@@ -1,0 +1,40 @@
+{
+  "run_id": "20261003T034035Z_smoke_test",
+  "phase": "00_setup",
+  "name": "smoke_test",
+  "timestamp": "2026-10-03T03:40:35.355081+00:00",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:latest",
+    "vllm_config": "baseline"
+  },
+  "load": {
+    "requests": 1,
+    "concurrency": 1,
+    "prompt": "In two sentences, explain what a KV cache is in LLM inference.",
+    "max_tokens": 128
+  },
+  "metrics": {
+    "request_id": "be11a2a3414d4b8eb919e8a315be772e",
+    "ttft_s": 0.28098985700000867,
+    "e2e_s": 0.8784723040000699,
+    "prompt_tokens": 44,
+    "output_tokens": 63,
+    "itl_s": 0.009636813661291311,
+    "output_tokens_per_s": 71.71540834370458
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "acce6baf9e11f6555412e068aad302e2e41f1d8d",
+    "git_dirty": false
+  },
+  "notes": ""
+}
