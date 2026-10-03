@@ -1,0 +1,418 @@
+[
+  {
+    "id": "short_qa_01",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "What is the capital of Australia?"
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_02",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Define latency in one sentence."
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_03",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "What does HTTP status code 429 mean?"
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_04",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Name three sorting algorithms."
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_05",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "What is the difference between a process and a thread?"
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_06",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Convert 72 degrees Fahrenheit to Celsius."
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_07",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "What does GPU stand for?"
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "short_qa_08",
+    "category": "short_qa",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "In one sentence, what is a load balancer?"
+      }
+    ],
+    "max_tokens": 64
+  },
+  {
+    "id": "summarize_01",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize this incident report in five bullet points, including root cause and follow-ups.\n\n---\nAt 09:12 UTC on Tuesday, the payments API began returning elevated error rates. Monitoring showed the p99 latency of the checkout service climbing from its usual 180 milliseconds to over 4 seconds within six minutes. The on-call engineer was paged at 09:15 and joined the incident channel at 09:19. Initial investigation focused on the database, because the dashboard showed connection pool saturation on the primary Postgres instance. However, query latency on the database itself remained normal, which suggested the pool was exhausted by connections being held open rather than by slow queries.\n\nAt 09:31 a second engineer noticed that a deployment of the fraud-scoring service had gone out at 09:08. The new version added a synchronous call to an external risk provider inside a database transaction. When the external provider slowed down, each checkout request held its database connection for the full duration of the external call. With 200 connections in the pool and the external call taking 3 to 5 seconds, the pool was exhausted at roughly 50 requests per second, well below normal peak traffic of 140 requests per second.\n\nThe team rolled back the fraud-scoring deployment at 09:38. Error rates returned to baseline by 09:44, and the connection pool drained within two minutes of the rollback. In total, approximately 11 percent of checkout attempts failed during the 32-minute window, and an estimated 4,100 customers saw an error page. No payments were double-charged, because the idempotency keys on the payment processor prevented duplicate captures.\n\nFollow-up actions agreed in the review: move the external risk call outside the database transaction; add a timeout of 800 milliseconds with a fallback score; add an alert on connection pool utilization above 80 percent; and require load tests for any change that adds a network call to the checkout path. The review also noted that the deployment pipeline had no automated canary analysis, so the regression reached 100 percent of traffic within two minutes of release."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "summarize_02",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize this text for a software engineer who is new to LLM serving.\n\n---\nLarge language model inference is dominated by two phases with very different performance characteristics. The prefill phase processes the entire input prompt in parallel, and its cost grows with the number of prompt tokens. Because many tokens are processed at once, prefill makes heavy use of the GPU's compute units and is usually compute-bound. The decode phase then generates output tokens one at a time. Each step reads the full model weights and the accumulated key-value cache from GPU memory but performs relatively little arithmetic, so decode is usually memory-bandwidth-bound.\n\nThe key-value cache stores intermediate attention results for every token in every active sequence, so that earlier tokens do not need to be recomputed at each decode step. Its size grows linearly with the number of concurrent sequences and with their lengths. For an 8-billion-parameter model with 32 layers and grouped-query attention, the cache can require on the order of 128 kilobytes per token in 16-bit precision. A single conversation with 4,000 tokens of context therefore consumes roughly half a gigabyte of GPU memory for its cache alone.\n\nServing systems such as vLLM manage this memory in fixed-size blocks, similar to virtual memory pages in an operating system. This approach, called paged attention, avoids reserving memory for the maximum possible sequence length and reduces fragmentation, which allows many more sequences to be batched together. When memory runs out, the scheduler must either queue new requests or preempt running ones, either by swapping their cache to CPU memory or by discarding it and recomputing it later.\n\nContinuous batching further improves utilization: instead of waiting for an entire batch to finish, the scheduler adds new requests and removes completed ones at every decode step. The combination of paged attention and continuous batching can increase throughput several-fold compared with static batching, but it introduces a trade-off between throughput and latency. Larger batches raise total tokens per second but increase the time each individual request waits, particularly the time to first token when long prefills compete with ongoing decodes."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "summarize_03",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize these meeting notes: list the decisions, owners and open questions.\n\n---\nAttendees: product lead, two backend engineers, data scientist, designer.\n\nThe product lead opened by reviewing last quarter's numbers. Weekly active users grew 14 percent, but the share of users who completed onboarding fell from 62 percent to 55 percent. The designer presented session recordings showing that most drop-off happens at the step where users are asked to connect a data source. Several users appeared confused about which permissions were required and abandoned the flow when the third-party authorization screen loaded slowly.\n\nThe data scientist shared an analysis showing that users who connect a data source in their first session are three times more likely to still be active after 30 days. She proposed making the connection step optional and allowing users to explore with a sample dataset first. One backend engineer raised the concern that sample data would inflate activation metrics without reflecting real value, and suggested tracking \"connected a real source within 7 days\" as the primary metric instead.\n\nThe second backend engineer reported that the authorization screen latency is caused by a synchronous call that fetches the full list of available accounts before rendering. For large organizations this list can contain thousands of entries. He estimated two days of work to paginate the call and render the first page immediately.\n\nDecisions: the team will ship the pagination fix this sprint; the designer will prototype a sample-data path for testing with five users next week; the data scientist will define the 7-day real-connection metric and add it to the dashboard. The product lead will revisit the onboarding redesign once the prototype feedback is in. Open question: whether enterprise customers should skip the sample-data path entirely, since their administrators usually connect sources on their behalf."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "summarize_04",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize this policy in plain language for a new employee.\n\n---\nRemote work policy, effective from the first day of next quarter.\n\nEmployees may work remotely up to three days per week, with Tuesday and Thursday designated as shared in-office days for all teams. Teams may choose a different pair of shared days with approval from their department head, provided the change is communicated to adjacent teams at least two weeks in advance. Fully remote arrangements remain available for roles hired as remote and for employees who live more than 80 kilometres from the nearest office.\n\nEmployees working remotely must be reachable during core hours of 10:00 to 15:00 in their local time zone, keep their calendar status up to date, and use company-managed devices for all work. Customer data may not be accessed over public Wi-Fi without the company VPN. Each remote employee receives an annual equipment allowance for a monitor, chair and keyboard, reimbursed against receipts.\n\nManagers are responsible for ensuring that remote and in-office team members have equal access to meetings, information and opportunities. All recurring meetings must have a video link, and decisions made in person must be written up in the team's shared channel within one working day. Performance reviews are based on outcomes and may not take office attendance into account, except where in-person presence is an explicit requirement of the role.\n\nRequests for exceptions, such as temporary fully remote work for medical or family reasons, are handled by the employee's manager together with human resources and are reviewed every three months. The policy itself will be reviewed after six months, using an employee survey and data on team delivery, retention and meeting load."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "summarize_05",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize both documents separately, then explain in two sentences how LLM serving could suffer a similar failure.\n\n---\nAt 09:12 UTC on Tuesday, the payments API began returning elevated error rates. Monitoring showed the p99 latency of the checkout service climbing from its usual 180 milliseconds to over 4 seconds within six minutes. The on-call engineer was paged at 09:15 and joined the incident channel at 09:19. Initial investigation focused on the database, because the dashboard showed connection pool saturation on the primary Postgres instance. However, query latency on the database itself remained normal, which suggested the pool was exhausted by connections being held open rather than by slow queries.\n\nAt 09:31 a second engineer noticed that a deployment of the fraud-scoring service had gone out at 09:08. The new version added a synchronous call to an external risk provider inside a database transaction. When the external provider slowed down, each checkout request held its database connection for the full duration of the external call. With 200 connections in the pool and the external call taking 3 to 5 seconds, the pool was exhausted at roughly 50 requests per second, well below normal peak traffic of 140 requests per second.\n\nThe team rolled back the fraud-scoring deployment at 09:38. Error rates returned to baseline by 09:44, and the connection pool drained within two minutes of the rollback. In total, approximately 11 percent of checkout attempts failed during the 32-minute window, and an estimated 4,100 customers saw an error page. No payments were double-charged, because the idempotency keys on the payment processor prevented duplicate captures.\n\nFollow-up actions agreed in the review: move the external risk call outside the database transaction; add a timeout of 800 milliseconds with a fallback score; add an alert on connection pool utilization above 80 percent; and require load tests for any change that adds a network call to the checkout path. The review also noted that the deployment pipeline had no automated canary analysis, so the regression reached 100 percent of traffic within two minutes of release.\n\nLarge language model inference is dominated by two phases with very different performance characteristics. The prefill phase processes the entire input prompt in parallel, and its cost grows with the number of prompt tokens. Because many tokens are processed at once, prefill makes heavy use of the GPU's compute units and is usually compute-bound. The decode phase then generates output tokens one at a time. Each step reads the full model weights and the accumulated key-value cache from GPU memory but performs relatively little arithmetic, so decode is usually memory-bandwidth-bound.\n\nThe key-value cache stores intermediate attention results for every token in every active sequence, so that earlier tokens do not need to be recomputed at each decode step. Its size grows linearly with the number of concurrent sequences and with their lengths. For an 8-billion-parameter model with 32 layers and grouped-query attention, the cache can require on the order of 128 kilobytes per token in 16-bit precision. A single conversation with 4,000 tokens of context therefore consumes roughly half a gigabyte of GPU memory for its cache alone.\n\nServing systems such as vLLM manage this memory in fixed-size blocks, similar to virtual memory pages in an operating system. This approach, called paged attention, avoids reserving memory for the maximum possible sequence length and reduces fragmentation, which allows many more sequences to be batched together. When memory runs out, the scheduler must either queue new requests or preempt running ones, either by swapping their cache to CPU memory or by discarding it and recomputing it later.\n\nContinuous batching further improves utilization: instead of waiting for an entire batch to finish, the scheduler adds new requests and removes completed ones at every decode step. The combination of paged attention and continuous batching can increase throughput several-fold compared with static batching, but it introduces a trade-off between throughput and latency. Larger batches raise total tokens per second but increase the time each individual request waits, particularly the time to first token when long prefills compete with ongoing decodes."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "summarize_06",
+    "category": "summarization",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Summarize both documents in one paragraph each.\n\n---\nAttendees: product lead, two backend engineers, data scientist, designer.\n\nThe product lead opened by reviewing last quarter's numbers. Weekly active users grew 14 percent, but the share of users who completed onboarding fell from 62 percent to 55 percent. The designer presented session recordings showing that most drop-off happens at the step where users are asked to connect a data source. Several users appeared confused about which permissions were required and abandoned the flow when the third-party authorization screen loaded slowly.\n\nThe data scientist shared an analysis showing that users who connect a data source in their first session are three times more likely to still be active after 30 days. She proposed making the connection step optional and allowing users to explore with a sample dataset first. One backend engineer raised the concern that sample data would inflate activation metrics without reflecting real value, and suggested tracking \"connected a real source within 7 days\" as the primary metric instead.\n\nThe second backend engineer reported that the authorization screen latency is caused by a synchronous call that fetches the full list of available accounts before rendering. For large organizations this list can contain thousands of entries. He estimated two days of work to paginate the call and render the first page immediately.\n\nDecisions: the team will ship the pagination fix this sprint; the designer will prototype a sample-data path for testing with five users next week; the data scientist will define the 7-day real-connection metric and add it to the dashboard. The product lead will revisit the onboarding redesign once the prototype feedback is in. Open question: whether enterprise customers should skip the sample-data path entirely, since their administrators usually connect sources on their behalf.\n\nRemote work policy, effective from the first day of next quarter.\n\nEmployees may work remotely up to three days per week, with Tuesday and Thursday designated as shared in-office days for all teams. Teams may choose a different pair of shared days with approval from their department head, provided the change is communicated to adjacent teams at least two weeks in advance. Fully remote arrangements remain available for roles hired as remote and for employees who live more than 80 kilometres from the nearest office.\n\nEmployees working remotely must be reachable during core hours of 10:00 to 15:00 in their local time zone, keep their calendar status up to date, and use company-managed devices for all work. Customer data may not be accessed over public Wi-Fi without the company VPN. Each remote employee receives an annual equipment allowance for a monitor, chair and keyboard, reimbursed against receipts.\n\nManagers are responsible for ensuring that remote and in-office team members have equal access to meetings, information and opportunities. All recurring meetings must have a video link, and decisions made in person must be written up in the team's shared channel within one working day. Performance reviews are based on outcomes and may not take office attendance into account, except where in-person presence is an explicit requirement of the role.\n\nRequests for exceptions, such as temporary fully remote work for medical or family reasons, are handled by the employee's manager together with human resources and are reviewed every three months. The policy itself will be reviewed after six months, using an employee survey and data on team delivery, retention and meeting load."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "multi_turn_01",
+    "category": "multi_turn",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "I'm planning a 3-day trip to Lisbon. What should I see?"
+      },
+      {
+        "role": "assistant",
+        "content": "Day 1: Alfama, São Jorge Castle and a fado show. Day 2: Belém, including the Jerónimos Monastery and Belém Tower. Day 3: a day trip to Sintra for Pena Palace and Quinta da Regaleira."
+      },
+      {
+        "role": "user",
+        "content": "I don't like crowds. How would you change the plan?"
+      }
+    ],
+    "max_tokens": 256
+  },
+  {
+    "id": "multi_turn_02",
+    "category": "multi_turn",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Write a Python function that checks if a string is a palindrome."
+      },
+      {
+        "role": "assistant",
+        "content": "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]"
+      },
+      {
+        "role": "user",
+        "content": "Now add type hints, a docstring and three pytest tests."
+      }
+    ],
+    "max_tokens": 384
+  },
+  {
+    "id": "multi_turn_03",
+    "category": "multi_turn",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "What's the difference between TCP and UDP?"
+      },
+      {
+        "role": "assistant",
+        "content": "TCP is connection-oriented and guarantees ordered, reliable delivery with retransmission and congestion control. UDP is connectionless and sends independent datagrams with no delivery or ordering guarantees, which makes it lower-latency and simpler."
+      },
+      {
+        "role": "user",
+        "content": "Which would you use for a video call, and why?"
+      },
+      {
+        "role": "assistant",
+        "content": "UDP, usually via a protocol like RTP or QUIC-based transports. For live video, a late packet is as useless as a lost one, so retransmitting it only adds delay."
+      },
+      {
+        "role": "user",
+        "content": "And for streaming tokens from an LLM server to a browser?"
+      }
+    ],
+    "max_tokens": 256
+  },
+  {
+    "id": "multi_turn_04",
+    "category": "multi_turn",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Help me write a short email asking my manager for Friday off."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi Sam, I'd like to request this Friday off for a personal matter. My current tasks are on track and I'll make sure anything urgent is covered before then. Please let me know if that works. Thanks!"
+      },
+      {
+        "role": "user",
+        "content": "Make it more formal and mention that the quarterly report is already finished."
+      }
+    ],
+    "max_tokens": 192
+  },
+  {
+    "id": "multi_turn_05",
+    "category": "multi_turn",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Explain what a KV cache is."
+      },
+      {
+        "role": "assistant",
+        "content": "During generation, a transformer computes key and value vectors for every token at every layer. The KV cache stores them so each new token only needs to compute its own keys and values, instead of recomputing the whole sequence."
+      },
+      {
+        "role": "user",
+        "content": "Why does it limit how many users a GPU can serve?"
+      },
+      {
+        "role": "assistant",
+        "content": "Because the cache lives in GPU memory and grows with every token of every active request. Once memory is full, new requests have to wait or running ones get preempted."
+      },
+      {
+        "role": "user",
+        "content": "What are three ways to fit more users on the same GPU?"
+      }
+    ],
+    "max_tokens": 320
+  },
+  {
+    "id": "long_gen_01",
+    "category": "long_generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Write a detailed explanation of how HTTPS establishes a secure connection, step by step."
+      }
+    ],
+    "max_tokens": 768
+  },
+  {
+    "id": "long_gen_02",
+    "category": "long_generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Write a Python class implementing an LRU cache with get and put in O(1), with comments explaining each part."
+      }
+    ],
+    "max_tokens": 768
+  },
+  {
+    "id": "long_gen_03",
+    "category": "long_generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Write a 400-word short story about a lighthouse keeper who discovers a message in a bottle."
+      }
+    ],
+    "max_tokens": 768
+  },
+  {
+    "id": "long_gen_04",
+    "category": "long_generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Explain the CAP theorem with a concrete example for each trade-off."
+      }
+    ],
+    "max_tokens": 768
+  },
+  {
+    "id": "long_gen_05",
+    "category": "long_generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful, concise assistant."
+      },
+      {
+        "role": "user",
+        "content": "Compare REST, GraphQL and gRPC for a backend team choosing an API style. Give pros, cons and when to use each."
+      }
+    ],
+    "max_tokens": 768
+  }
+]

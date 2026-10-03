@@ -1,0 +1,9 @@
+# Baseline vLLM engine arguments. Keys are `vllm serve` flags without the "--".
+# The model and served name are set in docker-compose.yml from .env.
+#
+# To run an experiment: copy this file (e.g. max_num_seqs_128.yaml), change ONE
+# value, and start the stack with VLLM_CONFIG=max_num_seqs_128.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192

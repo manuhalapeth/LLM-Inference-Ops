@@ -56,7 +56,7 @@ Every experiment in every notebook uses the same template:
 - Repo layout: `agent/`, `gateway/`, `nginx/`, `vllm/`, `observability/`, `loadtest/`, `notebooks/`, `results/`
 - `docker-compose.yml` that brings up the whole stack
 - Gateway: **a custom FastAPI gateway**, because harnesses, logging and tracing are fully visible and easy to explain in the notebook. (Alternatives such as LiteLLM proxy or Envoy AI Gateway can be compared later.)
-- Model: an ~8B instruct model (Llama 3.1 8B or Qwen 8B)
+- Model: Qwen2.5-7B-Instruct (~8B class, not gated; Llama 3.1 8B can be swapped in through `.env`)
 - Write 20+ synthetic prompts of varied lengths (short Q&A, long summarization, multi-turn) and save them in `loadtest/prompts.json`
 - Write a results logger that saves every benchmark run to `results/<phase>/<run_id>.json`
 - Write a setup script that builds a rented GPU box from scratch in one command
