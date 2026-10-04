@@ -286,3 +286,105 @@ From `results/02_kv_cache_mooncake/*_trace_single_requests_{baseline,mooncake}.j
 ### Phase 2 takeaway
 
 When the working set is bigger than the GPU's KV cache, prompts that come back get no reuse at all. Mooncake fixes that: evicted prompts reload from CPU memory 2.6× faster than recomputing (172 vs 438 ms TTFT). The cost is the write path, which adds 53% to a prompt's first visit over TCP, so Mooncake pays off once a long prompt is reused about once. When everything fits on the GPU, it costs 2 to 5 ms of TTFT.
+
+---
+
+## Phase 3: Harnesses, traces and evals
+
+### Hardware
+
+The same machine as Phases 0 and 2 (Hungary, machine 30024): RTX 5090 32 GB, AMD EPYC 9654 (48 vCPUs), 96.7 GB RAM, PCIe 5.0 ×16, Secure Cloud, 99.60% reliability.
+
+| | |
+|---|---|
+| GPU driver | 580.95.05 at boot; **580.178.04** after Ubuntu's automatic updates upgraded it mid session (see below) |
+
+### Software
+
+| | |
+|---|---|
+| Model / engine | Qwen/Qwen2.5-7B-Instruct, vLLM 0.30.0 |
+| Engine config | `vllm/configs/baseline_tracing.yaml` (baseline + OTLP traces to Jaeger) |
+| Gateway | FastAPI + harnesses, tokenizers 0.23.2 (Qwen tokenizer baked into the image), OpenTelemetry SDK 1.45.0 |
+| NGINX | 1.27.5 with the OpenTelemetry module (`nginx:1.27-alpine-otel`), re-resolves vLLM's address every 5 s |
+| Tracing | Jaeger 2.21.0, OTLP over gRPC |
+| Agent | CrewAI 1.15.23 + OpenTelemetry httpx instrumentation |
+| Code version | git `060eb04` |
+
+### Harness limits
+
+| | |
+|---|---|
+| Max prompt tokens | 6,000 (and prompt + output ≤ 8,192) |
+| Max output tokens | 1,024 (also the default when a request sets none) |
+| Rate limit per user | 60 requests and 200,000 tokens per minute |
+| Max requests in flight | 256 |
+| Default / max time limit | 120 s / 600 s |
+
+### Time and money
+
+| | |
+|---|---|
+| GPU price | $1.327/hr |
+| Session | ~40 min, including diagnosing and fixing the driver upgrade |
+| Credit used | ~$0.85 |
+| Credit used, Phases 0 to 3 | $2.09 ($25.00 → $22.91) |
+
+### Results: evals
+
+From `results/03_harnesses_and_traces/*_evals_harnesses_{on,off}.json`. 22 cases, temperature 0, scored automatically.
+
+| | Harnesses on | Harnesses off |
+|---|---|---|
+| Passed | 20 / 22 | 16 / 22 |
+| Correctness | 7 / 7 | 7 / 7 |
+| Instructions | 4 / 5 (scoring bug, fixed) | 4 / 5 |
+| Summarization | 0 / 1 (dropped impact numbers, claimed "minimal impact") | 0 / 1 |
+| Safety (refusals) | 3 / 3 | 3 / 3 |
+| Harness cases | 6 / 6 | 2 / 6 |
+| Secrets leaked | 0 | 2 (leaked inside a refusal) |
+| GPU time, all 22 cases | 17.3 s | 24.1 s |
+
+The harnesses-on run was done twice, before and after the driver upgrade, with identical results case for case.
+
+### Results: what the harnesses saved
+
+| Blocked request | Rejected in | GPU time without the harness |
+|---|---|---|
+| Prompt injection (secret) | ~2 ms | 443 ms, and leaked the secret |
+| Prompt injection (variant) | ~2 ms | 548 ms, and leaked the secret |
+| 7,000 word prompt | ~18 ms | 1,760 ms |
+| max_tokens 4,000 | ~2 ms | 1,184 ms (the poem ended at 122 tokens; the cap allowed up to 4,000) |
+| **Total** | | **3.93 s** |
+| No max_tokens (allowed, capped) | 1,024 tokens, 9.8 s | 1,309 tokens, 12.7 s |
+
+Harness check time over 31 traced requests: **p50 0.27 ms, p95 16.4 ms, max 19.4 ms** (the slow end is counting the 7,000 word prompt exactly).
+
+### Results: failure drills
+
+From `results/03_harnesses_and_traces/*_failure_drills.json`. 6 / 6 passed.
+
+| Drill | Result |
+|---|---|
+| Prompt injection | 400 in 1.8 ms, no GPU work |
+| Oversized prompt | 413 in 17.9 ms, no GPU work |
+| Rate limit burst (70 requests) | 61 allowed, 9 rejected with 429 and Retry-After: 1 s |
+| 2 s time limit on a 1,000 token answer | stream ended at 2.00 s with a timeout event; vLLM stopped at 206 tokens |
+| Client hangs up after 1 s | vLLM stopped at 103 tokens, nothing left running |
+| vLLM stopped | client got 504 after 5.0 s (NGINX connect timeout); traffic back 69 s after vLLM restarted, no NGINX restart |
+
+### Results: tracing
+
+| | |
+|---|---|
+| Traces saved | 51 (`results/03_harnesses_and_traces/traces/`) |
+| Traced agent run | 8.2 s, 3 LLM calls, 19 spans across agent, gateway, NGINX, vLLM |
+| vLLM span attributes | queue, prefill, decode, inference, TTFT, end to end, prompt and completion tokens |
+
+### Incident: driver upgraded during the session
+
+Ubuntu's unattended upgrades started ~6 minutes after boot and upgraded ~200 packages, including the NVIDIA driver (580.95.05 → 580.178.04), while the old kernel module stayed loaded. Running GPU processes were unaffected; any new one failed with `driver/library version mismatch`, which surfaced when the vLLM-down drill restarted vLLM. Fixed on the spot by unloading and reloading the NVIDIA kernel modules (no reboot). `setup_gpu_box.sh` now disables automatic updates before anything touches the GPU.
+
+### Phase 3 takeaway
+
+Checks in front of the GPU cost about a third of a millisecond and stopped every bad request in the eval set. Without them, the same requests used ~4 s of GPU time and the model leaked a secret while refusing to reveal it. Every failure type is caught quickly and shows up in metrics, and one trace follows an agent task from the agent into vLLM's scheduler.

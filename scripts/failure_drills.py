@@ -158,7 +158,12 @@ class Drills:
         subprocess.run(compose + ["stop", "vllm"], check=True, capture_output=True)
         down = self.post([{"role": "user", "content": "Say hi."}])
         start = time.perf_counter()
-        subprocess.run(compose + ["start", "vllm"], check=True, capture_output=True)
+        started = subprocess.run(compose + ["start", "vllm"], capture_output=True, text=True)
+        if started.returncode != 0:
+            # Record it instead of crashing, so the other drills' results are still saved.
+            return {"expected": "fast 502 while vLLM is down; automatic recovery", "passed": False,
+                    "status_while_down": down["status"], "latency_while_down_ms": down["latency_ms"],
+                    "trace_id": down["trace_id"], "restart_error": started.stderr.strip()[-500:]}
         recovered = None
         while time.perf_counter() - start < 900:
             r = self.post([{"role": "user", "content": "Say hi."}], max_tokens=2)

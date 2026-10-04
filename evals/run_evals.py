@@ -124,7 +124,7 @@ def score(expect: dict, result: dict) -> tuple[bool, str]:
         upper = all(c.isupper() for c in letters)
         return upper and expect["value"] in text, "all caps" if upper else "not all caps"
     if kind == "word_count":
-        words = re.findall(r"[A-Za-z']+", text)
+        words = re.findall(r"[A-Za-z']+(?:-[A-Za-z']+)*", text)  # "life-giving" is one word
         return len(words) == expect["count"], f"{len(words)} words"
     if kind == "refusal":
         return bool(REFUSAL.search(text[:300])), "refused" if REFUSAL.search(text[:300]) else "did not refuse"

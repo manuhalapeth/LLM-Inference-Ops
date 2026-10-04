@@ -17,6 +17,18 @@ die() { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
 SUDO=""
 if [ "$(id -u)" -ne 0 ]; then SUDO="sudo"; fi
 
+# Ubuntu's automatic updates start a few minutes after boot and can upgrade
+# the NVIDIA driver underneath the running one. After that, any new GPU
+# process or container fails with "driver/library version mismatch". Rented
+# boxes live for an hour, so updates are switched off for the session.
+log "Switching off automatic package updates"
+$SUDO systemctl stop unattended-upgrades apt-daily.timer apt-daily-upgrade.timer 2>/dev/null || true
+$SUDO systemctl disable unattended-upgrades apt-daily.timer apt-daily-upgrade.timer 2>/dev/null || true
+$SUDO systemctl kill --kill-who=all apt-daily.service apt-daily-upgrade.service 2>/dev/null || true
+while pgrep -x unattended-upgr >/dev/null || pgrep -f "apt.systemd.daily" >/dev/null; do
+  log "Waiting for an update run that already started to finish"; sleep 10
+done
+
 log "Checking the GPU"
 command -v nvidia-smi >/dev/null || die "nvidia-smi not found: this machine has no NVIDIA driver"
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv

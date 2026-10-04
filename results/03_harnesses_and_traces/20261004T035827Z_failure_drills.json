@@ -1,0 +1,132 @@
+{
+  "run_id": "20261004T035827Z_failure_drills",
+  "phase": "03_harnesses_and_traces",
+  "name": "failure_drills",
+  "timestamp": "2026-10-04T03:58:27.838636+00:00",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_config": "baseline_tracing",
+    "rate_limit_rpm": 60
+  },
+  "load": {
+    "drills": [
+      "injection",
+      "oversized",
+      "rate_limit",
+      "timeout",
+      "disconnect",
+      "vllm_down"
+    ]
+  },
+  "metrics": {
+    "passed": 6,
+    "total": 6,
+    "drills": [
+      {
+        "drill": "injection",
+        "expected": "400 prompt_injection, no GPU work",
+        "passed": true,
+        "status": 400,
+        "latency_ms": 1.7663940000147704,
+        "reason": "prompt_injection",
+        "trace_id": "243cbe36343eee64a5d4ba47493a200c",
+        "retry_after": null,
+        "body": "{\"error\":{\"type\":\"prompt_injection\",\"message\":\"request looks like an attempt to override the system instructions\",\"code\":400}}",
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"400\"}": 1.0,
+          "gateway_rejections_total{reason=\"prompt_injection\"}": 1.0
+        }
+      },
+      {
+        "drill": "oversized",
+        "expected": "413 prompt_too_long, no GPU work",
+        "passed": true,
+        "status": 413,
+        "latency_ms": 17.86942400008229,
+        "reason": "prompt_too_long",
+        "trace_id": "84feb953f54a601d19a5d65f3b9dcec7",
+        "retry_after": null,
+        "body": "{\"error\":{\"type\":\"prompt_too_long\",\"message\":\"prompt is 7035 tokens, over the limit of 6000\",\"code\":413}}",
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"413\"}": 1.0,
+          "gateway_rejections_total{reason=\"prompt_too_long\"}": 1.0
+        }
+      },
+      {
+        "drill": "rate_limit",
+        "expected": "~60 allowed (plus what refills during the burst), the rest 429 with Retry-After",
+        "passed": true,
+        "allowed": 61,
+        "rate_limited": 9,
+        "burst_s": 1.1485676099998727,
+        "retry_after_s": "1",
+        "trace_id": "14fb56e7475706320e22632ce938edfd",
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"200\"}": 61.0,
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"429\"}": 9.0,
+          "gateway_rejections_total{reason=\"rate_limited\"}": 9.0
+        }
+      },
+      {
+        "drill": "timeout",
+        "expected": "stream ends at ~2 s with a timeout event; vLLM stops well short of 1000 tokens",
+        "passed": true,
+        "trace_id": "0f6384fb60f9b9956639f43da5106bad",
+        "chunks": 207,
+        "elapsed_s": 2.002060862999997,
+        "timeout_event": true,
+        "done": false,
+        "generated_tokens": 206.0,
+        "still_running": 0.0,
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"200\"}": 1.0,
+          "gateway_requests_ended_early_total{why=\"timeout\"}": 1.0
+        }
+      },
+      {
+        "drill": "disconnect",
+        "expected": "client hangs up at ~1 s; vLLM stops generating soon after",
+        "passed": true,
+        "trace_id": "586e8a457ce51344205eaae8b8c717b3",
+        "chunks": 104,
+        "elapsed_s": 1.0058400469999924,
+        "timeout_event": false,
+        "done": false,
+        "generated_tokens": 103.0,
+        "still_running": 0.0,
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"200\"}": 1.0,
+          "gateway_requests_ended_early_total{why=\"client_disconnected\"}": 1.0
+        }
+      },
+      {
+        "drill": "vllm_down",
+        "expected": "fast 502 while vLLM is down; traffic recovers on its own once vLLM is back (no NGINX restart)",
+        "passed": true,
+        "status_while_down": 504,
+        "latency_while_down_ms": 5009.924352000098,
+        "trace_id": "a488db1398276e87ba79172fd39151bf",
+        "recovered_after_s": 69.34737349200009,
+        "metrics_change": {
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"200\"}": 1.0,
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"504\"}": 1.0,
+          "gateway_requests_total{path=\"/v1/chat/completions\",status=\"502\"}": 21.0
+        }
+      }
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.178.04"
+      }
+    ],
+    "git_commit": "060eb04743ba8a66fd585c750e618ec1ee348055",
+    "git_dirty": true
+  },
+  "notes": ""
+}

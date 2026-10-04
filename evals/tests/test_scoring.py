@@ -26,6 +26,7 @@ def test_format_checks():
     assert score({"type": "uppercase_contains", "value": "COLD"}, ok("COLD"))[0]
     assert not score({"type": "uppercase_contains", "value": "COLD"}, ok("Cold"))[0]
     assert score({"type": "word_count", "count": 3}, ok("Vast, deep, blue."))[0]
+    assert score({"type": "word_count", "count": 3}, ok("Blue, vast, life-giving."))[0]  # seen in Phase 3
 
 
 def test_summary_facts_and_refusals():
