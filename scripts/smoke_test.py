@@ -38,10 +38,16 @@ def wait_for_gateway(base_url: str, timeout_s: float) -> None:
         time.sleep(5)
 
 
-def stream_one_request(base_url: str, model: str, max_tokens: int) -> dict:
+def stream_one_request(
+    base_url: str,
+    model: str,
+    max_tokens: int,
+    messages: list[dict] | None = None,
+    headers: dict | None = None,
+) -> dict:
     body = json.dumps({
         "model": model,
-        "messages": [{"role": "user", "content": PROMPT}],
+        "messages": messages or [{"role": "user", "content": PROMPT}],
         "max_tokens": max_tokens,
         "temperature": 0,
         "stream": True,
@@ -50,7 +56,7 @@ def stream_one_request(base_url: str, model: str, max_tokens: int) -> dict:
     request = urllib.request.Request(
         f"{base_url}/v1/chat/completions",
         data=body,
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", **(headers or {})},
     )
 
     start = time.perf_counter()

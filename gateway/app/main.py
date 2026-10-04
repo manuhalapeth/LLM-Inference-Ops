@@ -83,6 +83,8 @@ def create_app(client: httpx.AsyncClient | None = None) -> FastAPI:
         path = f"/v1/{rest}"
         metric_path = _metric_path(path)
         request_id = request.headers.get("x-request-id") or uuid.uuid4().hex
+        # Groups the several LLM calls one agent task makes. Set by the client.
+        run_id = request.headers.get("x-run-id")
         start = time.perf_counter()
 
         upstream_request = app.state.client.build_request(
@@ -93,6 +95,7 @@ def create_app(client: httpx.AsyncClient | None = None) -> FastAPI:
             headers={
                 "content-type": request.headers.get("content-type", "application/json"),
                 "x-request-id": request_id,
+                **({"x-run-id": run_id} if run_id else {}),
             },
         )
         try:
@@ -101,7 +104,7 @@ def create_app(client: httpx.AsyncClient | None = None) -> FastAPI:
             elapsed = time.perf_counter() - start
             REQUESTS.labels(metric_path, "502").inc()
             REQUEST_DURATION.labels(metric_path).observe(elapsed)
-            _log(event="upstream_error", request_id=request_id, path=path,
+            _log(event="upstream_error", request_id=request_id, run_id=run_id, path=path,
                  error=type(exc).__name__, total_ms=round(elapsed * 1000, 1))
             return JSONResponse(
                 {"error": {"type": "upstream_error", "message": f"{type(exc).__name__}: {exc}"}},
@@ -125,6 +128,7 @@ def create_app(client: httpx.AsyncClient | None = None) -> FastAPI:
                 _log(
                     event="request",
                     request_id=request_id,
+                    run_id=run_id,
                     path=path,
                     status=upstream.status_code,
                     ttfb_ms=round((first_byte_at - start) * 1000, 1) if first_byte_at else None,

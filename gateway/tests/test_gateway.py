@@ -92,3 +92,18 @@ def test_metrics_are_recorded():
     assert 'gateway_requests_total{path="/v1/chat/completions",status="200"}' in metrics
     assert 'gateway_requests_total{path="other",status="200"}' in metrics
     assert "gateway_time_to_first_byte_seconds_bucket" in metrics
+
+
+def test_forwards_run_id_and_logs_it(caplog):
+    seen = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen["run_id"] = request.headers.get("x-run-id")
+        return httpx.Response(200, json={})
+
+    with caplog.at_level("INFO", logger="gateway"), make_client(handler) as client:
+        client.post("/v1/chat/completions", json={}, headers={"x-run-id": "run-42"})
+
+    assert seen["run_id"] == "run-42"
+    logged = [json.loads(r.getMessage()) for r in caplog.records if r.name == "gateway"]
+    assert logged[-1]["run_id"] == "run-42"

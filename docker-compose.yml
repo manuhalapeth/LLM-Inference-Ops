@@ -20,6 +20,9 @@ services:
       - ./vllm/configs:/configs:ro
       - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface
     ipc: host
+    # Published on localhost only, so scripts on the box can read vLLM's /metrics directly.
+    ports:
+      - "127.0.0.1:8000:8000"
     deploy:
       resources:
         reservations:
@@ -52,6 +55,20 @@ services:
       - "127.0.0.1:8080:8080"
     depends_on:
       - nginx
+    restart: unless-stopped
+
+  # GPU utilization, memory, temperature and power, read from nvidia-smi.
+  gpu-exporter:
+    image: utkuozdemir/nvidia_gpu_exporter:1.15.1
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     restart: unless-stopped
 
   prometheus:
