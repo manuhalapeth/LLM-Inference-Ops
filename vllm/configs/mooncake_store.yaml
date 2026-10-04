@@ -1,0 +1,10 @@
+# Baseline engine arguments plus ONE change: a Mooncake store as an extra KV
+# cache tier in CPU memory (sized in vllm/mooncake/mooncake_config.json).
+# Start with: docker compose -f docker-compose.yml -f docker-compose.mooncake.yml up -d
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+kv-transfer-config:
+  kv_connector: MooncakeStoreConnector
+  kv_role: kv_both  # this instance both writes KV to the store and reads it back

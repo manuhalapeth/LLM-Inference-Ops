@@ -98,3 +98,28 @@ def test_layer_breakdown_without_logs():
     layers = layer_breakdown({"e2e_s": 1.0}, {}, {"e2e_s": 0.9, "queue_s": 0, "prefill_s": 0.1, "decode_s": 0.8})
     assert layers["gateway_s"] is None
     assert layers["engine_decode_s"] == 0.8
+
+
+def test_mooncake_metrics_are_kept_per_operation(monkeypatch):
+    text = """\
+vllm:mooncake_store_operation_bytes_total{engine="0",model_name="llm",operation="save_put",status="success"} 1000.0
+vllm:mooncake_store_operation_bytes_total{engine="0",model_name="llm",operation="load_get",status="success"} 400.0
+vllm:mooncake_store_operation_time_seconds_sum{engine="0",model_name="llm",operation="load_get",status="success"} 0.02
+vllm:external_prefix_cache_hits_total{engine="0",model_name="llm"} 448.0
+"""
+
+    class Response:
+        def __init__(self, body): self.body = body
+        def read(self): return self.body.encode()
+        def __enter__(self): return self
+        def __exit__(self, *exc): return False
+
+    monkeypatch.setattr(vllm_metrics.urllib.request, "urlopen", lambda url, timeout: Response(text))
+    after = vllm_metrics.scrape()
+    d = vllm_metrics.delta({}, after)
+
+    assert d["mooncake"]["save_put"]["bytes"] == 1000
+    assert d["mooncake"]["load_get"]["bytes"] == 400
+    assert d["mooncake"]["load_get"]["time_s"] == 0.02
+    assert d["mooncake"]["save_exists"]["calls"] == 0
+    assert d["external_prefix_cache_hits"] == 448

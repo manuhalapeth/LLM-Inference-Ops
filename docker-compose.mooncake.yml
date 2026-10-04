@@ -1,0 +1,28 @@
+# Adds Mooncake to the stack: a mooncake-master service, and vLLM rebuilt with
+# the Mooncake client and pointed at the Mooncake store config.
+#
+#   VLLM_CONFIG=mooncake_store docker compose -f docker-compose.yml -f docker-compose.mooncake.yml up -d --build
+
+services:
+  mooncake-master:
+    image: llm-inference-ops/vllm-mooncake:v0.30.0
+    build:
+      context: ./vllm/mooncake
+      args:
+        VLLM_IMAGE: ${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}
+    entrypoint: ["mooncake_master"]
+    command: ["--port", "50051"]
+    restart: unless-stopped
+
+  vllm:
+    image: llm-inference-ops/vllm-mooncake:v0.30.0
+    build:
+      context: ./vllm/mooncake
+      args:
+        VLLM_IMAGE: ${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}
+    environment:
+      MOONCAKE_CONFIG_PATH: /mooncake/mooncake_config.json
+    volumes:
+      - ./vllm/mooncake:/mooncake:ro
+    depends_on:
+      - mooncake-master

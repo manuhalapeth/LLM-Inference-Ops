@@ -29,8 +29,15 @@ agent-env: ## Python environment for the CrewAI agent
 agent:    ## run the CrewAI agent once, saved to results/01_end_to_end/
 	.venv/bin/python agent/app.py
 
+up-mooncake: ## start the stack with Mooncake as a KV cache tier
+	VLLM_CONFIG=mooncake_store docker compose -f docker-compose.yml -f docker-compose.mooncake.yml up -d --build
+	docker compose -f docker-compose.yml -f docker-compose.mooncake.yml restart nginx
+
+kv-experiment: ## working set bigger than the GPU KV cache, saved to results/02_kv_cache_mooncake/
+	python3 scripts/kv_cache_experiment.py --label $(or $(LABEL),$(VLLM_CONFIG))
+
 test:     ## unit tests (needs gateway/requirements-dev.txt installed)
 	cd gateway && python3 -m pytest -q tests
 	python3 -m pytest -q loadtest/tests
 
-.PHONY: up down logs ps smoke trace agent-env agent test
+.PHONY: up down logs ps smoke trace agent-env agent up-mooncake kv-experiment test

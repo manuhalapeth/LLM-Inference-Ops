@@ -31,22 +31,43 @@ COUNTERS = {
     "vllm:num_preemptions_total": "preemptions",
     "vllm:prefix_cache_queries_total": "prefix_cache_queries",
     "vllm:prefix_cache_hits_total": "prefix_cache_hits",
+    # Hits served by an external KV store through a KV connector (Mooncake).
+    "vllm:external_prefix_cache_queries_total": "external_prefix_cache_queries",
+    "vllm:external_prefix_cache_hits_total": "external_prefix_cache_hits",
 }
+
+# Mooncake store operations (vllm/.../mooncake/store/metrics.py), kept per
+# operation: save_put writes KV to the store, save_exists checks before
+# writing, load_get reads KV back into the GPU.
+MOONCAKE_OPERATIONS = ("save_put", "save_exists", "load_get")
+MOONCAKE_SERIES = {
+    "vllm:mooncake_store_operation_total": "calls",
+    "vllm:mooncake_store_operation_bytes_total": "bytes",
+    "vllm:mooncake_store_operation_time_seconds_sum": "time_s",
+}
+_OPERATION = re.compile(r'operation="([^"]+)"')
 
 
 def scrape(url: str = "http://localhost:8000/metrics") -> dict[str, float]:
-    """Fetch /metrics and sum each metric over its labels."""
+    """Fetch /metrics and sum each metric over its labels.
+
+    Mooncake store metrics are also kept per operation, as "name[operation]".
+    """
     with urllib.request.urlopen(url, timeout=10) as resp:
         text = resp.read().decode()
     totals: dict[str, float] = {}
     for line in text.splitlines():
         match = _LINE.match(line)
         if match and not line.startswith("#"):
-            name, _, value = match.groups()
+            name, labels, value = match.groups()
             try:
-                totals[name] = totals.get(name, 0.0) + float(value)
+                number = float(value)
             except ValueError:
-                pass
+                continue
+            totals[name] = totals.get(name, 0.0) + number
+            if name in MOONCAKE_SERIES and labels and (op := _OPERATION.search(labels)):
+                key = f"{name}[{op.group(1)}]"
+                totals[key] = totals.get(key, 0.0) + number
     return totals
 
 
@@ -63,4 +84,8 @@ def delta(before: dict[str, float], after: dict[str, float]) -> dict:
     for name, short in HISTOGRAMS.items():
         result[f"{short}_s"] = diff(f"{name}_sum")
     result["requests_observed"] = diff("vllm:e2e_request_latency_seconds_count")
+    result["mooncake"] = {
+        op: {short: diff(f"{name}[{op}]") for name, short in MOONCAKE_SERIES.items()}
+        for op in MOONCAKE_OPERATIONS
+    }
     return result

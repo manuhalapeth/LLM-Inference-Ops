@@ -69,6 +69,8 @@ def main() -> None:
     parser.add_argument("--prompts", nargs="+", default=DEFAULT_PROMPTS, help="prompt IDs from loadtest/prompts.json")
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--warmup", type=int, default=1, help="untimed requests before measuring")
+    parser.add_argument("--phase", default="01_end_to_end", help="results/<phase>/ to save into")
+    parser.add_argument("--label", default="", help="appended to the run name, e.g. baseline or mooncake")
     args = parser.parse_args()
 
     prompts = {p["id"]: p for p in json.loads((ROOT / "loadtest" / "prompts.json").read_text())}
@@ -116,9 +118,9 @@ def main() -> None:
         }
 
     path = save_run(
-        "01_end_to_end", "trace_single_requests",
+        args.phase, "trace_single_requests" + (f"_{args.label}" if args.label else ""),
         metrics={"summary": summary, "samples": samples},
-        config={"model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
+        config={"label": args.label, "model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
                 "vllm_config": os.getenv("VLLM_CONFIG", "baseline")},
         load={"concurrency": 1, "prompts": args.prompts, "repeats": args.repeats, "warmup": args.warmup},
     )
