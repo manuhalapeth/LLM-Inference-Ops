@@ -42,8 +42,26 @@ DOCKER="docker"
 if ! docker info >/dev/null 2>&1; then DOCKER="$SUDO docker"; fi
 $DOCKER compose version >/dev/null 2>&1 || die "Docker Compose plugin missing (install docker-compose-plugin)"
 
+# Pull images through Google's Docker Hub mirror first (Docker falls back to
+# Docker Hub on its own). On one rented box, every download served through
+# Cloudflare, which is where Docker Hub's image layers come from, stalled
+# forever, while the same images came through the mirror in seconds.
+if ! grep -q "mirror.gcr.io" /etc/docker/daemon.json 2>/dev/null; then
+  log "Pulling images through mirror.gcr.io"
+  $SUDO python3 - <<'PY'
+import json, os
+p = "/etc/docker/daemon.json"
+cfg = json.load(open(p)) if os.path.exists(p) and os.path.getsize(p) else {}
+cfg["registry-mirrors"] = ["https://mirror.gcr.io"]
+os.makedirs("/etc/docker", exist_ok=True)
+json.dump(cfg, open(p, "w"), indent=2)
+PY
+  $SUDO systemctl restart docker
+fi
+
 log "Checking that containers can see the GPU"
-if ! $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L >/dev/null 2>&1; then
+timeout 300 $DOCKER pull -q ubuntu:22.04 >/dev/null || die "could not download ubuntu:22.04 within 5 minutes; check the box's network"
+if ! timeout 120 $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L >/dev/null 2>&1; then
   log "Installing NVIDIA Container Toolkit"
   curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey \
     | $SUDO gpg --dearmor --yes -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
@@ -54,7 +72,7 @@ if ! $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L >/dev/null 2>&1; the
   $SUDO apt-get install -y -qq nvidia-container-toolkit
   $SUDO nvidia-ctk runtime configure --runtime=docker
   $SUDO systemctl restart docker
-  $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L || die "containers still cannot see the GPU"
+  timeout 120 $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L || die "containers still cannot see the GPU"
 fi
 
 # Install system packages BEFORE starting containers. Installing packages can

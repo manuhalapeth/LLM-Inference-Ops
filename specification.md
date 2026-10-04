@@ -388,3 +388,107 @@ Ubuntu's unattended upgrades started ~6 minutes after boot and upgraded ~200 pac
 ### Phase 3 takeaway
 
 Checks in front of the GPU cost about a third of a millisecond and stopped every bad request in the eval set. Without them, the same requests used ~4 s of GPU time and the model leaked a secret while refusing to reveal it. Every failure type is caught quickly and shows up in metrics, and one trace follows an agent task from the agent into vLLM's scheduler.
+
+---
+
+## Phase 4: Breaking one GPU
+
+### Hardware
+
+The same machine as Phases 0, 2 and 3 (Hungary, machine 30024): RTX 5090 32 GB, AMD EPYC 9654 (48 vCPUs), 96.7 GB RAM, PCIe 5.0 ×16, Secure Cloud, 99.60% reliability. A fresh VM, driver 580.95.05 (automatic updates switched off at boot).
+
+### Software
+
+| | |
+|---|---|
+| Model / engine | Qwen/Qwen2.5-7B-Instruct, vLLM 0.30.0, `vllm/configs/baseline.yaml` (defaults, incl. max 256 sequences at once) |
+| Load generator | Locust 2.46.6 (`locustio/locust` image, 8 processes), closed loop |
+| Agent load | CrewAI 1.15.23, 1 to 32 crews at once |
+| Gateway | All harnesses on except rate limits (raised to 1M requests/min) and load shedding (raised to 4,096 in flight) |
+| Code version | git `4d530d1` |
+
+### Time and money
+
+| | |
+|---|---|
+| GPU price | $1.327/hr |
+| Session | ~62 min, of which ~25 min lost to stalled Docker Hub downloads (see below) |
+| Credit used | ~$1.36 |
+| Credit used, Phases 0 to 4 | ~$3.45 ($25.00 → ~$21.55) |
+
+### Load
+
+| | |
+|---|---|
+| Steps | 1, 2, 4, 8, 16, 32, 64, 96, 128, 192, 256, 384, 512 users, 60 s each (first 15 s of each step skipped) |
+| Mix | 35% short questions, 25% multi-turn, 25% summaries (~500 to 1,100 prompt tokens), 15% long answers (up to 768 tokens) |
+| Prefix cache | each request tagged uniquely; hit rate ~8% (shared system prompts only) |
+| Requests | 11,175, **0 errors** |
+
+### Results: the sweep
+
+From `results/04_breaking_one_gpu/*_load_sweep_baseline.json`.
+
+| Users | Output tokens/s | TTFT p50 | TTFT p95 | ITL p50 | E2E p95 | Running | Waiting (max) | KV cache (max) | Power |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 102 | 24 ms | 62 ms | 9.7 ms | 3.8 s | 1 | 0 | 0% | 475 W |
+| 8 | 767 | 41 ms | 88 ms | 10.2 ms | 7.9 s | 8 | 0 | 2% | 473 W |
+| 32 | 2,551 | 54 ms | 113 ms | 12.2 ms | 9.4 s | 32 | 0 | 8% | 523 W |
+| 64 | 4,054 | 73 ms | 135 ms | 15.5 ms | 11.7 s | 63 | 0 | 14% | 567 W |
+| 96 | 4,746 | 104 ms | 182 ms | 20.0 ms | 15.3 s | 94 | 0 | 20% | 575 W |
+| 128 | 5,461 | 169 ms | 328 ms | 23.3 ms | 18.3 s | 125 | 0 | 28% | 575 W |
+| **192** | **5,951** | 339 ms | 499 ms | 31.3 ms | 25.6 s | 184 | 0 | 40% | 575 W |
+| 256 | 5,918 | 467 ms | 666 ms | 41.4 ms | 32.3 s | 244 | 0 | 52% | 575 W |
+| 384 | 5,137 | **5.75 s** | 6.22 s | 48.9 ms | 42.3 s | 255 | 127 | 53% | 575 W |
+| 512 | 5,341 | **11.2 s** | 11.7 s | 47.8 ms | 28.8 s* | 255 | 256 | 52% | 575 W |
+
+\* Requests still running when Locust stopped were not logged, which flatters the last step's client side numbers.
+
+### Results: breaking points
+
+| | |
+|---|---|
+| Peak throughput | **5,951 output tokens/s at 192 users** |
+| Requests start queueing | 384 users (vLLM capped at 256 running) |
+| TTFT p95 over 1 s | 384 users |
+| KV cache ≥ 95% | never (max 53%) |
+| Preemptions | none |
+| Errors | none |
+
+### Results: capacity per target
+
+| Target | Users | Output tokens/s |
+|---|---|---|
+| TTFT p95 < 200 ms, ITL p50 < 20 ms | 96 | 4,746 |
+| TTFT p95 < 500 ms, ITL p50 < 40 ms | 192 | 5,951 |
+| TTFT p95 < 1 s | 256 | 5,918 |
+
+### Results: CPU of each container (max % of one core)
+
+| Users | Gateway | NGINX | vLLM | Locust |
+|---|---|---|---|---|
+| 64 | 56% | 24% | 116% | 99% |
+| 256 | 84% | 47% | 100% | 65% |
+| 512 | 81% | 46% | 98% | 72% |
+
+Locust's own worker view at 512 users: 8 workers × 64 users, 5 to 7% CPU each, ~45 MB memory each. The load generator was never the limit.
+
+### Results: concurrent CrewAI crews
+
+From `results/04_breaking_one_gpu/*_agent_load.json`.
+
+| Crews at once | Task p50 | Task p95 | Tasks per minute | Output tokens/s |
+|---|---|---|---|---|
+| 1 | 8.5 s | 8.5 s | 5.8 | 55 |
+| 4 | 8.8 s | 8.9 s | 21.7 | 182 |
+| 8 | 8.9 s | 9.0 s | 43.1 | 272 |
+| 16 | 9.9 s | 10.3 s | 77.0 | 825 |
+| 32 | 10.3 s | 11.0 s | 138.7 | 1,760 |
+
+### Incident: Docker Hub downloads stalled
+
+On this VM, every download served through Cloudflare (Docker Hub's image layers, Cloudflare's own speed test) stalled indefinitely, while other services (Hugging Face, Google Cloud Storage at ~20 MB/s) were fine. Not a rate limit (96 of 100 anonymous pulls left). The box also lacked the NVIDIA Container Toolkit, which the setup script installs, but it never got that far. Fixed by restarting Docker and pointing it at Google's Docker Hub mirror (`mirror.gcr.io`); the 21.6 GB vLLM image then downloaded normally. `setup_gpu_box.sh` now always uses the mirror and puts time limits on the download and GPU checks.
+
+### Phase 4 takeaway
+
+One RTX 5090 peaks at ~5,950 output tokens/s around 192 concurrent users, at its 575 W power limit. The break at 384 users is vLLM's default cap of 256 running requests, not memory: the KV cache never passed 53% and nothing was preempted. Time to first token goes from under 0.5 s to 5.8 s the moment the queue forms. Nothing errors; it just gets slow.

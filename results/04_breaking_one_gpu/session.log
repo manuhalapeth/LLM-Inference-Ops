@@ -1,0 +1,647 @@
+
+==> Switching off automatic package updates
+
+==> Checking the GPU
+name, memory.total [MiB], driver_version
+NVIDIA GeForce RTX 5090, 32607 MiB, 580.95.05
+
+==> Checking Docker
+
+==> Checking that containers can see the GPU
+
+==> Getting the code
+Already up to date.
+
+==> Starting the stack
+ gateway Skipped - No image to be pulled 
+ nginx Pulling 
+ jaeger Pulling 
+ grafana Pulling 
+ vllm Pulling 
+ prometheus Pulling 
+ gpu-exporter Pulling 
+ nginx Pulled 
+ grafana Pulled 
+ prometheus Pulled 
+ jaeger Pulled 
+ gpu-exporter Pulled 
+ vllm Pulled 
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+#0 building with "default" instance using docker driver
+
+#1 [gateway internal] load build definition from Dockerfile
+#1 transferring dockerfile: 598B done
+#1 DONE 0.0s
+
+#2 [gateway internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 0.8s
+
+#3 [gateway internal] load .dockerignore
+#3 transferring context: 58B done
+#3 DONE 0.0s
+
+#4 [gateway internal] load build context
+#4 transferring context: 24.14kB done
+#4 DONE 0.0s
+
+#5 [gateway 1/6] FROM docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#5 resolve docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d 0.0s done
+#5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0B / 29.83MB 0.1s
+#5 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 0B / 4.27MB 0.1s
+#5 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 0B / 12.12MB 0.1s
+#5 sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d 10.37kB / 10.37kB done
+#5 sha256:6b1f85a08c199d29d5b6d71ab9c27bd5b3b393492e01216a15758ff69c4be8b8 1.75kB / 1.75kB done
+#5 sha256:414a398990af718f018ff9c23cea0e7489b7986eb54f2b1d7cc874c99ebc7364 5.66kB / 5.66kB done
+#5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 10.49MB / 29.83MB 0.6s
+#5 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 1.05MB / 4.27MB 0.6s
+#5 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 1.05MB / 12.12MB 0.6s
+#5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 28.31MB / 29.83MB 0.7s
+#5 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 4.27MB / 4.27MB 0.7s done
+#5 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 10.49MB / 12.12MB 0.7s
+#5 sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 0B / 249B 0.7s
+#5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8
+#5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.7s done
+#5 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 12.12MB / 12.12MB 0.7s done
+#5 sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 249B / 249B 0.8s done
+#5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0.9s done
+#5 extracting sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045
+#5 extracting sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 0.1s done
+#5 extracting sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 0.1s
+#5 extracting sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 0.5s done
+#5 extracting sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7
+#5 extracting sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 done
+#5 DONE 2.5s
+
+#6 [gateway 2/6] WORKDIR /srv
+#6 DONE 1.7s
+
+#7 [gateway 3/6] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [gateway 4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 1.438 Collecting fastapi==0.142.2 (from -r requirements.txt (line 1))
+#8 1.551   Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+#8 1.596 Collecting uvicorn==0.54.0 (from -r requirements.txt (line 2))
+#8 1.624   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#8 1.652 Collecting httpx==0.28.1 (from -r requirements.txt (line 3))
+#8 1.676   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#8 1.701 Collecting prometheus-client==0.26.0 (from -r requirements.txt (line 4))
+#8 1.725   Downloading prometheus_client-0.26.0-py3-none-any.whl.metadata (2.1 kB)
+#8 1.872 Collecting tokenizers==0.23.2 (from -r requirements.txt (line 5))
+#8 1.896   Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.8 kB)
+#8 1.925 Collecting opentelemetry-sdk==1.45.0 (from -r requirements.txt (line 6))
+#8 1.949   Downloading opentelemetry_sdk-1.45.0-py3-none-any.whl.metadata (1.6 kB)
+#8 1.978 Collecting opentelemetry-exporter-otlp-proto-grpc==1.45.0 (from -r requirements.txt (line 7))
+#8 2.003   Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.0-py3-none-any.whl.metadata (2.6 kB)
+#8 2.030 Collecting opentelemetry-instrumentation-fastapi==0.66b0 (from -r requirements.txt (line 8))
+#8 2.057   Downloading opentelemetry_instrumentation_fastapi-0.66b0-py3-none-any.whl.metadata (2.2 kB)
+#8 2.096 Collecting opentelemetry-instrumentation-httpx==0.66b0 (from -r requirements.txt (line 9))
+#8 2.122   Downloading opentelemetry_instrumentation_httpx-0.66b0-py3-none-any.whl.metadata (9.0 kB)
+#8 2.161 Collecting starlette>=0.46.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.186   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+#8 2.280 Collecting pydantic>=2.9.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.305   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+#8 2.362 Collecting typing-extensions>=4.8.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.386   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#8 2.406 Collecting typing-inspection>=0.4.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.431   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#8 2.450 Collecting annotated-doc>=0.0.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.474   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#8 2.500 Collecting opentelemetry-api>=1.44.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 2.524   Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+#8 2.550 Collecting click>=7.0 (from uvicorn==0.54.0->-r requirements.txt (line 2))
+#8 2.574   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#8 2.595 Collecting h11>=0.8 (from uvicorn==0.54.0->-r requirements.txt (line 2))
+#8 2.619   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#8 2.646 Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 2.670   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#8 2.696 Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 2.721   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#8 2.747 Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 2.772   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#8 2.795 Collecting idna (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 2.819   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#8 2.875 Collecting huggingface-hub<2.0,>=0.16.4 (from tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 2.899   Downloading huggingface_hub-1.33.0-py3-none-any.whl.metadata (16 kB)
+#8 2.939 Collecting opentelemetry-semantic-conventions==0.66b0 (from opentelemetry-sdk==1.45.0->-r requirements.txt (line 6))
+#8 2.963   Downloading opentelemetry_semantic_conventions-0.66b0-py3-none-any.whl.metadata (2.4 kB)
+#8 2.995 Collecting googleapis-common-protos~=1.57 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 3.019   Downloading googleapis_common_protos-1.75.5-py3-none-any.whl.metadata (8.5 kB)
+#8 3.373 Collecting grpcio<2.0.0,>=1.63.2 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 3.397   Downloading grpcio-1.84.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+#8 3.419 Collecting opentelemetry-exporter-otlp-common==0.66b0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 3.447   Downloading opentelemetry_exporter_otlp_common-0.66b0-py3-none-any.whl.metadata (1.9 kB)
+#8 3.474 Collecting opentelemetry-exporter-otlp-proto-common==1.45.0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 3.499   Downloading opentelemetry_exporter_otlp_proto_common-1.45.0-py3-none-any.whl.metadata (1.8 kB)
+#8 3.529 Collecting opentelemetry-proto==1.45.0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 3.554   Downloading opentelemetry_proto-1.45.0-py3-none-any.whl.metadata (2.3 kB)
+#8 3.607 Collecting opentelemetry-instrumentation-asgi==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 3.632   Downloading opentelemetry_instrumentation_asgi-0.66b0-py3-none-any.whl.metadata (2.0 kB)
+#8 3.661 Collecting opentelemetry-instrumentation==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 3.686   Downloading opentelemetry_instrumentation-0.66b0-py3-none-any.whl.metadata (7.2 kB)
+#8 3.712 Collecting opentelemetry-util-http==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 3.738   Downloading opentelemetry_util_http-0.66b0-py3-none-any.whl.metadata (2.6 kB)
+#8 3.960 Collecting wrapt<3.0.0,>=1.0.0 (from opentelemetry-instrumentation-httpx==0.66b0->-r requirements.txt (line 9))
+#8 3.985   Downloading wrapt-2.5.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.6 kB)
+#8 4.023 Collecting packaging>=18.0 (from opentelemetry-instrumentation==0.66b0->opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 4.047   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#8 4.075 Collecting asgiref~=3.0 (from opentelemetry-instrumentation-asgi==0.66b0->opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 4.100   Downloading asgiref-3.12.1-py3-none-any.whl.metadata (9.4 kB)
+#8 4.232 Collecting protobuf<8.0,>=5.0 (from opentelemetry-proto==1.45.0->opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 4.257   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+#8 4.315 Collecting filelock>=3.10.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 4.342   Downloading filelock-4.0.10-py3-none-any.whl.metadata (2.0 kB)
+#8 4.373 Collecting fsspec>=2023.5.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 4.397   Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+#8 4.454 Collecting hf-xet<2.0.0,>=1.6.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 4.478   Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+#8 4.519 Collecting pyyaml>=5.1 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 4.543   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#8 4.579 Collecting tqdm>=4.42.1 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 4.603   Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+#8 4.633 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi==0.142.2->-r requirements.txt (line 1))
+#8 4.659   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#8 5.124 Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi==0.142.2->-r requirements.txt (line 1))
+#8 5.149   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#8 5.211 Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+#8 5.245 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#8 5.270 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#8 5.296 Downloading prometheus_client-0.26.0-py3-none-any.whl (64 kB)
+#8 5.322 Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+#8 5.400    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 47.1 MB/s eta 0:00:00
+#8 5.425 Downloading opentelemetry_sdk-1.45.0-py3-none-any.whl (140 kB)
+#8 5.452 Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.0-py3-none-any.whl (19 kB)
+#8 5.478 Downloading opentelemetry_instrumentation_fastapi-0.66b0-py3-none-any.whl (14 kB)
+#8 5.504 Downloading opentelemetry_instrumentation_httpx-0.66b0-py3-none-any.whl (17 kB)
+#8 5.529 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#8 5.554 Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+#8 5.580 Downloading opentelemetry_exporter_otlp_common-0.66b0-py3-none-any.whl (12 kB)
+#8 5.607 Downloading opentelemetry_exporter_otlp_proto_common-1.45.0-py3-none-any.whl (15 kB)
+#8 5.632 Downloading opentelemetry_instrumentation-0.66b0-py3-none-any.whl (36 kB)
+#8 5.658 Downloading opentelemetry_instrumentation_asgi-0.66b0-py3-none-any.whl (15 kB)
+#8 5.684 Downloading opentelemetry_proto-1.45.0-py3-none-any.whl (72 kB)
+#8 5.709 Downloading opentelemetry_semantic_conventions-0.66b0-py3-none-any.whl (206 kB)
+#8 5.734 Downloading opentelemetry_util_http-0.66b0-py3-none-any.whl (8.4 kB)
+#8 5.759 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#8 5.783 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#8 5.808 Downloading googleapis_common_protos-1.75.5-py3-none-any.whl (307 kB)
+#8 5.834 Downloading grpcio-1.84.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.2 MB)
+#8 5.876    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 179.4 MB/s eta 0:00:00
+#8 5.901 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 5.926 Downloading huggingface_hub-1.33.0-py3-none-any.whl (846 kB)
+#8 5.932    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 846.4/846.4 kB 209.4 MB/s eta 0:00:00
+#8 5.957 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+#8 5.983 Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#8 5.994    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 234.1 MB/s eta 0:00:00
+#8 6.018 Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+#8 6.043 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#8 6.068 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#8 6.093 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#8 6.118 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#8 6.142 Downloading wrapt-2.5.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (250 kB)
+#8 6.168 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#8 6.192 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#8 6.217 Downloading asgiref-3.12.1-py3-none-any.whl (25 kB)
+#8 6.242 Downloading filelock-4.0.10-py3-none-any.whl (111 kB)
+#8 6.267 Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+#8 6.292 Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+#8 6.311    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 271.4 MB/s eta 0:00:00
+#8 6.336 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#8 6.361 Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+#8 6.386 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#8 6.390    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 370.4 MB/s eta 0:00:00
+#8 6.414 Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+#8 6.509 Installing collected packages: wrapt, typing-extensions, tqdm, pyyaml, protobuf, prometheus-client, packaging, opentelemetry-util-http, idna, hf-xet, h11, fsspec, filelock, click, certifi, asgiref, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, opentelemetry-proto, opentelemetry-api, httpcore, grpcio, googleapis-common-protos, anyio, starlette, pydantic, opentelemetry-semantic-conventions, opentelemetry-exporter-otlp-proto-common, httpx, opentelemetry-sdk, opentelemetry-instrumentation, huggingface-hub, fastapi, tokenizers, opentelemetry-instrumentation-httpx, opentelemetry-instrumentation-asgi, opentelemetry-exporter-otlp-common, opentelemetry-instrumentation-fastapi, opentelemetry-exporter-otlp-proto-grpc
+#8 8.824 Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 asgiref-3.12.1 certifi-2026.7.22 click-8.5.0 fastapi-0.142.2 filelock-4.0.10 fsspec-2026.9.0 googleapis-common-protos-1.75.5 grpcio-1.84.0 h11-0.16.0 hf-xet-1.6.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-1.33.0 idna-3.20 opentelemetry-api-1.45.0 opentelemetry-exporter-otlp-common-0.66b0 opentelemetry-exporter-otlp-proto-common-1.45.0 opentelemetry-exporter-otlp-proto-grpc-1.45.0 opentelemetry-instrumentation-0.66b0 opentelemetry-instrumentation-asgi-0.66b0 opentelemetry-instrumentation-fastapi-0.66b0 opentelemetry-instrumentation-httpx-0.66b0 opentelemetry-proto-1.45.0 opentelemetry-sdk-1.45.0 opentelemetry-semantic-conventions-0.66b0 opentelemetry-util-http-0.66b0 packaging-26.3 prometheus-client-0.26.0 protobuf-7.36.2 pydantic-2.13.5 pydantic-core-2.46.5 pyyaml-6.0.3 starlette-1.7.0 tokenizers-0.23.2 tqdm-4.70.1 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0 wrapt-2.5.0
+#8 8.824 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 8.929 
+#8 8.929 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#8 8.929 [notice] To update, run: pip install --upgrade pip
+#8 DONE 9.2s
+
+#9 [gateway 5/6] RUN python -c "from tokenizers import Tokenizer; Tokenizer.from_pretrained('Qwen/Qwen2.5-7B-Instruct').save('/srv/tokenizer.json')"
+#9 DONE 4.5s
+
+#10 [gateway 6/6] COPY app ./app
+#10 DONE 0.0s
+
+#11 [gateway] exporting to image
+#11 exporting layers
+#11 exporting layers 0.6s done
+#11 writing image sha256:ceed92b969ee64a1f7cce905b310906deb9bfaa8fcae5d10b5cf53349ce79c42 done
+#11 naming to docker.io/library/llm-inference-ops-gateway done
+#11 DONE 0.6s
+
+#12 [gateway] resolving provenance for metadata file
+#12 DONE 0.0s
+ gateway  Built
+ Network llm-inference-ops_default  Creating
+ Network llm-inference-ops_default  Created
+ Volume "llm-inference-ops_prometheus-data"  Creating
+ Volume "llm-inference-ops_prometheus-data"  Created
+ Volume "llm-inference-ops_grafana-data"  Creating
+ Volume "llm-inference-ops_grafana-data"  Created
+ Container llm-inference-ops-vllm-1  Creating
+ Container llm-inference-ops-gpu-exporter-1  Creating
+ Container llm-inference-ops-jaeger-1  Creating
+ Container llm-inference-ops-prometheus-1  Creating
+ Container llm-inference-ops-gpu-exporter-1  Created
+ Container llm-inference-ops-prometheus-1  Created
+ Container llm-inference-ops-grafana-1  Creating
+ Container llm-inference-ops-jaeger-1  Created
+ Container llm-inference-ops-vllm-1  Created
+ Container llm-inference-ops-nginx-1  Creating
+ Container llm-inference-ops-nginx-1  Created
+ Container llm-inference-ops-gateway-1  Creating
+ Container llm-inference-ops-grafana-1  Created
+ Container llm-inference-ops-gateway-1  Created
+ Container llm-inference-ops-vllm-1  Starting
+ Container llm-inference-ops-gpu-exporter-1  Starting
+ Container llm-inference-ops-prometheus-1  Starting
+ Container llm-inference-ops-jaeger-1  Starting
+ Container llm-inference-ops-jaeger-1  Started
+ Container llm-inference-ops-prometheus-1  Started
+ Container llm-inference-ops-grafana-1  Starting
+ Container llm-inference-ops-grafana-1  Started
+ Container llm-inference-ops-gpu-exporter-1  Started
+ Container llm-inference-ops-vllm-1  Started
+ Container llm-inference-ops-nginx-1  Starting
+ Container llm-inference-ops-nginx-1  Started
+ Container llm-inference-ops-gateway-1  Starting
+ Container llm-inference-ops-gateway-1  Started
+
+==> Waiting for vLLM to load the model (first run downloads the weights)
+request_id     4072c45dd02c49b09266123ee3dcffbe
+TTFT           345 ms
+end-to-end     942 ms
+tokens         44 in / 63 out
+inter-token    9.6 ms
+throughput     66.9 output tokens/s
+
+A KV cache, or key-value cache, in the context of Language Model (LLM) inference, stores previously generated tokens along with their corresponding attention scores to speed up the generation process for subsequent tokens. This caching technique helps improve the efficiency and throughput of the model without compromising the quality of the generated text.
+
+saved /root/LLM-Inference-Ops/results/00_setup/20261004T210504Z_smoke_test.json
+
+==> Ready
+Stack is up. From your laptop, open an SSH tunnel:
+  ssh -L 8080:localhost:8080 -L 3000:localhost:3000 -L 9090:localhost:9090 -L 16686:localhost:16686 <this box>
+Then:
+  gateway     http://localhost:8080/v1/models
+  Grafana     http://localhost:3000   (admin / GRAFANA_ADMIN_PASSWORD from .env)
+  Prometheus  http://localhost:9090/targets
+  Jaeger      http://localhost:16686  (traces)
+
+Before you leave: push code, copy results/ off the box, then DESTROY the instance on Vast.ai.
+==> Stack: baseline engine, gateway with load test limits
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+#0 building with "default" instance using docker driver
+
+#1 [gateway internal] load build definition from Dockerfile
+#1 transferring dockerfile: 598B done
+#1 DONE 0.0s
+
+#2 [gateway internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 0.4s
+
+#3 [gateway internal] load .dockerignore
+#3 transferring context: 58B done
+#3 DONE 0.0s
+
+#4 [gateway 1/6] FROM docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#4 DONE 0.0s
+
+#5 [gateway internal] load build context
+#5 transferring context: 225B done
+#5 DONE 0.0s
+
+#6 [gateway 2/6] WORKDIR /srv
+#6 CACHED
+
+#7 [gateway 3/6] COPY requirements.txt .
+#7 CACHED
+
+#8 [gateway 4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [gateway 5/6] RUN python -c "from tokenizers import Tokenizer; Tokenizer.from_pretrained('Qwen/Qwen2.5-7B-Instruct').save('/srv/tokenizer.json')"
+#9 CACHED
+
+#10 [gateway 6/6] COPY app ./app
+#10 CACHED
+
+#11 [gateway] exporting to image
+#11 exporting layers done
+#11 writing image sha256:ceed92b969ee64a1f7cce905b310906deb9bfaa8fcae5d10b5cf53349ce79c42 done
+#11 naming to docker.io/library/llm-inference-ops-gateway done
+#11 DONE 0.0s
+
+#12 [gateway] resolving provenance for metadata file
+#12 DONE 0.0s
+ gateway  Built
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-vllm-1  Running
+ Container llm-inference-ops-gpu-exporter-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-prometheus-1  Running
+ Container llm-inference-ops-grafana-1  Running
+ Container llm-inference-ops-gateway-1  Recreate
+ Container llm-inference-ops-gateway-1  Recreated
+ Container llm-inference-ops-gateway-1  Starting
+ Container llm-inference-ops-gateway-1  Started
+==> Sampling container CPU and memory every 10 s
+==> Locust: 1 to 512 users, 60 s per step (~13 min). Live UI on :8089
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-vllm-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+ locust Pulling 
+ 6310eb16bf42 Pulling fs layer 
+ 5bbcb35ea63e Pulling fs layer 
+ 237e12970bdc Pulling fs layer 
+ 9b83eae799b8 Pulling fs layer 
+ 7e21a52d91a0 Pulling fs layer 
+ 19e33976761c Pulling fs layer 
+ f8907d240926 Pulling fs layer 
+ 09493a048270 Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 9b83eae799b8 Waiting 
+ 7e21a52d91a0 Waiting 
+ 19e33976761c Waiting 
+ f8907d240926 Waiting 
+ 09493a048270 Waiting 
+ 4f4fb700ef54 Waiting 
+ 237e12970bdc Downloading [>                                                  ]  119.6kB/11.91MB
+ 5bbcb35ea63e Downloading [>                                                  ]  43.03kB/4.265MB
+ 6310eb16bf42 Downloading [>                                                  ]  298.3kB/29.79MB
+ 237e12970bdc Downloading [===>                                               ]  719.8kB/11.91MB
+ 5bbcb35ea63e Downloading [===>                                               ]  305.2kB/4.265MB
+ 6310eb16bf42 Downloading [===>                                               ]  2.114MB/29.79MB
+ 237e12970bdc Downloading [==============>                                    ]  3.437MB/11.91MB
+ 5bbcb35ea63e Downloading [===================>                               ]  1.689MB/4.265MB
+ 6310eb16bf42 Downloading [====================>                              ]  12.23MB/29.79MB
+ 5bbcb35ea63e Verifying Checksum 
+ 5bbcb35ea63e Download complete 
+ 237e12970bdc Verifying Checksum 
+ 237e12970bdc Download complete 
+ 6310eb16bf42 Verifying Checksum 
+ 6310eb16bf42 Download complete 
+ 6310eb16bf42 Extracting [>                                                  ]  327.7kB/29.79MB
+ 6310eb16bf42 Extracting [===========>                                       ]  6.881MB/29.79MB
+ 6310eb16bf42 Extracting [==================>                                ]  11.14MB/29.79MB
+ 9b83eae799b8 Downloading [==================================================>]     249B/249B
+ 9b83eae799b8 Verifying Checksum 
+ 9b83eae799b8 Download complete 
+ 19e33976761c Downloading [===============>                                   ]  1.032kB/3.313kB
+ 19e33976761c Downloading [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Verifying Checksum 
+ 19e33976761c Download complete 
+ 6310eb16bf42 Extracting [===============================>                   ]  19.01MB/29.79MB
+ 6310eb16bf42 Extracting [===========================================>       ]  25.89MB/29.79MB
+ 6310eb16bf42 Extracting [===========================================>       ]  26.21MB/29.79MB
+ 7e21a52d91a0 Downloading [>                                                  ]  211.2kB/21.11MB
+ 6310eb16bf42 Extracting [================================================>  ]  28.84MB/29.79MB
+ 7e21a52d91a0 Downloading [===>                                               ]  1.284MB/21.11MB
+ 09493a048270 Downloading [>                                                  ]  18.39kB/1.756MB
+ 6310eb16bf42 Extracting [================================================>  ]  29.16MB/29.79MB
+ 7e21a52d91a0 Downloading [==================>                                ]  8.003MB/21.11MB
+ 09493a048270 Downloading [===>                                               ]    125kB/1.756MB
+ 7e21a52d91a0 Verifying Checksum 
+ 7e21a52d91a0 Download complete 
+ 6310eb16bf42 Extracting [==================================================>]  29.79MB/29.79MB
+ 6310eb16bf42 Extracting [==================================================>]  29.79MB/29.79MB
+ f8907d240926 Downloading [>                                                  ]  211.1kB/21.11MB
+ 6310eb16bf42 Pull complete 
+ 09493a048270 Downloading [==================>                                ]  639.6kB/1.756MB
+ 5bbcb35ea63e Extracting [>                                                  ]  65.54kB/4.265MB
+ 09493a048270 Verifying Checksum 
+ 09493a048270 Download complete 
+ f8907d240926 Downloading [==>                                                ]  845.8kB/21.11MB
+ 5bbcb35ea63e Extracting [=============================================>     ]  3.867MB/4.265MB
+ 5bbcb35ea63e Extracting [==================================================>]  4.265MB/4.265MB
+ 5bbcb35ea63e Pull complete 
+ 237e12970bdc Extracting [>                                                  ]  131.1kB/11.91MB
+ f8907d240926 Downloading [==========>                                        ]  4.293MB/21.11MB
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Download complete 
+ 237e12970bdc Extracting [============>                                      ]  2.884MB/11.91MB
+ f8907d240926 Downloading [=====================================>             ]  15.88MB/21.11MB
+ f8907d240926 Verifying Checksum 
+ f8907d240926 Download complete 
+ 237e12970bdc Extracting [========================>                          ]  5.767MB/11.91MB
+ 237e12970bdc Extracting [======================================>            ]  9.175MB/11.91MB
+ 237e12970bdc Extracting [============================================>      ]  10.62MB/11.91MB
+ 237e12970bdc Extracting [==================================================>]  11.91MB/11.91MB
+ 237e12970bdc Pull complete 
+ 9b83eae799b8 Extracting [==================================================>]     249B/249B
+ 9b83eae799b8 Extracting [==================================================>]     249B/249B
+ 9b83eae799b8 Pull complete 
+ 7e21a52d91a0 Extracting [>                                                  ]  229.4kB/21.11MB
+ 7e21a52d91a0 Extracting [=======>                                           ]  3.211MB/21.11MB
+ 7e21a52d91a0 Extracting [==============>                                    ]  5.964MB/21.11MB
+ 7e21a52d91a0 Extracting [=================>                                 ]   7.34MB/21.11MB
+ 7e21a52d91a0 Extracting [=====================>                             ]  9.175MB/21.11MB
+ 7e21a52d91a0 Extracting [============================>                      ]  11.93MB/21.11MB
+ 7e21a52d91a0 Extracting [=================================>                 ]  13.99MB/21.11MB
+ 7e21a52d91a0 Extracting [====================================>              ]   15.6MB/21.11MB
+ 7e21a52d91a0 Extracting [=========================================>         ]  17.66MB/21.11MB
+ 7e21a52d91a0 Extracting [=============================================>     ]  19.27MB/21.11MB
+ 7e21a52d91a0 Extracting [================================================>  ]  20.64MB/21.11MB
+ 7e21a52d91a0 Extracting [==================================================>]  21.11MB/21.11MB
+ 7e21a52d91a0 Pull complete 
+ 19e33976761c Extracting [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Extracting [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Pull complete 
+ f8907d240926 Extracting [>                                                  ]  229.4kB/21.11MB
+ f8907d240926 Extracting [========>                                          ]   3.67MB/21.11MB
+ f8907d240926 Extracting [===============>                                   ]  6.423MB/21.11MB
+ f8907d240926 Extracting [=================>                                 ]   7.34MB/21.11MB
+ f8907d240926 Extracting [=====================>                             ]  8.946MB/21.11MB
+ f8907d240926 Extracting [===========================>                       ]   11.7MB/21.11MB
+ f8907d240926 Extracting [================================>                  ]  13.76MB/21.11MB
+ f8907d240926 Extracting [====================================>              ]  15.37MB/21.11MB
+ f8907d240926 Extracting [=========================================>         ]  17.43MB/21.11MB
+ f8907d240926 Extracting [=============================================>     ]  19.04MB/21.11MB
+ f8907d240926 Extracting [================================================>  ]  20.41MB/21.11MB
+ f8907d240926 Extracting [==================================================>]  21.11MB/21.11MB
+ f8907d240926 Pull complete 
+ 09493a048270 Extracting [>                                                  ]  32.77kB/1.756MB
+ 09493a048270 Extracting [==================================================>]  1.756MB/1.756MB
+ 09493a048270 Extracting [==================================================>]  1.756MB/1.756MB
+ 09493a048270 Pull complete 
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Pull complete 
+ locust Pulled 
+[2026-10-04 21:05:18,254] 41ae51c4a9cb/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-04 21:05:18,279] 41ae51c4a9cb/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_1899a482c9844fce966f9e92f8f35ee5 (index 0) reported as ready. 1 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_7bf5be7d8a1f43048365f8e106ceb7c3 (index 1) reported as ready. 2 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_bddbad9e2e674d148d6297442ba34670 (index 2) reported as ready. 3 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_4c6269aaa34a49a18a95e5e71b37dfce (index 3) reported as ready. 4 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_17f976a782974ad98c4507a65ba69b25 (index 4) reported as ready. 5 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_8f390080c4ad4b478857fbda3c2ed4ea (index 5) reported as ready. 6 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_39281577452344e5a9c0699dd771e6cd (index 6) reported as ready. 7 workers connected.
+[2026-10-04 21:05:18,295] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_a336dfd51bda477c801182fba1340187 (index 7) reported as ready. 8 workers connected.
+[2026-10-04 21:05:19,295] 41ae51c4a9cb/INFO/locust.runners: Shape test starting.
+[2026-10-04 21:05:19,296] 41ae51c4a9cb/INFO/locust.runners: Shape worker starting
+[2026-10-04 21:05:19,296] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 1 users at 1.00 spawn rate
+[2026-10-04 21:05:19,296] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 1 users at 1.00 spawn rate to 8 ready workers
+[2026-10-04 21:05:19,350] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 1} (1 total users)
+[2026-10-04 21:06:19,336] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 2 users at 2.00 spawn rate
+[2026-10-04 21:06:19,336] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 2 users at 2.00 spawn rate to 8 ready workers
+[2026-10-04 21:06:19,390] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 2} (2 total users)
+[2026-10-04 21:07:19,379] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 4 users at 4.00 spawn rate
+[2026-10-04 21:07:19,379] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 4 users at 4.00 spawn rate to 8 ready workers
+[2026-10-04 21:07:19,475] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 4} (4 total users)
+[2026-10-04 21:08:19,420] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 8 users at 8.00 spawn rate
+[2026-10-04 21:08:19,421] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 8 users at 8.00 spawn rate to 8 ready workers
+[2026-10-04 21:08:19,505] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 8} (8 total users)
+[2026-10-04 21:09:19,464] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 16 users at 16.00 spawn rate
+[2026-10-04 21:09:19,464] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 16 users at 16.00 spawn rate to 8 ready workers
+[2026-10-04 21:09:19,559] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 16} (16 total users)
+[2026-10-04 21:10:19,506] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 32 users at 32.00 spawn rate
+[2026-10-04 21:10:19,506] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 32 users at 32.00 spawn rate to 8 ready workers
+[2026-10-04 21:10:19,580] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 32} (32 total users)
+[2026-10-04 21:11:19,548] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-10-04 21:11:19,548] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-10-04 21:11:19,621] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-10-04 21:12:19,586] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 96 users at 96.00 spawn rate
+[2026-10-04 21:12:19,586] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 96 users at 96.00 spawn rate to 8 ready workers
+[2026-10-04 21:12:19,681] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 96} (96 total users)
+[2026-10-04 21:13:19,632] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-10-04 21:13:19,632] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-10-04 21:13:19,717] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-10-04 21:14:19,676] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 192 users at 192.00 spawn rate
+[2026-10-04 21:14:19,676] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 192 users at 192.00 spawn rate to 8 ready workers
+[2026-10-04 21:14:19,753] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 192} (192 total users)
+[2026-10-04 21:15:19,715] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-04 21:15:19,715] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-04 21:15:19,790] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-04 21:16:19,754] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 384 users at 384.00 spawn rate
+[2026-10-04 21:16:19,754] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 384 users at 384.00 spawn rate to 8 ready workers
+[2026-10-04 21:16:19,838] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 384} (384 total users)
+[2026-10-04 21:17:19,917] 41ae51c4a9cb/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-04 21:17:19,917] 41ae51c4a9cb/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-04 21:17:20,012] 41ae51c4a9cb/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-04 21:18:20,117] 41ae51c4a9cb/INFO/locust.runners: Shape test stopping
+[2026-10-04 21:18:20,178] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_a336dfd51bda477c801182fba1340187 (index 7) reported that it has stopped
+[2026-10-04 21:18:20,179] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_a336dfd51bda477c801182fba1340187 (index 7) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,184] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_4c6269aaa34a49a18a95e5e71b37dfce (index 3) reported that it has stopped
+[2026-10-04 21:18:20,185] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_4c6269aaa34a49a18a95e5e71b37dfce (index 3) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,185] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_39281577452344e5a9c0699dd771e6cd (index 6) reported that it has stopped
+[2026-10-04 21:18:20,185] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_39281577452344e5a9c0699dd771e6cd (index 6) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,186] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_8f390080c4ad4b478857fbda3c2ed4ea (index 5) reported that it has stopped
+[2026-10-04 21:18:20,186] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_8f390080c4ad4b478857fbda3c2ed4ea (index 5) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,187] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_17f976a782974ad98c4507a65ba69b25 (index 4) reported that it has stopped
+[2026-10-04 21:18:20,187] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_17f976a782974ad98c4507a65ba69b25 (index 4) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,187] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_1899a482c9844fce966f9e92f8f35ee5 (index 0) reported that it has stopped
+[2026-10-04 21:18:20,188] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_1899a482c9844fce966f9e92f8f35ee5 (index 0) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,189] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_bddbad9e2e674d148d6297442ba34670 (index 2) reported that it has stopped
+[2026-10-04 21:18:20,189] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_bddbad9e2e674d148d6297442ba34670 (index 2) reported as ready. 8 workers connected.
+[2026-10-04 21:18:20,189] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_7bf5be7d8a1f43048365f8e106ceb7c3 (index 1) reported that it has stopped
+[2026-10-04 21:18:20,189] 41ae51c4a9cb/INFO/locust.runners: 41ae51c4a9cb_7bf5be7d8a1f43048365f8e106ceb7c3 (index 1) reported as ready. 8 workers connected.
+[2026-10-04 21:18:21,121] 41ae51c4a9cb/INFO/locust.main: Shape test completed, stopping test
+[2026-10-04 21:18:26,122] 41ae51c4a9cb/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,123] 41ae51c4a9cb/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-04 21:18:26,124] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,124] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,124] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,124] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_a336dfd51bda477c801182fba1340187' (index 7) quit. 7 workers ready.
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_17f976a782974ad98c4507a65ba69b25' (index 4) quit. 6 workers ready.
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_4c6269aaa34a49a18a95e5e71b37dfce' (index 3) quit. 5 workers ready.
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_39281577452344e5a9c0699dd771e6cd' (index 6) quit. 4 workers ready.
+[2026-10-04 21:18:26,125] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_8f390080c4ad4b478857fbda3c2ed4ea' (index 5) quit. 3 workers ready.
+[2026-10-04 21:18:26,126] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_bddbad9e2e674d148d6297442ba34670' (index 2) quit. 2 workers ready.
+[2026-10-04 21:18:26,126] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_7bf5be7d8a1f43048365f8e106ceb7c3' (index 1) quit. 1 workers ready.
+[2026-10-04 21:18:26,126] 41ae51c4a9cb/INFO/locust.runners: Worker '41ae51c4a9cb_1899a482c9844fce966f9e92f8f35ee5' (index 0) quit. 0 workers ready.
+[2026-10-04 21:18:26,126] 41ae51c4a9cb/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-04 21:18:27,207] 41ae51c4a9cb/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                 1546     0(0.00%) |  22693    5808   47845  20000 |    1.98        0.00
+TTFT     long_generation                                                                 1546     0(0.00%) |   1444      20   11121    220 |    1.98        0.00
+TOTAL    multi_turn                                                                      2782     0(0.00%) |   7825     710   27274   5600 |    3.56        0.00
+TTFT     multi_turn                                                                      2782     0(0.00%) |   1942      22   11837    270 |    3.56        0.00
+TOTAL    short_qa                                                                        4074     0(0.00%) |   3116      89   14997   1200 |    5.22        0.00
+TTFT     short_qa                                                                        4074     0(0.00%) |   2074      20   11844    250 |    5.22        0.00
+TOTAL    summarization                                                                   2773     0(0.00%) |   9170    1683   29822   7000 |    3.55        0.00
+TTFT     summarization                                                                   2773     0(0.00%) |   1850      43   11798    280 |    3.55        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     22350     0(0.00%) |   5199      20   47845   1500 |   28.63        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     20000  27000  32000  35000  41000  43000  44000  47000  48000  48000  48000   1546
+TTFT     long_generation                                                                       220    420    560   1100   5800   6200  11000  11000  11000  11000  11000   1546
+TOTAL    multi_turn                                                                           5600   8900  11000  12000  18000  20000  23000  23000  25000  27000  27000   2782
+TTFT     multi_turn                                                                            270    470    690   5200   6300  11000  11000  12000  12000  12000  12000   2782
+TOTAL    short_qa                                                                             1200   2100   3300   6500  11000  12000  14000  14000  15000  15000  15000   4074
+TTFT     short_qa                                                                              250    470   1200   5400   9500  11000  11000  12000  12000  12000  12000   4074
+TOTAL    summarization                                                                        7000   9400  14000  15000  19000  23000  26000  29000  30000  30000  30000   2773
+TTFT     summarization                                                                         280    470    640   5100   6100  11000  11000  12000  12000  12000  12000   2773
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           1500   5500   7400   9700  14000  21000  30000  38000  45000  48000  48000  22350
+
+==> Per step analysis
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+     1    0.58        102      24ms      62ms     3.8s    9.7ms        1        0      0%        0  100%       0
+     2    1.04        197      40ms      62ms     6.6s    9.9ms        2        0      1%        0  100%       0
+     4    1.69        393      39ms      77ms     7.6s   10.0ms        4        0      1%        0  100%       0
+     8    3.64        767      41ms      88ms     7.9s   10.2ms        8        0      2%        0  100%       0
+    16    6.00       1381      42ms      95ms     8.8s   11.4ms       16        0      4%        0  100%       0
+    32   11.33       2551      54ms     113ms     9.4s   12.2ms       32        0      8%        0  100%       0
+    64   19.67       4054      73ms     135ms    11.7s   15.5ms       63        0     14%        0  100%       0
+    96   20.51       4746     104ms     182ms    15.3s   20.0ms       94        0     20%        0  100%       0
+   128   23.40       5461     169ms     328ms    18.3s   23.3ms      125        0     28%        0  100%       0
+   192   25.67       5951     339ms     499ms    25.6s   31.3ms      184        0     40%        0  100%       0
+   256   26.38       5918     467ms     666ms    32.3s   41.4ms      244        0     52%        0  100%       0
+   384   22.58       5137    5750ms    6220ms    42.3s   48.9ms      255      127     53%        0  100%       0
+   512   12.64       5341   11153ms   11693ms    28.8s   47.8ms      255      256     52%        0  100%       0
+
+breaking points: {"requests_queue": 384, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 384, "errors_over_1pct": null, "peak_throughput_users": 192, "peak_output_tokens_per_s": 5951.0888888888885, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/04_breaking_one_gpu/20261004T211828Z_load_sweep_baseline.json
+==> Concurrent CrewAI crews
+  1 crews: task p50   8.5 s  p95   8.5 s    5.8 tasks/min  failed 0  55 tok/s
+  4 crews: task p50   8.8 s  p95   8.9 s   21.7 tasks/min  failed 0  182 tok/s
+  8 crews: task p50   8.9 s  p95   9.0 s   43.1 tasks/min  failed 0  272 tok/s
+ 16 crews: task p50   9.9 s  p95  10.3 s   77.0 tasks/min  failed 0  825 tok/s
+ 32 crews: task p50  10.3 s  p95  11.0 s  138.7 tasks/min  failed 0  1760 tok/s
+saved /root/LLM-Inference-Ops/results/04_breaking_one_gpu/20261004T212049Z_agent_load.json
+==> Done. Results are in results/04_breaking_one_gpu/
+results/04_breaking_one_gpu:
+20261004T211828Z_load_sweep_baseline.json
+20261004T212049Z_agent_load.json
+baseline
+vllm_startup.log
+
+results/04_breaking_one_gpu/baseline:
+container_stats.jsonl
+locust_exceptions.csv
+locust_failures.csv
+locust_report.html
+locust_stats.csv
+locust_stats_history.csv
+requests_10.jsonl
+requests_11.jsonl
+requests_12.jsonl
+requests_13.jsonl
+requests_14.jsonl
+requests_15.jsonl
+requests_8.jsonl
+requests_9.jsonl
+run_meta.json

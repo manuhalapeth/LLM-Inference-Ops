@@ -1,0 +1,1 @@
+{"start": 1791147919.2968574, "steps": [1, 2, 4, 8, 16, 32, 64, 96, 128, 192, 256, 384, 512], "step_seconds": 60, "category_weights": {"short_qa": 0.35, "multi_turn": 0.25, "summarization": 0.25, "long_generation": 0.15}}

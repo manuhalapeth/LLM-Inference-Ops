@@ -1,0 +1,195 @@
+{
+  "run_id": "20261004T212049Z_agent_load",
+  "phase": "04_breaking_one_gpu",
+  "name": "agent_load",
+  "timestamp": "2026-10-04T21:20:49.754436+00:00",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_config": "baseline",
+    "crewai": "1.15.23"
+  },
+  "load": {
+    "concurrency": [
+      1,
+      4,
+      8,
+      16,
+      32
+    ],
+    "document": "incident_report.md",
+    "agents_per_crew": 3
+  },
+  "metrics": {
+    "levels": [
+      {
+        "concurrent_crews": 1,
+        "wall_s": 10.37277603149414,
+        "failed": 0,
+        "task_s": {
+          "count": 1,
+          "mean": 8.485235058999933,
+          "p50": 8.485235058999933,
+          "p95": 8.485235058999933,
+          "p99": 8.485235058999933,
+          "max": 8.485235058999933
+        },
+        "tasks_per_minute": 5.7843724590048184,
+        "per_agent_p50_s": {
+          "Incident analyst": 4.631316946999959,
+          "Reviewer": 2.2749313720000828,
+          "Technical writer": 1.561696473000211
+        },
+        "server": {
+          "output_tokens_per_s": 55.33716319114609,
+          "running": {
+            "avg": 0.6666666666666666,
+            "max": 1.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.002189799607873096,
+            "max": 0.003361087770223814
+          }
+        },
+        "errors": []
+      },
+      {
+        "concurrent_crews": 4,
+        "wall_s": 11.067697286605835,
+        "failed": 0,
+        "task_s": {
+          "count": 4,
+          "mean": 8.793078604000016,
+          "p50": 8.830721065000034,
+          "p95": 8.86243653800011,
+          "p99": 8.86243653800011,
+          "max": 8.86243653800011
+        },
+        "tasks_per_minute": 21.68472752597316,
+        "per_agent_p50_s": {
+          "Incident analyst": 4.750884405999841,
+          "Reviewer": 2.2732687469997472,
+          "Technical writer": 1.5599890749999759
+        },
+        "server": {
+          "output_tokens_per_s": 181.9710051554581,
+          "running": {
+            "avg": 2.3333333333333335,
+            "max": 4.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.004201359712779758,
+            "max": 0.00817355435031697
+          }
+        },
+        "errors": []
+      },
+      {
+        "concurrent_crews": 8,
+        "wall_s": 11.145482778549194,
+        "failed": 0,
+        "task_s": {
+          "count": 8,
+          "mean": 8.887734417124932,
+          "p50": 8.855405395999696,
+          "p95": 9.035596388999693,
+          "p99": 9.035596388999693,
+          "max": 9.035596388999693
+        },
+        "tasks_per_minute": 43.0667750816337,
+        "per_agent_p50_s": {
+          "Incident analyst": 4.969252607000271,
+          "Reviewer": 2.1150740010002664,
+          "Technical writer": 1.6551385049997407
+        },
+        "server": {
+          "output_tokens_per_s": 271.5001279104658,
+          "running": {
+            "avg": 2.6666666666666665,
+            "max": 8.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.01166195605123114,
+            "max": 0.03498586815369342
+          }
+        },
+        "errors": []
+      },
+      {
+        "concurrent_crews": 16,
+        "wall_s": 12.465837001800537,
+        "failed": 0,
+        "task_s": {
+          "count": 16,
+          "mean": 9.838564421249998,
+          "p50": 9.88149995699996,
+          "p95": 10.275488878000033,
+          "p99": 10.275488878000033,
+          "max": 10.275488878000033
+        },
+        "tasks_per_minute": 77.01047269119111,
+        "per_agent_p50_s": {
+          "Incident analyst": 5.56382906700037,
+          "Reviewer": 2.3472982509997564,
+          "Technical writer": 1.8083272149997356
+        },
+        "server": {
+          "output_tokens_per_s": 825.0549079467714,
+          "running": {
+            "avg": 5.333333333333333,
+            "max": 16.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.019198940748096655,
+            "max": 0.05759682224428997
+          }
+        },
+        "errors": []
+      },
+      {
+        "concurrent_crews": 32,
+        "wall_s": 13.83792233467102,
+        "failed": 0,
+        "task_s": {
+          "count": 32,
+          "mean": 10.329224925812511,
+          "p50": 10.297895087000143,
+          "p95": 11.041543030999946,
+          "p99": 11.127835952999703,
+          "max": 11.127835952999703
+        },
+        "tasks_per_minute": 138.7491527676395,
+        "per_agent_p50_s": {
+          "Incident analyst": 6.034327157999996,
+          "Reviewer": 2.2988401079996947,
+          "Technical writer": 1.8539041310000357
+        },
+        "server": {
+          "output_tokens_per_s": 1760.307610555693,
+          "running": {
+            "avg": 11.666666666666666,
+            "max": 32.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.04799735187024164,
+            "max": 0.1359712779772363
+          }
+        },
+        "errors": []
+      }
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "4d530d1c58874b3573b93a6852dfffe40e209808",
+    "git_dirty": true
+  },
+  "notes": ""
+}
