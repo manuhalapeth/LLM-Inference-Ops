@@ -1,0 +1,105 @@
+{
+  "run_id": "20261004T015807Z_agent_run",
+  "phase": "01_end_to_end",
+  "name": "agent_run",
+  "timestamp": "2026-10-04T01:58:07.747454+00:00",
+  "config": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:v0.30.0",
+    "vllm_config": "baseline",
+    "crewai": "1.15.23"
+  },
+  "load": {
+    "concurrency": 1,
+    "document": "incident_report.md",
+    "agents": 3,
+    "process": "sequential"
+  },
+  "metrics": {
+    "run_id": "agent-20261004T015758Z",
+    "total_s": 8.070576076000009,
+    "tasks": [
+      {
+        "agent": "Incident analyst",
+        "duration_s": 4.316930904999992
+      },
+      {
+        "agent": "Technical writer",
+        "duration_s": 1.5169552300000078
+      },
+      {
+        "agent": "Reviewer",
+        "duration_s": 2.204499967000004
+      }
+    ],
+    "llm_calls": 3,
+    "calls": [
+      {
+        "request_id": "8d67598b49d64639a3be572a170b4de7",
+        "run_id": "agent-20261004T015758Z",
+        "path": "/v1/chat/completions",
+        "status": 200,
+        "gateway_ttfb_s": 4.0838,
+        "gateway_total_s": 4.0842,
+        "nginx_total_s": 4.082,
+        "upstream_connect_s": 0.0,
+        "upstream_header_s": 4.082,
+        "upstream_total_s": 4.082
+      },
+      {
+        "request_id": "f1672c8d35944783a78b8703e8dd1d08",
+        "run_id": "agent-20261004T015758Z",
+        "path": "/v1/chat/completions",
+        "status": 200,
+        "gateway_ttfb_s": 1.4709,
+        "gateway_total_s": 1.4712,
+        "nginx_total_s": 1.47,
+        "upstream_connect_s": 0.0,
+        "upstream_header_s": 1.47,
+        "upstream_total_s": 1.47
+      },
+      {
+        "request_id": "60ede8b34b404b12b2fdb20f31186744",
+        "run_id": "agent-20261004T015758Z",
+        "path": "/v1/chat/completions",
+        "status": 200,
+        "gateway_ttfb_s": 2.1673,
+        "gateway_total_s": 2.1675,
+        "nginx_total_s": 2.166,
+        "upstream_connect_s": 0.0,
+        "upstream_header_s": 2.166,
+        "upstream_total_s": 2.166
+      }
+    ],
+    "engine": {
+      "requests": 3.0,
+      "prompt_tokens": 1852.0,
+      "generation_tokens": 805.0,
+      "preemptions": 0.0,
+      "prefix_cache_queries": 1852.0,
+      "prefix_cache_hits": 1824.0,
+      "queue_s": 3.363200005424005e-05,
+      "prefill_s": 0.037664161999941825,
+      "decode_s": 7.6675272520000135,
+      "inference_s": 7.705191413999955,
+      "e2e_s": 7.713181734085083,
+      "ttft_s": 0.04475259780883789,
+      "requests_observed": 3.0
+    },
+    "final_summary": "On 09:12 UTC, elevated error rates were observed in the Payments API. The root cause was a recent deployment of the fraud-scoring service, which introduced a synchronous call to an external risk provider within a database transaction. This led to database connection exhaustion, causing checkout failures. Approximately 11% of checkout attempts (4,100 customers) failed over a 32-minute window. The issue was resolved by rolling back the deployment at 09:38, and error rates normalized by 09:44. The on-call engineer was paged at 09:15, joined the incident channel at 09:19, and a second engineer noticed the deployment at 09:31. Moving the external call outside transactions, adding a 800-millisecond timeout with a fallback score, enhancing alerts on connection pool utilization above 80%, and requiring load tests for any change involving network calls are planned changes. Additionally, the deployment pipeline lacked automated canary analysis, allowing the regression to affect all traffic within two minutes of release."
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "72bb78e022f27eea3db3a78bd164b32fb0b8350f",
+    "git_dirty": true
+  },
+  "notes": ""
+}

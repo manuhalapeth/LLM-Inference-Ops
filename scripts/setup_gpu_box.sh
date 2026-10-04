@@ -45,6 +45,15 @@ if ! $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L >/dev/null 2>&1; the
   $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L || die "containers still cannot see the GPU"
 fi
 
+# Install system packages BEFORE starting containers. Installing packages can
+# trigger a systemd reload, which makes running containers lose access to the
+# GPU for new processes ("Failed to initialize NVML: Unknown Error").
+if ! python3 -m venv --help >/dev/null 2>&1 || ! python3 -c "import ensurepip" >/dev/null 2>&1; then
+  log "Installing python3-venv"
+  $SUDO apt-get update -qq
+  $SUDO apt-get install -y -qq python3-venv
+fi
+
 log "Getting the code"
 if [ -d "$REPO_DIR/.git" ]; then
   git -C "$REPO_DIR" pull --ff-only

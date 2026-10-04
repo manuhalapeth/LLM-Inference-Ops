@@ -1,0 +1,8 @@
+(EngineCore pid=170) INFO 10-04 01:54:45 [weight_utils.py:558] Time spent downloading weights for Qwen/Qwen2.5-7B-Instruct: 22.499088 seconds
+(EngineCore pid=170) INFO 10-04 01:54:45 [weight_utils.py:895] Filesystem type for checkpoints: EXT4. Checkpoint size: 14.19 GiB. Available RAM: 90.75 GiB.
+(EngineCore pid=170) INFO 10-04 01:54:47 [model_runner.py:428] Model loading took 14.29 GiB memory and 27.302467 seconds
+(EngineCore pid=170) INFO 10-04 01:55:30 [model_runner.py:1066] Graph capturing finished in 34 secs, took 0.32 GiB
+(EngineCore pid=170) INFO 10-04 01:55:31 [gpu_worker.py:640] Available KV cache memory: 11.19 GiB
+(EngineCore pid=170) INFO 10-04 01:55:31 [kv_cache_utils.py:2395] GPU KV cache size: 209,472 tokens, Maximum concurrency for 8,192 tokens per request: 25.57x
+(EngineCore pid=170) INFO 10-04 01:56:05 [model_runner.py:1066] Graph capturing finished in 32 secs, took 0.18 GiB
+(APIServer pid=1) INFO:     Application startup complete.
