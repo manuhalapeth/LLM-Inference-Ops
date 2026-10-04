@@ -1,0 +1,11 @@
+# Phase 5: the baseline plus ONE change. Not a tuning change: the baseline with the PyTorch profiler available (adds overhead, only used to capture one profile).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+profiler-config:
+  profiler: torch
+  torch_profiler_dir: /profiles
+  torch_profiler_with_stack: false
+  ignore_frontend: true
+  max_iterations: 60

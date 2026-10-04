@@ -123,3 +123,26 @@ vllm:external_prefix_cache_hits_total{engine="0",model_name="llm"} 448.0
     assert d["mooncake"]["load_get"]["time_s"] == 0.02
     assert d["mooncake"]["save_exists"]["calls"] == 0
     assert d["external_prefix_cache_hits"] == 448
+
+
+def test_profile_summary_groups_kernels_and_measures_busy_time(tmp_path):
+    import gzip, json
+    from analyze_profile import categorize, load_kernels, summarize
+
+    events = [
+        {"ph": "X", "cat": "kernel", "name": "sm90_xmma_gemm_bf16bf16_bf16f32", "ts": 0, "dur": 60},
+        {"ph": "X", "cat": "kernel", "name": "flash_fwd_splitkv_kernel", "ts": 60, "dur": 30},
+        {"ph": "X", "cat": "kernel", "name": "rms_norm_kernel", "ts": 90, "dur": 5},
+        {"ph": "X", "cat": "kernel", "name": "something_else", "ts": 195, "dur": 5},  # gap 95..195 is idle
+        {"ph": "X", "cat": "cpu_op", "name": "aten::mm", "ts": 0, "dur": 500},      # CPU op: ignored
+    ]
+    with gzip.open(tmp_path / "trace.pt.trace.json.gz", "wt") as f:
+        json.dump({"traceEvents": events}, f)
+
+    s = summarize(load_kernels(tmp_path))
+    assert s["kernels"] == 4
+    assert s["window_ms"] == 0.2
+    assert round(s["gpu_busy_ratio"], 3) == 0.5
+    assert list(s["by_category"])[:2] == ["matmul (GEMM)", "attention"]
+    assert categorize("triton_poi_fused_silu_and_mul") == "activation"
+    assert categorize("void at::native::vectorized_elementwise_kernel") == "memory and copies"

@@ -20,6 +20,8 @@ services:
     volumes:
       - ./vllm/configs:/configs:ro
       - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface
+      # Where the PyTorch profiler writes traces (only with the profile_* configs).
+      - ./results/profiles:/profiles
     ipc: host
     # Published on localhost only, so scripts on the box can read vLLM's /metrics directly.
     ports:
@@ -98,7 +100,7 @@ services:
       STEP_SECONDS: ${STEP_SECONDS:-60}
     volumes:
       - ./loadtest:/mnt/loadtest:ro
-      - ./results/04_breaking_one_gpu/${RUN_LABEL:-baseline}:/results
+      - ./results/${LOAD_PHASE:-04_breaking_one_gpu}/${RUN_LABEL:-baseline}:/results
     command: ["-f", "/mnt/loadtest/locustfile.py", "--autostart", "--autoquit", "5",
               "--processes", "${LOCUST_PROCESSES:-8}", "--web-port", "8089",
               "--html", "/results/locust_report.html", "--csv", "/results/locust"]

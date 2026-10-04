@@ -1,0 +1,6 @@
+# Phase 5: the baseline plus ONE change. Store the KV cache in FP8 instead of BF16: half the bytes per token.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+kv-cache-dtype: fp8

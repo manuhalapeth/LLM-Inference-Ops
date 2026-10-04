@@ -115,12 +115,13 @@ def breaking_points(steps: list[dict], ttft_slo_s: float) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--label", default="baseline")
+    parser.add_argument("--phase", default=PHASE, help="results/<phase>/<label>/ holds the Locust logs")
     parser.add_argument("--prometheus", default="http://localhost:9090")
     parser.add_argument("--warmup-s", type=float, default=15, help="skip this much at the start of every step")
     parser.add_argument("--ttft-slo-s", type=float, default=1.0)
     args = parser.parse_args()
 
-    run_dir = RESULTS_DIR / PHASE / args.label
+    run_dir = RESULTS_DIR / args.phase / args.label
     meta = json.loads((run_dir / "run_meta.json").read_text())
     rows = [json.loads(line) for f in sorted(run_dir.glob("requests_*.jsonl")) for line in f.read_text().splitlines() if line]
     try:
@@ -138,7 +139,7 @@ def main() -> None:
         steps.append({"users": users, "window": [start, end], **analyze_step(in_step, prom, start, end)})
 
     breaks = breaking_points(steps, args.ttft_slo_s)
-    path = save_run(PHASE, f"load_sweep_{args.label}",
+    path = save_run(args.phase, f"load_sweep_{args.label}",
                     metrics={"steps": steps, "breaking_points": breaks, "total_requests": len(rows)},
                     config={"label": args.label, "model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
                             "vllm_config": os.getenv("VLLM_CONFIG", "baseline")},

@@ -1,0 +1,9 @@
+# Phase 5: the baseline plus ONE change. Speculative decoding with n-gram prompt lookup (draft tokens copied from the prompt).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+speculative-config:
+  method: ngram
+  num_speculative_tokens: 4
+  prompt_lookup_max: 4

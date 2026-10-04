@@ -1,0 +1,6 @@
+# Phase 5: the baseline plus ONE change. Quantize the model weights to FP8 when loading: half the bytes to read per token.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8

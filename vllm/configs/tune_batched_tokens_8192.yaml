@@ -1,0 +1,6 @@
+# Phase 5: the baseline plus ONE change. Up to 8,192 tokens per scheduler step (baseline: 2,048; vLLM's default for H100-class GPUs is 8,192).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+max-num-batched-tokens: 8192
