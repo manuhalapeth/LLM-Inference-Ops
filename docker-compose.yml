@@ -84,6 +84,27 @@ services:
               capabilities: [gpu]
     restart: unless-stopped
 
+  # Load generator (Phase 4). Not started with the stack; run it with:
+  #   docker compose --profile loadtest run --rm -p 127.0.0.1:8089:8089 locust
+  locust:
+    image: locustio/locust:2.46.6
+    profiles: ["loadtest"]
+    user: "0"  # write results into the mounted folder
+    environment:
+      GATEWAY_URL: http://gateway:8080
+      SERVED_MODEL_NAME: ${SERVED_MODEL_NAME:-llm}
+      RESULTS_DIR: /results
+      LOAD_STEPS: ${LOAD_STEPS:-1,2,4,8,16,32,64,96,128,192,256,384,512}
+      STEP_SECONDS: ${STEP_SECONDS:-60}
+    volumes:
+      - ./loadtest:/mnt/loadtest:ro
+      - ./results/04_breaking_one_gpu/${RUN_LABEL:-baseline}:/results
+    command: ["-f", "/mnt/loadtest/locustfile.py", "--autostart", "--autoquit", "5",
+              "--processes", "${LOCUST_PROCESSES:-8}", "--web-port", "8089",
+              "--html", "/results/locust_report.html", "--csv", "/results/locust"]
+    depends_on:
+      - gateway
+
   # Traces from the agent, gateway, NGINX and vLLM. UI on :16686.
   jaeger:
     image: jaegertracing/jaeger:2.21.0

@@ -108,6 +108,39 @@ def build_crew(llm: LLM) -> Crew:
                 process=Process.sequential, verbose=False)
 
 
+def run_crew(url: str, model: str, document: str, run_id: str | None = None, tracer=None) -> dict:
+    """Run the crew once. Returns the run ID, trace ID, total and per task times, and the answer."""
+    run_id = run_id or f"agent-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
+    llm = LLM(
+        model=model,
+        custom_openai=True,
+        base_url=f"{url}/v1",
+        api_key="not-needed",
+        temperature=0,
+        max_tokens=512,
+        default_headers={"x-run-id": run_id},
+    )
+    crew = build_crew(llm)
+    task_finished_at = []
+    crew.task_callback = lambda output: task_finished_at.append((output.agent, time.perf_counter()))
+
+    start = time.perf_counter()
+    trace_id = None
+    if tracer is not None:
+        with tracer.start_as_current_span("agent_run", attributes={"run.id": run_id, "agents": 3}) as span:
+            trace_id = format(span.get_span_context().trace_id, "032x")
+            result = crew.kickoff(inputs={"document": document})
+    else:
+        result = crew.kickoff(inputs={"document": document})
+    total_s = time.perf_counter() - start
+
+    tasks, previous = [], start
+    for agent, finished in task_finished_at:
+        tasks.append({"agent": agent.strip(), "duration_s": finished - previous})
+        previous = finished
+    return {"run_id": run_id, "trace_id": trace_id, "total_s": total_s, "tasks": tasks, "answer": result.raw}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--document", default=str(ROOT / "agent" / "documents" / "incident_report.md"))
@@ -119,44 +152,18 @@ def main() -> None:
     args = parser.parse_args()
 
     provider, tracer = setup_tracing()
-    run_id = f"agent-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
-    llm = LLM(
-        model=args.model,
-        custom_openai=True,
-        base_url=f"{args.url}/v1",
-        api_key="not-needed",
-        temperature=0,
-        max_tokens=512,
-        default_headers={"x-run-id": run_id},
-    )
-    crew = build_crew(llm)
-
-    task_finished_at = []
-    crew.task_callback = lambda output: task_finished_at.append((output.agent, time.perf_counter()))
-
     document = Path(args.document).read_text()
     started_utc = datetime.now(timezone.utc) - timedelta(seconds=2)
     before = None if args.no_collect else vllm_metrics.scrape(args.vllm_metrics)
-    start = time.perf_counter()
-    trace_id = None
-    if tracer is not None:
-        with tracer.start_as_current_span("agent_run", attributes={"run.id": run_id, "agents": 3}) as span:
-            trace_id = format(span.get_span_context().trace_id, "032x")
-            result = crew.kickoff(inputs={"document": document})
+    run = run_crew(args.url, args.model, document, tracer=tracer)
+    if provider is not None:
         provider.force_flush()
-    else:
-        result = crew.kickoff(inputs={"document": document})
-    total_s = time.perf_counter() - start
-
-    tasks, previous = [], start
-    for agent, finished in task_finished_at:
-        tasks.append({"agent": agent.strip(), "duration_s": finished - previous})
-        previous = finished
+    run_id, trace_id, total_s, tasks = run["run_id"], run["trace_id"], run["total_s"], run["tasks"]
 
     print(f"\nrun {run_id}: {total_s:.1f} s, {len(tasks)} tasks" + (f", trace {trace_id}" if trace_id else ""))
     for task in tasks:
         print(f"  {task['agent']:<20}{task['duration_s']:6.1f} s")
-    print(f"\n{result.raw}\n")
+    print(f"\n{run['answer']}\n")
     if args.no_collect:
         return
 
@@ -175,7 +182,7 @@ def main() -> None:
             "llm_calls": len(calls),
             "calls": calls,
             "engine": engine,
-            "final_summary": result.raw,
+            "final_summary": run["answer"],
         },
         config={"model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
                 "vllm_config": os.getenv("VLLM_CONFIG", "baseline"), "crewai": "1.15.23"},
