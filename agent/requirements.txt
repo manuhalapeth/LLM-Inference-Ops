@@ -1,1 +1,4 @@
 crewai==1.15.23
+opentelemetry-sdk==1.45.0
+opentelemetry-exporter-otlp-proto-grpc==1.45.0
+opentelemetry-instrumentation-httpx==0.66b0

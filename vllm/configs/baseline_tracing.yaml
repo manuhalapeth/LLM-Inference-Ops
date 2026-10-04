@@ -1,0 +1,7 @@
+# Baseline engine arguments plus ONE change: send a span for every request to
+# Jaeger, so a request's trace continues from the gateway and NGINX into vLLM.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+otlp-traces-endpoint: http://jaeger:4317

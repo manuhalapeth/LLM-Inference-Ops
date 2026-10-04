@@ -24,8 +24,8 @@ import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+# CrewAI's own usage telemetry is off. Our tracing (below) is separate.
 os.environ.setdefault("CREWAI_DISABLE_TELEMETRY", "true")
-os.environ.setdefault("OTEL_SDK_DISABLED", "true")
 
 from crewai import LLM, Agent, Crew, Process, Task  # noqa: E402
 
@@ -34,6 +34,30 @@ sys.path.insert(0, str(ROOT / "loadtest"))
 import stack_logs  # noqa: E402
 import vllm_metrics  # noqa: E402
 from results_logger import save_run  # noqa: E402
+
+
+def setup_tracing():
+    """Send this run's trace to Jaeger, if OTEL_EXPORTER_OTLP_ENDPOINT is set.
+
+    The run is the root span; every LLM call is an HTTP span under it, and the
+    traceparent header carries the trace on through the gateway, NGINX and vLLM.
+    """
+    if not os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT"):
+        return None, None
+    from opentelemetry import trace
+    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+    from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
+    from opentelemetry.sdk.resources import Resource
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+    provider = TracerProvider(resource=Resource.create({"service.name": os.getenv("OTEL_SERVICE_NAME", "agent")}))
+    provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(insecure=True)))
+    trace.set_tracer_provider(provider)
+    # The OpenAI client CrewAI uses is built on httpx, so each LLM call becomes a span.
+    HTTPXClientInstrumentor().instrument(request_hook=lambda span, request: span.is_recording()
+                                         and span.update_name(f"llm call {request.url.path}"))
+    return provider, trace.get_tracer("agent")
 
 
 def build_crew(llm: LLM) -> Crew:
@@ -91,8 +115,10 @@ def main() -> None:
     parser.add_argument("--vllm-metrics", default="http://localhost:8000/metrics")
     parser.add_argument("--model", default=os.getenv("SERVED_MODEL_NAME", "llm"))
     parser.add_argument("--no-collect", action="store_true", help="skip collecting logs and metrics (local testing)")
+    parser.add_argument("--phase", default="01_end_to_end", help="results/<phase>/ to save into")
     args = parser.parse_args()
 
+    provider, tracer = setup_tracing()
     run_id = f"agent-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}"
     llm = LLM(
         model=args.model,
@@ -112,7 +138,14 @@ def main() -> None:
     started_utc = datetime.now(timezone.utc) - timedelta(seconds=2)
     before = None if args.no_collect else vllm_metrics.scrape(args.vllm_metrics)
     start = time.perf_counter()
-    result = crew.kickoff(inputs={"document": document})
+    trace_id = None
+    if tracer is not None:
+        with tracer.start_as_current_span("agent_run", attributes={"run.id": run_id, "agents": 3}) as span:
+            trace_id = format(span.get_span_context().trace_id, "032x")
+            result = crew.kickoff(inputs={"document": document})
+        provider.force_flush()
+    else:
+        result = crew.kickoff(inputs={"document": document})
     total_s = time.perf_counter() - start
 
     tasks, previous = [], start
@@ -120,7 +153,7 @@ def main() -> None:
         tasks.append({"agent": agent.strip(), "duration_s": finished - previous})
         previous = finished
 
-    print(f"\nrun {run_id}: {total_s:.1f} s, {len(tasks)} tasks")
+    print(f"\nrun {run_id}: {total_s:.1f} s, {len(tasks)} tasks" + (f", trace {trace_id}" if trace_id else ""))
     for task in tasks:
         print(f"  {task['agent']:<20}{task['duration_s']:6.1f} s")
     print(f"\n{result.raw}\n")
@@ -133,9 +166,10 @@ def main() -> None:
     calls = [row for row in stack_logs.requests_by_id(started_utc).values() if row.get("run_id") == run_id]
 
     path = save_run(
-        "01_end_to_end", "agent_run",
+        args.phase, "agent_run",
         metrics={
             "run_id": run_id,
+            "trace_id": trace_id,
             "total_s": total_s,
             "tasks": tasks,
             "llm_calls": len(calls),

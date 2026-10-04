@@ -36,8 +36,14 @@ up-mooncake: ## start the stack with Mooncake as a KV cache tier
 kv-experiment: ## working set bigger than the GPU KV cache, saved to results/02_kv_cache_mooncake/
 	python3 scripts/kv_cache_experiment.py --label $(or $(LABEL),$(VLLM_CONFIG))
 
+eval:     ## run the eval set against the live stack, saved to results/03_harnesses_and_traces/
+	python3 evals/run_evals.py --label $(or $(LABEL),harnesses_on)
+
+drills:   ## trigger each kind of failure on purpose (stops and starts vLLM)
+	python3 scripts/failure_drills.py
+
 test:     ## unit tests (needs gateway/requirements-dev.txt installed)
 	cd gateway && python3 -m pytest -q tests
-	python3 -m pytest -q loadtest/tests
+	python3 -m pytest -q loadtest/tests evals/tests
 
-.PHONY: up down logs ps smoke trace agent-env agent up-mooncake kv-experiment test
+.PHONY: up down logs ps smoke trace agent-env agent up-mooncake kv-experiment eval drills test

@@ -78,11 +78,12 @@ python3 scripts/smoke_test.py --wait "$READY_TIMEOUT_S" --save
 log "Ready"
 cat <<EOF
 Stack is up. From your laptop, open an SSH tunnel:
-  ssh -L 8080:localhost:8080 -L 3000:localhost:3000 -L 9090:localhost:9090 <this box>
+  ssh -L 8080:localhost:8080 -L 3000:localhost:3000 -L 9090:localhost:9090 -L 16686:localhost:16686 <this box>
 Then:
   gateway     http://localhost:8080/v1/models
   Grafana     http://localhost:3000   (admin / GRAFANA_ADMIN_PASSWORD from .env)
   Prometheus  http://localhost:9090/targets
+  Jaeger      http://localhost:16686  (traces)
 
 Before you leave: push code, copy results/ off the box, then DESTROY the instance on Vast.ai.
 EOF
