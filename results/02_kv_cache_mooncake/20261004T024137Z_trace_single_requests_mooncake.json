@@ -1,0 +1,1176 @@
+{
+  "run_id": "20261004T024137Z_trace_single_requests_mooncake",
+  "phase": "02_kv_cache_mooncake",
+  "name": "trace_single_requests_mooncake",
+  "timestamp": "2026-10-04T02:41:37.925137+00:00",
+  "config": {
+    "label": "mooncake",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:v0.30.0",
+    "vllm_config": "mooncake_store"
+  },
+  "load": {
+    "concurrency": 1,
+    "prompts": [
+      "short_qa_05",
+      "summarize_01",
+      "long_gen_02"
+    ],
+    "repeats": 5,
+    "warmup": 1
+  },
+  "metrics": {
+    "summary": {
+      "short_qa_05": {
+        "ttft_s": {
+          "count": 5,
+          "mean": 0.0330679026000098,
+          "p50": 0.03181877999998051,
+          "p95": 0.04269242300006226,
+          "p99": 0.04269242300006226,
+          "max": 0.04269242300006226
+        },
+        "e2e_s": {
+          "count": 5,
+          "mean": 0.6383875016000047,
+          "p50": 0.6380070970000133,
+          "p95": 0.6426860469999838,
+          "p99": 0.6426860469999838,
+          "max": 0.6426860469999838
+        },
+        "layers_p50_s": {
+          "client_to_gateway_s": 0.002307097000013303,
+          "gateway_s": 0.0027000000000000357,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0023795204162597727,
+          "engine_queue_s": 2.5990000040110317e-05,
+          "engine_prefill_s": 0.019739329000003636,
+          "engine_decode_s": 0.6061694030000808,
+          "engine_other_s": 0.004561060179185006
+        }
+      },
+      "summarize_01": {
+        "ttft_s": {
+          "count": 5,
+          "mean": 0.03953370100000484,
+          "p50": 0.03759165099995698,
+          "p95": 0.05466017700007342,
+          "p99": 0.05466017700007342,
+          "max": 0.05466017700007342
+        },
+        "e2e_s": {
+          "count": 5,
+          "mean": 1.6997462624000037,
+          "p50": 1.6873062129999425,
+          "p95": 1.7548798580000948,
+          "p99": 1.7548798580000948,
+          "max": 1.7548798580000948
+        },
+        "layers_p50_s": {
+          "client_to_gateway_s": 0.00234793499996222,
+          "gateway_s": 0.0027000000000001467,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0022000808715820774,
+          "engine_queue_s": 2.752899990809965e-05,
+          "engine_prefill_s": 0.022960796000006667,
+          "engine_decode_s": 1.6496119619999945,
+          "engine_other_s": 0.007671825128454657
+        }
+      },
+      "long_gen_02": {
+        "ttft_s": {
+          "count": 5,
+          "mean": 0.03149909160001698,
+          "p50": 0.03235134900000958,
+          "p95": 0.0348332799999298,
+          "p99": 0.0348332799999298,
+          "max": 0.0348332799999298
+        },
+        "e2e_s": {
+          "count": 5,
+          "mean": 7.433808084400016,
+          "p50": 7.433780275000004,
+          "p95": 7.43781383299995,
+          "p99": 7.43781383299995,
+          "max": 7.43781383299995
+        },
+        "layers_p50_s": {
+          "client_to_gateway_s": 0.0028698990000126656,
+          "gateway_s": 0.002500000000000391,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.00222509384155245,
+          "engine_queue_s": 3.7469000062628766e-05,
+          "engine_prefill_s": 0.019698611999956483,
+          "engine_decode_s": 7.40212633200008,
+          "engine_other_s": 0.004730158727284106
+        }
+      }
+    },
+    "samples": [
+      {
+        "prompt_id": "short_qa_05",
+        "category": "short_qa",
+        "request_id": "b5725560a6934d55833d278890b8604d",
+        "client": {
+          "request_id": "b5725560a6934d55833d278890b8604d",
+          "ttft_s": 0.04269242300006226,
+          "e2e_s": 0.6426860469999838,
+          "prompt_tokens": 32,
+          "output_tokens": 64,
+          "itl_s": 0.009523708317459072,
+          "output_tokens_per_s": 99.58205923210531
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 32.0,
+          "generation_tokens": 64.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 32.0,
+          "prefix_cache_hits": 0.0,
+          "external_prefix_cache_queries": 32.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.214899996033637e-05,
+          "prefill_s": 0.03038131499999963,
+          "decode_s": 0.5996088680000184,
+          "inference_s": 0.6299901830000181,
+          "e2e_s": 0.6355650424957275,
+          "ttft_s": 0.036487579345703125,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 1.0,
+              "bytes": 1835008.0,
+              "time_s": 0.01376296299997648
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.000617814000065664
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "b5725560a6934d55833d278890b8604d",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0409,
+          "gateway_total_s": 0.6407,
+          "nginx_total_s": 0.638,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.006,
+          "upstream_total_s": 0.638
+        },
+        "layers": {
+          "client_to_gateway_s": 0.001986046999983726,
+          "gateway_s": 0.0027000000000000357,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0024349575042724725,
+          "engine_queue_s": 2.214899996033637e-05,
+          "engine_prefill_s": 0.03038131499999963,
+          "engine_decode_s": 0.5996088680000184,
+          "engine_other_s": 0.005552710495749125
+        }
+      },
+      {
+        "prompt_id": "short_qa_05",
+        "category": "short_qa",
+        "request_id": "08c53a012dcf495b8ef0e3184d7aad87",
+        "client": {
+          "request_id": "08c53a012dcf495b8ef0e3184d7aad87",
+          "ttft_s": 0.028995349999945574,
+          "e2e_s": 0.6366100349999897,
+          "prompt_tokens": 32,
+          "output_tokens": 64,
+          "itl_s": 0.00964467753968324,
+          "output_tokens_per_s": 100.53250260184956
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 32.0,
+          "generation_tokens": 64.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 32.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 16.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.5990000040110317e-05,
+          "prefill_s": 0.016783079999981965,
+          "decode_s": 0.6076000159999921,
+          "inference_s": 0.6243830959999741,
+          "e2e_s": 0.6289701461791992,
+          "ttft_s": 0.022230863571166992,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.00056408399996144
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "08c53a012dcf495b8ef0e3184d7aad87",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0265,
+          "gateway_total_s": 0.6339,
+          "nginx_total_s": 0.631,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.005,
+          "upstream_total_s": 0.631
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0027100349999896745,
+          "gateway_s": 0.0029000000000000137,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0020298538208007866,
+          "engine_queue_s": 2.5990000040110317e-05,
+          "engine_prefill_s": 0.016783079999981965,
+          "engine_decode_s": 0.6076000159999921,
+          "engine_other_s": 0.004561060179185006
+        }
+      },
+      {
+        "prompt_id": "short_qa_05",
+        "category": "short_qa",
+        "request_id": "c7cc838a8fe649b5bc9609dbc91512f1",
+        "client": {
+          "request_id": "c7cc838a8fe649b5bc9609dbc91512f1",
+          "ttft_s": 0.03181877999998051,
+          "e2e_s": 0.6380499619999682,
+          "prompt_tokens": 32,
+          "output_tokens": 64,
+          "itl_s": 0.009622717174602979,
+          "output_tokens_per_s": 100.30562465577451
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 32.0,
+          "generation_tokens": 64.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 32.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 16.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.899000000728847e-05,
+          "prefill_s": 0.019739329000003636,
+          "decode_s": 0.6061694030000808,
+          "inference_s": 0.6259087320000845,
+          "e2e_s": 0.6306204795837402,
+          "ttft_s": 0.025214672088623047,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0004877650000025824
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "c7cc838a8fe649b5bc9609dbc91512f1",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0296,
+          "gateway_total_s": 0.6357,
+          "nginx_total_s": 0.633,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.005,
+          "upstream_total_s": 0.633
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0023499619999681753,
+          "gateway_s": 0.0027000000000000357,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0023795204162597727,
+          "engine_queue_s": 3.899000000728847e-05,
+          "engine_prefill_s": 0.019739329000003636,
+          "engine_decode_s": 0.6061694030000808,
+          "engine_other_s": 0.00467275758364849
+        }
+      },
+      {
+        "prompt_id": "short_qa_05",
+        "category": "short_qa",
+        "request_id": "29333e9914114df6bd2e66a829e0fe13",
+        "client": {
+          "request_id": "29333e9914114df6bd2e66a829e0fe13",
+          "ttft_s": 0.03296103800005312,
+          "e2e_s": 0.6380070970000133,
+          "prompt_tokens": 32,
+          "output_tokens": 64,
+          "itl_s": 0.009603905698412067,
+          "output_tokens_per_s": 100.3123637666975
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 32.0,
+          "generation_tokens": 64.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 32.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 16.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.472000003057474e-05,
+          "prefill_s": 0.02073360800000046,
+          "decode_s": 0.6049738300000627,
+          "inference_s": 0.6257074380000631,
+          "e2e_s": 0.6301999092102051,
+          "ttft_s": 0.026273012161254883,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008539409999457348
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "29333e9914114df6bd2e66a829e0fe13",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.030699999999999998,
+          "gateway_total_s": 0.6357,
+          "nginx_total_s": 0.633,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.004,
+          "upstream_total_s": 0.632
+        },
+        "layers": {
+          "client_to_gateway_s": 0.002307097000013303,
+          "gateway_s": 0.0027000000000000357,
+          "nginx_s": 0.0010000000000000009,
+          "vllm_api_server_s": 0.001800090789794928,
+          "engine_queue_s": 3.472000003057474e-05,
+          "engine_prefill_s": 0.02073360800000046,
+          "engine_decode_s": 0.6049738300000627,
+          "engine_other_s": 0.0044577512101113825
+        }
+      },
+      {
+        "prompt_id": "short_qa_05",
+        "category": "short_qa",
+        "request_id": "279b1b78dbac40fc894de4bdf49dac00",
+        "client": {
+          "request_id": "279b1b78dbac40fc894de4bdf49dac00",
+          "ttft_s": 0.028871922000007544,
+          "e2e_s": 0.6365843670000686,
+          "prompt_tokens": 32,
+          "output_tokens": 64,
+          "itl_s": 0.009646229285715254,
+          "output_tokens_per_s": 100.53655621736797
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 32.0,
+          "generation_tokens": 64.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 32.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 16.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.21599999576938e-05,
+          "prefill_s": 0.01963349000004655,
+          "decode_s": 0.6066542569999456,
+          "inference_s": 0.6262877469999921,
+          "e2e_s": 0.6303207874298096,
+          "ttft_s": 0.02419304847717285,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0004698449999978038
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "279b1b78dbac40fc894de4bdf49dac00",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.027600000000000003,
+          "gateway_total_s": 0.635,
+          "nginx_total_s": 0.632,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.005,
+          "upstream_total_s": 0.633
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0015843670000685872,
+          "gateway_s": 0.0030000000000000027,
+          "nginx_s": -0.0010000000000000009,
+          "vllm_api_server_s": 0.002679212570190437,
+          "engine_queue_s": 2.21599999576938e-05,
+          "engine_prefill_s": 0.01963349000004655,
+          "engine_decode_s": 0.6066542569999456,
+          "engine_other_s": 0.004010880429859753
+        }
+      },
+      {
+        "prompt_id": "summarize_01",
+        "category": "summarization",
+        "request_id": "2d46e8aa14174773811875caba6db354",
+        "client": {
+          "request_id": "2d46e8aa14174773811875caba6db354",
+          "ttft_s": 0.05466017700007342,
+          "e2e_s": 1.7548798580000948,
+          "prompt_tokens": 477,
+          "output_tokens": 172,
+          "itl_s": 0.009942805152046909,
+          "output_tokens_per_s": 98.0124076391278
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 477.0,
+          "generation_tokens": 172.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 477.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 461.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.2719999947184988e-05,
+          "prefill_s": 0.04000331300005655,
+          "decode_s": 1.7006417269999474,
+          "inference_s": 1.740645040000004,
+          "e2e_s": 1.7488174438476562,
+          "ttft_s": 0.048749685287475586,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 1.0,
+              "bytes": 25690112.0,
+              "time_s": 0.05565854599990416
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0005407839998952113
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "2d46e8aa14174773811875caba6db354",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.053,
+          "gateway_total_s": 1.7530999999999999,
+          "nginx_total_s": 1.752,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.008,
+          "upstream_total_s": 1.751
+        },
+        "layers": {
+          "client_to_gateway_s": 0.001779858000094947,
+          "gateway_s": 0.0010999999999998789,
+          "nginx_s": 0.001000000000000112,
+          "vllm_api_server_s": 0.00218255615234364,
+          "engine_queue_s": 2.2719999947184988e-05,
+          "engine_prefill_s": 0.04000331300005655,
+          "engine_decode_s": 1.7006417269999474,
+          "engine_other_s": 0.008149683847705091
+        }
+      },
+      {
+        "prompt_id": "summarize_01",
+        "category": "summarization",
+        "request_id": "145c3646976a4befa9054ed9e6e0d91e",
+        "client": {
+          "request_id": "145c3646976a4befa9054ed9e6e0d91e",
+          "ttft_s": 0.029998370000043906,
+          "e2e_s": 1.6812280730000566,
+          "prompt_tokens": 477,
+          "output_tokens": 172,
+          "itl_s": 0.009656314052631653,
+          "output_tokens_per_s": 102.30616699914825
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 477.0,
+          "generation_tokens": 172.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 477.0,
+          "prefix_cache_hits": 464.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.3370000008071656e-05,
+          "prefill_s": 0.016327076000038687,
+          "decode_s": 1.6507776479999166,
+          "inference_s": 1.6671047239999552,
+          "e2e_s": 1.674799919128418,
+          "ttft_s": 0.024106979370117188,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.00042673600000853185
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "145c3646976a4befa9054ed9e6e0d91e",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0281,
+          "gateway_total_s": 1.6790999999999998,
+          "nginx_total_s": 1.677,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.007,
+          "upstream_total_s": 1.677
+        },
+        "layers": {
+          "client_to_gateway_s": 0.002128073000056796,
+          "gateway_s": 0.0020999999999997687,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0022000808715820774,
+          "engine_queue_s": 2.3370000008071656e-05,
+          "engine_prefill_s": 0.016327076000038687,
+          "engine_decode_s": 1.6507776479999166,
+          "engine_other_s": 0.007671825128454657
+        }
+      },
+      {
+        "prompt_id": "summarize_01",
+        "category": "summarization",
+        "request_id": "7096aad1edec424e845c10f804e997de",
+        "client": {
+          "request_id": "7096aad1edec424e845c10f804e997de",
+          "ttft_s": 0.03962432799994531,
+          "e2e_s": 1.6890479349999623,
+          "prompt_tokens": 477,
+          "output_tokens": 172,
+          "itl_s": 0.009645752087719398,
+          "output_tokens_per_s": 101.83251548749197
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 477.0,
+          "generation_tokens": 172.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 477.0,
+          "prefix_cache_hits": 464.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.752899990809965e-05,
+          "prefill_s": 0.02433617100007268,
+          "decode_s": 1.6488269939999327,
+          "inference_s": 1.6731631650000054,
+          "e2e_s": 1.6818158626556396,
+          "ttft_s": 0.03310441970825195,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008861999999680847
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "7096aad1edec424e845c10f804e997de",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0375,
+          "gateway_total_s": 1.6867,
+          "nginx_total_s": 1.684,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.007,
+          "upstream_total_s": 1.684
+        },
+        "layers": {
+          "client_to_gateway_s": 0.00234793499996222,
+          "gateway_s": 0.0027000000000001467,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.002184137344360293,
+          "engine_queue_s": 2.752899990809965e-05,
+          "engine_prefill_s": 0.02433617100007268,
+          "engine_decode_s": 1.6488269939999327,
+          "engine_other_s": 0.008625168655726156
+        }
+      },
+      {
+        "prompt_id": "summarize_01",
+        "category": "summarization",
+        "request_id": "51306d67d6dd483d8f9b40f0a8033787",
+        "client": {
+          "request_id": "51306d67d6dd483d8f9b40f0a8033787",
+          "ttft_s": 0.03759165099995698,
+          "e2e_s": 1.6873062129999425,
+          "prompt_tokens": 477,
+          "output_tokens": 172,
+          "itl_s": 0.009647453578947284,
+          "output_tokens_per_s": 101.93763211135989
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 477.0,
+          "generation_tokens": 172.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 477.0,
+          "prefix_cache_hits": 464.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.4630000072866096e-05,
+          "prefill_s": 0.022960796000006667,
+          "decode_s": 1.649044678999985,
+          "inference_s": 1.6720054749999917,
+          "e2e_s": 1.6794044971466064,
+          "ttft_s": 0.03045487403869629,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008033320000322419
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "51306d67d6dd483d8f9b40f0a8033787",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0352,
+          "gateway_total_s": 1.6847,
+          "nginx_total_s": 1.682,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.007,
+          "upstream_total_s": 1.682
+        },
+        "layers": {
+          "client_to_gateway_s": 0.002606212999942459,
+          "gateway_s": 0.0027000000000001467,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.0025955028533934943,
+          "engine_queue_s": 3.4630000072866096e-05,
+          "engine_prefill_s": 0.022960796000006667,
+          "engine_decode_s": 1.649044678999985,
+          "engine_other_s": 0.007364392146541832
+        }
+      },
+      {
+        "prompt_id": "summarize_01",
+        "category": "summarization",
+        "request_id": "5070f422e23a4ec3aa18d15cd831058a",
+        "client": {
+          "request_id": "5070f422e23a4ec3aa18d15cd831058a",
+          "ttft_s": 0.03579397900000458,
+          "e2e_s": 1.6862692329999618,
+          "prompt_tokens": 477,
+          "output_tokens": 172,
+          "itl_s": 0.009651902070175189,
+          "output_tokens_per_s": 102.0003191862802
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 477.0,
+          "generation_tokens": 172.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 477.0,
+          "prefix_cache_hits": 464.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.661999994619691e-05,
+          "prefill_s": 0.02126671400003488,
+          "decode_s": 1.6496119619999945,
+          "inference_s": 1.6708786760000294,
+          "e2e_s": 1.6781895160675049,
+          "ttft_s": 0.028654813766479492,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0005549539999947228
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "5070f422e23a4ec3aa18d15cd831058a",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.033299999999999996,
+          "gateway_total_s": 1.6836,
+          "nginx_total_s": 1.68,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.006,
+          "upstream_total_s": 1.681
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0026692329999618014,
+          "gateway_s": 0.0036000000000000476,
+          "nginx_s": -0.001000000000000112,
+          "vllm_api_server_s": 0.002810483932495167,
+          "engine_queue_s": 3.661999994619691e-05,
+          "engine_prefill_s": 0.02126671400003488,
+          "engine_decode_s": 1.6496119619999945,
+          "engine_other_s": 0.007274220067529313
+        }
+      },
+      {
+        "prompt_id": "long_gen_02",
+        "category": "long_generation",
+        "request_id": "e79aaae29f104ee9bb28a1834769882f",
+        "client": {
+          "request_id": "e79aaae29f104ee9bb28a1834769882f",
+          "ttft_s": 0.0348332799999298,
+          "e2e_s": 7.43781383299995,
+          "prompt_tokens": 45,
+          "output_tokens": 768,
+          "itl_s": 0.00965186512777056,
+          "output_tokens_per_s": 103.25614720182324
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 45.0,
+          "generation_tokens": 768.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 45.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 29.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.7469000062628766e-05,
+          "prefill_s": 0.02323759399996561,
+          "decode_s": 7.402707954999983,
+          "inference_s": 7.425945548999948,
+          "e2e_s": 7.430713176727295,
+          "ttft_s": 0.028779983520507812,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 1.0,
+              "bytes": 917504.0,
+              "time_s": 0.0030978969999750916
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.00054269400004614
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "e79aaae29f104ee9bb28a1834769882f",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.032600000000000004,
+          "gateway_total_s": 7.4354,
+          "nginx_total_s": 7.433,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.004,
+          "upstream_total_s": 7.432
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0024138329999505714,
+          "gateway_s": 0.0023999999999997357,
+          "nginx_s": 0.0009999999999994458,
+          "vllm_api_server_s": 0.0012868232727054618,
+          "engine_queue_s": 3.7469000062628766e-05,
+          "engine_prefill_s": 0.02323759399996561,
+          "engine_decode_s": 7.402707954999983,
+          "engine_other_s": 0.004730158727284106
+        }
+      },
+      {
+        "prompt_id": "long_gen_02",
+        "category": "long_generation",
+        "request_id": "31bdcb70e1314da0abcd392878cb0d17",
+        "client": {
+          "request_id": "31bdcb70e1314da0abcd392878cb0d17",
+          "ttft_s": 0.03193237200002841,
+          "e2e_s": 7.433369899000013,
+          "prompt_tokens": 45,
+          "output_tokens": 768,
+          "itl_s": 0.009649853359843526,
+          "output_tokens_per_s": 103.31787741429584
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 45.0,
+          "generation_tokens": 768.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 45.0,
+          "prefix_cache_hits": 32.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.7999000053569034e-05,
+          "prefill_s": 0.019698611999956483,
+          "decode_s": 7.401330108000025,
+          "inference_s": 7.421028719999981,
+          "e2e_s": 7.425769090652466,
+          "ttft_s": 0.02502727508544922,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0007407819999798448
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "31bdcb70e1314da0abcd392878cb0d17",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0292,
+          "gateway_total_s": 7.4305,
+          "nginx_total_s": 7.428,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.004,
+          "upstream_total_s": 7.427
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0028698990000126656,
+          "gateway_s": 0.002500000000000391,
+          "nginx_s": 0.001000000000000334,
+          "vllm_api_server_s": 0.0012309093475337818,
+          "engine_queue_s": 2.7999000053569034e-05,
+          "engine_prefill_s": 0.019698611999956483,
+          "engine_decode_s": 7.401330108000025,
+          "engine_other_s": 0.004712371652431102
+        }
+      },
+      {
+        "prompt_id": "long_gen_02",
+        "category": "long_generation",
+        "request_id": "013c98cc33e94dcf96b3f99852298ab4",
+        "client": {
+          "request_id": "013c98cc33e94dcf96b3f99852298ab4",
+          "ttft_s": 0.03235134900000958,
+          "e2e_s": 7.4355692400000635,
+          "prompt_tokens": 45,
+          "output_tokens": 768,
+          "itl_s": 0.009652174564537227,
+          "output_tokens_per_s": 103.28731738096133
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 45.0,
+          "generation_tokens": 768.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 45.0,
+          "prefix_cache_hits": 32.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 4.476999993130448e-05,
+          "prefill_s": 0.020832820000009633,
+          "decode_s": 7.40212633200008,
+          "inference_s": 7.4229591520000895,
+          "e2e_s": 7.427774906158447,
+          "ttft_s": 0.02630138397216797,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0004969839999375836
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "013c98cc33e94dcf96b3f99852298ab4",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0298,
+          "gateway_total_s": 7.4325,
+          "nginx_total_s": 7.43,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.004,
+          "upstream_total_s": 7.43
+        },
+        "layers": {
+          "client_to_gateway_s": 0.003069240000063367,
+          "gateway_s": 0.002500000000000391,
+          "nginx_s": 0.0,
+          "vllm_api_server_s": 0.00222509384155245,
+          "engine_queue_s": 4.476999993130448e-05,
+          "engine_prefill_s": 0.020832820000009633,
+          "engine_decode_s": 7.40212633200008,
+          "engine_other_s": 0.004770984158426472
+        }
+      },
+      {
+        "prompt_id": "long_gen_02",
+        "category": "long_generation",
+        "request_id": "259324c4c95340589436bae94f2db8bf",
+        "client": {
+          "request_id": "259324c4c95340589436bae94f2db8bf",
+          "ttft_s": 0.033299550000037925,
+          "e2e_s": 7.433780275000004,
+          "prompt_tokens": 45,
+          "output_tokens": 768,
+          "itl_s": 0.00964860589960882,
+          "output_tokens_per_s": 103.31217383204128
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 45.0,
+          "generation_tokens": 768.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 45.0,
+          "prefix_cache_hits": 32.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 4.5220000060908205e-05,
+          "prefill_s": 0.019262136999941504,
+          "decode_s": 7.4008445520000805,
+          "inference_s": 7.420106689000022,
+          "e2e_s": 7.425360679626465,
+          "ttft_s": 0.0257413387298584,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.00045707500009939395
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "259324c4c95340589436bae94f2db8bf",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.0305,
+          "gateway_total_s": 7.4308000000000005,
+          "nginx_total_s": 7.427,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.006,
+          "upstream_total_s": 7.428
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0029802750000031963,
+          "gateway_s": 0.0038000000000009138,
+          "nginx_s": -0.001000000000000334,
+          "vllm_api_server_s": 0.0026393203735350923,
+          "engine_queue_s": 4.5220000060908205e-05,
+          "engine_prefill_s": 0.019262136999941504,
+          "engine_decode_s": 7.4008445520000805,
+          "engine_other_s": 0.00520877062638192
+        }
+      },
+      {
+        "prompt_id": "long_gen_02",
+        "category": "long_generation",
+        "request_id": "a3bf32b25fb241f29c1fa25471995a48",
+        "client": {
+          "request_id": "a3bf32b25fb241f29c1fa25471995a48",
+          "ttft_s": 0.025078907000079198,
+          "e2e_s": 7.42850717500005,
+          "prompt_tokens": 45,
+          "output_tokens": 768,
+          "itl_s": 0.009652448850065151,
+          "output_tokens_per_s": 103.38550961956832
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 45.0,
+          "generation_tokens": 768.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 45.0,
+          "prefix_cache_hits": 32.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.4019999955271487e-05,
+          "prefill_s": 0.015635625999948388,
+          "decode_s": 7.402656445000048,
+          "inference_s": 7.418292070999996,
+          "e2e_s": 7.421773910522461,
+          "ttft_s": 0.019417762756347656,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0003877259999853777
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "logs": {
+          "request_id": "a3bf32b25fb241f29c1fa25471995a48",
+          "run_id": null,
+          "path": "/v1/chat/completions",
+          "status": 200,
+          "gateway_ttfb_s": 0.022699999999999998,
+          "gateway_total_s": 7.4258999999999995,
+          "nginx_total_s": 7.423,
+          "upstream_connect_s": 0.0,
+          "upstream_header_s": 0.003,
+          "upstream_total_s": 7.424
+        },
+        "layers": {
+          "client_to_gateway_s": 0.0026071750000502547,
+          "gateway_s": 0.0028999999999994586,
+          "nginx_s": -0.001000000000000334,
+          "vllm_api_server_s": 0.002226089477539439,
+          "engine_queue_s": 2.4019999955271487e-05,
+          "engine_prefill_s": 0.015635625999948388,
+          "engine_decode_s": 7.402656445000048,
+          "engine_other_s": 0.0034578195225094532
+        }
+      }
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "a56890269fdef68d6a5f81462edcb67d9cf2fc7a",
+    "git_dirty": true
+  },
+  "notes": ""
+}

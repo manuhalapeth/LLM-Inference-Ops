@@ -1,0 +1,11 @@
+(APIServer pid=1) INFO 10-04 02:37:26 [api_utils.py:286] non-default args: {'model_tag': 'Qwen/Qwen2.5-7B-Instruct', 'host': '0.0.0.0', 'model': 'Qwen/Qwen2.5-7B-Instruct', 'max_model_len': 8192, 'served_model_name': ['llm'], 'gpu_memory_utilization': 0.9, 'kv_transfer_config': KVTransferConfig(kv_connector='MooncakeStoreConnector', engine_id='04457926-25a7-4e75-80af-da7479be38de', kv_buffer_device='cuda', kv_buffer_size=1000000000.0, kv_role='kv_both', kv_rank=None, kv_parallel_size=1, kv_ip='127.0.0.1', kv_port=14579, kv_connector_extra_config={}, kv_connector_module_path=None, enable_permute_local_kv=False, kv_load_failure_policy='fail')}
+(EngineCore pid=245) INFO 10-04 02:37:57 [model_runner.py:428] Model loading took 14.29 GiB memory and 7.374430 seconds
+(EngineCore pid=245) INFO 10-04 02:39:23 [gpu_worker.py:640] Available KV cache memory: 11.19 GiB
+(EngineCore pid=245) INFO 10-04 02:39:23 [kv_cache_utils.py:2395] GPU KV cache size: 209,472 tokens, Maximum concurrency for 8,192 tokens per request: 25.57x
+(EngineCore pid=245) INFO 10-04 02:39:23 [factory.py:62] Creating v1 connector with name: MooncakeStoreConnector and engine_id: 04457926-25a7-4e75-80af-da7479be38de
+(EngineCore pid=245) WARNING 10-04 02:39:23 [base.py:217] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(EngineCore pid=245) INFO 10-04 02:39:23 [worker.py:1603] Mooncake mode=embedded (global_segment_size=34359738368, local_buffer_size=2147483648, preferred_segment=<none>, enable_offload=False, tenant_id=default)
+(EngineCore pid=245) INFO 10-04 02:39:23 [worker.py:2106] Started 1 Mooncake KV-load receive thread(s)
+(EngineCore pid=245) INFO 10-04 02:40:32 [factory.py:62] Creating v1 connector with name: MooncakeStoreConnector and engine_id: 04457926-25a7-4e75-80af-da7479be38de
+(EngineCore pid=245) WARNING 10-04 02:40:32 [base.py:217] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(APIServer pid=1) INFO:     Application startup complete.

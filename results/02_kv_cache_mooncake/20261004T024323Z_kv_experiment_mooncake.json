@@ -1,0 +1,5114 @@
+{
+  "run_id": "20261004T024323Z_kv_experiment_mooncake",
+  "phase": "02_kv_cache_mooncake",
+  "name": "kv_experiment_mooncake",
+  "timestamp": "2026-10-04T02:43:23.353132+00:00",
+  "config": {
+    "label": "mooncake",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:v0.30.0",
+    "vllm_config": "mooncake_store",
+    "mooncake_config": "{\n  \"mode\": \"embedded\",\n  \"metadata_server\": \"P2PHANDSHAKE\",\n  \"master_server_address\": \"mooncake-master:50051\",\n  \"global_segment_size\": \"32GB\",\n  \"local_buffer_size\": \"2GB\",\n  \"protocol\": \"tcp\",\n  \"device_name\": \"\",\n  \"enable_offload\": false\n}\n"
+  },
+  "load": {
+    "concurrency": 1,
+    "docs": 48,
+    "words_per_doc": 5900,
+    "hot": 5,
+    "max_tokens": 8,
+    "rounds": [
+      "fill",
+      "revisit",
+      "hot"
+    ]
+  },
+  "metrics": {
+    "summary": {
+      "fill": {
+        "requests": 48,
+        "prompt_tokens": 285562.0,
+        "ttft_s": {
+          "count": 48,
+          "mean": 0.6665441319374873,
+          "p50": 0.6691794470000332,
+          "p95": 0.6783070180001687,
+          "p99": 0.7098979539999846,
+          "max": 0.7098979539999846
+        },
+        "prefill_s": {
+          "count": 48,
+          "mean": 0.6298806685000073,
+          "p50": 0.6288464940000722,
+          "p95": 0.6347402760000023,
+          "p99": 0.6627566160000242,
+          "max": 0.6627566160000242
+        },
+        "gpu_hit_ratio": 0.0026894334680384645,
+        "mooncake_hit_ratio": 0.0,
+        "preemptions": 0.0,
+        "mooncake": {
+          "save_put": {
+            "calls": 144.0,
+            "bytes": 16294871040.0,
+            "time_s": 25.645217457000285
+          },
+          "save_exists": {
+            "calls": 144.0,
+            "bytes": 0.0,
+            "time_s": 0.1286158610006396
+          },
+          "load_get": {
+            "calls": 0.0,
+            "bytes": 0.0,
+            "time_s": 0.0
+          }
+        }
+      },
+      "revisit": {
+        "requests": 48,
+        "prompt_tokens": 285562.0,
+        "ttft_s": {
+          "count": 48,
+          "mean": 0.17037119750001276,
+          "p50": 0.17145858200001385,
+          "p95": 0.1829977529998814,
+          "p99": 0.18620139400013613,
+          "max": 0.18620139400013613
+        },
+        "prefill_s": {
+          "count": 48,
+          "mean": 0.021642943312514262,
+          "p50": 0.02167681499986429,
+          "p95": 0.02295622299993738,
+          "p99": 0.025290799000003972,
+          "max": 0.025290799000003972
+        },
+        "gpu_hit_ratio": 0.0026894334680384645,
+        "mooncake_hit_ratio": 0.9950903831742318,
+        "preemptions": 0.0,
+        "mooncake": {
+          "save_put": {
+            "calls": 0.0,
+            "bytes": 0.0,
+            "time_s": 0.0
+          },
+          "save_exists": {
+            "calls": 48.0,
+            "bytes": 0.0,
+            "time_s": 0.10710576700034835
+          },
+          "load_get": {
+            "calls": 48.0,
+            "bytes": 16294871040.0,
+            "time_s": 4.649042853000537
+          }
+        }
+      },
+      "hot": {
+        "requests": 5,
+        "prompt_tokens": 29746.0,
+        "ttft_s": {
+          "count": 5,
+          "mean": 0.055992869800002155,
+          "p50": 0.0546544599999379,
+          "p95": 0.06216087699999662,
+          "p99": 0.06216087699999662,
+          "max": 0.06216087699999662
+        },
+        "prefill_s": {
+          "count": 5,
+          "mean": 0.027216960599980668,
+          "p50": 0.0275576959998034,
+          "p95": 0.028940120000015668,
+          "p99": 0.028940120000015668,
+          "max": 0.028940120000015668
+        },
+        "gpu_hit_ratio": 0.9977812142809117,
+        "mooncake_hit_ratio": 0.0,
+        "preemptions": 0.0,
+        "mooncake": {
+          "save_put": {
+            "calls": 0.0,
+            "bytes": 0.0,
+            "time_s": 0.0
+          },
+          "save_exists": {
+            "calls": 5.0,
+            "bytes": 0.0,
+            "time_s": 0.004923659999803931
+          },
+          "load_get": {
+            "calls": 0.0,
+            "bytes": 0.0,
+            "time_s": 0.0
+          }
+        }
+      }
+    },
+    "requests": [
+      {
+        "round": "fill",
+        "doc_id": 0,
+        "client": {
+          "request_id": "413a26d6080f467f9d07d07210c5fc53",
+          "ttft_s": 0.7098979539999846,
+          "e2e_s": 0.884369410999966,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02492449385714021,
+          "output_tokens_per_s": 9.045993563882217
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.4989000053210475e-05,
+          "prefill_s": 0.6627566160000242,
+          "decode_s": 0.17888508199996522,
+          "inference_s": 0.8416416979999894,
+          "e2e_s": 0.8772671222686768,
+          "ttft_s": 0.6992049217224121,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5589232209999864
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0027715410001292184
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 1,
+        "client": {
+          "request_id": "76a4b3592fd84b3dae7b0d0da90b75b8",
+          "ttft_s": 0.6860482060000095,
+          "e2e_s": 0.8613276460000634,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.025039920000007702,
+          "output_tokens_per_s": 9.287987024625716
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.975899994657084e-05,
+          "prefill_s": 0.6436384090000047,
+          "decode_s": 0.17971733399997447,
+          "inference_s": 0.8233557429999792,
+          "e2e_s": 0.8531227111816406,
+          "ttft_s": 0.6741650104522705,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5525580200001059
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0026610520000076576
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 2,
+        "client": {
+          "request_id": "9f795f58a5424737bb69253cea25d0b3",
+          "ttft_s": 0.665940489000036,
+          "e2e_s": 0.828023617000099,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023154732571437568,
+          "output_tokens_per_s": 9.661560172623728
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.839999999399879e-05,
+          "prefill_s": 0.6288691460000564,
+          "decode_s": 0.16723275399999693,
+          "inference_s": 0.7961019000000533,
+          "e2e_s": 0.8206541538238525,
+          "ttft_s": 0.6541604995727539,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5145001399999956
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0027087120000715004
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 3,
+        "client": {
+          "request_id": "379d8db9bc6c4d0ab36da31f82c856ed",
+          "ttft_s": 0.6504529729999149,
+          "e2e_s": 0.8170531349999237,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023800023142858402,
+          "output_tokens_per_s": 9.79128487157784
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 9.447900004033727e-05,
+          "prefill_s": 0.6267861499999299,
+          "decode_s": 0.16835195400005887,
+          "inference_s": 0.7951381039999887,
+          "e2e_s": 0.8103866577148438,
+          "ttft_s": 0.6427915096282959,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5105621729999257
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0020056290001093657
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 4,
+        "client": {
+          "request_id": "a6e1241bc599445b8cf420e7358e91ca",
+          "ttft_s": 0.652728862999993,
+          "e2e_s": 0.8176685529999759,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02356281285714041,
+          "output_tokens_per_s": 9.783915463849612
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.9928999992989702e-05,
+          "prefill_s": 0.6286088350000227,
+          "decode_s": 0.16721079600006306,
+          "inference_s": 0.7958196310000858,
+          "e2e_s": 0.810478925704956,
+          "ttft_s": 0.6441035270690918,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.49326000500002465
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0013232659999857788
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 5,
+        "client": {
+          "request_id": "81a271ef8f324270999474a976f9b172",
+          "ttft_s": 0.6485601790000146,
+          "e2e_s": 0.813724627000056,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023594921142863053,
+          "output_tokens_per_s": 9.831335730237706
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.152900003693503e-05,
+          "prefill_s": 0.6243904010000279,
+          "decode_s": 0.16819732699991619,
+          "inference_s": 0.792587727999944,
+          "e2e_s": 0.8068842887878418,
+          "ttft_s": 0.6395442485809326,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5274592519999715
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0018074409999826457
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 6,
+        "client": {
+          "request_id": "c91701707191451abb4910b070568363",
+          "ttft_s": 0.6600626709999915,
+          "e2e_s": 0.8258567629999334,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.023684870285705983,
+          "output_tokens_per_s": 9.686909835235733
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.05689999322567e-05,
+          "prefill_s": 0.6347402760000023,
+          "decode_s": 0.1682587660000081,
+          "inference_s": 0.8029990420000104,
+          "e2e_s": 0.8200020790100098,
+          "ttft_s": 0.6527035236358643,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5079957469998817
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002235135999967497
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 7,
+        "client": {
+          "request_id": "3c2f7a22bdd344e89e7abce3caf62e5c",
+          "ttft_s": 0.6508044009999594,
+          "e2e_s": 0.8181842479998522,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023911406714270406,
+          "output_tokens_per_s": 9.77774874003862
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.8959000019312953e-05,
+          "prefill_s": 0.6275687629999993,
+          "decode_s": 0.16993378999995912,
+          "inference_s": 0.7975025529999584,
+          "e2e_s": 0.8119900226593018,
+          "ttft_s": 0.6427035331726074,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.512015435999956
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.00204398900018532
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 8,
+        "client": {
+          "request_id": "33a8e5c7614148ae839e89379010e130",
+          "ttft_s": 0.6560131599999295,
+          "e2e_s": 0.8231576489999952,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.023877784142866534,
+          "output_tokens_per_s": 9.718672978036127
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.742000015132362e-05,
+          "prefill_s": 0.633701321999979,
+          "decode_s": 0.16957460399999036,
+          "inference_s": 0.8032759259999693,
+          "e2e_s": 0.8179380893707275,
+          "ttft_s": 0.6489934921264648,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5199459569998908
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0015354639999713982
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 9,
+        "client": {
+          "request_id": "f1979330e1c94a91a791f24851d5b3e9",
+          "ttft_s": 0.6535647369998969,
+          "e2e_s": 0.8202719129999423,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023815310857149337,
+          "output_tokens_per_s": 9.75286349954611
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.4439000071652117e-05,
+          "prefill_s": 0.6315897659999337,
+          "decode_s": 0.16952875599986328,
+          "inference_s": 0.8011185219997969,
+          "e2e_s": 0.8154284954071045,
+          "ttft_s": 0.6468942165374756,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5135416050000003
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.00235826699986319
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 10,
+        "client": {
+          "request_id": "f5306be369d64ce39a8ae5a435ac18a6",
+          "ttft_s": 0.6500163969999448,
+          "e2e_s": 0.8165121949998593,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023785113999987777,
+          "output_tokens_per_s": 9.797771605850148
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.6768999987325515e-05,
+          "prefill_s": 0.6281332949999978,
+          "decode_s": 0.16872768500002167,
+          "inference_s": 0.7968609800000195,
+          "e2e_s": 0.8112151622772217,
+          "ttft_s": 0.6431930065155029,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5196549030001734
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.001956309999968653
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 11,
+        "client": {
+          "request_id": "bec2712ed1e444069a79d9767d47c999",
+          "ttft_s": 0.6488871320000271,
+          "e2e_s": 0.8167364860000816,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023978479142864932,
+          "output_tokens_per_s": 9.795080955890098
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.703899986045144e-05,
+          "prefill_s": 0.6269950600001266,
+          "decode_s": 0.1698444930000278,
+          "inference_s": 0.7968395530001544,
+          "e2e_s": 0.8113934993743896,
+          "ttft_s": 0.6419267654418945,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5303880240001035
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002058218999991368
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 12,
+        "client": {
+          "request_id": "900009bb82214540bac3953c6fd2a207",
+          "ttft_s": 0.6516094749999866,
+          "e2e_s": 0.8150988559998495,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.023355625857123283,
+          "output_tokens_per_s": 9.814760431956092
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.4489999987054034e-05,
+          "prefill_s": 0.6268816530000549,
+          "decode_s": 0.17002825300005497,
+          "inference_s": 0.7969099060001099,
+          "e2e_s": 0.8102154731750488,
+          "ttft_s": 0.6408207416534424,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.512897748000114
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0016751820000990847
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 13,
+        "client": {
+          "request_id": "4f868083b64140fb984ff1591e585e4b",
+          "ttft_s": 0.6563791889998356,
+          "e2e_s": 0.8217848099998264,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02362937442857011,
+          "output_tokens_per_s": 9.734908582700244
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.805000008265779e-05,
+          "prefill_s": 0.6264528599999721,
+          "decode_s": 0.17023147100007918,
+          "inference_s": 0.7966843310000513,
+          "e2e_s": 0.8165769577026367,
+          "ttft_s": 0.6469502449035645,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5202746340003159
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002120247999982894
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 14,
+        "client": {
+          "request_id": "c3d96b654c6541a48213727f44366d03",
+          "ttft_s": 0.6763639640000747,
+          "e2e_s": 0.8436447820001831,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023897259714301202,
+          "output_tokens_per_s": 9.482663996371715
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.634999984569731e-05,
+          "prefill_s": 0.6295762800000375,
+          "decode_s": 0.17219342299995333,
+          "inference_s": 0.8017697029999908,
+          "e2e_s": 0.8379836082458496,
+          "ttft_s": 0.6663167476654053,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5189391870001145
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0025003839998589683
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 15,
+        "client": {
+          "request_id": "4e98cd2e072a4fdf956626ed0f0f1aca",
+          "ttft_s": 0.6715335280000545,
+          "e2e_s": 0.8395985870001823,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.0240092941428754,
+          "output_tokens_per_s": 9.528362867526196
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.5568999919632915e-05,
+          "prefill_s": 0.629903744000103,
+          "decode_s": 0.1705313089998981,
+          "inference_s": 0.8004350530000011,
+          "e2e_s": 0.833873987197876,
+          "ttft_s": 0.6639358997344971,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5271812219998537
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0026171060001161095
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 16,
+        "client": {
+          "request_id": "1c987db41e554ef5bbd2a90cbfa2f3f5",
+          "ttft_s": 0.6597714029999224,
+          "e2e_s": 0.829371386000048,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02422856900001794,
+          "output_tokens_per_s": 9.645859665575124
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.7847999919904396e-05,
+          "prefill_s": 0.6317453809999733,
+          "decode_s": 0.1721631810000872,
+          "inference_s": 0.8039085620000606,
+          "e2e_s": 0.8241872787475586,
+          "ttft_s": 0.6526937484741211,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5011051819999466
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002257626999835338
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 17,
+        "client": {
+          "request_id": "7ea530e4b2b0406187918e3d9de939a9",
+          "ttft_s": 0.6558237320000444,
+          "e2e_s": 0.8214880139998968,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023666325999978914,
+          "output_tokens_per_s": 9.738425714877204
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 8.405699986724358e-05,
+          "prefill_s": 0.6287423850001232,
+          "decode_s": 0.17040198099994086,
+          "inference_s": 0.7991443660000641,
+          "e2e_s": 0.815117597579956,
+          "ttft_s": 0.6452755928039551,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5399872729999515
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0022383189998436137
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 18,
+        "client": {
+          "request_id": "5679806c1e454c8b91ba725496a7d894",
+          "ttft_s": 0.6558821649998663,
+          "e2e_s": 0.8213699670000096,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02364111457144905,
+          "output_tokens_per_s": 9.739825317961627
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.741799991985317e-05,
+          "prefill_s": 0.6288464940000722,
+          "decode_s": 0.16985727399992356,
+          "inference_s": 0.7987037679999958,
+          "e2e_s": 0.8146753311157227,
+          "ttft_s": 0.6452758312225342,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5435532199999216
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0024294529998769576
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 19,
+        "client": {
+          "request_id": "d5baf68daf3141c9945811c241c73eff",
+          "ttft_s": 0.6699397960001079,
+          "e2e_s": 0.8352316860000428,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02361312714284785,
+          "output_tokens_per_s": 9.578180682191682
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.504800019982213e-05,
+          "prefill_s": 0.6293318040000031,
+          "decode_s": 0.1697453089998362,
+          "inference_s": 0.7990771129998393,
+          "e2e_s": 0.8278563022613525,
+          "ttft_s": 0.6588404178619385,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5477212410000902
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0026382469998225133
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 20,
+        "client": {
+          "request_id": "fbef2b367d864d51b8c7c5a2bdb5b041",
+          "ttft_s": 0.6591963040000337,
+          "e2e_s": 0.8250582350001423,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023694561571444086,
+          "output_tokens_per_s": 9.696285256759628
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 8.71270001425728e-05,
+          "prefill_s": 0.6282469909999691,
+          "decode_s": 0.16952170499985186,
+          "inference_s": 0.7977686959998209,
+          "e2e_s": 0.8160674571990967,
+          "ttft_s": 0.6468408107757568,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5381812350001383
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0030763929999011452
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 21,
+        "client": {
+          "request_id": "a7193df9bbdf412bad6514ee3a975073",
+          "ttft_s": 0.6524735840000631,
+          "e2e_s": 0.8182667749999837,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02368474157141723,
+          "output_tokens_per_s": 9.776762596770668
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.883900012624508e-05,
+          "prefill_s": 0.6273007959998722,
+          "decode_s": 0.1695537630000672,
+          "inference_s": 0.7968545589999394,
+          "e2e_s": 0.8116061687469482,
+          "ttft_s": 0.6427030563354492,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5330262480001693
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002704384000026039
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 22,
+        "client": {
+          "request_id": "be1f037275ed491981100618aa5c0d22",
+          "ttft_s": 0.6660138029999416,
+          "e2e_s": 0.8314449179999883,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.0236330164285781,
+          "output_tokens_per_s": 9.621803954546646
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.643900004135503e-05,
+          "prefill_s": 0.6258692330000031,
+          "decode_s": 0.16941375099986544,
+          "inference_s": 0.7952829839998685,
+          "e2e_s": 0.8230409622192383,
+          "ttft_s": 0.6542308330535889,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5503326719997403
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0030676639999001054
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 23,
+        "client": {
+          "request_id": "b9b3b40b5ae245259d61bf3a62d85768",
+          "ttft_s": 0.672616638999898,
+          "e2e_s": 0.8374107879999428,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023542021285720693,
+          "output_tokens_per_s": 9.55325643595667
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.944800005228899e-05,
+          "prefill_s": 0.6308590359999471,
+          "decode_s": 0.16929744799995206,
+          "inference_s": 0.8001564839998991,
+          "e2e_s": 0.8287370204925537,
+          "ttft_s": 0.6599831581115723,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5643654220000371
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0029734360000475135
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 24,
+        "client": {
+          "request_id": "22c9cfdeb26840d680996ffd651491d9",
+          "ttft_s": 0.6783070180001687,
+          "e2e_s": 0.8414302520000092,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023303319142834362,
+          "output_tokens_per_s": 9.507621078496609
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.6848999823414488e-05,
+          "prefill_s": 0.6331497860001036,
+          "decode_s": 0.1679962319999504,
+          "inference_s": 0.801146018000054,
+          "e2e_s": 0.8324100971221924,
+          "ttft_s": 0.6653423309326172,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5199630790000356
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002565150000009453
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 25,
+        "client": {
+          "request_id": "4ecc6dfc0d944ae29c2c56c4e8048258",
+          "ttft_s": 0.6726973550000821,
+          "e2e_s": 0.837281915000176,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023512080000013418,
+          "output_tokens_per_s": 9.554726856841663
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.6698999792861287e-05,
+          "prefill_s": 0.6310240990001148,
+          "decode_s": 0.1694864480000433,
+          "inference_s": 0.8005105470001581,
+          "e2e_s": 0.8290789127349854,
+          "ttft_s": 0.6600873470306396,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5772803169998042
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0029031799999756913
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 26,
+        "client": {
+          "request_id": "6db78312765048f0b552eecc9e7ae88b",
+          "ttft_s": 0.6755348430001504,
+          "e2e_s": 0.8404941260000669,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023565611857130925,
+          "output_tokens_per_s": 9.518210481817649
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.749899997274042e-05,
+          "prefill_s": 0.629108381000151,
+          "decode_s": 0.1693308070000512,
+          "inference_s": 0.7984391880002022,
+          "e2e_s": 0.8319098949432373,
+          "ttft_s": 0.6631860733032227,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5381734200002484
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0027306959998441016
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 27,
+        "client": {
+          "request_id": "14ed78f83037410f9a9cedd338639048",
+          "ttft_s": 0.6741303520000201,
+          "e2e_s": 0.8395657220000885,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02363362428572405,
+          "output_tokens_per_s": 9.528735857559411
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.5989000025438145e-05,
+          "prefill_s": 0.6316026160000092,
+          "decode_s": 0.1695361629999752,
+          "inference_s": 0.8011387789999844,
+          "e2e_s": 0.8307785987854004,
+          "ttft_s": 0.6617319583892822,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.54159709999999
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.00283354099974531
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 28,
+        "client": {
+          "request_id": "d46ca6af1bd14d4aa010bf75541d23b0",
+          "ttft_s": 0.6733773879998353,
+          "e2e_s": 0.8388438389999919,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02363806442859381,
+          "output_tokens_per_s": 9.53693599220686
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.431899995121057e-05,
+          "prefill_s": 0.6320428389999506,
+          "decode_s": 0.17010622900011185,
+          "inference_s": 0.8021490680000625,
+          "e2e_s": 0.8304729461669922,
+          "ttft_s": 0.6611287593841553,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5201007729999674
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0028755120001733303
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 29,
+        "client": {
+          "request_id": "787a8771af5543408beee5c27d1a8277",
+          "ttft_s": 0.6717546409997794,
+          "e2e_s": 0.837076419999903,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023617397000017654,
+          "output_tokens_per_s": 9.557072459406905
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.7198999987376737e-05,
+          "prefill_s": 0.6287420399999064,
+          "decode_s": 0.1701178420000815,
+          "inference_s": 0.7988598819999879,
+          "e2e_s": 0.8277480602264404,
+          "ttft_s": 0.6587057113647461,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5252819079998972
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0028994510000757145
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 30,
+        "client": {
+          "request_id": "30744441686f4d0087e596bc7a6e1aa9",
+          "ttft_s": 0.6711418720001348,
+          "e2e_s": 0.8365791590001663,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023633898142861653,
+          "output_tokens_per_s": 9.562753164400082
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.2139000066090375e-05,
+          "prefill_s": 0.6292158659998677,
+          "decode_s": 0.1701373030000468,
+          "inference_s": 0.7993531689999145,
+          "e2e_s": 0.8278961181640625,
+          "ttft_s": 0.658484935760498,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5306960490001984
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0033649370000148338
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 31,
+        "client": {
+          "request_id": "6061b0920135434d959f5c3df096c751",
+          "ttft_s": 0.6761284949998299,
+          "e2e_s": 0.8397769260000132,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023378347285740477,
+          "output_tokens_per_s": 9.526339379322115
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.0989999939047266e-05,
+          "prefill_s": 0.6328416540000035,
+          "decode_s": 0.1696491079999305,
+          "inference_s": 0.802490761999934,
+          "e2e_s": 0.8310656547546387,
+          "ttft_s": 0.6636447906494141,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5351636370000961
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0027356559999134333
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 32,
+        "client": {
+          "request_id": "c2bfce9a994c4c4ba0479fd83a37d447",
+          "ttft_s": 0.6712320249998811,
+          "e2e_s": 0.8350565050000114,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023403497142875755,
+          "output_tokens_per_s": 9.580190025583827
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.0139000045892317e-05,
+          "prefill_s": 0.6294203249999555,
+          "decode_s": 0.16911280999988776,
+          "inference_s": 0.7985331349998432,
+          "e2e_s": 0.8271937370300293,
+          "ttft_s": 0.6585679054260254,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5608791140002722
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003328718999910052
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 33,
+        "client": {
+          "request_id": "db56ae40fe5945f9bbf38144e687979f",
+          "ttft_s": 0.6697766889999457,
+          "e2e_s": 0.8347258670000883,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02356416828573466,
+          "output_tokens_per_s": 9.583984774248231
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.1039000077726087e-05,
+          "prefill_s": 0.6298147789998438,
+          "decode_s": 0.16943532200002664,
+          "inference_s": 0.7992501009998705,
+          "e2e_s": 0.8261752128601074,
+          "ttft_s": 0.6574199199676514,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5550164829999176
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003197092999926099
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 34,
+        "client": {
+          "request_id": "6212035af1f54e639dc98073249ea57f",
+          "ttft_s": 0.6690530419998595,
+          "e2e_s": 0.8341101589999198,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02357958814286576,
+          "output_tokens_per_s": 9.591059302756639
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.8478999865910737e-05,
+          "prefill_s": 0.6274431370000002,
+          "decode_s": 0.16964046000020971,
+          "inference_s": 0.7970835970002099,
+          "e2e_s": 0.8255269527435303,
+          "ttft_s": 0.6567833423614502,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.536413901999822
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0031708939998225105
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 35,
+        "client": {
+          "request_id": "aee073ba9dd341d2b0d19c8a3f075a32",
+          "ttft_s": 0.6680628619999425,
+          "e2e_s": 0.832929047000107,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02355231214288064,
+          "output_tokens_per_s": 9.604659639152882
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.896900014093262e-05,
+          "prefill_s": 0.6241470049999407,
+          "decode_s": 0.16920040500008326,
+          "inference_s": 0.793347410000024,
+          "e2e_s": 0.824101448059082,
+          "ttft_s": 0.6554486751556396,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5486849720000464
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0028295060003529215
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 36,
+        "client": {
+          "request_id": "8b88ff15683d445e9bc36d8c10c448c7",
+          "ttft_s": 0.6720844550000038,
+          "e2e_s": 0.8369402220000666,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023550823857151824,
+          "output_tokens_per_s": 9.558627712839645
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.3659999897063244e-05,
+          "prefill_s": 0.6303545870000562,
+          "decode_s": 0.16905578999990212,
+          "inference_s": 0.7994103769999583,
+          "e2e_s": 0.8281943798065186,
+          "ttft_s": 0.6597089767456055,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5590289559997927
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0033188810002684477
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 37,
+        "client": {
+          "request_id": "75a145b42bd041cfb88aa7a5e59591f5",
+          "ttft_s": 0.6706043459998909,
+          "e2e_s": 0.8349722890000066,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023481134714302243,
+          "output_tokens_per_s": 9.58115629152327
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.332000008209434e-05,
+          "prefill_s": 0.6287305079999896,
+          "decode_s": 0.16891585700000178,
+          "inference_s": 0.7976463649999914,
+          "e2e_s": 0.8260929584503174,
+          "ttft_s": 0.6579742431640625,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5456482560002769
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002800167000032161
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 38,
+        "client": {
+          "request_id": "73ed9898c3b84e22b2cc72f48bd20c86",
+          "ttft_s": 0.6709729640001569,
+          "e2e_s": 0.8333036589999665,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02319009928568708,
+          "output_tokens_per_s": 9.600341860493765
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 1.7718999970384175e-05,
+          "prefill_s": 0.626821012000164,
+          "decode_s": 0.16692469899999196,
+          "inference_s": 0.793745711000156,
+          "e2e_s": 0.8244633674621582,
+          "ttft_s": 0.6584656238555908,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5525499309999304
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0028801839998777723
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 39,
+        "client": {
+          "request_id": "0cac707e00c64b0794f58139e4fc59bf",
+          "ttft_s": 0.6684167079999952,
+          "e2e_s": 0.8328004460001921,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023483391142885272,
+          "output_tokens_per_s": 9.606142790175877
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.9379000125118182e-05,
+          "prefill_s": 0.6262454010000056,
+          "decode_s": 0.16843586699997104,
+          "inference_s": 0.7946812679999766,
+          "e2e_s": 0.8239192962646484,
+          "ttft_s": 0.6559555530548096,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5399707839999337
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0029855899999802205
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 40,
+        "client": {
+          "request_id": "b88c63a2f534426cb9fa275541344433",
+          "ttft_s": 0.6723024640000403,
+          "e2e_s": 0.8368242270000792,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.02350310900000555,
+          "output_tokens_per_s": 9.559952666140058
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 4.0479000062987325e-05,
+          "prefill_s": 0.6292324700000336,
+          "decode_s": 0.16948474599985275,
+          "inference_s": 0.7987172159998863,
+          "e2e_s": 0.8282339572906494,
+          "ttft_s": 0.659365177154541,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5233994890002123
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0032965510001758958
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 41,
+        "client": {
+          "request_id": "d95e6243629d43e1b55b2d955d700e9b",
+          "ttft_s": 0.6714445689999593,
+          "e2e_s": 0.8351816269998835,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02339100828570346,
+          "output_tokens_per_s": 9.578754777852788
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.3540000029242947e-05,
+          "prefill_s": 0.6290922509999746,
+          "decode_s": 0.16851290600016,
+          "inference_s": 0.7976051570001346,
+          "e2e_s": 0.8263828754425049,
+          "ttft_s": 0.6585307121276855,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5190476909997415
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003123908000134179
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 42,
+        "client": {
+          "request_id": "0fb895440dd6487abfa3235d5353ad16",
+          "ttft_s": 0.6660925050000515,
+          "e2e_s": 0.8325051440001516,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02377323414287145,
+          "output_tokens_per_s": 9.609550232398975
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.436899987718789e-05,
+          "prefill_s": 0.627031474999967,
+          "decode_s": 0.16823747600005845,
+          "inference_s": 0.7952689510000255,
+          "e2e_s": 0.824129581451416,
+          "ttft_s": 0.6564350128173828,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5391347789998235
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.0036987620001127652
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 43,
+        "client": {
+          "request_id": "c0e6d047d814470ebb90e8e44007129e",
+          "ttft_s": 0.667323086000124,
+          "e2e_s": 0.8315967600001386,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023467667714287797,
+          "output_tokens_per_s": 9.620047100711007
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.6619999971444486e-05,
+          "prefill_s": 0.6256292400000802,
+          "decode_s": 0.1687005839999074,
+          "inference_s": 0.7943298239999876,
+          "e2e_s": 0.8229327201843262,
+          "ttft_s": 0.6551132202148438,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.544871318000105
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.002937204000318161
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 44,
+        "client": {
+          "request_id": "2367c4394a6b4570a8a594d4f8bab119",
+          "ttft_s": 0.6691794470000332,
+          "e2e_s": 0.8337682820001646,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02351269071430449,
+          "output_tokens_per_s": 9.594992005222887
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.4989000166897313e-05,
+          "prefill_s": 0.6269068329997936,
+          "decode_s": 0.16900974700001825,
+          "inference_s": 0.7959165799998118,
+          "e2e_s": 0.8247623443603516,
+          "ttft_s": 0.6564939022064209,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5417412939998485
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.00275290800050243
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 45,
+        "client": {
+          "request_id": "23dbd8c717e146f88f077e646072ba01",
+          "ttft_s": 0.6711329180000121,
+          "e2e_s": 0.8362587300000541,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.023589401714291722,
+          "output_tokens_per_s": 9.566417321585966
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 4.031899993606203e-05,
+          "prefill_s": 0.6291288140000688,
+          "decode_s": 0.16962872999988576,
+          "inference_s": 0.7987575439999546,
+          "e2e_s": 0.8272976875305176,
+          "ttft_s": 0.6583149433135986,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5343087950002428
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003188787999761189
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 46,
+        "client": {
+          "request_id": "48456e6ac32549c09800476c431e43a8",
+          "ttft_s": 0.6718743040000845,
+          "e2e_s": 0.8364281930000743,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.02350769842856997,
+          "output_tokens_per_s": 9.564479135149488
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.534899999773188e-05,
+          "prefill_s": 0.6278880840000056,
+          "decode_s": 0.16883269499999187,
+          "inference_s": 0.7967207789999975,
+          "e2e_s": 0.8274507522583008,
+          "ttft_s": 0.6590161323547363,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5563838509997368
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003267496000034953
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "fill",
+        "doc_id": 47,
+        "client": {
+          "request_id": "bb1d94ac682e46d284c685295cf2674f",
+          "ttft_s": 0.6709132409998801,
+          "e2e_s": 0.8356503949999023,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.023533879142860314,
+          "output_tokens_per_s": 9.57338146175463
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.852899999401416e-05,
+          "prefill_s": 0.6271241900001314,
+          "decode_s": 0.16912855699979445,
+          "inference_s": 0.7962527469999259,
+          "e2e_s": 0.8266446590423584,
+          "ttft_s": 0.6581904888153076,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 3.0,
+              "bytes": 339476480.0,
+              "time_s": 0.5415117919999375
+            },
+            "save_exists": {
+              "calls": 3.0,
+              "bytes": 0.0,
+              "time_s": 0.003167618000134098
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "revisit",
+        "doc_id": 0,
+        "client": {
+          "request_id": "27c1c611f3b04e2fbadc40d1bceadc6e",
+          "ttft_s": 0.18620139400013613,
+          "e2e_s": 0.2519122430001062,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009387264142852863,
+          "output_tokens_per_s": 31.757090900884194
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1213155910002115,
+          "prefill_s": 0.021483648999947036,
+          "decode_s": 0.06962444600003437,
+          "inference_s": 0.0911080949999814,
+          "e2e_s": 0.24237942695617676,
+          "ttft_s": 0.17302370071411133,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002113568999902782
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.1052157060000809
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 1,
+        "client": {
+          "request_id": "1584eb75174547afac24c524ad7699b3",
+          "ttft_s": 0.181212559999949,
+          "e2e_s": 0.24661944199988284,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009343840285704832,
+          "output_tokens_per_s": 32.43864285445833
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11742644100013422,
+          "prefill_s": 0.02167681499986429,
+          "decode_s": 0.06966350900006546,
+          "inference_s": 0.09134032399992975,
+          "e2e_s": 0.2376701831817627,
+          "ttft_s": 0.16850543022155762,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002349833000153012
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10254344100007984
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 2,
+        "client": {
+          "request_id": "8499c7ac551141e5920cb34ebf2e0eb0",
+          "ttft_s": 0.18152157300005456,
+          "e2e_s": 0.24714135299996087,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009374254285700902,
+          "output_tokens_per_s": 32.370139205320555
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11766574099988247,
+          "prefill_s": 0.02187541000012061,
+          "decode_s": 0.06974502200000643,
+          "inference_s": 0.09162043200012704,
+          "e2e_s": 0.23831415176391602,
+          "ttft_s": 0.16883373260498047,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0021462780000547355
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10231951299988395
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 3,
+        "client": {
+          "request_id": "7e2e79389d714179bf15a3fc2497aa50",
+          "ttft_s": 0.17923201999997218,
+          "e2e_s": 0.24507680799979426,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009406398285688868,
+          "output_tokens_per_s": 32.64282763143674
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1155891519999841,
+          "prefill_s": 0.021982078000064575,
+          "decode_s": 0.06971921700005623,
+          "inference_s": 0.09170129500012081,
+          "e2e_s": 0.23627233505249023,
+          "ttft_s": 0.1666889190673828,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0022726539998529915
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10023135400001593
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 4,
+        "client": {
+          "request_id": "9129bcb36b57463e8327294ca6afb378",
+          "ttft_s": 0.17378590599992094,
+          "e2e_s": 0.23943508000002112,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00937845342858574,
+          "output_tokens_per_s": 33.41197956456211
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11020161400006145,
+          "prefill_s": 0.022129444000029252,
+          "decode_s": 0.06964474899996276,
+          "inference_s": 0.09177419299999201,
+          "e2e_s": 0.23069477081298828,
+          "ttft_s": 0.16128802299499512,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002074680000077933
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.0944861950001723
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 5,
+        "client": {
+          "request_id": "4b2242f3f2a242018f82d621e6d890ef",
+          "ttft_s": 0.1727691070000219,
+          "e2e_s": 0.2382722489999196,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.0093575917142711,
+          "output_tokens_per_s": 33.57503877844666
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10916339000004882,
+          "prefill_s": 0.021976429999995162,
+          "decode_s": 0.06977596899992022,
+          "inference_s": 0.09175239899991539,
+          "e2e_s": 0.2298593521118164,
+          "ttft_s": 0.1606760025024414,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0025002390000281594
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09381245100007618
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 6,
+        "client": {
+          "request_id": "b18a1a1c6a404b0e86384f06a7ea7c6e",
+          "ttft_s": 0.1711395340000763,
+          "e2e_s": 0.23747290699998302,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009476196142843816,
+          "output_tokens_per_s": 33.68805351761905
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11025192599981892,
+          "prefill_s": 0.021196064000150727,
+          "decode_s": 0.0697039459998905,
+          "inference_s": 0.09090001000004122,
+          "e2e_s": 0.228989839553833,
+          "ttft_s": 0.15936684608459473,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0022169169999415317
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09494085400001495
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 7,
+        "client": {
+          "request_id": "fdf35daff5714c588768d95ee615a08b",
+          "ttft_s": 0.1530091279998942,
+          "e2e_s": 0.2183124640000642,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009329048000024289,
+          "output_tokens_per_s": 36.644724050192785
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10451961300009316,
+          "prefill_s": 0.02055506300007437,
+          "decode_s": 0.06954822499983493,
+          "inference_s": 0.0901032879999093,
+          "e2e_s": 0.2105391025543213,
+          "ttft_s": 0.14135026931762695,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002240086000028896
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09173461800014593
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 8,
+        "client": {
+          "request_id": "264d3ecfcd7144628b769f152f8347b8",
+          "ttft_s": 0.16700426300008075,
+          "e2e_s": 0.2325976909999099,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009370489714261307,
+          "output_tokens_per_s": 34.39415054211823
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10695520700005545,
+          "prefill_s": 0.02043438700002298,
+          "decode_s": 0.06953963499995552,
+          "inference_s": 0.0899740219999785,
+          "e2e_s": 0.2245337963104248,
+          "ttft_s": 0.1551799774169922,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0023304240000925347
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09386973999994552
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 9,
+        "client": {
+          "request_id": "8b34bbba56014fec87b88fddb5766d0b",
+          "ttft_s": 0.1715397049999865,
+          "e2e_s": 0.23701910999989195,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009354200714272207,
+          "output_tokens_per_s": 33.75255269502804
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11103076799986411,
+          "prefill_s": 0.021562256000152047,
+          "decode_s": 0.06968977499991524,
+          "inference_s": 0.09125203100006729,
+          "e2e_s": 0.22924590110778809,
+          "ttft_s": 0.15998148918151855,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0022237360001327033
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09989478500006044
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 10,
+        "client": {
+          "request_id": "c78d7ab737a74240a57ff13f2610a9fe",
+          "ttft_s": 0.17048147600007724,
+          "e2e_s": 0.23602468299986867,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00936331528568449,
+          "output_tokens_per_s": 33.894760066278536
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10909685000001446,
+          "prefill_s": 0.021374613000034515,
+          "decode_s": 0.06962794099990788,
+          "inference_s": 0.09100255399994239,
+          "e2e_s": 0.2281186580657959,
+          "ttft_s": 0.15878772735595703,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0018745559998478711
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09559585300007711
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 11,
+        "client": {
+          "request_id": "f50e50cc65394a52a2cf5016cf1441cb",
+          "ttft_s": 0.16937387500001932,
+          "e2e_s": 0.2350370629999361,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00938045542855954,
+          "output_tokens_per_s": 34.03718502048409
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10733006700002079,
+          "prefill_s": 0.021301225999877715,
+          "decode_s": 0.06967216399993958,
+          "inference_s": 0.0909733899998173,
+          "e2e_s": 0.22671198844909668,
+          "ttft_s": 0.15727615356445312,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0027004430000943103
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09397063500000513
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 12,
+        "client": {
+          "request_id": "014146bf211144558165ec2b3dfacfdf",
+          "ttft_s": 0.17183790800004317,
+          "e2e_s": 0.2374425779999001,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009372095714265274,
+          "output_tokens_per_s": 33.69235655790162
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10841116599999623,
+          "prefill_s": 0.021618176999936622,
+          "decode_s": 0.06969178400004239,
+          "inference_s": 0.09130996099997901,
+          "e2e_s": 0.22928714752197266,
+          "ttft_s": 0.15985512733459473,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002557037000087803
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09434242499992251
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 13,
+        "client": {
+          "request_id": "b1f2657da3824ffab08b6d636ae3355f",
+          "ttft_s": 0.17122294599994348,
+          "e2e_s": 0.23447293599997465,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009035712857147311,
+          "output_tokens_per_s": 34.1190763270046
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1051753550000285,
+          "prefill_s": 0.025205726999956823,
+          "decode_s": 0.06771612400007143,
+          "inference_s": 0.09292185100002825,
+          "e2e_s": 0.22624564170837402,
+          "ttft_s": 0.15926909446716309,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002374632000055499
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.0935767329999635
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 14,
+        "client": {
+          "request_id": "13a5b4e9ace84632b7398018f35422ed",
+          "ttft_s": 0.17803328400009377,
+          "e2e_s": 0.2436402220000673,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009372419714281932,
+          "output_tokens_per_s": 32.83530089706531
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10795951199997944,
+          "prefill_s": 0.021384676000025138,
+          "decode_s": 0.06961819499997546,
+          "inference_s": 0.0910028710000006,
+          "e2e_s": 0.23547625541687012,
+          "ttft_s": 0.1661076545715332,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002133029000106035
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.0941571120001754
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 15,
+        "client": {
+          "request_id": "90419d11dd524aa2a3cee3761fa2c117",
+          "ttft_s": 0.1655973960000665,
+          "e2e_s": 0.22989442399989457,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009185289714261151,
+          "output_tokens_per_s": 34.7985821526653
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10270953700000973,
+          "prefill_s": 0.02295622299993738,
+          "decode_s": 0.06816899000000376,
+          "inference_s": 0.09112521299994114,
+          "e2e_s": 0.22212553024291992,
+          "ttft_s": 0.1540982723236084,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002394003000063094
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09139348500002598
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 16,
+        "client": {
+          "request_id": "cf046a69245847bd8161197903a9dbc9",
+          "ttft_s": 0.1693845689999307,
+          "e2e_s": 0.23500259999991613,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009374004428569347,
+          "output_tokens_per_s": 34.042176554654525
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10375208699997529,
+          "prefill_s": 0.022737559000006513,
+          "decode_s": 0.0696960370000852,
+          "inference_s": 0.09243359600009171,
+          "e2e_s": 0.22660136222839355,
+          "ttft_s": 0.15729451179504395,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0022876649998124776
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09168472699980157
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 17,
+        "client": {
+          "request_id": "3b38b2a128bc4ca6a53df17f74a85591",
+          "ttft_s": 0.17407354700003452,
+          "e2e_s": 0.2388057979999303,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009247464428556538,
+          "output_tokens_per_s": 33.50002414933969
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10795104599992555,
+          "prefill_s": 0.025290799000003972,
+          "decode_s": 0.0684892750000472,
+          "inference_s": 0.09378007400005117,
+          "e2e_s": 0.23055362701416016,
+          "ttft_s": 0.16222095489501953,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0028234609999344684
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09584775600001194
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 18,
+        "client": {
+          "request_id": "f72d9f2771ab49078cae2a28b8fe1201",
+          "ttft_s": 0.17205146400010563,
+          "e2e_s": 0.2372475760000725,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009313730285709556,
+          "output_tokens_per_s": 33.720049472697475
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10789457399982894,
+          "prefill_s": 0.02208028000018203,
+          "decode_s": 0.06973028499987777,
+          "inference_s": 0.0918105650000598,
+          "e2e_s": 0.22869396209716797,
+          "ttft_s": 0.1594841480255127,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024905000000217115
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09390324600008171
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 19,
+        "client": {
+          "request_id": "2710c66f55634d26ac1f020e52281dd0",
+          "ttft_s": 0.1766479159998653,
+          "e2e_s": 0.24204143599990857,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009341931428577612,
+          "output_tokens_per_s": 33.05219193957774
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11000976100012849,
+          "prefill_s": 0.022053752999909193,
+          "decode_s": 0.06975176800006011,
+          "inference_s": 0.0918055209999693,
+          "e2e_s": 0.23303699493408203,
+          "ttft_s": 0.1635417938232422,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024898409999423166
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09479689700015115
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 20,
+        "client": {
+          "request_id": "5d8b99e070bf4e35bf3b9e4d6121718c",
+          "ttft_s": 0.17532731300002524,
+          "e2e_s": 0.24056244099983815,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009319303999973272,
+          "output_tokens_per_s": 33.2553991668441
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10890157199992245,
+          "prefill_s": 0.02188209700011612,
+          "decode_s": 0.06982844999993176,
+          "inference_s": 0.09171054700004788,
+          "e2e_s": 0.23179030418395996,
+          "ttft_s": 0.16243362426757812,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024678209999819956
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09465218100012862
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 21,
+        "client": {
+          "request_id": "c204e21e9bea4314a131605a7b1e444c",
+          "ttft_s": 0.17145858200001385,
+          "e2e_s": 0.23682257700011178,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009337713571442561,
+          "output_tokens_per_s": 33.780563075268894
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10810223199996472,
+          "prefill_s": 0.02146289000006618,
+          "decode_s": 0.06960899599994264,
+          "inference_s": 0.09107188600000882,
+          "e2e_s": 0.22840023040771484,
+          "ttft_s": 0.15894079208374023,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024890400000003865
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09421565899992856
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 22,
+        "client": {
+          "request_id": "4e8ace0cf1324bbc8158024128849096",
+          "ttft_s": 0.17318482400014545,
+          "e2e_s": 0.23889379299998836,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00938699557140613,
+          "output_tokens_per_s": 33.48768462979861
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1101692700001422,
+          "prefill_s": 0.02186480099999244,
+          "decode_s": 0.06972009699984483,
+          "inference_s": 0.09158489799983727,
+          "e2e_s": 0.23031878471374512,
+          "ttft_s": 0.16083621978759766,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0027524430001903966
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09434989099986524
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 23,
+        "client": {
+          "request_id": "4e397bea6b58412bb3489a76a95b4475",
+          "ttft_s": 0.173602123000137,
+          "e2e_s": 0.23924209799997698,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009377139285691425,
+          "output_tokens_per_s": 33.43893096941814
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1106674129998737,
+          "prefill_s": 0.022018637999963175,
+          "decode_s": 0.06951135700001032,
+          "inference_s": 0.0915299949999735,
+          "e2e_s": 0.2308652400970459,
+          "ttft_s": 0.1614823341369629,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024335329999303212
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09415736200003266
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 24,
+        "client": {
+          "request_id": "11fdaee549de4587939c32fed19c9a83",
+          "ttft_s": 0.17228602399995907,
+          "e2e_s": 0.23807050899995374,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009397783571427811,
+          "output_tokens_per_s": 33.60349013241936
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1098180300000422,
+          "prefill_s": 0.021725026999774855,
+          "decode_s": 0.06978244400011135,
+          "inference_s": 0.09150747099988621,
+          "e2e_s": 0.23004984855651855,
+          "ttft_s": 0.16054606437683105,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0023339049998867267
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09450504500000534
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 25,
+        "client": {
+          "request_id": "aed05c19a9574d8cbb021753d4cf7d19",
+          "ttft_s": 0.17121449999990546,
+          "e2e_s": 0.23699348499985717,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00939699785713596,
+          "output_tokens_per_s": 33.75620220110617
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10866984499989485,
+          "prefill_s": 0.02177781499995035,
+          "decode_s": 0.06972409600007268,
+          "inference_s": 0.09150191100002303,
+          "e2e_s": 0.22881245613098145,
+          "ttft_s": 0.15927886962890625,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0023996140000690502
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09418177700013075
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 26,
+        "client": {
+          "request_id": "a1f025de0d81404eaeaa87de53f88df0",
+          "ttft_s": 0.17209394600013184,
+          "e2e_s": 0.23764749099996152,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009364792142832812,
+          "output_tokens_per_s": 33.66330511775231
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10919885700013765,
+          "prefill_s": 0.02171500899999046,
+          "decode_s": 0.06973200900006304,
+          "inference_s": 0.0914470180000535,
+          "e2e_s": 0.22931313514709473,
+          "ttft_s": 0.1598358154296875,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002333865000082369
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09470452800019302
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 27,
+        "client": {
+          "request_id": "04abd5c778a04d82bda7cff7beb32fd2",
+          "ttft_s": 0.17257250200009366,
+          "e2e_s": 0.2390413160001117,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009495544857145433,
+          "output_tokens_per_s": 33.46701789407929
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10926464099998157,
+          "prefill_s": 0.02171685999996953,
+          "decode_s": 0.06979081200006476,
+          "inference_s": 0.09150767200003429,
+          "e2e_s": 0.23028254508972168,
+          "ttft_s": 0.1606152057647705,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024897910000163392
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09394982399999208
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 28,
+        "client": {
+          "request_id": "cbea0b2c58ca48cba2c556f3005fb8e9",
+          "ttft_s": 0.17906298200000492,
+          "e2e_s": 0.2439574929999253,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009270644428560055,
+          "output_tokens_per_s": 32.79259801215636
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11496084100008375,
+          "prefill_s": 0.021632842999906643,
+          "decode_s": 0.06969180900000538,
+          "inference_s": 0.09132465199991202,
+          "e2e_s": 0.23468351364135742,
+          "ttft_s": 0.16532540321350098,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002723574999890843
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10076873299999534
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 29,
+        "client": {
+          "request_id": "817c02ce721e4488be6c7496022b504c",
+          "ttft_s": 0.1621639300001334,
+          "e2e_s": 0.22808352300012302,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009417084714284232,
+          "output_tokens_per_s": 35.0748703578894
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10846412999990207,
+          "prefill_s": 0.02066376100015077,
+          "decode_s": 0.06957774199986488,
+          "inference_s": 0.09024150300001565,
+          "e2e_s": 0.22077298164367676,
+          "ttft_s": 0.15148544311523438,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0025490000000445434
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09676465200004714
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 30,
+        "client": {
+          "request_id": "34b2524bd32f4bcc9cb1da33fb0c02e2",
+          "ttft_s": 0.15626449199999115,
+          "e2e_s": 0.22236693300010302,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009443205857158838,
+          "output_tokens_per_s": 35.97657211019003
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11030865599991557,
+          "prefill_s": 0.02231654599995636,
+          "decode_s": 0.06960636500002693,
+          "inference_s": 0.09192291099998329,
+          "e2e_s": 0.21555852890014648,
+          "ttft_s": 0.1461019515991211,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002404584000032628
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09765336400005253
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 31,
+        "client": {
+          "request_id": "b7f4ece7fe6b4b80a183165fade19f6d",
+          "ttft_s": 0.15326693300016814,
+          "e2e_s": 0.22102535299995907,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00967977428568442,
+          "output_tokens_per_s": 36.19494275845125
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11112853899999209,
+          "prefill_s": 0.019197453000060705,
+          "decode_s": 0.06962459900000795,
+          "inference_s": 0.08882205200006865,
+          "e2e_s": 0.21579408645629883,
+          "ttft_s": 0.14652013778686523,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.001611945999911768
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10101041699999769
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 32,
+        "client": {
+          "request_id": "ff8e551da5d8433bb7e4204f15acb942",
+          "ttft_s": 0.16275812999992922,
+          "e2e_s": 0.2300793459999113,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009617316571426013,
+          "output_tokens_per_s": 34.77061343873554
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10476620999997976,
+          "prefill_s": 0.02161337799998364,
+          "decode_s": 0.0695046559999355,
+          "inference_s": 0.09111803399991913,
+          "e2e_s": 0.22424674034118652,
+          "ttft_s": 0.1552753448486328,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0024989519999962795
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09353050799995799
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 33,
+        "client": {
+          "request_id": "c25bf9c39c7e49bfac2391f752188bc6",
+          "ttft_s": 0.17300904099988657,
+          "e2e_s": 0.2388553169998886,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009406610857143147,
+          "output_tokens_per_s": 33.49307899226598
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10963538700002573,
+          "prefill_s": 0.021570289000010234,
+          "decode_s": 0.06968480099999397,
+          "inference_s": 0.0912550900000042,
+          "e2e_s": 0.23165249824523926,
+          "ttft_s": 0.16251564025878906,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0023593649998474575
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09617640499982372
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 34,
+        "client": {
+          "request_id": "227317d441d146599e9ebd04b80fdea8",
+          "ttft_s": 0.1701664479999181,
+          "e2e_s": 0.236990262000063,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009546259142877846,
+          "output_tokens_per_s": 33.756661275803275
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11052380899991476,
+          "prefill_s": 0.021578880000106437,
+          "decode_s": 0.06964286700008415,
+          "inference_s": 0.09122174700019059,
+          "e2e_s": 0.22961878776550293,
+          "ttft_s": 0.16004562377929688,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002172080999798709
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09530772499988416
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 35,
+        "client": {
+          "request_id": "616d114844ae4a17a097d3d86c1a60ce",
+          "ttft_s": 0.15611499200008438,
+          "e2e_s": 0.2226575069998944,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.00950607357140143,
+          "output_tokens_per_s": 35.92962172168664
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10805341299987958,
+          "prefill_s": 0.021599331000061284,
+          "decode_s": 0.06963963099997272,
+          "inference_s": 0.09123896200003401,
+          "e2e_s": 0.21497726440429688,
+          "ttft_s": 0.14553570747375488,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0015704570000707463
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09457706099988172
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 36,
+        "client": {
+          "request_id": "d314288c4a3849d4b8ff3f6f596e16c4",
+          "ttft_s": 0.1541880540000875,
+          "e2e_s": 0.22278768700016371,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009799947571439458,
+          "output_tokens_per_s": 35.908627212392226
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10293144899992512,
+          "prefill_s": 0.018969843999911973,
+          "decode_s": 0.06947837899997467,
+          "inference_s": 0.08844822299988664,
+          "e2e_s": 0.21472573280334473,
+          "ttft_s": 0.14537930488586426,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0016632449999178789
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09185875999992277
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 37,
+        "client": {
+          "request_id": "6402ba0c7e28466eb9bd117e1595211b",
+          "ttft_s": 0.15781936500002303,
+          "e2e_s": 0.2255215220000082,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009671736714283594,
+          "output_tokens_per_s": 35.47333278461871
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10562632500000291,
+          "prefill_s": 0.021632211999985884,
+          "decode_s": 0.06963307499995608,
+          "inference_s": 0.09126528699994196,
+          "e2e_s": 0.21998381614685059,
+          "ttft_s": 0.15052175521850586,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0017654119999406248
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.0921102830000109
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 38,
+        "client": {
+          "request_id": "b3e054ce9bf1474594276cccc64f719a",
+          "ttft_s": 0.1552664729999833,
+          "e2e_s": 0.22357755799998813,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009758726428572118,
+          "output_tokens_per_s": 35.781766611836886
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10978808799995932,
+          "prefill_s": 0.02164829200000895,
+          "decode_s": 0.06969594699990012,
+          "inference_s": 0.09134423899990907,
+          "e2e_s": 0.21599984169006348,
+          "ttft_s": 0.14648914337158203,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002113402000077258
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09601088199997321
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 39,
+        "client": {
+          "request_id": "376841cf53fd49aca8405e296aacaefb",
+          "ttft_s": 0.16316903799997817,
+          "e2e_s": 0.2286222440000074,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009350458000004178,
+          "output_tokens_per_s": 34.992220616991844
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10928174799983026,
+          "prefill_s": 0.0191621500000565,
+          "decode_s": 0.06951747700009037,
+          "inference_s": 0.08867962700014687,
+          "e2e_s": 0.2199687957763672,
+          "ttft_s": 0.15068650245666504,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0021186630001466256
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09680023700002494
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 40,
+        "client": {
+          "request_id": "d4994dbf72054ddd8f838d84ba931daf",
+          "ttft_s": 0.16453358999979173,
+          "e2e_s": 0.23299494799994136,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009780194000021376,
+          "output_tokens_per_s": 34.33550842485226
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.10918405799998254,
+          "prefill_s": 0.019712296000079732,
+          "decode_s": 0.06988015000001724,
+          "inference_s": 0.08959244600009697,
+          "e2e_s": 0.22547364234924316,
+          "ttft_s": 0.1558220386505127,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002100853999991159
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09828879099995902
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "revisit",
+        "doc_id": 41,
+        "client": {
+          "request_id": "eda15e9891d0423eba03748fa7d2e541",
+          "ttft_s": 0.18451305999997203,
+          "e2e_s": 0.24979422600017642,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009325880857172055,
+          "output_tokens_per_s": 32.02636076942127
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11913332800008902,
+          "prefill_s": 0.021958175999998275,
+          "decode_s": 0.06976181499999257,
+          "inference_s": 0.09171999099999084,
+          "e2e_s": 0.24175071716308594,
+          "ttft_s": 0.17251300811767578,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0020908639999106526
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10450207400003819
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 42,
+        "client": {
+          "request_id": "449fa3a0ea9847c7a9e34265bdf3d955",
+          "ttft_s": 0.17727982600013092,
+          "e2e_s": 0.24599593100015227,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009816586428574478,
+          "output_tokens_per_s": 32.520863119459676
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.1206448839998302,
+          "prefill_s": 0.02180384200005392,
+          "decode_s": 0.06973723800001608,
+          "inference_s": 0.09154108000007,
+          "e2e_s": 0.23820185661315918,
+          "ttft_s": 0.16881728172302246,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0016323760000886978
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10711380899988399
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 43,
+        "client": {
+          "request_id": "f1d7b30f1652411fb0aa27c2a79237eb",
+          "ttft_s": 0.17061964499998794,
+          "e2e_s": 0.23662777699996695,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009429733142854144,
+          "output_tokens_per_s": 33.808372378873834
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.118359651999981,
+          "prefill_s": 0.022094834999961677,
+          "decode_s": 0.06959176600003047,
+          "inference_s": 0.09168660099999215,
+          "e2e_s": 0.22803330421447754,
+          "ttft_s": 0.1585407257080078,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0019081289999576256
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10293706800007385
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 44,
+        "client": {
+          "request_id": "c899cdab477b46208f0eb6cc3187545b",
+          "ttft_s": 0.1829977529998814,
+          "e2e_s": 0.24848807199987277,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009355759857141623,
+          "output_tokens_per_s": 32.194704299545194
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11839895799994338,
+          "prefill_s": 0.021896430999959193,
+          "decode_s": 0.0697157669999342,
+          "inference_s": 0.0916121979998934,
+          "e2e_s": 0.2402658462524414,
+          "ttft_s": 0.1710667610168457,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.002002586000116935
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10398567500010358
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 45,
+        "client": {
+          "request_id": "39a9fc8926c445e1987e9db802a5624e",
+          "ttft_s": 0.17892460300004132,
+          "e2e_s": 0.24400143799994112,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.0092966907142714,
+          "output_tokens_per_s": 32.78669201942134
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11450864299990826,
+          "prefill_s": 0.022024429000111923,
+          "decode_s": 0.06972159999986616,
+          "inference_s": 0.09174602899997808,
+          "e2e_s": 0.23700332641601562,
+          "ttft_s": 0.1675093173980713,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0021483320001607353
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.1019969989999936
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 46,
+        "client": {
+          "request_id": "7b957c756a174888993c2cb555c6135f",
+          "ttft_s": 0.16661101199997574,
+          "e2e_s": 0.2330618900000445,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009492982571438395,
+          "output_tokens_per_s": 34.32564629077054
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5933.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.11922590200015293,
+          "prefill_s": 0.020904749999999694,
+          "decode_s": 0.06983777699997518,
+          "inference_s": 0.09074252699997487,
+          "e2e_s": 0.22558307647705078,
+          "ttft_s": 0.15566611289978027,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0015929370001686038
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.10567979500001456
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689527651706169,
+        "mooncake_hit_ratio": 0.9951252311312826
+      },
+      {
+        "round": "revisit",
+        "doc_id": 47,
+        "client": {
+          "request_id": "23a03a299ee54386bb72b9bade319dd3",
+          "ttft_s": 0.17122872799996003,
+          "e2e_s": 0.23646107200011102,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009318906285735855,
+          "output_tokens_per_s": 33.83220727340796
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 16.0,
+          "external_prefix_cache_queries": 5934.0,
+          "external_prefix_cache_hits": 5920.0,
+          "queue_s": 0.110633739999912,
+          "prefill_s": 0.021843775000206733,
+          "decode_s": 0.06941443199980313,
+          "inference_s": 0.09125820700000986,
+          "e2e_s": 0.2277834415435791,
+          "ttft_s": 0.15888047218322754,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0017854119998901297
+            },
+            "load_get": {
+              "calls": 1.0,
+              "bytes": 339476480.0,
+              "time_s": 0.09893582199993034
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.002689075630252101,
+        "mooncake_hit_ratio": 0.9949579831932773
+      },
+      {
+        "round": "hot",
+        "doc_id": 43,
+        "client": {
+          "request_id": "eb0adf71da4f411db5f40598fc358db2",
+          "ttft_s": 0.05353671000011673,
+          "e2e_s": 0.11955444699992768,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009431105285687278,
+          "output_tokens_per_s": 66.91511859868199
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 5936.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 2.2959000034461496e-05,
+          "prefill_s": 0.024759778999850823,
+          "decode_s": 0.06979721600009725,
+          "inference_s": 0.09455699499994807,
+          "e2e_s": 0.10993552207946777,
+          "ttft_s": 0.04057884216308594,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008079679998900247
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.9978147587829888,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "hot",
+        "doc_id": 44,
+        "client": {
+          "request_id": "f39dff3472144ea3baa04c9a62b8efa0",
+          "ttft_s": 0.0546544599999379,
+          "e2e_s": 0.12033244600002035,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009382569428583207,
+          "output_tokens_per_s": 66.48248469908646
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 5936.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.0828999797449796e-05,
+          "prefill_s": 0.02668853700015461,
+          "decode_s": 0.06960987100001148,
+          "inference_s": 0.09629840800016609,
+          "e2e_s": 0.11217164993286133,
+          "ttft_s": 0.043325185775756836,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008273880000615463
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.9978147587829888,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "hot",
+        "doc_id": 45,
+        "client": {
+          "request_id": "1dc00a52afbc4abebfbed86a2a631900",
+          "ttft_s": 0.05454338699996697,
+          "e2e_s": 0.12328753499991763,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009820592571421522,
+          "output_tokens_per_s": 64.8889605912337
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 5936.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.524900012052967e-05,
+          "prefill_s": 0.0275576959998034,
+          "decode_s": 0.06986599800006843,
+          "inference_s": 0.09742369399987183,
+          "e2e_s": 0.11530137062072754,
+          "ttft_s": 0.04566621780395508,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0008696570000665815
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.9978147587829888,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "hot",
+        "doc_id": 46,
+        "client": {
+          "request_id": "eb4e436a91134185996839c3d6c031c4",
+          "ttft_s": 0.05506891499999256,
+          "e2e_s": 0.12232633700000406,
+          "prompt_tokens": 5949,
+          "output_tokens": 8,
+          "itl_s": 0.009608203142858786,
+          "output_tokens_per_s": 65.39883557536538
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5949.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5949.0,
+          "prefix_cache_hits": 5936.0,
+          "external_prefix_cache_queries": 13.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 5.85880000016914e-05,
+          "prefill_s": 0.02813867100007883,
+          "decode_s": 0.06952646099989579,
+          "inference_s": 0.09766513199997462,
+          "e2e_s": 0.11478757858276367,
+          "ttft_s": 0.0462794303894043,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.0007787499998812564
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.9978147587829888,
+        "mooncake_hit_ratio": 0.0
+      },
+      {
+        "round": "hot",
+        "doc_id": 47,
+        "client": {
+          "request_id": "1598fc4b822c4353959e6a1ab77e0025",
+          "ttft_s": 0.06216087699999662,
+          "e2e_s": 0.13122083000007478,
+          "prompt_tokens": 5950,
+          "output_tokens": 8,
+          "itl_s": 0.009865707571439739,
+          "output_tokens_per_s": 60.96593048523958
+        },
+        "engine": {
+          "requests": 1.0,
+          "prompt_tokens": 5950.0,
+          "generation_tokens": 8.0,
+          "preemptions": 0.0,
+          "prefix_cache_queries": 5950.0,
+          "prefix_cache_hits": 5936.0,
+          "external_prefix_cache_queries": 14.0,
+          "external_prefix_cache_hits": 0.0,
+          "queue_s": 3.151900000375463e-05,
+          "prefill_s": 0.028940120000015668,
+          "decode_s": 0.06966993700007151,
+          "inference_s": 0.09861005700008718,
+          "e2e_s": 0.12344980239868164,
+          "ttft_s": 0.05421042442321777,
+          "requests_observed": 1.0,
+          "mooncake": {
+            "save_put": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            },
+            "save_exists": {
+              "calls": 1.0,
+              "bytes": 0.0,
+              "time_s": 0.001639896999904522
+            },
+            "load_get": {
+              "calls": 0.0,
+              "bytes": 0.0,
+              "time_s": 0.0
+            }
+          }
+        },
+        "gpu_hit_ratio": 0.9976470588235294,
+        "mooncake_hit_ratio": 0.0
+      }
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "a56890269fdef68d6a5f81462edcb67d9cf2fc7a",
+    "git_dirty": true
+  },
+  "notes": ""
+}
