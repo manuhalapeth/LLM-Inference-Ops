@@ -1,0 +1,223 @@
+{
+  "run_id": "20261005T154220Z_load_sweep_lb_least_conn",
+  "phase": "06_scaling_out",
+  "name": "load_sweep_lb_least_conn",
+  "timestamp": "2026-10-05T15:42:20.018847+00:00",
+  "config": {
+    "label": "lb_least_conn",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:v0.30.0",
+    "vllm_config": "baseline",
+    "topology": "2x tp1 tune_fp8_weights lb=least_conn",
+    "load_mode": "sessions",
+    "gateway_workers": "8"
+  },
+  "load": {
+    "start": 1791214841.5794144,
+    "steps": [
+      256,
+      512
+    ],
+    "step_seconds": 45,
+    "category_weights": {
+      "short_qa": 0.35,
+      "multi_turn": 0.25,
+      "summarization": 0.25,
+      "long_generation": 0.15
+    },
+    "warmup_s": 10.0,
+    "closed_loop": true
+  },
+  "metrics": {
+    "steps": [
+      {
+        "users": 256,
+        "window": [
+          1791214851.5794144,
+          1791214886.5794144
+        ],
+        "requests": 3359,
+        "errors": 0,
+        "error_rate": 0.0,
+        "requests_per_s": 95.97142857142858,
+        "ttft_s": {
+          "count": 3359,
+          "p50": 0.3260724750002737,
+          "p95": 0.5724162120000074,
+          "p99": 0.7141042419998485,
+          "max": 0.942740029000106
+        },
+        "e2e_s": {
+          "count": 3359,
+          "p50": 2.09139820099972,
+          "p95": 7.006362093999996,
+          "p99": 10.257584719000079,
+          "max": 13.709242918999735
+        },
+        "itl_s": {
+          "count": 3359,
+          "p50": 0.02627697240541238,
+          "p95": 0.04071428961538587,
+          "p99": 0.054840200619567084,
+          "max": 0.08717820259091075
+        },
+        "by_category": {
+          "session_follow_up": {
+            "requests": 2771,
+            "ttft_p95_s": 0.563379181000073,
+            "e2e_p95_s": 3.947633585999938
+          },
+          "session_open": {
+            "requests": 588,
+            "ttft_p95_s": 0.6072434630000316,
+            "e2e_p95_s": 10.985409080999943
+          }
+        },
+        "server": {
+          "running": {
+            "avg": 222.75,
+            "max": 246.0
+          },
+          "waiting": {
+            "avg": 4.5,
+            "max": 13.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.5830059788516652,
+            "max": 0.7226010475343413
+          },
+          "preemptions": 0.0,
+          "output_tokens_per_s": 8562.885714285714,
+          "prompt_tokens_per_s": 88265.74285714286,
+          "gpu_utilization": {
+            "avg": 1.0,
+            "max": 1.0
+          },
+          "gpu_power_w": {
+            "avg": 599.42625,
+            "max": 604.98
+          },
+          "gpu_memory_bytes": {
+            "avg": 29736566784.0,
+            "max": 29736566784.0
+          },
+          "prefix_cache_hit_rate": 0.7149186921006048,
+          "external_cache_hit_rate": 0.0,
+          "running_per_replica": {
+            "vllm-0": 78.25,
+            "vllm-1": 77.66666666666667
+          }
+        }
+      },
+      {
+        "users": 512,
+        "window": [
+          1791214896.5794144,
+          1791214931.5794144
+        ],
+        "requests": 2174,
+        "errors": 0,
+        "error_rate": 0.0,
+        "requests_per_s": 62.114285714285714,
+        "ttft_s": {
+          "count": 2174,
+          "p50": 0.4929131819999384,
+          "p95": 1.2070832230001542,
+          "p99": 1.3662565109998468,
+          "max": 1.572290532000352
+        },
+        "e2e_s": {
+          "count": 2174,
+          "p50": 5.0453836030001185,
+          "p95": 12.389215528000022,
+          "p99": 19.293065995000234,
+          "max": 22.968854531000034
+        },
+        "itl_s": {
+          "count": 2174,
+          "p50": 0.08250704396427214,
+          "p95": 0.10200104820000383,
+          "p99": 0.10411632283673071,
+          "max": 0.11233788055881846
+        },
+        "by_category": {
+          "session_follow_up": {
+            "requests": 2078,
+            "ttft_p95_s": 1.2030785000001742,
+            "e2e_p95_s": 10.867808222999884
+          },
+          "session_open": {
+            "requests": 96,
+            "ttft_p95_s": 1.3601362139997946,
+            "e2e_p95_s": 22.64517466799998
+          }
+        },
+        "server": {
+          "running": {
+            "avg": 485.375,
+            "max": 506.0
+          },
+          "waiting": {
+            "avg": 6.125,
+            "max": 31.0
+          },
+          "kv_cache_usage": {
+            "avg": 1.2915616661725466,
+            "max": 1.4851764008301216
+          },
+          "preemptions": 0.0,
+          "output_tokens_per_s": 6856.228571428572,
+          "prompt_tokens_per_s": 67009.34285714285,
+          "gpu_utilization": {
+            "avg": 0.99625,
+            "max": 1.0
+          },
+          "gpu_power_w": {
+            "avg": 602.225,
+            "max": 608.29
+          },
+          "gpu_memory_bytes": {
+            "avg": 29736566784.0,
+            "max": 29736566784.0
+          },
+          "prefix_cache_hit_rate": 0.6752376410257722,
+          "external_cache_hit_rate": 0.0,
+          "running_per_replica": {
+            "vllm-0": 205.33333333333334,
+            "vllm-1": 198.0
+          }
+        }
+      }
+    ],
+    "breaking_points": {
+      "requests_queue": 256,
+      "kv_cache_95pct": 512,
+      "preemptions": null,
+      "ttft_p95_over_slo": 512,
+      "errors_over_1pct": null,
+      "peak_throughput_users": 256,
+      "peak_output_tokens_per_s": 8562.885714285714,
+      "ttft_slo_s": 1.0
+    },
+    "total_requests": 7280
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "5a4c7b613c364b0ff9a7479466a407bac064fd29",
+    "git_dirty": true
+  },
+  "notes": ""
+}

@@ -1,0 +1,86 @@
+time="2026-10-05T16:23:10Z" level=warning msg="Found orphan containers ([llm-inference-ops-vllm-1-1 llm-inference-ops-vllm-0-1 llm-inference-ops-mooncake-master-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-10-05 16:23:11,301] 6755daea68a8/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 16:23:11,333] 6755daea68a8/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 16:23:11,354] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6608ff4b1db34e57a52ffe78cf6fe66c (index 0) reported as ready. 1 workers connected.
+[2026-10-05 16:23:11,354] 6755daea68a8/INFO/locust.runners: 6755daea68a8_0452d54561da47bd92c793012298d0d6 (index 1) reported as ready. 2 workers connected.
+[2026-10-05 16:23:11,354] 6755daea68a8/INFO/locust.runners: 6755daea68a8_fa7d7cfbb5564ebfbd0316aa19682a1f (index 2) reported as ready. 3 workers connected.
+[2026-10-05 16:23:11,354] 6755daea68a8/INFO/locust.runners: 6755daea68a8_950abbdbe66844ca8d53e07d67d108e3 (index 3) reported as ready. 4 workers connected.
+[2026-10-05 16:23:11,355] 6755daea68a8/INFO/locust.runners: 6755daea68a8_67c94687a6364a17add9d07bbd030c6f (index 4) reported as ready. 5 workers connected.
+[2026-10-05 16:23:11,355] 6755daea68a8/INFO/locust.runners: 6755daea68a8_ce581b46c7eb424b86c6f3ec243f2afe (index 5) reported as ready. 6 workers connected.
+[2026-10-05 16:23:11,355] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6c3a80b160b44ff18f47b5dafa02997b (index 6) reported as ready. 7 workers connected.
+[2026-10-05 16:23:11,355] 6755daea68a8/INFO/locust.runners: 6755daea68a8_83c9cb9902574be3a62ce70938c2098a (index 7) reported as ready. 8 workers connected.
+[2026-10-05 16:23:12,355] 6755daea68a8/INFO/locust.runners: Shape test starting.
+[2026-10-05 16:23:12,356] 6755daea68a8/INFO/locust.runners: Shape worker starting
+[2026-10-05 16:23:12,356] 6755daea68a8/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 16:23:12,356] 6755daea68a8/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 16:23:12,498] 6755daea68a8/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 16:23:57,390] 6755daea68a8/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-05 16:23:57,390] 6755daea68a8/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-05 16:23:57,548] 6755daea68a8/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-05 16:24:42,429] 6755daea68a8/INFO/locust.runners: Shape test stopping
+[2026-10-05 16:24:42,533] 6755daea68a8/INFO/locust.runners: 6755daea68a8_0452d54561da47bd92c793012298d0d6 (index 1) reported that it has stopped
+[2026-10-05 16:24:42,533] 6755daea68a8/INFO/locust.runners: 6755daea68a8_0452d54561da47bd92c793012298d0d6 (index 1) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,534] 6755daea68a8/INFO/locust.runners: 6755daea68a8_67c94687a6364a17add9d07bbd030c6f (index 4) reported that it has stopped
+[2026-10-05 16:24:42,535] 6755daea68a8/INFO/locust.runners: 6755daea68a8_67c94687a6364a17add9d07bbd030c6f (index 4) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,547] 6755daea68a8/INFO/locust.runners: 6755daea68a8_83c9cb9902574be3a62ce70938c2098a (index 7) reported that it has stopped
+[2026-10-05 16:24:42,547] 6755daea68a8/INFO/locust.runners: 6755daea68a8_83c9cb9902574be3a62ce70938c2098a (index 7) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,550] 6755daea68a8/INFO/locust.runners: 6755daea68a8_950abbdbe66844ca8d53e07d67d108e3 (index 3) reported that it has stopped
+[2026-10-05 16:24:42,550] 6755daea68a8/INFO/locust.runners: 6755daea68a8_950abbdbe66844ca8d53e07d67d108e3 (index 3) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,551] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6608ff4b1db34e57a52ffe78cf6fe66c (index 0) reported that it has stopped
+[2026-10-05 16:24:42,551] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6608ff4b1db34e57a52ffe78cf6fe66c (index 0) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,553] 6755daea68a8/INFO/locust.runners: 6755daea68a8_fa7d7cfbb5564ebfbd0316aa19682a1f (index 2) reported that it has stopped
+[2026-10-05 16:24:42,553] 6755daea68a8/INFO/locust.runners: 6755daea68a8_fa7d7cfbb5564ebfbd0316aa19682a1f (index 2) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,556] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6c3a80b160b44ff18f47b5dafa02997b (index 6) reported that it has stopped
+[2026-10-05 16:24:42,556] 6755daea68a8/INFO/locust.runners: 6755daea68a8_6c3a80b160b44ff18f47b5dafa02997b (index 6) reported as ready. 8 workers connected.
+[2026-10-05 16:24:42,592] 6755daea68a8/INFO/locust.runners: 6755daea68a8_ce581b46c7eb424b86c6f3ec243f2afe (index 5) reported that it has stopped
+[2026-10-05 16:24:42,593] 6755daea68a8/INFO/locust.runners: 6755daea68a8_ce581b46c7eb424b86c6f3ec243f2afe (index 5) reported as ready. 8 workers connected.
+[2026-10-05 16:24:43,432] 6755daea68a8/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 16:24:48,434] 6755daea68a8/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 16:24:48,435] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,435] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,435] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,435] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,435] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,436] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,437] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,436] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,437] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,437] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,437] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,438] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,438] 6755daea68a8/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 16:24:48,438] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,439] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,439] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 16:24:48,441] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_6608ff4b1db34e57a52ffe78cf6fe66c' (index 0) quit. 7 workers ready.
+[2026-10-05 16:24:48,441] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_67c94687a6364a17add9d07bbd030c6f' (index 4) quit. 6 workers ready.
+[2026-10-05 16:24:48,442] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_83c9cb9902574be3a62ce70938c2098a' (index 7) quit. 5 workers ready.
+[2026-10-05 16:24:48,442] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_950abbdbe66844ca8d53e07d67d108e3' (index 3) quit. 4 workers ready.
+[2026-10-05 16:24:48,442] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_0452d54561da47bd92c793012298d0d6' (index 1) quit. 3 workers ready.
+[2026-10-05 16:24:48,444] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_fa7d7cfbb5564ebfbd0316aa19682a1f' (index 2) quit. 2 workers ready.
+[2026-10-05 16:24:48,444] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_6c3a80b160b44ff18f47b5dafa02997b' (index 6) quit. 1 workers ready.
+[2026-10-05 16:24:48,444] 6755daea68a8/INFO/locust.runners: Worker '6755daea68a8_ce581b46c7eb424b86c6f3ec243f2afe' (index 5) quit. 0 workers ready.
+[2026-10-05 16:24:48,445] 6755daea68a8/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 16:24:49,533] 6755daea68a8/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    session_follow_up                                                               1559     0(0.00%) |   7857     426   39107   4200 |   17.31        0.00
+TTFT     session_follow_up                                                               1559     0(0.00%) |   4386      68   36657    340 |   17.31        0.00
+TOTAL    session_open                                                                     647     0(0.00%) |  18351    2674   44875  15000 |    7.18        0.00
+TTFT     session_open                                                                     647     0(0.00%) |  10987      72   38874   3400 |    7.18        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                      4412     0(0.00%) |   8628      68   44875   2800 |   48.99        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    session_follow_up                                                                    4200   6400   8300  11000  27000  30000  34000  36000  37000  39000  39000   1559
+TTFT     session_follow_up                                                                     340    470    780   1600  26000  29000  33000  35000  36000  37000  37000   1559
+TOTAL    session_open                                                                        15000  22000  28000  31000  39000  42000  44000  44000  45000  45000  45000    647
+TTFT     session_open                                                                         3400  14000  24000  27000  34000  35000  36000  37000  39000  39000  39000    647
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           2800   7000  12000  18000  29000  34000  37000  41000  45000  45000  45000   4412
+

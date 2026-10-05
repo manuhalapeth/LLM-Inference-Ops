@@ -1,0 +1,223 @@
+{
+  "run_id": "20261005T154018Z_load_sweep_lb_round_robin",
+  "phase": "06_scaling_out",
+  "name": "load_sweep_lb_round_robin",
+  "timestamp": "2026-10-05T15:40:18.966320+00:00",
+  "config": {
+    "label": "lb_round_robin",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "vllm_image": "vllm/vllm-openai:v0.30.0",
+    "vllm_config": "baseline",
+    "topology": "2x tp1 tune_fp8_weights lb=round_robin",
+    "load_mode": "sessions",
+    "gateway_workers": "8"
+  },
+  "load": {
+    "start": 1791214720.1989346,
+    "steps": [
+      256,
+      512
+    ],
+    "step_seconds": 45,
+    "category_weights": {
+      "short_qa": 0.35,
+      "multi_turn": 0.25,
+      "summarization": 0.25,
+      "long_generation": 0.15
+    },
+    "warmup_s": 10.0,
+    "closed_loop": true
+  },
+  "metrics": {
+    "steps": [
+      {
+        "users": 256,
+        "window": [
+          1791214730.1989346,
+          1791214765.1989346
+        ],
+        "requests": 2710,
+        "errors": 0,
+        "error_rate": 0.0,
+        "requests_per_s": 77.42857142857143,
+        "ttft_s": {
+          "count": 2710,
+          "p50": 0.2245455820002462,
+          "p95": 0.623128577999978,
+          "p99": 0.7576851580001858,
+          "max": 1.4429466499996124
+        },
+        "e2e_s": {
+          "count": 2710,
+          "p50": 2.4361408019999544,
+          "p95": 10.402871599999798,
+          "p99": 15.543108448000112,
+          "max": 17.730794097999933
+        },
+        "itl_s": {
+          "count": 2710,
+          "p50": 0.030740563484841638,
+          "p95": 0.08297612283720725,
+          "p99": 0.09453366441999606,
+          "max": 0.10281376500001392
+        },
+        "by_category": {
+          "session_follow_up": {
+            "requests": 2271,
+            "ttft_p95_s": 0.6234989620002125,
+            "e2e_p95_s": 7.354259958000057
+          },
+          "session_open": {
+            "requests": 439,
+            "ttft_p95_s": 0.6185043220002626,
+            "e2e_p95_s": 15.683868642000107
+          }
+        },
+        "server": {
+          "running": {
+            "avg": 237.625,
+            "max": 251.0
+          },
+          "waiting": {
+            "avg": 6.5,
+            "max": 43.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.6323870935863227,
+            "max": 0.717313963830418
+          },
+          "preemptions": 0.0,
+          "output_tokens_per_s": 6400.542857142857,
+          "prompt_tokens_per_s": 68478.54285714286,
+          "gpu_utilization": {
+            "avg": 0.9962500000000001,
+            "max": 1.0
+          },
+          "gpu_power_w": {
+            "avg": 600.3275,
+            "max": 607.73
+          },
+          "gpu_memory_bytes": {
+            "avg": 29736566784.0,
+            "max": 29736566784.0
+          },
+          "prefix_cache_hit_rate": 0.6861505937199918,
+          "external_cache_hit_rate": 0.0,
+          "running_per_replica": {
+            "vllm-0": 85.25,
+            "vllm-1": 90.75
+          }
+        }
+      },
+      {
+        "users": 512,
+        "window": [
+          1791214775.1989346,
+          1791214810.1989346
+        ],
+        "requests": 1711,
+        "errors": 0,
+        "error_rate": 0.0,
+        "requests_per_s": 48.885714285714286,
+        "ttft_s": {
+          "count": 1711,
+          "p50": 0.256203930999618,
+          "p95": 11.812971855999876,
+          "p99": 13.402066329999798,
+          "max": 13.930037397999968
+        },
+        "e2e_s": {
+          "count": 1711,
+          "p50": 2.0818329369999446,
+          "p95": 18.927200708000328,
+          "p99": 22.63706581999986,
+          "max": 30.012799046000055
+        },
+        "itl_s": {
+          "count": 1711,
+          "p50": 0.024898921921568198,
+          "p95": 0.1018947824571504,
+          "p99": 0.10380172080000799,
+          "max": 0.10830745719048147
+        },
+        "by_category": {
+          "session_follow_up": {
+            "requests": 1589,
+            "ttft_p95_s": 11.923382332000074,
+            "e2e_p95_s": 18.649555340999996
+          },
+          "session_open": {
+            "requests": 122,
+            "ttft_p95_s": 2.444509677000042,
+            "e2e_p95_s": 27.434175919000154
+          }
+        },
+        "server": {
+          "running": {
+            "avg": 293.625,
+            "max": 477.0
+          },
+          "waiting": {
+            "avg": 208.375,
+            "max": 310.0
+          },
+          "kv_cache_usage": {
+            "avg": 0.7373134697104458,
+            "max": 1.079750963533946
+          },
+          "preemptions": 0.0,
+          "output_tokens_per_s": 5389.542857142857,
+          "prompt_tokens_per_s": 49172.65714285714,
+          "gpu_utilization": {
+            "avg": 1.0,
+            "max": 1.0
+          },
+          "gpu_power_w": {
+            "avg": 599.5625,
+            "max": 600.5
+          },
+          "gpu_memory_bytes": {
+            "avg": 29736566784.0,
+            "max": 29736566784.0
+          },
+          "prefix_cache_hit_rate": 0.48173288290542293,
+          "external_cache_hit_rate": 0.0,
+          "running_per_replica": {
+            "vllm-0": 192.66666666666666,
+            "vllm-1": 92.08333333333333
+          }
+        }
+      }
+    ],
+    "breaking_points": {
+      "requests_queue": 256,
+      "kv_cache_95pct": 512,
+      "preemptions": null,
+      "ttft_p95_over_slo": 512,
+      "errors_over_1pct": null,
+      "peak_throughput_users": 256,
+      "peak_output_tokens_per_s": 6400.542857142857,
+      "ttft_slo_s": 1.0
+    },
+    "total_requests": 5798
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "5a4c7b613c364b0ff9a7479466a407bac064fd29",
+    "git_dirty": true
+  },
+  "notes": ""
+}

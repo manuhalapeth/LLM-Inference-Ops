@@ -76,6 +76,8 @@ def build(args) -> tuple[dict, str, list, dict]:
     services, backends = {}, []
     image = MOONCAKE_IMAGE if (args.mooncake_store or args.pd) else VLLM_IMAGE
 
+    if args.mooncake_store and args.config == "tune_fp8_weights":
+        args.config = "fp8_weights_mooncake_store"  # same engine settings plus the Mooncake connector
     if args.pd:
         n_prefill, n_decode = (int(x) for x in args.pd.split(","))
         names = [f"vllm-prefill-{i}" for i in range(n_prefill)] + [f"vllm-decode-{i}" for i in range(n_decode)]
@@ -130,8 +132,13 @@ def build(args) -> tuple[dict, str, list, dict]:
         "upstream vllm_backends {",
         "    zone vllm_backends 64k;",
         *([f"    {LB_METHODS[args.lb]}"] if LB_METHODS[args.lb] else []),
-        *[f"    server {b}:8000 resolve max_fails=1 fail_timeout=5s;" for b in backends],
+        # A server is benched after 3 failed requests in 10 s. (With max_fails=1, two
+        # stale connection resets under load benched BOTH servers: see Phase 6.)
+        *[f"    server {b}:8000 resolve max_fails=3 fail_timeout=10s;" for b in backends],
         "    keepalive 64;",
+        # vLLM's web server drops idle connections after 5 s; close them first, so
+        # NGINX never reuses a connection vLLM has already closed.
+        "    keepalive_timeout 4s;",
         "}",
         "",
     ])

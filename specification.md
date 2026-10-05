@@ -614,3 +614,102 @@ FP8 weights passed exactly the cases the baseline passed. The FP8 KV cache answe
 ### Phase 5 takeaway
 
 The GPU spends three quarters of its time multiplying by the model weights, so halving the weights' size with FP8 is the one change that matters: +50% throughput and 31% lower cost per token, with answers as good as BF16. The FP8 KV cache and the combined config looked even faster (+22%, +99%) but got arithmetic, unit conversions and JSON wrong; without the eval set, the broken config would have looked like the answer. Raising the sequence cap mostly trades queueing for slower streaming; batched tokens, prefix caching and n-gram speculation didn't help this traffic.
+
+---
+
+## Phase 6: Scaling out
+
+### Hardware
+
+| | |
+|---|---|
+| Provider | Vast.ai, verified host, on demand |
+| Location | Estonia (host 229807, machine 148403) |
+| Host reliability | 99.62% |
+| GPUs | **2×** NVIDIA GeForce RTX 5090, 32 GB each (no 4-GPU VM machine was available) |
+| GPU interconnect | PCIe 4.0 ×16 through the host bridge (`nvidia-smi topo`: PHB), **peer-to-peer not supported**, no NVLink |
+| GPU driver / max CUDA | 580.95.05 / 13.0 |
+| CPU | AMD EPYC 7452 (32 cores), 36.6 of 128 vCPUs allocated |
+| System RAM | 147 GB (113 GB visible in the VM) |
+| Disk | 130 GB NVMe |
+| Price | $1.190/hr for the machine (both GPUs) |
+
+### Software
+
+| | |
+|---|---|
+| Model / engine | Qwen/Qwen2.5-7B-Instruct, vLLM 0.30.0, **FP8 weights** (Phase 5 recommended) on every server |
+| Setups | `scripts/topology.py`: N copies, tensor parallel, NGINX balancing method, Mooncake store, prefill/decode split |
+| Gateway | 8 worker processes (merged Prometheus metrics) |
+| NGINX | 1.27.5; after the incident below: `max_fails=3 fail_timeout=10s`, `keepalive_timeout 4s` |
+| Load | Phase 4 mix (users scaled with the number of copies), and a new conversation mode (6 turns per user on a long document) |
+| Code version | git `5a4c7b6` plus the NGINX and Mooncake config fixes made during the session |
+
+### Time and money
+
+| | |
+|---|---|
+| Session | 1 h 52 min (including a restart after the NGINX incident and a Mooncake config fix) |
+| Credit used | ~$2.20 ($18.64 → $16.52 at 1 h 52 min) |
+| Credit used, Phases 0 to 6 | ~$8.50 ($25.00 → ~$16.50) |
+
+### Results: scaling
+
+From `results/06_scaling_out/*_load_sweep_scale_{1x,2x}.json`.
+
+| Copies | Peak output tokens/s | At users | Per GPU | Speedup | Efficiency | Errors |
+|---|---|---|---|---|---|---|
+| 1 | 8,717 | 128 | 8,717 | 1.00× | 100% | 0 |
+| **2** | **16,022** | 256 | 8,011 | **1.84×** | **92%** | 0 (up to 1,024 users) |
+
+### Results: load balancing (conversations, 2 copies)
+
+| Method | Users | Tokens/s | TTFT p50 | TTFT p95 | Prefix hit | Running per server |
+|---|---|---|---|---|---|---|
+| Round robin | 256 | 6,401 | 225 ms | 623 ms | 69% | 85 / 91 |
+| Round robin | 512 | 5,390 | 256 ms | **11.8 s** | 48% | 193 / 92 |
+| **Least connections** | 256 | 8,563 | 326 ms | 572 ms | 71% | 78 / 78 |
+| **Least connections** | 512 | **6,856** | 493 ms | **1.2 s** | 68% | 205 / 198 |
+| Sticky per user | 256 | 6,392 | 221 ms | 653 ms | 68% | 76 / 90 |
+| Sticky per user | 512 | 5,810 | 242 ms | 11.1 s | 48% | 184 / 91 |
+
+### Results: failover (2 copies, least connections, 256 users)
+
+| | |
+|---|---|
+| vLLM-1 stopped at | 58 s (stopped instantly, like a crash) |
+| Errors | **127 of 15,906 (0.8%)**, all in the 10 s of the stop (requests in flight on that server) |
+| While one server was down | 0 errors; ~350 vs ~740 requests finished per 10 s; TTFT p95 ~1.0 to 1.2 s (was ~0.33 s) |
+| vLLM-1 started at | 150 s; serving again at ~220 s (~70 s to load) |
+| After recovery | ~730 requests per 10 s, TTFT p95 ~0.33 s, no NGINX restart |
+
+### Results: tensor parallel (1 server across both GPUs) vs 2 copies
+
+| Users | 2 copies tokens/s | TP2 tokens/s | 2 copies ITL p50 | TP2 ITL p50 |
+|---|---|---|---|---|
+| 128 | 12,029 | 1,117 | 10.3 ms | 115.5 ms |
+| 256 | 16,022 | 1,156 | 15.0 ms | 201.2 ms |
+| 512 | 15,208 | 1,235 | 31.6 ms | 215.3 ms |
+
+TP2 split the weights (4.14 GiB per GPU) and had 844,608 tokens of KV capacity, but ran ~13× slower than 2 copies, and slower than one GPU, because all-reduces cross PCIe through host memory (no peer-to-peer). Evals: 21/22, same as one GPU.
+
+### Results: Mooncake store shared by 2 copies (conversations, round robin)
+
+| Users | Without Mooncake tokens/s / TTFT p95 | With Mooncake tokens/s / TTFT p95 | Mooncake hits | Preemptions |
+|---|---|---|---|---|
+| 256 | 6,401 / 0.6 s | **4,217 / 29.5 s** | 2.0% of prompt tokens | 507 |
+| 512 | 5,390 / 11.8 s | **1,840 / 27.7 s** | 3.2% | 783 |
+
+Mooncake wrote 29.4 GiB to the store and loaded 2.2 GiB back over TCP; the KV cache filled on both servers.
+
+### Results: disaggregated prefill/decode
+
+1 prefill + 1 decode server with vLLM's MooncakeConnector over TCP: the decode engine crashed under load on an assertion in vLLM 0.30.0's scheduler (`assert req_id in self.requests` in `_update_from_kv_xfer_finished`). Log: `results/06_scaling_out/pd_1p1d_engine_crash.log`.
+
+### Incident: NGINX benched both healthy servers
+
+The first 2-copy run had 1,574 errors (502, "no live upstreams") at 768 users. vLLM drops idle connections after 5 s, NGINX kept them up to 60 s, so under load NGINX reused closed connections and got resets; with `max_fails=1`, a few resets benched both servers. Fixed with `keepalive_timeout 4s` and `max_fails=3`, and rerun; the original run is kept in `results/06_discarded/`.
+
+### Phase 6 takeaway
+
+Two RTX 5090s serve 16,022 tokens/s as two independent copies (1.84×, 92% efficient). Least connections beats round robin and sticky routing by about 10× on tail latency near capacity. Failover costs only the requests in flight. On these GPUs, tensor parallel is ~13× slower than copies (no peer-to-peer), a Mooncake store over TCP cuts throughput by a third to two thirds under concurrent load, and vLLM 0.30.0's disaggregated serving crashed. The NGINX defaults nearly caused a full outage; health checks need tuning against the backend's keepalive behaviour.

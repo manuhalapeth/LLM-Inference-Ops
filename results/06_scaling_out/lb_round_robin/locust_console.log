@@ -1,0 +1,86 @@
+time="2026-10-05T15:38:38Z" level=warning msg="Found orphan containers ([llm-inference-ops-vllm-1-1 llm-inference-ops-vllm-0-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-10-05 15:38:39,134] c1ac8471e427/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 15:38:39,174] c1ac8471e427/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 15:38:39,196] c1ac8471e427/INFO/locust.runners: c1ac8471e427_8c68d2d4f4b7490681cf4ed9bf2a04e1 (index 0) reported as ready. 1 workers connected.
+[2026-10-05 15:38:39,196] c1ac8471e427/INFO/locust.runners: c1ac8471e427_ecd04f11e03a471bb9fa29beb60f3342 (index 1) reported as ready. 2 workers connected.
+[2026-10-05 15:38:39,196] c1ac8471e427/INFO/locust.runners: c1ac8471e427_f08f8620579544d4ae3959f0b2000a45 (index 2) reported as ready. 3 workers connected.
+[2026-10-05 15:38:39,196] c1ac8471e427/INFO/locust.runners: c1ac8471e427_01f42010ceb24a5bab0292c36e18d624 (index 3) reported as ready. 4 workers connected.
+[2026-10-05 15:38:39,197] c1ac8471e427/INFO/locust.runners: c1ac8471e427_a58e373d3717499b846fe47229d0c7d1 (index 4) reported as ready. 5 workers connected.
+[2026-10-05 15:38:39,197] c1ac8471e427/INFO/locust.runners: c1ac8471e427_5ce392f3bce0457b9d1f06a99ad7d6a4 (index 5) reported as ready. 6 workers connected.
+[2026-10-05 15:38:39,355] c1ac8471e427/INFO/locust.runners: c1ac8471e427_67718ed62dea466a8a45db31865e8953 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 15:38:39,356] c1ac8471e427/INFO/locust.runners: c1ac8471e427_795bef80b27d4e6db3a370c834b6b910 (index 7) reported as ready. 8 workers connected.
+[2026-10-05 15:38:40,197] c1ac8471e427/INFO/locust.runners: Shape test starting.
+[2026-10-05 15:38:40,198] c1ac8471e427/INFO/locust.runners: Shape worker starting
+[2026-10-05 15:38:40,198] c1ac8471e427/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 15:38:40,198] c1ac8471e427/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 15:38:40,328] c1ac8471e427/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 15:39:25,229] c1ac8471e427/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-05 15:39:25,230] c1ac8471e427/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-05 15:39:25,373] c1ac8471e427/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-05 15:40:10,261] c1ac8471e427/INFO/locust.runners: Shape test stopping
+[2026-10-05 15:40:10,340] c1ac8471e427/INFO/locust.runners: c1ac8471e427_01f42010ceb24a5bab0292c36e18d624 (index 3) reported that it has stopped
+[2026-10-05 15:40:10,341] c1ac8471e427/INFO/locust.runners: c1ac8471e427_01f42010ceb24a5bab0292c36e18d624 (index 3) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,357] c1ac8471e427/INFO/locust.runners: c1ac8471e427_67718ed62dea466a8a45db31865e8953 (index 6) reported that it has stopped
+[2026-10-05 15:40:10,357] c1ac8471e427/INFO/locust.runners: c1ac8471e427_67718ed62dea466a8a45db31865e8953 (index 6) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,357] c1ac8471e427/INFO/locust.runners: c1ac8471e427_a58e373d3717499b846fe47229d0c7d1 (index 4) reported that it has stopped
+[2026-10-05 15:40:10,357] c1ac8471e427/INFO/locust.runners: c1ac8471e427_f08f8620579544d4ae3959f0b2000a45 (index 2) reported that it has stopped
+[2026-10-05 15:40:10,358] c1ac8471e427/INFO/locust.runners: c1ac8471e427_a58e373d3717499b846fe47229d0c7d1 (index 4) reported as ready. 7 workers connected.
+[2026-10-05 15:40:10,358] c1ac8471e427/INFO/locust.runners: c1ac8471e427_f08f8620579544d4ae3959f0b2000a45 (index 2) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,359] c1ac8471e427/INFO/locust.runners: c1ac8471e427_795bef80b27d4e6db3a370c834b6b910 (index 7) reported that it has stopped
+[2026-10-05 15:40:10,359] c1ac8471e427/INFO/locust.runners: c1ac8471e427_795bef80b27d4e6db3a370c834b6b910 (index 7) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,359] c1ac8471e427/INFO/locust.runners: c1ac8471e427_ecd04f11e03a471bb9fa29beb60f3342 (index 1) reported that it has stopped
+[2026-10-05 15:40:10,360] c1ac8471e427/INFO/locust.runners: c1ac8471e427_ecd04f11e03a471bb9fa29beb60f3342 (index 1) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,360] c1ac8471e427/INFO/locust.runners: c1ac8471e427_8c68d2d4f4b7490681cf4ed9bf2a04e1 (index 0) reported that it has stopped
+[2026-10-05 15:40:10,360] c1ac8471e427/INFO/locust.runners: c1ac8471e427_8c68d2d4f4b7490681cf4ed9bf2a04e1 (index 0) reported as ready. 8 workers connected.
+[2026-10-05 15:40:10,361] c1ac8471e427/INFO/locust.runners: c1ac8471e427_5ce392f3bce0457b9d1f06a99ad7d6a4 (index 5) reported that it has stopped
+[2026-10-05 15:40:10,361] c1ac8471e427/INFO/locust.runners: c1ac8471e427_5ce392f3bce0457b9d1f06a99ad7d6a4 (index 5) reported as ready. 8 workers connected.
+[2026-10-05 15:40:11,263] c1ac8471e427/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 15:40:16,264] c1ac8471e427/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,266] c1ac8471e427/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,268] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 15:40:16,269] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_f08f8620579544d4ae3959f0b2000a45' (index 2) quit. 7 workers ready.
+[2026-10-05 15:40:16,270] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_a58e373d3717499b846fe47229d0c7d1' (index 4) quit. 6 workers ready.
+[2026-10-05 15:40:16,270] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_795bef80b27d4e6db3a370c834b6b910' (index 7) quit. 5 workers ready.
+[2026-10-05 15:40:16,270] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_01f42010ceb24a5bab0292c36e18d624' (index 3) quit. 4 workers ready.
+[2026-10-05 15:40:16,270] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_ecd04f11e03a471bb9fa29beb60f3342' (index 1) quit. 3 workers ready.
+[2026-10-05 15:40:16,271] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_67718ed62dea466a8a45db31865e8953' (index 6) quit. 2 workers ready.
+[2026-10-05 15:40:16,271] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_8c68d2d4f4b7490681cf4ed9bf2a04e1' (index 0) quit. 1 workers ready.
+[2026-10-05 15:40:16,271] c1ac8471e427/INFO/locust.runners: Worker 'c1ac8471e427_5ce392f3bce0457b9d1f06a99ad7d6a4' (index 5) quit. 0 workers ready.
+[2026-10-05 15:40:16,271] c1ac8471e427/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 15:40:17,377] c1ac8471e427/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    session_follow_up                                                               4650     0(0.00%) |   3850     213   23086   2200 |   51.58        0.00
+TTFT     session_follow_up                                                               4650     0(0.00%) |   1204      55   13930    250 |   51.58        0.00
+TOTAL    session_open                                                                    1148     0(0.00%) |   9761    1605   30012   9900 |   12.73        0.00
+TTFT     session_open                                                                    1148     0(0.00%) |   1057      57    4927    560 |   12.73        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     11596     0(0.00%) |   3097      55   30012   1100 |  128.63        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    session_follow_up                                                                    2200   3600   4700   5800   9300  15000  18000  20000  22000  23000  23000   4650
+TTFT     session_follow_up                                                                     250    380    590   1000   3200   8400  12000  13000  14000  14000  14000   4650
+TOTAL    session_open                                                                         9900  12000  13000  14000  18000  21000  24000  26000  29000  30000  30000   1148
+TTFT     session_open                                                                          560   1300   1800   2000   2700   3300   3900   4100   4500   4900   4900   1148
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           1100   2400   3700   4800  10000  13000  18000  20000  26000  29000  30000  11596
+

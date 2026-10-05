@@ -81,8 +81,8 @@ MAXN=$(( GPUS >= 4 ? 4 : GPUS ))
 SESSION_STEPS=$(for u in $SESSION_BASE; do printf "%s," $((u * MAXN)); done); SESSION_STEPS=${SESSION_STEPS%,}
 
 if [ "$RUN_CORE" = 1 ]; then
-echo "==> [1] Scaling: 1, 2, 4 copies, one per GPU, round robin"
-for n in 1 2 4; do
+echo "==> [1] Scaling: ${SCALES:-1 2 4} copies, one per GPU, round robin"
+for n in ${SCALES:-1 2 4}; do
   [ "$n" -le "$GPUS" ] || continue
   apply --replicas "$n" --lb round_robin && run_load "scale_${n}x" "$(scaled_steps "$n")" mix
 done
@@ -125,7 +125,7 @@ if [ "$RUN_MOONCAKE" = 1 ]; then
   apply --replicas "$MAXN" --lb round_robin --mooncake-store && run_load "lb_round_robin_mooncake" "$SESSION_STEPS" sessions
 
   echo "==> [6] Disaggregated serving: 1 prefill + 1 decode server (vs 2 copies in [1])"
-  if [ "$GPUS" -ge 2 ] && apply --pd 1,1; then
+  if [ "${RUN_PD:-1}" = 1 ] && [ "$GPUS" -ge 2 ] && apply --pd 1,1; then
     python3 evals/run_evals.py --phase $PHASE --label quality_pd_1p1d | tail -2
     run_load pd_1p1d "$(scaled_steps 2)" mix
   fi

@@ -1,0 +1,136 @@
+==> 2 GPUs
+==> [1] Scaling: 2 copies, one per GPU, round robin
+2x tp1 tune_fp8_weights lb=round_robin: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=round_robin
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   128   53.00      12029      82ms     156ms     8.0s   10.3ms      124        0     17%        0  100%       0
+   256   68.94      16022     181ms     402ms    11.9s   15.0ms      243        0     33%        0   99%       0
+   384   67.06      15740     323ms     757ms    20.6s   24.3ms      362        0     49%        0  100%       0
+   512   67.09      15208    1053ms    3105ms    25.9s   31.6ms      433       96     60%        0  100%       0
+   768   61.66      14230    1577ms    7774ms    31.1s   35.6ms      510      252     69%        0  100%       0
+  1024   34.77      14573    5922ms   11043ms    21.4s   34.9ms      510      510     67%        0  100%       0
+
+breaking points: {"requests_queue": 512, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 512, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 16021.542857142857, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T153819Z_load_sweep_scale_2x.json
+==> [2] Load balancing with conversations (256,512 users, 2 copies)
+2x tp1 tune_fp8_weights lb=round_robin: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=round_robin
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   256   77.43       6401     225ms     623ms    10.4s   30.7ms      238       43     72%        0  100%       0
+   512   48.89       5390     256ms   11813ms    18.9s   24.9ms      294      310    108%        0  100%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": 512, "preemptions": null, "ttft_p95_over_slo": 512, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 6400.542857142857, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T154018Z_load_sweep_lb_round_robin.json
+2x tp1 tune_fp8_weights lb=least_conn: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=least_conn
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   256   95.97       8563     326ms     572ms     7.0s   26.3ms      223       13     72%        0  100%       0
+   512   62.11       6856     493ms    1207ms    12.4s   82.5ms      485       31    149%        0  100%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": 512, "preemptions": null, "ttft_p95_over_slo": 512, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 8562.885714285714, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T154220Z_load_sweep_lb_least_conn.json
+2x tp1 tune_fp8_weights lb=user_hash: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=user_hash
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   256   76.83       6392     221ms     653ms    11.2s   30.5ms      234       33     67%        0  100%       0
+   512   49.57       5810     242ms   11123ms    17.5s   27.6ms      296      327    105%        0  100%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": 512, "preemptions": null, "ttft_p95_over_slo": 512, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 6391.8, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T154419Z_load_sweep_lb_user_hash.json
+==> [3] Failover: stop one copy under load, start it again
+2x tp1 tune_fp8_weights lb=least_conn: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=least_conn
+<body>
+<center><h1>502 Bad; ChunkedEncodingError: Response ended prematurely
+   60s  ok  355  errors   0  TTFT p95   1180 ms    
+   70s  ok  338  errors   0  TTFT p95   1010 ms    
+   80s  ok  354  errors   0  TTFT p95   1019 ms    
+   90s  ok  332  errors   0  TTFT p95   1014 ms    
+  100s  ok  390  errors   0  TTFT p95   1093 ms    
+  110s  ok  364  errors   0  TTFT p95   1097 ms    
+  120s  ok  343  errors   0  TTFT p95   1041 ms    
+  130s  ok  345  errors   0  TTFT p95    954 ms    
+  140s  ok  355  errors   0  TTFT p95    985 ms  start vllm-1  
+  150s  ok  354  errors   0  TTFT p95    990 ms    
+  160s  ok  366  errors   0  TTFT p95   1020 ms    
+  170s  ok  346  errors   0  TTFT p95    992 ms    
+  180s  ok  387  errors   0  TTFT p95    888 ms    
+  190s  ok  362  errors   0  TTFT p95    868 ms    
+  200s  ok  361  errors   0  TTFT p95    828 ms    
+  210s  ok  338  errors   0  TTFT p95    985 ms    
+  220s  ok  571  errors   0  TTFT p95    834 ms    
+  230s  ok  716  errors   0  TTFT p95    344 ms    
+  240s  ok  723  errors   0  TTFT p95    317 ms    
+  250s  ok  762  errors   0  TTFT p95    346 ms    
+  260s  ok  727  errors   0  TTFT p95    345 ms    
+  270s  ok  728  errors   0  TTFT p95    334 ms    
+  280s  ok  737  errors   0  TTFT p95    338 ms    
+  290s  ok  746  errors   0  TTFT p95    309 ms    
+  300s  ok   43  errors   0  TTFT p95    273 ms    
+
+15906 requests, 127 errors
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T154949Z_timeline_failover.json
+==> [4] Tensor parallel: one model split across 2 GPUs (vs 2 copies in [1])
+1x tp2 tune_fp8_weights lb=round_robin: vllm-0
+==> up: 1x tp2 tune_fp8_weights lb=round_robin
+21/22 passed  correctness 7/7  instructions 5/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T155644Z_evals_quality_tp2.json
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   128    4.91       1117     379ms     648ms    80.6s  115.5ms      123       36      6%        0  100%      28
+   256    4.89       1156     658ms    1048ms    74.9s  201.2ms      248       48     12%        0  100%      12
+   384    5.37       1288   21993ms   23312ms    91.0s  201.9ms      255      128     13%        0  100%      37
+   512    4.97       1235   40911ms   43379ms    99.7s  215.3ms      254      256     12%        0  100%       5
+   768    0.00       1177         -         -        -        -      253      512     12%        0  100%       0
+  1024    0.00       1220         -         -        -        -      254      768     12%        0  100%       0
+
+breaking points: {"requests_queue": 128, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 256, "errors_over_1pct": 128, "peak_throughput_users": 384, "peak_output_tokens_per_s": 1287.9714285714285, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T160125Z_load_sweep_tp2.json
+==> Comparing scaling and tensor parallel
+config                       peak tok/s  vs base  @users  TTFT p95 @256  ITL p50 @256  running  KV max  preempt   interactive users ($/1M)   relaxed users ($/1M)
+scale_1x                           8717      +0%     128         1010ms        28.9ms      256     35%        0    128 ($0.042)            192 ($0.043)
+scale_2x                          16022     +84%     256          402ms        15.0ms      512     69%        0    256 ($0.023)            384 ($0.023)
+tp2                                1288     -85%     384         1048ms       201.2ms      256     13%        0      0                       0
+
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T160125Z_tuning_summary.json
+==> [5] Mooncake store shared by every copy, conversations, round robin
+2x tp1 tune_fp8_weights lb=round_robin mooncake_store: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=round_robin mooncake_store
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   256   76.31       6581     215ms     597ms    11.1s   30.5ms      240       21     70%        0   99%       0
+   512   48.71       5772     231ms   11742ms    18.7s   23.9ms      302      315    109%        0  100%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": 512, "preemptions": null, "ttft_p95_over_slo": 512, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 6581.2, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T160936Z_load_sweep_lb_round_robin_mooncake.json
+==> [6] Disaggregated serving: 1 prefill + 1 decode server (vs 2 copies in [1])
+pd 1P+1D tp1 lb=round_robin: vllm-prefill-0, vllm-decode-0
+!! pd 1P+1D tp1 lb=round_robin did not come up
+==> Done. Results are in results/06_scaling_out/
+20261005T152100Z_load_sweep_scale_1x.json
+20261005T153819Z_load_sweep_scale_2x.json
+20261005T154018Z_load_sweep_lb_round_robin.json
+20261005T154220Z_load_sweep_lb_least_conn.json
+20261005T154419Z_load_sweep_lb_user_hash.json
+20261005T154949Z_timeline_failover.json
+20261005T155644Z_evals_quality_tp2.json
+20261005T160125Z_load_sweep_tp2.json
+20261005T160125Z_tuning_summary.json
+20261005T160936Z_load_sweep_lb_round_robin_mooncake.json
+container_stats.jsonl
+failed_pd_1P_1D_tp1_lb_round_robin.log
+failover
+lb_least_conn
+lb_round_robin
+lb_round_robin_mooncake
+lb_user_hash
+scale_1x
+scale_2x
+tp2
+vllm_startup_vllm-0_1x_tp2_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_least_conn.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_round_robin_mooncake_store.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_user_hash.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_least_conn.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_round_robin_mooncake_store.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_user_hash.log

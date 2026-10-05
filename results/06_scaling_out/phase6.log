@@ -1,0 +1,402 @@
+
+==> Switching off automatic package updates
+
+==> Checking the GPU
+name, memory.total [MiB], driver_version
+NVIDIA GeForce RTX 5090, 32607 MiB, 580.95.05
+NVIDIA GeForce RTX 5090, 32607 MiB, 580.95.05
+
+==> Checking Docker
+
+==> Pulling images through mirror.gcr.io
+
+==> Checking that containers can see the GPU
+
+==> Installing NVIDIA Container Toolkit
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Selecting previously unselected package libnvidia-container1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130734 files and directories currently installed.)
+Preparing to unpack .../libnvidia-container1_1.20.1-1_amd64.deb ...
+Unpacking libnvidia-container1:amd64 (1.20.1-1) ...
+Selecting previously unselected package libnvidia-container-tools.
+Preparing to unpack .../libnvidia-container-tools_1.20.1-1_amd64.deb ...
+Unpacking libnvidia-container-tools (1.20.1-1) ...
+Selecting previously unselected package nvidia-container-toolkit-base.
+Preparing to unpack .../nvidia-container-toolkit-base_1.20.1-1_amd64.deb ...
+Unpacking nvidia-container-toolkit-base (1.20.1-1) ...
+Selecting previously unselected package nvidia-container-toolkit.
+Preparing to unpack .../nvidia-container-toolkit_1.20.1-1_amd64.deb ...
+Unpacking nvidia-container-toolkit (1.20.1-1) ...
+Setting up nvidia-container-toolkit-base (1.20.1-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-cdi-refresh.path → /lib/systemd/system/nvidia-cdi-refresh.path.
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-cdi-refresh.service → /lib/systemd/system/nvidia-cdi-refresh.service.
+Setting up libnvidia-container1:amd64 (1.20.1-1) ...
+Setting up libnvidia-container-tools (1.20.1-1) ...
+Setting up nvidia-container-toolkit (1.20.1-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+time="2026-10-05T14:49:54Z" level=info msg="Loading config from /etc/docker/daemon.json"
+time="2026-10-05T14:49:54Z" level=info msg="Wrote updated config to /etc/docker/daemon.json"
+time="2026-10-05T14:49:54Z" level=info msg="It is recommended that docker daemon be restarted."
+GPU 0: NVIDIA GeForce RTX 5090 (UUID: GPU-011b6f71-d739-6c53-65df-9a4fc93fe2ac)
+GPU 1: NVIDIA GeForce RTX 5090 (UUID: GPU-f60e8950-2e7e-e99b-6df6-1e1d794ec01d)
+
+==> Getting the code
+Cloning into '/root/LLM-Inference-Ops'...
+
+==> Created .env from .env.example (edit it to set GPU_HOURLY_PRICE_USD and GRAFANA_ADMIN_PASSWORD)
+
+==> Starting the stack
+ gateway Skipped - No image to be pulled 
+ nginx Pulling 
+ jaeger Pulling 
+ gpu-exporter Pulling 
+ grafana Pulling 
+ vllm Pulling 
+ prometheus Pulling 
+ nginx Pulled 
+ jaeger Pulled 
+ prometheus Pulled 
+ gpu-exporter Pulled 
+ grafana Pulled 
+ vllm Pulled 
+Compose can now delegate builds to bake for better performance.
+ To do so, set COMPOSE_BAKE=true.
+#0 building with "default" instance using docker driver
+
+#1 [gateway internal] load build definition from Dockerfile
+#1 transferring dockerfile: 956B done
+#1 DONE 0.1s
+
+#2 [gateway internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 1.8s
+
+#3 [gateway internal] load .dockerignore
+#3 transferring context: 58B done
+#3 DONE 0.0s
+
+#4 [gateway 1/6] FROM docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#4 resolve docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#4 ...
+
+#5 [gateway internal] load build context
+#5 transferring context: 24.59kB done
+#5 DONE 0.1s
+
+#4 [gateway 1/6] FROM docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d
+#4 resolve docker.io/library/python:3.12-slim@sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d 0.1s done
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 0B / 4.27MB 0.1s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 0B / 12.12MB 0.1s
+#4 sha256:02108f5d322dd89f1c9e552442c25acb0543dfdbc455693a5599624f20d9155d 10.37kB / 10.37kB done
+#4 sha256:6b1f85a08c199d29d5b6d71ab9c27bd5b3b393492e01216a15758ff69c4be8b8 1.75kB / 1.75kB done
+#4 sha256:414a398990af718f018ff9c23cea0e7489b7986eb54f2b1d7cc874c99ebc7364 5.66kB / 5.66kB done
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0B / 29.83MB 0.1s
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 1.05MB / 4.27MB 1.3s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 1.05MB / 12.12MB 1.3s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 2.10MB / 12.12MB 2.1s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 2.10MB / 29.83MB 3.2s
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 2.10MB / 4.27MB 3.4s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 3.15MB / 12.12MB 4.7s
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 3.15MB / 4.27MB 5.3s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 4.19MB / 12.12MB 7.1s
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 4.19MB / 4.27MB 8.1s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 4.19MB / 29.83MB 8.1s
+#4 sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 4.27MB / 4.27MB 9.0s done
+#4 sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 0B / 249B 9.1s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 5.24MB / 12.12MB 9.3s
+#4 sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 249B / 249B 9.4s done
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 6.29MB / 12.12MB 11.7s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 6.29MB / 29.83MB 13.2s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 7.34MB / 12.12MB 13.6s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 8.39MB / 12.12MB 14.9s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 9.44MB / 12.12MB 16.1s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 8.39MB / 29.83MB 17.2s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 10.49MB / 29.83MB 18.5s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 10.49MB / 12.12MB 18.8s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 12.58MB / 29.83MB 21.4s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 11.53MB / 12.12MB 21.6s
+#4 sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 12.12MB / 12.12MB 22.5s done
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 14.68MB / 29.83MB 23.7s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 16.78MB / 29.83MB 26.1s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 18.87MB / 29.83MB 27.8s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 20.97MB / 29.83MB 28.7s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 23.07MB / 29.83MB 29.1s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 25.17MB / 29.83MB 30.2s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 27.26MB / 29.83MB 33.8s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.36MB / 29.83MB 36.4s
+#4 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 36.7s done
+#4 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8
+#4 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 1.7s done
+#4 extracting sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045
+#4 extracting sha256:a510a9ea6d60786b7cefdbf9577945344c72879881de8d32ef07ec38111fb045 0.3s done
+#4 extracting sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0
+#4 extracting sha256:e360d85fdc0f3910a4fe48ba2bb0865d5e618392ea8abfa424e66575e45273c0 0.9s done
+#4 extracting sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7
+#4 extracting sha256:5e62c0470a0973ad9561440c8a37984c3252eda1dd19e00ca7e76a37b62b5dc7 done
+#4 DONE 40.4s
+
+#6 [gateway 2/6] WORKDIR /srv
+#6 DONE 0.5s
+
+#7 [gateway 3/6] COPY requirements.txt .
+#7 DONE 0.1s
+
+#8 [gateway 4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 2.537 Collecting fastapi==0.142.2 (from -r requirements.txt (line 1))
+#8 7.638   Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+#8 7.776 Collecting uvicorn==0.54.0 (from -r requirements.txt (line 2))
+#8 7.800   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+#8 8.100 Collecting httpx==0.28.1 (from -r requirements.txt (line 3))
+#8 8.114   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#8 8.273 Collecting prometheus-client==0.26.0 (from -r requirements.txt (line 4))
+#8 8.287   Downloading prometheus_client-0.26.0-py3-none-any.whl.metadata (2.1 kB)
+#8 10.58 Collecting tokenizers==0.23.2 (from -r requirements.txt (line 5))
+#8 10.59   Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.8 kB)
+#8 10.77 Collecting opentelemetry-sdk==1.45.0 (from -r requirements.txt (line 6))
+#8 10.79   Downloading opentelemetry_sdk-1.45.0-py3-none-any.whl.metadata (1.6 kB)
+#8 10.90 Collecting opentelemetry-exporter-otlp-proto-grpc==1.45.0 (from -r requirements.txt (line 7))
+#8 10.91   Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.0-py3-none-any.whl.metadata (2.6 kB)
+#8 11.01 Collecting opentelemetry-instrumentation-fastapi==0.66b0 (from -r requirements.txt (line 8))
+#8 11.07   Downloading opentelemetry_instrumentation_fastapi-0.66b0-py3-none-any.whl.metadata (2.2 kB)
+#8 11.15 Collecting opentelemetry-instrumentation-httpx==0.66b0 (from -r requirements.txt (line 9))
+#8 11.16   Downloading opentelemetry_instrumentation_httpx-0.66b0-py3-none-any.whl.metadata (9.0 kB)
+#8 11.36 Collecting starlette>=0.46.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 11.37   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+#8 12.72 Collecting pydantic>=2.9.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 12.73   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+#8 13.15 Collecting typing-extensions>=4.8.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 13.40   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#8 13.44 Collecting typing-inspection>=0.4.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 13.45   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#8 13.50 Collecting annotated-doc>=0.0.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 13.52   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#8 13.81 Collecting opentelemetry-api>=1.44.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#8 13.83   Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+#8 14.19 Collecting click>=7.0 (from uvicorn==0.54.0->-r requirements.txt (line 2))
+#8 14.20   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#8 14.25 Collecting h11>=0.8 (from uvicorn==0.54.0->-r requirements.txt (line 2))
+#8 14.26   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#8 14.36 Collecting anyio (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 14.38   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#8 14.51 Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 14.54   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#8 15.37 Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 15.38   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#8 15.48 Collecting idna (from httpx==0.28.1->-r requirements.txt (line 3))
+#8 15.49   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#8 15.77 Collecting huggingface-hub<2.0,>=0.16.4 (from tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 15.79   Downloading huggingface_hub-1.33.0-py3-none-any.whl.metadata (16 kB)
+#8 15.95 Collecting opentelemetry-semantic-conventions==0.66b0 (from opentelemetry-sdk==1.45.0->-r requirements.txt (line 6))
+#8 15.96   Downloading opentelemetry_semantic_conventions-0.66b0-py3-none-any.whl.metadata (2.4 kB)
+#8 16.29 Collecting googleapis-common-protos~=1.57 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 16.31   Downloading googleapis_common_protos-1.75.5-py3-none-any.whl.metadata (8.5 kB)
+#8 21.74 Collecting grpcio<2.0.0,>=1.63.2 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 21.76   Downloading grpcio-1.84.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+#8 21.79 Collecting opentelemetry-exporter-otlp-common==0.66b0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 21.80   Downloading opentelemetry_exporter_otlp_common-0.66b0-py3-none-any.whl.metadata (1.9 kB)
+#8 21.89 Collecting opentelemetry-exporter-otlp-proto-common==1.45.0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 22.13   Downloading opentelemetry_exporter_otlp_proto_common-1.45.0-py3-none-any.whl.metadata (1.8 kB)
+#8 22.29 Collecting opentelemetry-proto==1.45.0 (from opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 22.30   Downloading opentelemetry_proto-1.45.0-py3-none-any.whl.metadata (2.3 kB)
+#8 23.04 Collecting opentelemetry-instrumentation-asgi==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 23.06   Downloading opentelemetry_instrumentation_asgi-0.66b0-py3-none-any.whl.metadata (2.0 kB)
+#8 23.48 Collecting opentelemetry-instrumentation==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 23.50   Downloading opentelemetry_instrumentation-0.66b0-py3-none-any.whl.metadata (7.2 kB)
+#8 23.71 Collecting opentelemetry-util-http==0.66b0 (from opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 23.73   Downloading opentelemetry_util_http-0.66b0-py3-none-any.whl.metadata (2.6 kB)
+#8 26.03 Collecting wrapt<3.0.0,>=1.0.0 (from opentelemetry-instrumentation-httpx==0.66b0->-r requirements.txt (line 9))
+#8 26.04   Downloading wrapt-2.5.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.6 kB)
+#8 26.21 Collecting packaging>=18.0 (from opentelemetry-instrumentation==0.66b0->opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 26.22   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#8 26.34 Collecting asgiref~=3.0 (from opentelemetry-instrumentation-asgi==0.66b0->opentelemetry-instrumentation-fastapi==0.66b0->-r requirements.txt (line 8))
+#8 26.35   Downloading asgiref-3.12.1-py3-none-any.whl.metadata (9.4 kB)
+#8 28.16 Collecting protobuf<8.0,>=5.0 (from opentelemetry-proto==1.45.0->opentelemetry-exporter-otlp-proto-grpc==1.45.0->-r requirements.txt (line 7))
+#8 28.21   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+#8 28.53 Collecting filelock>=3.10.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 28.54   Downloading filelock-4.0.12-py3-none-any.whl.metadata (2.0 kB)
+#8 28.79 Collecting fsspec>=2023.5.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 28.80   Downloading fsspec-2026.9.0-py3-none-any.whl.metadata (10 kB)
+#8 29.94 Collecting hf-xet<2.0.0,>=1.6.0 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 29.95   Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+#8 30.55 Collecting pyyaml>=5.1 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 30.56   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#8 30.78 Collecting tqdm>=4.42.1 (from huggingface-hub<2.0,>=0.16.4->tokenizers==0.23.2->-r requirements.txt (line 5))
+#8 30.80   Downloading tqdm-4.70.1-py3-none-any.whl.metadata (57 kB)
+#8 31.09 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi==0.142.2->-r requirements.txt (line 1))
+#8 31.11   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#8 43.09 Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi==0.142.2->-r requirements.txt (line 1))
+#8 43.10   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#8 43.53 Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+#8 44.17 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+#8 44.37 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#8 44.61 Downloading prometheus_client-0.26.0-py3-none-any.whl (64 kB)
+#8 44.68 Downloading tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.4 MB)
+#8 58.46    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.4/3.4 MB 242.8 kB/s eta 0:00:00
+#8 58.47 Downloading opentelemetry_sdk-1.45.0-py3-none-any.whl (140 kB)
+#8 60.07 Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.0-py3-none-any.whl (19 kB)
+#8 60.14 Downloading opentelemetry_instrumentation_fastapi-0.66b0-py3-none-any.whl (14 kB)
+#8 60.17 Downloading opentelemetry_instrumentation_httpx-0.66b0-py3-none-any.whl (17 kB)
+#8 60.21 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#8 61.68 Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+#8 61.98 Downloading opentelemetry_exporter_otlp_common-0.66b0-py3-none-any.whl (12 kB)
+#8 62.03 Downloading opentelemetry_exporter_otlp_proto_common-1.45.0-py3-none-any.whl (15 kB)
+#8 62.09 Downloading opentelemetry_instrumentation-0.66b0-py3-none-any.whl (36 kB)
+#8 62.50 Downloading opentelemetry_instrumentation_asgi-0.66b0-py3-none-any.whl (15 kB)
+#8 62.62 Downloading opentelemetry_proto-1.45.0-py3-none-any.whl (72 kB)
+#8 63.02 Downloading opentelemetry_semantic_conventions-0.66b0-py3-none-any.whl (206 kB)
+#8 64.10 Downloading opentelemetry_util_http-0.66b0-py3-none-any.whl (8.4 kB)
+#8 64.12 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#8 64.14 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#8 64.42 Downloading googleapis_common_protos-1.75.5-py3-none-any.whl (307 kB)
+#8 67.38 Downloading grpcio-1.84.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.2 MB)
+#8 84.74    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 419.6 kB/s eta 0:00:00
+#8 84.76 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 84.78 Downloading huggingface_hub-1.33.0-py3-none-any.whl (846 kB)
+#8 85.17    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 846.4/846.4 kB 2.2 MB/s eta 0:00:00
+#8 85.18 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+#8 85.37 Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#8 86.97    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 1.2 MB/s eta 0:00:00
+#8 86.98 Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+#8 87.01 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#8 87.05 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#8 87.07 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#8 87.09 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#8 87.10 Downloading wrapt-2.5.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (250 kB)
+#8 87.16 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#8 87.19 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#8 87.21 Downloading asgiref-3.12.1-py3-none-any.whl (25 kB)
+#8 87.22 Downloading filelock-4.0.12-py3-none-any.whl (111 kB)
+#8 87.25 Downloading fsspec-2026.9.0-py3-none-any.whl (221 kB)
+#8 87.29 Downloading hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+#8 87.82    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 8.7 MB/s eta 0:00:00
+#8 87.83 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#8 87.85 Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+#8 87.89 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#8 87.95    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 12.7 MB/s eta 0:00:00
+#8 87.97 Downloading tqdm-4.70.1-py3-none-any.whl (80 kB)
+#8 88.14 Installing collected packages: wrapt, typing-extensions, tqdm, pyyaml, protobuf, prometheus-client, packaging, opentelemetry-util-http, idna, hf-xet, h11, fsspec, filelock, click, certifi, asgiref, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, opentelemetry-proto, opentelemetry-api, httpcore, grpcio, googleapis-common-protos, anyio, starlette, pydantic, opentelemetry-semantic-conventions, opentelemetry-exporter-otlp-proto-common, httpx, opentelemetry-sdk, opentelemetry-instrumentation, huggingface-hub, fastapi, tokenizers, opentelemetry-instrumentation-httpx, opentelemetry-instrumentation-asgi, opentelemetry-exporter-otlp-common, opentelemetry-instrumentation-fastapi, opentelemetry-exporter-otlp-proto-grpc
+#8 93.98 Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 asgiref-3.12.1 certifi-2026.7.22 click-8.5.0 fastapi-0.142.2 filelock-4.0.12 fsspec-2026.9.0 googleapis-common-protos-1.75.5 grpcio-1.84.0 h11-0.16.0 hf-xet-1.6.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-1.33.0 idna-3.20 opentelemetry-api-1.45.0 opentelemetry-exporter-otlp-common-0.66b0 opentelemetry-exporter-otlp-proto-common-1.45.0 opentelemetry-exporter-otlp-proto-grpc-1.45.0 opentelemetry-instrumentation-0.66b0 opentelemetry-instrumentation-asgi-0.66b0 opentelemetry-instrumentation-fastapi-0.66b0 opentelemetry-instrumentation-httpx-0.66b0 opentelemetry-proto-1.45.0 opentelemetry-sdk-1.45.0 opentelemetry-semantic-conventions-0.66b0 opentelemetry-util-http-0.66b0 packaging-26.3 prometheus-client-0.26.0 protobuf-7.36.2 pydantic-2.13.5 pydantic-core-2.46.5 pyyaml-6.0.3 starlette-1.7.0 tokenizers-0.23.2 tqdm-4.70.1 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0 wrapt-2.5.0
+#8 93.98 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 94.09 
+#8 94.09 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#8 94.09 [notice] To update, run: pip install --upgrade pip
+#8 DONE 94.7s
+
+#9 [gateway 5/6] RUN python -c "from tokenizers import Tokenizer; Tokenizer.from_pretrained('Qwen/Qwen2.5-7B-Instruct').save('/srv/tokenizer.json')"
+#9 1.107 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+#9 DONE 2.0s
+
+#10 [gateway 6/6] COPY app ./app
+#10 DONE 0.1s
+
+#11 [gateway] exporting to image
+#11 exporting layers
+#11 exporting layers 1.4s done
+#11 writing image sha256:004639b740cd0779a48b78b21041b11e31a0c814ea48b88c9e23479ea4d4ae03 0.0s done
+#11 naming to docker.io/library/llm-inference-ops-gateway 0.0s done
+#11 DONE 1.4s
+
+#12 [gateway] resolving provenance for metadata file
+#12 DONE 0.0s
+ gateway  Built
+ Network llm-inference-ops_default  Creating
+ Network llm-inference-ops_default  Created
+ Volume "llm-inference-ops_grafana-data"  Creating
+ Volume "llm-inference-ops_grafana-data"  Created
+ Volume "llm-inference-ops_prometheus-data"  Creating
+ Volume "llm-inference-ops_prometheus-data"  Created
+ Container llm-inference-ops-vllm-1  Creating
+ Container llm-inference-ops-gpu-exporter-1  Creating
+ Container llm-inference-ops-jaeger-1  Creating
+ Container llm-inference-ops-prometheus-1  Creating
+ Container llm-inference-ops-gpu-exporter-1  Created
+ Container llm-inference-ops-prometheus-1  Created
+ Container llm-inference-ops-grafana-1  Creating
+ Container llm-inference-ops-jaeger-1  Created
+ Container llm-inference-ops-nginx-1  Creating
+ Container llm-inference-ops-vllm-1  Created
+ Container llm-inference-ops-grafana-1  Created
+ Container llm-inference-ops-nginx-1  Created
+ Container llm-inference-ops-gateway-1  Creating
+ Container llm-inference-ops-gateway-1  Created
+ Container llm-inference-ops-vllm-1  Starting
+ Container llm-inference-ops-gpu-exporter-1  Starting
+ Container llm-inference-ops-prometheus-1  Starting
+ Container llm-inference-ops-jaeger-1  Starting
+ Container llm-inference-ops-jaeger-1  Started
+ Container llm-inference-ops-nginx-1  Starting
+ Container llm-inference-ops-prometheus-1  Started
+ Container llm-inference-ops-grafana-1  Starting
+ Container llm-inference-ops-nginx-1  Started
+ Container llm-inference-ops-gateway-1  Starting
+ Container llm-inference-ops-grafana-1  Started
+ Container llm-inference-ops-gateway-1  Started
+ Container llm-inference-ops-gpu-exporter-1  Started
+ Container llm-inference-ops-vllm-1  Started
+
+==> Waiting for vLLM to load the model (first run downloads the weights)
+request_id     52243b139c4345a68f3d76439ba6ac9a
+TTFT           644 ms
+end-to-end     1242 ms
+tokens         44 in / 63 out
+inter-token    9.6 ms
+throughput     50.7 output tokens/s
+
+A KV cache, or key-value cache, in the context of Language Model (LLM) inference, stores previously generated tokens along with their corresponding attention scores to speed up the generation process for subsequent tokens. This caching technique helps improve the efficiency and throughput of the model without compromising the quality of the generated text.
+
+saved /root/LLM-Inference-Ops/results/00_setup/20261005T150904Z_smoke_test.json
+
+==> Ready
+Stack is up. From your laptop, open an SSH tunnel:
+  ssh -L 8080:localhost:8080 -L 3000:localhost:3000 -L 9090:localhost:9090 -L 16686:localhost:16686 <this box>
+Then:
+  gateway     http://localhost:8080/v1/models
+  Grafana     http://localhost:3000   (admin / GRAFANA_ADMIN_PASSWORD from .env)
+  Prometheus  http://localhost:9090/targets
+  Jaeger      http://localhost:16686  (traces)
+
+Before you leave: push code, copy results/ off the box, then DESTROY the instance on Vast.ai.
+==> 2 GPUs
+==> [1] Scaling: 1, 2, 4 copies, one per GPU, round robin
+1x tp1 tune_fp8_weights lb=round_robin: vllm-0
+==> up: 1x tp1 tune_fp8_weights lb=round_robin
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+    64   27.51       6185      81ms     139ms     7.8s   10.0ms       62        0      9%        0   95%       0
+   128   37.66       8717     224ms     322ms    10.9s   13.7ms      122        0     16%        0   99%       0
+   192   38.40       8542     442ms     667ms    16.2s   20.7ms      176        0     24%        0  100%       0
+   256   34.71       8365     629ms    1010ms    22.7s   28.9ms      239        1     32%        0  100%       0
+   384   32.26       7304    4116ms    4338ms    30.3s   35.5ms      254      126     32%        0   99%       0
+   512   17.83       7304    7944ms    8720ms    19.5s   34.9ms      255      255     35%        0   94%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 256, "errors_over_1pct": null, "peak_throughput_users": 128, "peak_output_tokens_per_s": 8716.942857142858, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T152100Z_load_sweep_scale_1x.json
+2x tp1 tune_fp8_weights lb=round_robin: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=round_robin
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   128   52.09      12033      83ms     155ms     7.8s   10.2ms      123        0     17%        0   99%       0
+   256   69.77      16033     182ms     390ms    12.4s   15.4ms      242        0     33%        0  100%       0
+   384   69.29      15183     394ms    2676ms    19.5s   25.3ms      342       80     47%        0  100%       1
+   512   63.00      14218    4345ms    5779ms    29.4s   25.2ms      347      164     46%        0   97%       0
+   768   60.49      14426    8912ms   16202ms    37.4s   32.6ms      373      430     61%        0  100%    1574
+  1024   31.03      12886     114ms   23477ms    29.3s   12.3ms      331      735     54%        0  100%       1
+
+breaking points: {"requests_queue": 384, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 384, "errors_over_1pct": 768, "peak_throughput_users": 256, "peak_output_tokens_per_s": 16033.314285714287, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T153152Z_load_sweep_scale_2x.json
+==> [2] Load balancing with conversations (256,512 users, 2 copies)
+2x tp1 tune_fp8_weights lb=round_robin: vllm-0, vllm-1
+==> up: 2x tp1 tune_fp8_weights lb=round_robin

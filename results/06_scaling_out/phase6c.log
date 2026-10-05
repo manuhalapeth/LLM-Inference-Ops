@@ -1,0 +1,41 @@
+==> 2 GPUs
+==> [5] Mooncake store shared by every copy, conversations, round robin
+2x tp1 fp8_weights_mooncake_store lb=round_robin mooncake_store: vllm-0, vllm-1
+==> up: 2x tp1 fp8_weights_mooncake_store lb=round_robin mooncake_store
+ users   req/s  out tok/s  TTFT p50  TTFT p95  e2e p95  ITL p50  running  waiting  KV max  preempt   GPU  errors
+   256   41.34       4217     328ms   29536ms    32.5s   31.5ms      192      242    200%      507   55%       0
+   512    1.37       1840   26725ms   27730ms    28.7s   16.7ms       34      510    200%      783   56%       0
+
+breaking points: {"requests_queue": 256, "kv_cache_95pct": 256, "preemptions": 256, "ttft_p95_over_slo": 256, "errors_over_1pct": null, "peak_throughput_users": 256, "peak_output_tokens_per_s": 4217.228571428572, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/06_scaling_out/20261005T162450Z_load_sweep_lb_round_robin_mooncake.json
+==> [6] Disaggregated serving: 1 prefill + 1 decode server (vs 2 copies in [1])
+==> Done. Results are in results/06_scaling_out/
+20261005T152100Z_load_sweep_scale_1x.json
+20261005T153819Z_load_sweep_scale_2x.json
+20261005T154018Z_load_sweep_lb_round_robin.json
+20261005T154220Z_load_sweep_lb_least_conn.json
+20261005T154419Z_load_sweep_lb_user_hash.json
+20261005T154949Z_timeline_failover.json
+20261005T155644Z_evals_quality_tp2.json
+20261005T160125Z_load_sweep_tp2.json
+20261005T160125Z_tuning_summary.json
+20261005T162450Z_load_sweep_lb_round_robin_mooncake.json
+container_stats.jsonl
+failover
+lb_least_conn
+lb_round_robin
+lb_round_robin_mooncake
+lb_user_hash
+pd_1p1d_engine_crash.log
+scale_1x
+scale_2x
+tp2
+vllm_startup_vllm-0_1x_tp2_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-0_2x_tp1_fp8_weights_mooncake_store_lb_round_robin_mooncake_store.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_least_conn.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-0_2x_tp1_tune_fp8_weights_lb_user_hash.log
+vllm_startup_vllm-1_2x_tp1_fp8_weights_mooncake_store_lb_round_robin_mooncake_store.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_least_conn.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_round_robin.log
+vllm_startup_vllm-1_2x_tp1_tune_fp8_weights_lb_user_hash.log
