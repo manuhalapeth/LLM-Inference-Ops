@@ -1,0 +1,12 @@
+# Phase 6 disaggregated serving: the PREFILL server. Computes the prompt and hands
+# its KV to a decode server through Mooncake (over TCP; no RDMA on rented boxes).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-transfer-config:
+  kv_connector: MooncakeConnector
+  kv_role: kv_producer
+  kv_connector_extra_config:
+    mooncake_protocol: tcp

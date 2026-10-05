@@ -3,9 +3,12 @@ global:
   evaluation_interval: 5s
 
 scrape_configs:
+  # vLLM servers come from a file, so a multi-GPU setup can list all of them
+  # (observability/prometheus/targets/vllm.json by default).
   - job_name: vllm
-    static_configs:
-      - targets: ["vllm:8000"]
+    file_sd_configs:
+      - files: ["/etc/prometheus/targets/vllm.json"]
+        refresh_interval: 10s
 
   - job_name: gateway
     static_configs:

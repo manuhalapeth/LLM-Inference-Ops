@@ -11,6 +11,7 @@ Each request is a trace that continues into NGINX and vLLM.
 import asyncio
 import json
 import logging
+import os
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -18,7 +19,7 @@ from contextlib import asynccontextmanager
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response, StreamingResponse
-from prometheus_client import CONTENT_TYPE_LATEST, Counter, Gauge, Histogram, generate_latest
+from prometheus_client import CONTENT_TYPE_LATEST, CollectorRegistry, Counter, Gauge, Histogram, generate_latest, multiprocess
 
 from . import tracing
 from .config import Settings
@@ -56,7 +57,9 @@ HARNESS_SECONDS = Histogram(
     "gateway_harness_seconds", "Time spent running the harness checks",
     buckets=(0.0001, 0.00025, 0.0005, 0.001, 0.0025, 0.005, 0.01, 0.025, 0.05),
 )
-IN_FLIGHT = Gauge("gateway_in_flight_requests", "Requests forwarded upstream and not finished yet")
+# "livesum" adds the gauge up across worker processes when there are several.
+IN_FLIGHT = Gauge("gateway_in_flight_requests", "Requests forwarded upstream and not finished yet",
+                  multiprocess_mode="livesum")
 ENDED_EARLY = Counter(
     "gateway_requests_ended_early_total", "Forwarded requests that did not finish normally", ["why"]
 )
@@ -107,6 +110,10 @@ def create_app(client: httpx.AsyncClient | None = None, settings: Settings | Non
 
     @app.get("/metrics")
     async def metrics():
+        if os.getenv("PROMETHEUS_MULTIPROC_DIR"):  # several worker processes: merge their metrics
+            registry = CollectorRegistry()
+            multiprocess.MultiProcessCollector(registry)
+            return Response(generate_latest(registry), media_type=CONTENT_TYPE_LATEST)
         return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
     @app.api_route("/v1/{rest:path}", methods=["GET", "POST"])

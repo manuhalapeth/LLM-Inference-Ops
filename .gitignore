@@ -1,5 +1,8 @@
 notes/
 
+# Written by scripts/topology.py for each multi-GPU setup
+generated/
+
 # Secrets
 .env
 

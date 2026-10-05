@@ -52,7 +52,7 @@ def summarize_sweep(run: dict, price_per_hour: float) -> dict:
         "at_users": {},
         "capacity": {},
     }
-    for users in (128, 256, 512):
+    for users in sorted({128, 256, 512} | {s["users"] for s in steps}):
         s = at_users(steps, users)
         if s:
             out["at_users"][users] = {
@@ -77,14 +77,18 @@ def summarize_sweep(run: dict, price_per_hour: float) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--price-per-hour", type=float, default=float(os.getenv("GPU_HOURLY_PRICE_USD") or 1.327))
+    parser.add_argument("--phase", default=PHASE)
+    parser.add_argument("--baseline", default="baseline", help="label the others are compared with")
+    parser.add_argument("--labels", nargs="*", help="only these runs (default: every load sweep in the phase)")
     args = parser.parse_args()
 
     runs = {}
-    for run in load_runs(PHASE):  # oldest first, so the latest run of each config wins
-        if run["name"].startswith("load_sweep_") and not run["config"]["label"].startswith("latency_"):
-            runs[run["config"]["label"]] = run
+    for run in load_runs(args.phase):  # oldest first, so the latest run of each config wins
+        label = run["config"]["label"]
+        if run["name"].startswith("load_sweep_") and not label.startswith("latency_") and (not args.labels or label in args.labels):
+            runs[label] = run
     rows = [summarize_sweep(r, args.price_per_hour) for r in runs.values()]
-    base = next((r for r in rows if r["label"] == "baseline"), None)
+    base = next((r for r in rows if r["label"] == args.baseline), None)
 
     def rel(row, value):
         b = base and base["peak_output_tokens_per_s"]
@@ -100,7 +104,7 @@ def main() -> None:
               f"{r['peak_at_users']:>8}{(a.get('ttft_p95_s') or 0) * 1000:>13.0f}ms{(a.get('itl_p50_s') or 0) * 1000:>12.1f}ms"
               f"{r['max_running']:>9.0f}{r['max_kv_cache_usage']:>8.0%}{r['preemptions']:>9.0f}   {cap('interactive'):<24}{cap('relaxed')}")
 
-    path = save_run(PHASE, "tuning_summary", metrics={"configs": rows, "targets": TARGETS},
+    path = save_run(args.phase, "tuning_summary", metrics={"configs": rows, "targets": TARGETS},
                     config={"price_per_hour_usd": args.price_per_hour}, load={"configs": list(runs)})
     print(f"\nsaved {path}")
 

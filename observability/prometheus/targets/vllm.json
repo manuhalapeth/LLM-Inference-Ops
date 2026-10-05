@@ -1,0 +1,10 @@
+[
+  {
+    "targets": [
+      "vllm:8000"
+    ],
+    "labels": {
+      "replica": "vllm"
+    }
+  }
+]

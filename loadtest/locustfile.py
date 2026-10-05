@@ -30,6 +30,19 @@ MODEL = os.getenv("SERVED_MODEL_NAME", "llm")
 RESULTS_DIR = Path(os.getenv("RESULTS_DIR", "/results"))
 STEPS = [int(x) for x in os.getenv("LOAD_STEPS", "1,2,4,8,16,32,64,96,128,192,256,384,512").split(",")]
 STEP_SECONDS = int(os.getenv("STEP_SECONDS", "60"))
+# "mix": independent requests (Phases 4 and 5). "sessions": every user holds a
+# conversation about a long document, so each request repeats that user's
+# growing prefix (what sticky routing and a shared KV store are for).
+LOAD_MODE = os.getenv("LOAD_MODE", "mix")
+SESSION_TURNS = int(os.getenv("SESSION_TURNS", "6"))
+FOLLOW_UPS = [
+    "What was the root cause, in one sentence?",
+    "List the follow-up actions as short bullet points.",
+    "Which team should own each follow-up action?",
+    "What metric would have caught this earliest?",
+    "Write a two sentence status update for customers.",
+    "What is the single most important lesson here?",
+]
 
 # A chat product's mix: mostly short exchanges, some long documents, some long answers.
 CATEGORY_WEIGHTS = {"short_qa": 0.35, "multi_turn": 0.25, "summarization": 0.25, "long_generation": 0.15}
@@ -75,14 +88,28 @@ class ChatUser(User):
     def on_start(self):
         self.session = requests.Session()
         self.user_id = f"locust-{uuid.uuid4().hex[:8]}"
+        self.history, self.turn = [], 0
+
+    def next_request(self) -> tuple[str, str, list[dict], int]:
+        """category, prompt id, messages, max_tokens for this user's next request."""
+        if LOAD_MODE != "sessions":
+            category = random.choices(list(CATEGORY_WEIGHTS), weights=list(CATEGORY_WEIGHTS.values()))[0]
+            prompt = random.choice(BY_CATEGORY[category])
+            return category, prompt["id"], unique_messages(prompt), prompt["max_tokens"]
+        if not self.history or self.turn >= SESSION_TURNS:
+            prompt = random.choice(BY_CATEGORY["summarization"])
+            self.history, self.turn = unique_messages(prompt), 0  # a new conversation, unique to this user
+            return "session_open", prompt["id"], self.history, 256
+        self.history = self.history + [{"role": "user", "content": FOLLOW_UPS[(self.turn - 1) % len(FOLLOW_UPS)]}]
+        return "session_follow_up", f"turn_{self.turn}", self.history, 128
 
     @task
     def chat(self):
-        category = random.choices(list(CATEGORY_WEIGHTS), weights=list(CATEGORY_WEIGHTS.values()))[0]
-        prompt = random.choice(BY_CATEGORY[category])
-        body = {"model": MODEL, "messages": unique_messages(prompt), "max_tokens": prompt["max_tokens"],
+        category, prompt_id, messages, max_tokens = self.next_request()
+        body = {"model": MODEL, "messages": messages, "max_tokens": max_tokens,
                 "temperature": 0, "stream": True, "stream_options": {"include_usage": True}}
-        row = {"t_start": time.time(), "category": category, "prompt_id": prompt["id"]}
+        row = {"t_start": time.time(), "category": category, "prompt_id": prompt_id}
+        answer = []
         start = time.perf_counter()
         first_token, usage, error, status = None, {}, None, None
         try:
@@ -100,8 +127,11 @@ class ChatUser(User):
                             error = str(event["error"])[:200]
                         if event.get("usage"):
                             usage = event["usage"]
-                        if first_token is None and any(c.get("delta", {}).get("content") for c in event.get("choices", [])):
-                            first_token = time.perf_counter()
+                        for c in event.get("choices", []):
+                            if c.get("delta", {}).get("content"):
+                                answer.append(c["delta"]["content"])
+                                if first_token is None:
+                                    first_token = time.perf_counter()
         except requests.RequestException as exc:
             error = f"{type(exc).__name__}: {exc}"[:200]
         end = time.perf_counter()
@@ -115,6 +145,12 @@ class ChatUser(User):
             "itl_s": (end - first_token) / (out - 1) if first_token and out > 1 else None,
         })
         _record(row)
+        if LOAD_MODE == "sessions":
+            if error is None and status == 200 and answer:
+                self.history = self.history + [{"role": "assistant", "content": "".join(answer)}]
+                self.turn += 1
+            else:
+                self.history = []  # start over after a failed turn
 
         # Also report to Locust's own stats, so its web UI shows TTFT and total time live.
         ok = error is None and status == 200

@@ -1,0 +1,10 @@
+# Phase 6: the recommended config (FP8 weights) plus a Mooncake store shared by
+# every vLLM server, so KV computed on one server can be loaded by another.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-transfer-config:
+  kv_connector: MooncakeStoreConnector
+  kv_role: kv_both

@@ -26,11 +26,23 @@ PROMPT = "In two sentences, explain what a KV cache is in LLM inference."
 def wait_for_gateway(base_url: str, timeout_s: float) -> None:
     """Block until vLLM answers through the gateway (the model may still be loading)."""
     deadline = time.monotonic() + timeout_s
+    probe = json.dumps({"model": os.getenv("SERVED_MODEL_NAME", "llm"), "max_tokens": 1,
+                        "messages": [{"role": "user", "content": "hi"}]}).encode()
     while True:
         try:
             with urllib.request.urlopen(f"{base_url}/v1/models", timeout=5) as resp:
                 if resp.status == 200:
                     return
+        except urllib.error.HTTPError as err:
+            if err.code == 404:  # some front ends (the disaggregation proxy) only serve completions
+                try:
+                    req = urllib.request.Request(f"{base_url}/v1/chat/completions", data=probe,
+                                                 headers={"Content-Type": "application/json"})
+                    with urllib.request.urlopen(req, timeout=60) as resp:
+                        if resp.status == 200:
+                            return
+                except (urllib.error.URLError, OSError):
+                    pass
         except (urllib.error.URLError, OSError):
             pass
         if time.monotonic() > deadline:

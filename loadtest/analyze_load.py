@@ -48,9 +48,17 @@ class Prometheus:
             return {"avg": None, "max": None}
         return {"avg": sum(values) / len(values), "max": max(values)}
 
+    def per_series(self, query: str, t: float, label: str) -> dict:
+        """One value per series, keyed by a label (e.g. per vLLM server)."""
+        return {r["metric"].get(label, "?"): float(r["value"][1]) for r in self._get("/api/v1/query", query=query, time=t)}
+
     def increase(self, counter: str, start: float, end: float) -> float | None:
         a, b = self.at(f"sum({counter})", start), self.at(f"sum({counter})", end)
         return b - a if a is not None and b is not None else None
+
+
+def _ratio(a, b):
+    return a / b if a is not None and b else None
 
 
 def pct(values: list[float]) -> dict:
@@ -86,6 +94,12 @@ def analyze_step(rows: list[dict], prom: Prometheus | None, start: float, end: f
             "gpu_utilization": prom.over("max(nvidia_smi_utilization_gpu_ratio)", start, end),
             "gpu_power_w": prom.over("max(nvidia_smi_power_draw_watts)", start, end),
             "gpu_memory_bytes": prom.over("max(nvidia_smi_memory_used_bytes)", start, end),
+            "prefix_cache_hit_rate": _ratio(prom.increase("vllm:prefix_cache_hits_total", start, end),
+                                            prom.increase("vllm:prefix_cache_queries_total", start, end)),
+            "external_cache_hit_rate": _ratio(prom.increase("vllm:external_prefix_cache_hits_total", start, end),
+                                              prom.increase("vllm:prefix_cache_queries_total", start, end)),
+            # How evenly the load was spread: average requests running on each vLLM server.
+            "running_per_replica": prom.per_series("avg_over_time(vllm:num_requests_running[1m])", end, "replica"),
         }
     return step
 
@@ -142,7 +156,8 @@ def main() -> None:
     path = save_run(args.phase, f"load_sweep_{args.label}",
                     metrics={"steps": steps, "breaking_points": breaks, "total_requests": len(rows)},
                     config={"label": args.label, "model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
-                            "vllm_config": os.getenv("VLLM_CONFIG", "baseline")},
+                            "vllm_config": os.getenv("VLLM_CONFIG", "baseline"), "topology": os.getenv("TOPOLOGY"),
+                            "load_mode": os.getenv("LOAD_MODE", "mix"), "gateway_workers": os.getenv("GATEWAY_WORKERS", "1")},
                     load={**meta, "warmup_s": args.warmup_s, "closed_loop": True})
 
     print(f"{'users':>6}{'req/s':>8}{'out tok/s':>11}{'TTFT p50':>10}{'TTFT p95':>10}{'e2e p95':>9}{'ITL p50':>9}"

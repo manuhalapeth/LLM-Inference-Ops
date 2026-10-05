@@ -47,8 +47,10 @@ services:
     image: nginx:1.27-alpine-otel
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${NGINX_UPSTREAM:-./nginx/upstream_single.conf}:/etc/nginx/upstream.conf:ro
+    # No dependency on vLLM: NGINX looks its servers up at runtime ("resolve"),
+    # so it can start first and pick vLLM up once it's running.
     depends_on:
-      - vllm
       - jaeger
     restart: unless-stopped
 
@@ -65,6 +67,8 @@ services:
       RATE_LIMIT_RPM: ${RATE_LIMIT_RPM:-60}
       RATE_LIMIT_TPM: ${RATE_LIMIT_TPM:-200000}
       MAX_IN_FLIGHT: ${MAX_IN_FLIGHT:-256}
+      # Gateway processes. One is plenty for one GPU (84% of a core at its peak, Phase 4).
+      GATEWAY_WORKERS: ${GATEWAY_WORKERS:-1}
     ports:
       - "127.0.0.1:8080:8080"
     depends_on:
@@ -98,6 +102,7 @@ services:
       RESULTS_DIR: /results
       LOAD_STEPS: ${LOAD_STEPS:-1,2,4,8,16,32,64,96,128,192,256,384,512}
       STEP_SECONDS: ${STEP_SECONDS:-60}
+      LOAD_MODE: ${LOAD_MODE:-mix}
     volumes:
       - ./loadtest:/mnt/loadtest:ro
       - ./results/${LOAD_PHASE:-04_breaking_one_gpu}/${RUN_LABEL:-baseline}:/results
@@ -120,6 +125,7 @@ services:
     image: prom/prometheus:v2.55.1
     volumes:
       - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ${PROM_TARGETS_DIR:-./observability/prometheus/targets}:/etc/prometheus/targets:ro
       - prometheus-data:/prometheus
     ports:
       - "127.0.0.1:9090:9090"
