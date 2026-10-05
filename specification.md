@@ -492,3 +492,82 @@ On this VM, every download served through Cloudflare (Docker Hub's image layers,
 ### Phase 4 takeaway
 
 One RTX 5090 peaks at ~5,950 output tokens/s around 192 concurrent users, at its 575 W power limit. The break at 384 users is vLLM's default cap of 256 running requests, not memory: the KV cache never passed 53% and nothing was preempted. Time to first token goes from under 0.5 s to 5.8 s the moment the queue forms. Nothing errors; it just gets slow.
+
+---
+
+## Phase 5: Profiling and tuning one GPU
+
+### Hardware
+
+A different machine with the same hardware as Phases 0, 2, 3 and 4: **United Kingdom, host 166946, machine 33260**, RTX 5090 32 GB, **AMD EPYC 9654** (48 vCPUs), PCIe 5.0 ×16, verified host, 99.73% reliability, driver 580.95.05, $1.211/hr. Phase 5 reruns its own baseline on this machine, and it reproduced Phase 4 within 3% (peak 5,794 vs 5,951 tokens/s, same break at 384 users).
+
+### Software
+
+| | |
+|---|---|
+| Model / engine | Qwen/Qwen2.5-7B-Instruct, vLLM 0.30.0 |
+| Configs | `vllm/configs/tune_*.yaml`, each the baseline plus one change |
+| Load | Phase 4's Locust mix, unique tags, closed loop; 64, 128, 192, 256, 384, 512, 768 users, 45 s per step |
+| Code version | git `6896b27` |
+
+### Why the defaults were worth testing
+
+vLLM 0.30.0 sets its batch limits by GPU memory. GPUs with 70 GB or more get up to 1,024 sequences and 8,192 batched tokens; anything smaller, like this 32 GB RTX 5090, falls through to an untuned fallback (marked TODO in vLLM's code) of 256 sequences and 2,048 tokens.
+
+### Results: one change at a time
+
+From `results/05_profiling_and_tuning/*_load_sweep_*.json` and `*_tuning_summary.json`.
+
+| Config | Weights | KV cache capacity | Peak tokens/s | vs baseline | TTFT p95 @256 | ITL p50 @256 | KV max | Preemptions |
+|---|---|---|---|---|---|---|---|---|
+| baseline | 14.29 GiB | 209,472 | 5,794 | | 713 ms | 43.0 ms | 57% | 0 |
+| max-num-seqs 512 | 14.29 GiB | 209,472 | 6,013 | +4% | 702 ms | 43.1 ms | 100% | 238 |
+| max-num-seqs 1024 | 14.29 GiB | 209,472 | 5,835 | +1% | 657 ms | 43.9 ms | 100% | 348 |
+| max-num-batched-tokens 8192 | 14.29 GiB | 209,472 | 5,949 | +3% | 743 ms | 41.4 ms | 55% | 0 |
+| prefix caching off | 14.29 GiB | 209,472 | 5,942 | +3% | 709 ms | 42.8 ms | 56% | 0 |
+| **FP8 KV cache** | 14.29 GiB | **404,480** | **7,064** | **+22%** | 748 ms | 34.9 ms | 30% | 0 |
+| **FP8 weights** | **8.17 GiB** | **323,824** | **8,662** | **+50%** | 745 ms | 29.0 ms | 35% | 0 |
+
+### Results: raising the sequence cap, step by step
+
+| Users | Baseline TTFT p95 / ITL p50 | max-num-seqs 512 TTFT p95 / ITL p50 |
+|---|---|---|
+| 384 | 6.39 s / 51 ms (127 waiting) | **1.20 s** / 65 ms (23 waiting) |
+| 512 | 12.99 s / 51 ms (256 waiting) | **1.48 s** / 90 ms, KV 99%, preemptions begin |
+| 768 | 24.18 s / 51 ms | 13.80 s / 104 ms, KV 100% |
+
+### Results: capacity and cost per target ($1.211/hr)
+
+Interactive: TTFT p95 ≤ 0.5 s and ITL p50 ≤ 40 ms. Relaxed: TTFT p95 ≤ 1 s and ITL p50 ≤ 60 ms. Capacity is limited to the steps tested.
+
+| Config | Interactive users | $/1M output tokens | Relaxed users | $/1M output tokens |
+|---|---|---|---|---|
+| baseline | 128 | $0.066 | 256 | $0.064 |
+| FP8 KV cache | 128 | $0.061 | 256 | $0.053 |
+| FP8 weights | 128 | $0.045 | 256 | $0.044 |
+
+### Results: speculative decoding (n-gram) at low load
+
+| Users | Baseline ITL p50 / tokens/s | N-gram speculative ITL p50 / tokens/s |
+|---|---|---|
+| 4 | 9.9 ms / 395 | 11.7 ms / 298 |
+| 16 | 11.4 ms / 1,369 | 13.5 ms / 1,202 |
+| 64 | 14.9 ms / 4,250 | 23.3 ms / 2,757 |
+
+At 1 user, one multi-turn request took 58.9 s under speculation (under 1 s normally), so no request finished in that step's measured window. GPU utilization fell to 64 to 82%.
+
+### Results: profile of the baseline at 128 users
+
+60 engine steps, 1,310 ms, 24,306 GPU kernels. **GPU busy 98%** of the window.
+
+| Work | Share of GPU kernel time |
+|---|---|
+| Matrix multiplies (weights) | 73.0% |
+| Attention | 23.6% |
+| Activation, normalization, copies, sampling, other | 3.4% |
+
+The single largest kernel, a BF16 matrix multiply, was 63.6% of all GPU time.
+
+### Phase 5 findings so far (single changes)
+
+The GPU is busy 98% of the time and three quarters of that is matrix multiplies on the model weights, so the settings that change *how much work* each step does are the ones that matter. **FP8 weights (+50%) and an FP8 KV cache (+22%)** were the only real wins. Raising the sequence cap barely added throughput but cut time to first token at 384 to 512 users by 5 to 9×, at the cost of slower streaming and, past ~500 running requests, KV cache preemptions. Batched tokens and prefix caching made no difference on this traffic, and n-gram speculative decoding made it worse.

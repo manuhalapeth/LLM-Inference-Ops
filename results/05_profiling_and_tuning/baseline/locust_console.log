@@ -1,0 +1,242 @@
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-vllm-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+ locust Pulling 
+ 6310eb16bf42 Pulling fs layer 
+ 5bbcb35ea63e Pulling fs layer 
+ 237e12970bdc Pulling fs layer 
+ 9b83eae799b8 Pulling fs layer 
+ 7e21a52d91a0 Pulling fs layer 
+ 19e33976761c Pulling fs layer 
+ f8907d240926 Pulling fs layer 
+ 09493a048270 Pulling fs layer 
+ 4f4fb700ef54 Pulling fs layer 
+ 09493a048270 Waiting 
+ 19e33976761c Waiting 
+ f8907d240926 Waiting 
+ 4f4fb700ef54 Waiting 
+ 9b83eae799b8 Waiting 
+ 7e21a52d91a0 Waiting 
+ 5bbcb35ea63e Downloading [>                                                  ]  43.02kB/4.265MB
+ 6310eb16bf42 Downloading [>                                                  ]  298.4kB/29.79MB
+ 237e12970bdc Downloading [>                                                  ]  119.6kB/11.91MB
+ 5bbcb35ea63e Downloading [=================================================> ]  4.194MB/4.265MB
+ 5bbcb35ea63e Verifying Checksum 
+ 5bbcb35ea63e Download complete 
+ 6310eb16bf42 Downloading [===================>                               ]  11.71MB/29.79MB
+ 237e12970bdc Downloading [======>                                            ]  1.601MB/11.91MB
+ 6310eb16bf42 Downloading [=====================================>             ]  22.52MB/29.79MB
+ 237e12970bdc Downloading [==================================>                ]   8.12MB/11.91MB
+ 9b83eae799b8 Downloading [==================================================>]     249B/249B
+ 9b83eae799b8 Verifying Checksum 
+ 9b83eae799b8 Download complete 
+ 6310eb16bf42 Verifying Checksum 
+ 6310eb16bf42 Download complete 
+ 237e12970bdc Verifying Checksum 
+ 237e12970bdc Download complete 
+ 6310eb16bf42 Extracting [>                                                  ]  327.7kB/29.79MB
+ 6310eb16bf42 Extracting [===========>                                       ]  6.881MB/29.79MB
+ 6310eb16bf42 Extracting [==================>                                ]  11.14MB/29.79MB
+ 19e33976761c Downloading [===============>                                   ]  1.032kB/3.313kB
+ 19e33976761c Downloading [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Verifying Checksum 
+ 19e33976761c Download complete 
+ 6310eb16bf42 Extracting [==============================>                    ]  18.02MB/29.79MB
+ 7e21a52d91a0 Downloading [>                                                  ]  212.2kB/21.11MB
+ f8907d240926 Downloading [>                                                  ]  212.4kB/21.11MB
+ 6310eb16bf42 Extracting [===========================================>       ]  25.89MB/29.79MB
+ 7e21a52d91a0 Downloading [==============>                                    ]  6.308MB/21.11MB
+ f8907d240926 Downloading [==========>                                        ]  4.555MB/21.11MB
+ 6310eb16bf42 Extracting [===========================================>       ]  26.21MB/29.79MB
+ 09493a048270 Downloading [>                                                  ]  18.37kB/1.756MB
+ 09493a048270 Downloading [=============================>                     ]  1.048MB/1.756MB
+ f8907d240926 Downloading [=======================================>           ]  16.88MB/21.11MB
+ 7e21a52d91a0 Downloading [====================>                              ]  8.489MB/21.11MB
+ 6310eb16bf42 Extracting [================================================>  ]  28.84MB/29.79MB
+ 09493a048270 Downloading [==================================================>]  1.756MB/1.756MB
+ 09493a048270 Verifying Checksum 
+ 09493a048270 Download complete 
+ f8907d240926 Verifying Checksum 
+ f8907d240926 Download complete 
+ 7e21a52d91a0 Verifying Checksum 
+ 7e21a52d91a0 Download complete 
+ 6310eb16bf42 Extracting [================================================>  ]  29.16MB/29.79MB
+ 6310eb16bf42 Extracting [==================================================>]  29.79MB/29.79MB
+ 6310eb16bf42 Extracting [==================================================>]  29.79MB/29.79MB
+ 4f4fb700ef54 Downloading [==================================================>]      32B/32B
+ 4f4fb700ef54 Verifying Checksum 
+ 4f4fb700ef54 Download complete 
+ 6310eb16bf42 Pull complete 
+ 5bbcb35ea63e Extracting [>                                                  ]  65.54kB/4.265MB
+ 5bbcb35ea63e Extracting [============================================>      ]  3.801MB/4.265MB
+ 5bbcb35ea63e Extracting [==================================================>]  4.265MB/4.265MB
+ 5bbcb35ea63e Pull complete 
+ 237e12970bdc Extracting [>                                                  ]  131.1kB/11.91MB
+ 237e12970bdc Extracting [==========>                                        ]   2.49MB/11.91MB
+ 237e12970bdc Extracting [========================>                          ]  5.767MB/11.91MB
+ 237e12970bdc Extracting [======================================>            ]  9.175MB/11.91MB
+ 237e12970bdc Extracting [============================================>      ]  10.49MB/11.91MB
+ 237e12970bdc Extracting [==================================================>]  11.91MB/11.91MB
+ 237e12970bdc Pull complete 
+ 9b83eae799b8 Extracting [==================================================>]     249B/249B
+ 9b83eae799b8 Extracting [==================================================>]     249B/249B
+ 9b83eae799b8 Pull complete 
+ 7e21a52d91a0 Extracting [>                                                  ]  229.4kB/21.11MB
+ 7e21a52d91a0 Extracting [=======>                                           ]  3.211MB/21.11MB
+ 7e21a52d91a0 Extracting [=============>                                     ]  5.505MB/21.11MB
+ 7e21a52d91a0 Extracting [================>                                  ]  7.111MB/21.11MB
+ 7e21a52d91a0 Extracting [====================>                              ]  8.716MB/21.11MB
+ 7e21a52d91a0 Extracting [===========================>                       ]   11.7MB/21.11MB
+ 7e21a52d91a0 Extracting [================================>                  ]  13.76MB/21.11MB
+ 7e21a52d91a0 Extracting [===================================>               ]  15.14MB/21.11MB
+ 7e21a52d91a0 Extracting [========================================>          ]   17.2MB/21.11MB
+ 7e21a52d91a0 Extracting [==========================================>        ]  18.12MB/21.11MB
+ 7e21a52d91a0 Extracting [===============================================>   ]  19.96MB/21.11MB
+ 7e21a52d91a0 Extracting [=================================================> ]   21.1MB/21.11MB
+ 7e21a52d91a0 Extracting [==================================================>]  21.11MB/21.11MB
+ 7e21a52d91a0 Pull complete 
+ 19e33976761c Extracting [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Extracting [==================================================>]  3.313kB/3.313kB
+ 19e33976761c Pull complete 
+ f8907d240926 Extracting [>                                                  ]  229.4kB/21.11MB
+ f8907d240926 Extracting [========>                                          ]   3.67MB/21.11MB
+ f8907d240926 Extracting [===============>                                   ]  6.423MB/21.11MB
+ f8907d240926 Extracting [=================>                                 ]   7.34MB/21.11MB
+ f8907d240926 Extracting [=====================>                             ]  9.175MB/21.11MB
+ f8907d240926 Extracting [============================>                      ]  11.93MB/21.11MB
+ f8907d240926 Extracting [=================================>                 ]  13.99MB/21.11MB
+ f8907d240926 Extracting [====================================>              ]   15.6MB/21.11MB
+ f8907d240926 Extracting [=========================================>         ]  17.66MB/21.11MB
+ f8907d240926 Extracting [=============================================>     ]  19.04MB/21.11MB
+ f8907d240926 Extracting [================================================>  ]  20.41MB/21.11MB
+ f8907d240926 Extracting [==================================================>]  21.11MB/21.11MB
+ f8907d240926 Pull complete 
+ 09493a048270 Extracting [>                                                  ]  32.77kB/1.756MB
+ 09493a048270 Extracting [==================================================>]  1.756MB/1.756MB
+ 09493a048270 Extracting [==================================================>]  1.756MB/1.756MB
+ 09493a048270 Pull complete 
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Extracting [==================================================>]      32B/32B
+ 4f4fb700ef54 Pull complete 
+ locust Pulled 
+[2026-10-05 00:33:13,078] 638da1fe63ca/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 00:33:13,109] 638da1fe63ca/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_f2108d2c1f1b45bc9c3587a3a04485fd (index 0) reported as ready. 1 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_235aa381761e44589da590da6ad94a71 (index 1) reported as ready. 2 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_26186bb27456464886efe9c8c75c4b1b (index 2) reported as ready. 3 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_9bfd9aa7c550466b95f5e4e29db6a614 (index 3) reported as ready. 4 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_439ad1dd0ecd4a5da9befe59f02e43bb (index 4) reported as ready. 5 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_31da309c94044798ac843284b376f0d4 (index 5) reported as ready. 6 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_db3594efc0094328b891a0ea08198e00 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 00:33:13,127] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_8b91d8ac0e534e0bbec37db4bba4bc71 (index 7) reported as ready. 8 workers connected.
+[2026-10-05 00:33:14,127] 638da1fe63ca/INFO/locust.runners: Shape test starting.
+[2026-10-05 00:33:14,128] 638da1fe63ca/INFO/locust.runners: Shape worker starting
+[2026-10-05 00:33:14,128] 638da1fe63ca/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-10-05 00:33:14,129] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-10-05 00:33:14,184] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-10-05 00:33:59,159] 638da1fe63ca/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-10-05 00:33:59,159] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-10-05 00:33:59,227] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-10-05 00:34:44,187] 638da1fe63ca/INFO/locust.runners: Shape test updating to 192 users at 192.00 spawn rate
+[2026-10-05 00:34:44,187] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 192 users at 192.00 spawn rate to 8 ready workers
+[2026-10-05 00:34:44,242] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 192} (192 total users)
+[2026-10-05 00:35:29,216] 638da1fe63ca/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 00:35:29,217] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 00:35:29,313] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 00:36:14,246] 638da1fe63ca/INFO/locust.runners: Shape test updating to 384 users at 384.00 spawn rate
+[2026-10-05 00:36:14,247] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 384 users at 384.00 spawn rate to 8 ready workers
+[2026-10-05 00:36:14,303] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 384} (384 total users)
+[2026-10-05 00:36:59,280] 638da1fe63ca/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-05 00:36:59,280] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-05 00:36:59,335] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-05 00:37:44,332] 638da1fe63ca/INFO/locust.runners: Shape test updating to 768 users at 768.00 spawn rate
+[2026-10-05 00:37:44,333] 638da1fe63ca/INFO/locust.runners: Sending spawn jobs of 768 users at 768.00 spawn rate to 8 ready workers
+[2026-10-05 00:37:44,390] 638da1fe63ca/INFO/locust.runners: All users spawned: {"ChatUser": 768} (768 total users)
+[2026-10-05 00:38:29,365] 638da1fe63ca/INFO/locust.runners: Shape test stopping
+[2026-10-05 00:38:29,428] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_439ad1dd0ecd4a5da9befe59f02e43bb (index 4) reported that it has stopped
+[2026-10-05 00:38:29,428] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_f2108d2c1f1b45bc9c3587a3a04485fd (index 0) reported that it has stopped
+[2026-10-05 00:38:29,428] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_26186bb27456464886efe9c8c75c4b1b (index 2) reported that it has stopped
+[2026-10-05 00:38:29,428] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_31da309c94044798ac843284b376f0d4 (index 5) reported that it has stopped
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_439ad1dd0ecd4a5da9befe59f02e43bb (index 4) reported as ready. 5 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_f2108d2c1f1b45bc9c3587a3a04485fd (index 0) reported as ready. 6 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_26186bb27456464886efe9c8c75c4b1b (index 2) reported as ready. 7 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_31da309c94044798ac843284b376f0d4 (index 5) reported as ready. 8 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_db3594efc0094328b891a0ea08198e00 (index 6) reported that it has stopped
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_8b91d8ac0e534e0bbec37db4bba4bc71 (index 7) reported that it has stopped
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_9bfd9aa7c550466b95f5e4e29db6a614 (index 3) reported that it has stopped
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_235aa381761e44589da590da6ad94a71 (index 1) reported that it has stopped
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_9bfd9aa7c550466b95f5e4e29db6a614 (index 3) reported as ready. 5 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_8b91d8ac0e534e0bbec37db4bba4bc71 (index 7) reported as ready. 6 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_db3594efc0094328b891a0ea08198e00 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 00:38:29,429] 638da1fe63ca/INFO/locust.runners: 638da1fe63ca_235aa381761e44589da590da6ad94a71 (index 1) reported as ready. 8 workers connected.
+[2026-10-05 00:38:30,367] 638da1fe63ca/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 00:38:35,369] 638da1fe63ca/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,371] 638da1fe63ca/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_26186bb27456464886efe9c8c75c4b1b' (index 2) quit. 7 workers ready.
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_235aa381761e44589da590da6ad94a71' (index 1) quit. 6 workers ready.
+[2026-10-05 00:38:35,373] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_31da309c94044798ac843284b376f0d4' (index 5) quit. 5 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_f2108d2c1f1b45bc9c3587a3a04485fd' (index 0) quit. 4 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_db3594efc0094328b891a0ea08198e00' (index 6) quit. 3 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_439ad1dd0ecd4a5da9befe59f02e43bb' (index 4) quit. 2 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_8b91d8ac0e534e0bbec37db4bba4bc71' (index 7) quit. 1 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: Worker '638da1fe63ca_9bfd9aa7c550466b95f5e4e29db6a614' (index 3) quit. 0 workers ready.
+[2026-10-05 00:38:35,374] 638da1fe63ca/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 00:38:36,436] 638da1fe63ca/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                  999     0(0.00%) |  29165    7072   51778  28000 |    3.17        0.00
+TTFT     long_generation                                                                  999     0(0.00%) |   3057      44   14294    420 |    3.17        0.00
+TOTAL    multi_turn                                                                      1792     0(0.00%) |  11222     954   35799   8900 |    5.68        0.00
+TTFT     multi_turn                                                                      1792     0(0.00%) |   4219      46   23439    510 |    5.68        0.00
+TOTAL    short_qa                                                                        2586     0(0.00%) |   5729     131   27253   2100 |    8.20        0.00
+TTFT     short_qa                                                                        2586     0(0.00%) |   4449      46   24422    470 |    8.20        0.00
+TOTAL    summarization                                                                   1806     0(0.00%) |  13603    2245   42252  11000 |    5.73        0.00
+TTFT     summarization                                                                   1806     0(0.00%) |   4385      68   23180    550 |    5.73        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     14366     0(0.00%) |   8260      44   51778   5400 |   45.56        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     28000  37000  41000  43000  46000  49000  51000  51000  52000  52000  52000    999
+TTFT     long_generation                                                                       420   1100   5800   6100  12000  12000  13000  13000  14000  14000  14000    999
+TOTAL    multi_turn                                                                           8900  12000  18000  19000  24000  27000  32000  35000  36000  36000  36000   1792
+TTFT     multi_turn                                                                            510   5400   6000  11000  12000  18000  23000  23000  23000  23000  23000   1792
+TOTAL    short_qa                                                                             2100   6400   8800  12000  15000  23000  25000  26000  26000  27000  27000   2586
+TTFT     short_qa                                                                              470   5500   6100  11000  13000  22000  23000  23000  24000  24000  24000   2586
+TOTAL    summarization                                                                       11000  16000  20000  22000  26000  31000  32000  34000  42000  42000  42000   1806
+TTFT     summarization                                                                         550   5600   6200  11000  12000  17000  23000  23000  23000  23000  23000   1806
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           5400   9500  12000  15000  23000  28000  39000  45000  51000  52000  52000  14366
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/opt/venv/lib/python3.13/site-packages/locust/stats.py", line 1166, in stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: I/O operation on closed file.
+2026-10-05T00:38:36Z <Greenlet at 0x7a050ab8e700: <bound method StatsCSVFileWriter.stats_writer of <locust.stats.StatsCSVFileWriter object at 0x7a050ab506e0>>> failed with ValueError
+
+[2026-10-05 00:38:36,979] 638da1fe63ca/CRITICAL/locust.main: Unhandled exception in greenlet: <Greenlet at 0x7a050ab8e700: <bound method StatsCSVFileWriter.stats_writer of <locust.stats.StatsCSVFileWriter object at 0x7a050ab506e0>>>
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/opt/venv/lib/python3.13/site-packages/locust/stats.py", line 1166, in stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ^^^^^^^
+ValueError: I/O operation on closed file.

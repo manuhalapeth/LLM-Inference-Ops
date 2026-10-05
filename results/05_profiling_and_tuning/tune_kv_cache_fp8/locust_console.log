@@ -1,0 +1,124 @@
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-vllm-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-10-05 01:17:46,101] ad9017c0d9cd/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 01:17:46,128] ad9017c0d9cd/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 01:17:46,144] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_81269e549fab492c8a69ee37a4c7a26d (index 0) reported as ready. 1 workers connected.
+[2026-10-05 01:17:46,144] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_771ecc7bc47948309f3f521328492d34 (index 1) reported as ready. 2 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_043cb6b5aade4437bb032f810fdbfed1 (index 2) reported as ready. 3 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_50bdef85ad754294ac9a0a0e3a1af23e (index 3) reported as ready. 4 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_ebd10a393f464ea38c683713bf83f3f9 (index 4) reported as ready. 5 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_9dfb4c4126a8402eb90cebf40f390a67 (index 5) reported as ready. 6 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_06ad93e78d9e48289168b450f704435c (index 6) reported as ready. 7 workers connected.
+[2026-10-05 01:17:46,145] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_624c93f59db847658d8a94750060676f (index 7) reported as ready. 8 workers connected.
+[2026-10-05 01:17:47,146] ad9017c0d9cd/INFO/locust.runners: Shape test starting.
+[2026-10-05 01:17:47,146] ad9017c0d9cd/INFO/locust.runners: Shape worker starting
+[2026-10-05 01:17:47,146] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-10-05 01:17:47,147] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-10-05 01:17:47,202] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-10-05 01:18:32,176] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-10-05 01:18:32,176] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-10-05 01:18:32,242] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-10-05 01:19:17,205] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 192 users at 192.00 spawn rate
+[2026-10-05 01:19:17,205] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 192 users at 192.00 spawn rate to 8 ready workers
+[2026-10-05 01:19:17,260] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 192} (192 total users)
+[2026-10-05 01:20:02,234] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 01:20:02,234] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 01:20:02,289] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 01:20:47,269] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 384 users at 384.00 spawn rate
+[2026-10-05 01:20:47,269] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 384 users at 384.00 spawn rate to 8 ready workers
+[2026-10-05 01:20:47,325] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 384} (384 total users)
+[2026-10-05 01:21:32,297] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-05 01:21:32,298] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-05 01:21:32,351] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-05 01:22:17,327] ad9017c0d9cd/INFO/locust.runners: Shape test updating to 768 users at 768.00 spawn rate
+[2026-10-05 01:22:17,328] ad9017c0d9cd/INFO/locust.runners: Sending spawn jobs of 768 users at 768.00 spawn rate to 8 ready workers
+[2026-10-05 01:22:17,393] ad9017c0d9cd/INFO/locust.runners: All users spawned: {"ChatUser": 768} (768 total users)
+[2026-10-05 01:23:02,380] ad9017c0d9cd/INFO/locust.runners: Shape test stopping
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_81269e549fab492c8a69ee37a4c7a26d (index 0) reported that it has stopped
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_81269e549fab492c8a69ee37a4c7a26d (index 0) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_043cb6b5aade4437bb032f810fdbfed1 (index 2) reported that it has stopped
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_624c93f59db847658d8a94750060676f (index 7) reported that it has stopped
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_043cb6b5aade4437bb032f810fdbfed1 (index 2) reported as ready. 7 workers connected.
+[2026-10-05 01:23:02,447] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_624c93f59db847658d8a94750060676f (index 7) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_ebd10a393f464ea38c683713bf83f3f9 (index 4) reported that it has stopped
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_ebd10a393f464ea38c683713bf83f3f9 (index 4) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_50bdef85ad754294ac9a0a0e3a1af23e (index 3) reported that it has stopped
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_50bdef85ad754294ac9a0a0e3a1af23e (index 3) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_06ad93e78d9e48289168b450f704435c (index 6) reported that it has stopped
+[2026-10-05 01:23:02,448] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_06ad93e78d9e48289168b450f704435c (index 6) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,449] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_9dfb4c4126a8402eb90cebf40f390a67 (index 5) reported that it has stopped
+[2026-10-05 01:23:02,449] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_9dfb4c4126a8402eb90cebf40f390a67 (index 5) reported as ready. 8 workers connected.
+[2026-10-05 01:23:02,449] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_771ecc7bc47948309f3f521328492d34 (index 1) reported that it has stopped
+[2026-10-05 01:23:02,449] ad9017c0d9cd/INFO/locust.runners: ad9017c0d9cd_771ecc7bc47948309f3f521328492d34 (index 1) reported as ready. 8 workers connected.
+[2026-10-05 01:23:03,382] ad9017c0d9cd/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 01:23:08,382] ad9017c0d9cd/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,384] ad9017c0d9cd/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:23:08,385] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,385] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_043cb6b5aade4437bb032f810fdbfed1' (index 2) quit. 7 workers ready.
+[2026-10-05 01:23:08,385] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_81269e549fab492c8a69ee37a4c7a26d' (index 0) quit. 6 workers ready.
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_9dfb4c4126a8402eb90cebf40f390a67' (index 5) quit. 5 workers ready.
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_624c93f59db847658d8a94750060676f' (index 7) quit. 4 workers ready.
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_06ad93e78d9e48289168b450f704435c' (index 6) quit. 3 workers ready.
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_ebd10a393f464ea38c683713bf83f3f9' (index 4) quit. 2 workers ready.
+[2026-10-05 01:23:08,386] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_50bdef85ad754294ac9a0a0e3a1af23e' (index 3) quit. 1 workers ready.
+[2026-10-05 01:23:08,387] ad9017c0d9cd/INFO/locust.runners: Worker 'ad9017c0d9cd_771ecc7bc47948309f3f521328492d34' (index 1) quit. 0 workers ready.
+[2026-10-05 01:23:08,387] ad9017c0d9cd/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 01:23:09,447] ad9017c0d9cd/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                 1203     0(0.00%) |  20682     142   45038  21000 |    3.82        0.00
+TTFT     long_generation                                                                 1203     0(0.00%) |   3276      37   18139    570 |    3.82        0.00
+TOTAL    multi_turn                                                                      2308     0(0.00%) |  10815      60   31967   9300 |    7.32        0.00
+TTFT     multi_turn                                                                      2308     0(0.00%) |   4058      43   18357    690 |    7.32        0.00
+TOTAL    short_qa                                                                        3088     0(0.00%) |   5461     123   20594   2600 |    9.79        0.00
+TTFT     short_qa                                                                        3088     0(0.00%) |   4146      36   18403    640 |    9.79        0.00
+TOTAL    summarization                                                                   2073     0(0.00%) |  12724     128   31979  12000 |    6.57        0.00
+TTFT     summarization                                                                   1984     0(0.00%) |   3672      61   18357    650 |    6.29        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     17255     0(0.00%) |   7330      36   45038   4500 |   54.73        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     21000  28000  32000  33000  37000  38000  38000  41000  45000  45000  45000   1203
+TTFT     long_generation                                                                       570   4200   4800   8100   9100  11000  17000  17000  18000  18000  18000   1203
+TOTAL    multi_turn                                                                           9300  13000  16000  18000  21000  24000  28000  29000  31000  32000  32000   2308
+TTFT     multi_turn                                                                            690   4500   8100   8500  10000  17000  17000  18000  18000  18000  18000   2308
+TOTAL    short_qa                                                                             2600   6400   9100  10000  14000  19000  20000  20000  20000  21000  21000   3088
+TTFT     short_qa                                                                              640   4400   8100   8600  13000  17000  17000  18000  18000  18000  18000   3088
+TOTAL    summarization                                                                       12000  16000  19000  19000  23000  26000  31000  31000  32000  32000  32000   2073
+TTFT     summarization                                                                         650   4300   5000   8300   9400  17000  17000  18000  18000  18000  18000   1984
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           4500   8700  11000  14000  19000  23000  31000  35000  40000  45000  45000  17255
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/opt/venv/lib/python3.13/site-packages/locust/stats.py", line 1166, in stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: I/O operation on closed file.
+2026-10-05T01:23:10Z <Greenlet at 0x769af490e700: <bound method StatsCSVFileWriter.stats_writer of <locust.stats.StatsCSVFileWriter object at 0x769af48d06e0>>> failed with ValueError
+
+[2026-10-05 01:23:10,009] ad9017c0d9cd/CRITICAL/locust.main: Unhandled exception in greenlet: <Greenlet at 0x769af490e700: <bound method StatsCSVFileWriter.stats_writer of <locust.stats.StatsCSVFileWriter object at 0x769af48d06e0>>>
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "/opt/venv/lib/python3.13/site-packages/locust/stats.py", line 1166, in stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ^^^^^^^
+ValueError: I/O operation on closed file.

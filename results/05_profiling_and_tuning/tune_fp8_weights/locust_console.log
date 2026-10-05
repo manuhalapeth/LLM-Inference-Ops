@@ -1,0 +1,109 @@
+ Container llm-inference-ops-vllm-1  Running
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-10-05 01:27:18,776] 96b49f358c42/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 01:27:18,804] 96b49f358c42/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 01:27:18,819] 96b49f358c42/INFO/locust.runners: 96b49f358c42_58ba2e309e964abd8665f15e51022af7 (index 0) reported as ready. 1 workers connected.
+[2026-10-05 01:27:18,819] 96b49f358c42/INFO/locust.runners: 96b49f358c42_d998ba84f38441a6a64d32dc10b76b7a (index 1) reported as ready. 2 workers connected.
+[2026-10-05 01:27:18,820] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff549f70a3044762b4b857e610866334 (index 2) reported as ready. 3 workers connected.
+[2026-10-05 01:27:18,820] 96b49f358c42/INFO/locust.runners: 96b49f358c42_98b09c04cb87433d977ac906f723b39b (index 3) reported as ready. 4 workers connected.
+[2026-10-05 01:27:18,820] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff9a19cdf3b44b5db0cca161ce424f32 (index 4) reported as ready. 5 workers connected.
+[2026-10-05 01:27:18,820] 96b49f358c42/INFO/locust.runners: 96b49f358c42_917cc8309cc14a5d861c99acd5e312cf (index 5) reported as ready. 6 workers connected.
+[2026-10-05 01:27:18,989] 96b49f358c42/INFO/locust.runners: 96b49f358c42_948b4d053efa4361865dd82cc3d14577 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 01:27:18,989] 96b49f358c42/INFO/locust.runners: 96b49f358c42_08758742c3624e9086c13bd0024c849e (index 7) reported as ready. 8 workers connected.
+[2026-10-05 01:27:19,820] 96b49f358c42/INFO/locust.runners: Shape test starting.
+[2026-10-05 01:27:19,821] 96b49f358c42/INFO/locust.runners: Shape worker starting
+[2026-10-05 01:27:19,821] 96b49f358c42/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-10-05 01:27:19,821] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-10-05 01:27:19,888] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-10-05 01:28:04,849] 96b49f358c42/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-10-05 01:28:04,849] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-10-05 01:28:04,906] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-10-05 01:28:49,873] 96b49f358c42/INFO/locust.runners: Shape test updating to 192 users at 192.00 spawn rate
+[2026-10-05 01:28:49,873] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 192 users at 192.00 spawn rate to 8 ready workers
+[2026-10-05 01:28:49,928] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 192} (192 total users)
+[2026-10-05 01:29:34,904] 96b49f358c42/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 01:29:34,904] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 01:29:34,970] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 01:30:19,932] 96b49f358c42/INFO/locust.runners: Shape test updating to 384 users at 384.00 spawn rate
+[2026-10-05 01:30:19,932] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 384 users at 384.00 spawn rate to 8 ready workers
+[2026-10-05 01:30:19,987] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 384} (384 total users)
+[2026-10-05 01:31:04,959] 96b49f358c42/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-10-05 01:31:04,959] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-10-05 01:31:05,025] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-10-05 01:31:49,989] 96b49f358c42/INFO/locust.runners: Shape test updating to 768 users at 768.00 spawn rate
+[2026-10-05 01:31:49,989] 96b49f358c42/INFO/locust.runners: Sending spawn jobs of 768 users at 768.00 spawn rate to 8 ready workers
+[2026-10-05 01:31:50,054] 96b49f358c42/INFO/locust.runners: All users spawned: {"ChatUser": 768} (768 total users)
+[2026-10-05 01:32:35,021] 96b49f358c42/INFO/locust.runners: Shape test stopping
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff9a19cdf3b44b5db0cca161ce424f32 (index 4) reported that it has stopped
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff549f70a3044762b4b857e610866334 (index 2) reported that it has stopped
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_08758742c3624e9086c13bd0024c849e (index 7) reported that it has stopped
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_d998ba84f38441a6a64d32dc10b76b7a (index 1) reported that it has stopped
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_98b09c04cb87433d977ac906f723b39b (index 3) reported that it has stopped
+[2026-10-05 01:32:35,077] 96b49f358c42/INFO/locust.runners: 96b49f358c42_917cc8309cc14a5d861c99acd5e312cf (index 5) reported that it has stopped
+[2026-10-05 01:32:35,078] 96b49f358c42/INFO/locust.runners: 96b49f358c42_948b4d053efa4361865dd82cc3d14577 (index 6) reported that it has stopped
+[2026-10-05 01:32:35,078] 96b49f358c42/INFO/locust.runners: 96b49f358c42_58ba2e309e964abd8665f15e51022af7 (index 0) reported that it has stopped
+[2026-10-05 01:32:35,078] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff9a19cdf3b44b5db0cca161ce424f32 (index 4) reported as ready. 1 workers connected.
+[2026-10-05 01:32:35,078] 96b49f358c42/INFO/locust.runners: 96b49f358c42_ff549f70a3044762b4b857e610866334 (index 2) reported as ready. 2 workers connected.
+[2026-10-05 01:32:35,078] 96b49f358c42/INFO/locust.runners: 96b49f358c42_08758742c3624e9086c13bd0024c849e (index 7) reported as ready. 3 workers connected.
+[2026-10-05 01:32:35,079] 96b49f358c42/INFO/locust.runners: 96b49f358c42_d998ba84f38441a6a64d32dc10b76b7a (index 1) reported as ready. 4 workers connected.
+[2026-10-05 01:32:35,079] 96b49f358c42/INFO/locust.runners: 96b49f358c42_98b09c04cb87433d977ac906f723b39b (index 3) reported as ready. 5 workers connected.
+[2026-10-05 01:32:35,079] 96b49f358c42/INFO/locust.runners: 96b49f358c42_917cc8309cc14a5d861c99acd5e312cf (index 5) reported as ready. 6 workers connected.
+[2026-10-05 01:32:35,079] 96b49f358c42/INFO/locust.runners: 96b49f358c42_948b4d053efa4361865dd82cc3d14577 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 01:32:35,079] 96b49f358c42/INFO/locust.runners: 96b49f358c42_58ba2e309e964abd8665f15e51022af7 (index 0) reported as ready. 8 workers connected.
+[2026-10-05 01:32:36,022] 96b49f358c42/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 01:32:41,024] 96b49f358c42/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,025] 96b49f358c42/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_ff9a19cdf3b44b5db0cca161ce424f32' (index 4) quit. 7 workers ready.
+[2026-10-05 01:32:41,027] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_98b09c04cb87433d977ac906f723b39b' (index 3) quit. 6 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_08758742c3624e9086c13bd0024c849e' (index 7) quit. 5 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_ff549f70a3044762b4b857e610866334' (index 2) quit. 4 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_d998ba84f38441a6a64d32dc10b76b7a' (index 1) quit. 3 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_948b4d053efa4361865dd82cc3d14577' (index 6) quit. 2 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_917cc8309cc14a5d861c99acd5e312cf' (index 5) quit. 1 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: Worker '96b49f358c42_58ba2e309e964abd8665f15e51022af7' (index 0) quit. 0 workers ready.
+[2026-10-05 01:32:41,028] 96b49f358c42/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 01:32:42,087] 96b49f358c42/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                 1416     0(0.00%) |  20577    5525   43878  19000 |    4.49        0.00
+TTFT     long_generation                                                                 1416     0(0.00%) |   2478      36   16744    490 |    4.49        0.00
+TOTAL    multi_turn                                                                      2614     0(0.00%) |   8789     669   30947   6700 |    8.30        0.00
+TTFT     multi_turn                                                                      2614     0(0.00%) |   3464      39   17617    560 |    8.30        0.00
+TOTAL    short_qa                                                                        3600     0(0.00%) |   4546      99   20078   1500 |   11.43        0.00
+TTFT     short_qa                                                                        3600     0(0.00%) |   3639      38   17612    530 |   11.43        0.00
+TOTAL    summarization                                                                   2568     0(0.00%) |   9486    1563   32220   6500 |    8.15        0.00
+TTFT     summarization                                                                   2568     0(0.00%) |   3288      54   17568    540 |    8.15        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     20396     0(0.00%) |   6224      36   43878   3800 |   64.73        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     19000  26000  30000  32000  35000  37000  38000  41000  44000  44000  44000   1416
+TTFT     long_generation                                                                       490    930   4200   4600   8400   8800  11000  15000  16000  17000  17000   1416
+TOTAL    multi_turn                                                                           6700  11000  13000  15000  18000  22000  26000  27000  30000  31000  31000   2614
+TTFT     multi_turn                                                                            560   4100   4900   8200   9000  16000  17000  17000  18000  18000  18000   2614
+TOTAL    short_qa                                                                             1500   4900   7000   9100  12000  18000  19000  20000  20000  20000  20000   3600
+TTFT     short_qa                                                                              530   4100   4900   8300  11000  17000  17000  17000  18000  18000  18000   3600
+TOTAL    summarization                                                                        6500  11000  14000  15000  20000  24000  27000  28000  32000  32000  32000   2568
+TTFT     summarization                                                                         540   3800   4500   7800   9100  17000  17000  17000  18000  18000  18000   2568
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           3800   7200   8900  11000  17000  21000  29000  33000  39000  43000  44000  20396
+

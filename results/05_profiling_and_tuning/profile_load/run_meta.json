@@ -1,0 +1,1 @@
+{"start": 1791165067.262521, "steps": [128], "step_seconds": 75, "category_weights": {"short_qa": 0.35, "multi_turn": 0.25, "summarization": 0.25, "long_generation": 0.15}}

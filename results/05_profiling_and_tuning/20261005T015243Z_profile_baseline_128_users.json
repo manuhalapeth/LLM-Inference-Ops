@@ -1,0 +1,154 @@
+{
+  "run_id": "20261005T015243Z_profile_baseline_128_users",
+  "phase": "05_profiling_and_tuning",
+  "name": "profile_baseline_128_users",
+  "timestamp": "2026-10-05T01:52:43.119962+00:00",
+  "config": {
+    "trace_dir": "results/profiles"
+  },
+  "load": {
+    "label": "baseline_128_users"
+  },
+  "metrics": {
+    "kernels": 24306,
+    "window_ms": 1309.5437319946288,
+    "gpu_busy_ratio": 0.9785588260848231,
+    "kernel_time_ms": 1281.4655999999868,
+    "by_category": {
+      "matmul (GEMM)": {
+        "ms": 934.8337130000026,
+        "share": 0.7295035567088279
+      },
+      "attention": {
+        "ms": 302.81617200000176,
+        "share": 0.23630456564733762
+      },
+      "activation": {
+        "ms": 10.63135400000001,
+        "share": 0.008296246110703337
+      },
+      "normalization": {
+        "ms": 10.333220000000015,
+        "share": 0.00806359530837201
+      },
+      "memory and copies": {
+        "ms": 10.055480999999892,
+        "share": 0.007846859876691186
+      },
+      "sampling": {
+        "ms": 9.138428,
+        "share": 0.007131231614801126
+      },
+      "other": {
+        "ms": 3.6572319999999903,
+        "share": 0.0028539447332804157
+      }
+    },
+    "top_kernels": [
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_128x64_64x3_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_128x64_64x3_tn_align8::",
+        "ms": 814.9112490000005,
+        "share": 0.6359212834117505,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::b",
+        "ms": 204.66201199999983,
+        "share": 0.1597093296925036,
+        "category": "attention"
+      },
+      {
+        "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 64, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 64, 4, cutlass::bfl",
+        "ms": 94.88678700000008,
+        "share": 0.07404552022309538,
+        "category": "attention"
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_128x128_32x4_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_128x128_32x4_tn_align8",
+        "ms": 55.21299899999995,
+        "share": 0.04308582220232873,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x256_32x4_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x256_32x4_tn_align8::",
+        "ms": 35.403670999999996,
+        "share": 0.027627484498998926,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x64_32x6_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x64_32x6_tn_align8::Pa",
+        "ms": 17.416561999999995,
+        "share": 0.013591127221831138,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "triton_poi_fused_mul_silu_slice_1",
+        "ms": 10.63135400000001,
+        "share": 0.008296246110703337,
+        "category": "activation"
+      },
+      {
+        "name": "void cublasLt::splitKreduce_kernel<32, 16, int, __nv_bfloat16, __nv_bfloat16, float, __nv_bfloat16, false, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, true, fa",
+        "ms": 8.124971999999998,
+        "share": 0.006340374646030358,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "_penalties_kernel",
+        "ms": 6.054340000000001,
+        "share": 0.004724543522666596,
+        "category": "sampling"
+      },
+      {
+        "name": "triton_red_fused_fused_add_rms_norm_0",
+        "ms": 5.299338000000002,
+        "share": 0.004135372810631871,
+        "category": "normalization"
+      },
+      {
+        "name": "triton_red_fused_fused_add_rms_norm_2",
+        "ms": 4.763798000000011,
+        "share": 0.003717460695004267,
+        "category": "normalization"
+      },
+      {
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::opera",
+        "ms": 4.293533000000054,
+        "share": 0.0033504863493800364,
+        "category": "memory and copies"
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x64_32x4_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x64_32x4_tn_align8::",
+        "ms": 3.7642599999999993,
+        "share": 0.0029374647278865994,
+        "category": "matmul (GEMM)"
+      },
+      {
+        "name": "void vllm::reshape_and_cache_flash_kernel<__nv_bfloat16, __nv_bfloat16, (vllm::Fp8KVCacheDataType)0>(__nv_bfloat16 const*, __nv_bfloat16 const*, __nv_bfloat16*,",
+        "ms": 3.267373000000019,
+        "share": 0.0025497157317372022,
+        "category": "attention"
+      },
+      {
+        "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::opera",
+        "ms": 3.1785599999999996,
+        "share": 0.0024804099306294544,
+        "category": "memory and copies"
+      }
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "6896b27245f9453c7da1d036825929449ad97ccc",
+    "git_dirty": true
+  },
+  "notes": ""
+}
