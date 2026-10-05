@@ -9,7 +9,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 set -a; . ./.env; set +a
 
-PHASE=06_scaling_out
+PHASE="${PHASE6_DIR:-06_scaling_out}"   # e.g. 06_scaling_out_4gpu for a run on another machine
 OUT=results/$PHASE
 mkdir -p "$OUT"
 export LOAD_PHASE=$PHASE
