@@ -16,6 +16,7 @@ Standard library only.
 import argparse
 import json
 import math
+import re
 import os
 import sys
 import urllib.parse
@@ -30,10 +31,14 @@ PHASE = "04_breaking_one_gpu"
 
 
 class Prometheus:
-    def __init__(self, url: str):
+    def __init__(self, url: str, vllm_selector: str = ""):
         self.url = url
+        # e.g. 'model_name="llm"': limit every vLLM query to one model when several share a cluster
+        self.vllm_selector = vllm_selector
 
     def _get(self, path: str, **params) -> list:
+        if self.vllm_selector and "query" in params:
+            params["query"] = re.sub(r"(vllm:[A-Za-z_:]+)(?![A-Za-z_:{])", r"\1{" + self.vllm_selector + "}", params["query"])
         with urllib.request.urlopen(f"{self.url}{path}?{urllib.parse.urlencode(params)}", timeout=30) as resp:
             return json.load(resp)["data"]["result"]
 
@@ -130,6 +135,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--label", default="baseline")
     parser.add_argument("--phase", default=PHASE, help="results/<phase>/<label>/ holds the Locust logs")
+    parser.add_argument("--vllm-selector", default="", help='only this model\'s vLLM metrics, e.g. model_name="llm"')
     parser.add_argument("--prometheus", default="http://localhost:9090")
     parser.add_argument("--warmup-s", type=float, default=15, help="skip this much at the start of every step")
     parser.add_argument("--ttft-slo-s", type=float, default=1.0)
@@ -139,7 +145,7 @@ def main() -> None:
     meta = json.loads((run_dir / "run_meta.json").read_text())
     rows = [json.loads(line) for f in sorted(run_dir.glob("requests_*.jsonl")) for line in f.read_text().splitlines() if line]
     try:
-        prom = Prometheus(args.prometheus)
+        prom = Prometheus(args.prometheus, args.vllm_selector)
         prom.at("up", meta["start"])
     except OSError:
         prom = None
