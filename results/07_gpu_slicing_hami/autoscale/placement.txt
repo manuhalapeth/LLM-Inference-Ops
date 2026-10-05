@@ -1,0 +1,34 @@
+Mon Oct  5 21:40:21 UTC 2026
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE     NOMINATED NODE   READINESS GATES
+gateway-55b4958c4c-bk8rb        1/1     Running   0          46m   10.42.0.16   ubuntu   <none>           <none>
+gpu-exporter-765d8d8ccc-g4tm6   1/1     Running   0          46m   10.42.0.17   ubuntu   <none>           <none>
+grafana-6dbb45945d-m58zg        1/1     Running   0          46m   10.42.0.13   ubuntu   <none>           <none>
+jaeger-7d5ff4bccc-wh455         1/1     Running   0          46m   10.42.0.14   ubuntu   <none>           <none>
+nginx-8dcf46d85-9nr2g           1/1     Running   0          46m   10.42.0.15   ubuntu   <none>           <none>
+prometheus-fff5876d5-mfrg8      1/1     Running   0          46m   10.42.0.12   ubuntu   <none>           <none>
+vllm-large-5c9c77ff76-bv8tt     1/1     Running   0          17m   10.42.0.24   ubuntu   <none>           <none>
+
+Mon Oct  5 21:40:21 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5090        Off |   00000000:00:07.0 Off |                  N/A |
+| 31%   44C    P8              6W /  600W |       0MiB /  32607MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 5090        Off |   00000000:00:09.0 Off |                  N/A |
+| 39%   43C    P8             15W /  575W |   28711MiB /  32607MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    1   N/A  N/A           24137      C   VLLM::EngineCore                      28702MiB |
++-----------------------------------------------------------------------------------------+

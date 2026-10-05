@@ -1,0 +1,24 @@
+17m         Normal    KEDAScalerInfo       scaledobject/vllm-large-scaler                       PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+17m         Normal    KEDAScalerInfo       scaledobject/vllm-large-scaler                       PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+17m         Normal    KEDAScalerInfo       scaledobject/vllm-large-scaler                       PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+17m         Normal    KEDAScalersStarted   scaledobject/vllm-large-scaler                       Scaler prometheus is built
+17m         Normal    KEDAScalersStarted   scaledobject/vllm-large-scaler                       Started scalers watch
+17m         Normal    ScaledObjectReady    scaledobject/vllm-large-scaler                       ScaledObject is ready for scaling
+17m         Normal    ScaledObjectReady    scaledobject/vllm-large-scaler                       ScaledObject is ready for scaling
+46m         Normal    ScalingReplicaSet    deployment/gpu-exporter                              Scaled up replica set gpu-exporter-765d8d8ccc from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/jaeger                                    Scaled up replica set jaeger-7d5ff4bccc from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/gateway                                   Scaled up replica set gateway-55b4958c4c from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/nginx                                     Scaled up replica set nginx-8dcf46d85 from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/grafana                                   Scaled up replica set grafana-6dbb45945d from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/prometheus                                Scaled up replica set prometheus-fff5876d5 from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled up replica set vllm-large-5ccfb79f7c from 0 to 1
+46m         Normal    ScalingReplicaSet    deployment/vllm-small                                Scaled up replica set vllm-small-7b4b784cbc from 0 to 1
+35m         Normal    ScalingReplicaSet    deployment/vllm-small                                Scaled up replica set vllm-small-79f7896df4 from 0 to 1
+35m         Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled up replica set vllm-large-749668648 from 0 to 1
+26m         Normal    ScalingReplicaSet    deployment/vllm-small                                Scaled up replica set vllm-small-777777dc94 from 0 to 1
+26m         Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled up replica set vllm-large-6d58b5f7b from 0 to 1
+17m         Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled up replica set vllm-large-5c9c77ff76 from 0 to 1
+13m         Normal    SuccessfulRescale    horizontalpodautoscaler/keda-hpa-vllm-large-scaler   New size: 2; reason: external metric s0-prometheus(&LabelSelector{MatchLabels:map[string]string{scaledobject.keda.sh/name: vllm-large-scaler,},MatchExpressions:[]LabelSelectorRequirement{},}) above target
+13m         Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled up replica set vllm-large-5c9c77ff76 from 1 to 2
+5m46s       Normal    ScalingReplicaSet    deployment/vllm-large                                Scaled down replica set vllm-large-5c9c77ff76 from 2 to 1
+5m46s       Normal    SuccessfulRescale    horizontalpodautoscaler/keda-hpa-vllm-large-scaler   New size: 1; reason: All metrics below target

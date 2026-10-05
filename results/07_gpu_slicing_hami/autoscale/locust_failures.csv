@@ -1,0 +1,5 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+TOTAL,summarization,Exception('ChunkedEncodingError: Response ended prematurely'),10,2026-10-05T21:35:06Z,2026-10-05T21:35:06Z
+TOTAL,multi_turn,Exception('ChunkedEncodingError: Response ended prematurely'),5,2026-10-05T21:35:06Z,2026-10-05T21:35:06Z
+TOTAL,long_generation,Exception('ChunkedEncodingError: Response ended prematurely'),16,2026-10-05T21:35:06Z,2026-10-05T21:35:06Z
+TOTAL,short_qa,Exception('ChunkedEncodingError: Response ended prematurely'),1,2026-10-05T21:35:06Z,2026-10-05T21:35:06Z

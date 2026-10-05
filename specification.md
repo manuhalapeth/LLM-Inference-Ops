@@ -713,3 +713,111 @@ The first 2-copy run had 1,574 errors (502, "no live upstreams") at 768 users. v
 ### Phase 6 takeaway
 
 Two RTX 5090s serve 16,022 tokens/s as two independent copies (1.84×, 92% efficient). Least connections beats round robin and sticky routing by about 10× on tail latency near capacity. Failover costs only the requests in flight. On these GPUs, tensor parallel is ~13× slower than copies (no peer-to-peer), a Mooncake store over TCP cuts throughput by a third to two thirds under concurrent load, and vLLM 0.30.0's disaggregated serving crashed. The NGINX defaults nearly caused a full outage; health checks need tuning against the backend's keepalive behaviour.
+
+## Phase 7: Kubernetes, GPU sharing (HAMi) and autoscaling (KEDA)
+
+### Hardware
+
+| | |
+|---|---|
+| Provider | Vast.ai, verified host, on demand, Ubuntu 22.04 VM template (`vastai/kvm:cuda-12.9.1-auto`) |
+| Host | host 698358, machine 151050, reliability 99.13% |
+| GPUs | **2×** NVIDIA GeForce RTX 5090, 32 GB each |
+| GPU driver / max CUDA | 580.95.05 / 13.2 |
+| CPU | AMD Ryzen 9 9950X3D, 32 vCPUs |
+| System RAM | 126 GB |
+| Disk | 130 GB NVMe (WD_BLACK SN850X), PCIe 5.0 ×8 |
+| Price | $1.439/hr for the machine (both GPUs) |
+
+### Software
+
+| | |
+|---|---|
+| Kubernetes | k3s v1.34.12+k3s1, one node, NVIDIA as the default container runtime, Traefik off |
+| GPU sharing | HAMi 2.10.0 (Helm), kube-scheduler image from registry.k8s.io; 10 virtual GPUs per physical GPU |
+| Autoscaling | KEDA 2.21.0, Prometheus trigger |
+| Tenant A | Qwen/Qwen2.5-7B-Instruct, vLLM 0.30.0, FP8 weights, `--gpu-memory-utilization 0.90`, behind gateway (8 workers) and NGINX (least connections over a headless Service) |
+| Tenant B | Qwen/Qwen2.5-1.5B-Instruct, vLLM 0.30.0, reached directly through a NodePort |
+| Load | Tenant A: Phase 4 mix, 32 → 256 users, 60 s per step. Tenant B: 4 clients sending short questions (32 output tokens), starting 60 s before A |
+| Code version | git `af72b37` plus the HAMi dashboard metric fix made during the session |
+
+| Scenario | GPUs | Tenant A limits | Tenant B limits |
+|---|---|---|---|
+| isolated | 2 | whole GPU 0 | whole GPU 1 |
+| shared | 1 | GPU 0, `gpumem` 20,000 MiB | GPU 0, `gpumem` 9,000 MiB |
+| shared_cores | 1 | as shared, `gpucores` 70 | as shared, `gpucores` 30 |
+| autoscale | 1 → 2 | whole GPUs, KEDA min 1 max 2, threshold 180 requests (running + waiting) per pod, scale down stabilization 90 s | none |
+
+### Time and money
+
+| | |
+|---|---|
+| Session | ~1 h 35 min: setup ~15 min (k3s, HAMi, KEDA, 22 GB vLLM image), runs 46 min, Grafana and a dashboard fix ~30 min |
+| Credit used | ~$2.30 ($16.29 at 9 min, estimated from the hourly price after that) |
+| Credit used, Phases 0 to 7 | ~$10.80 |
+
+### Results: placement and memory
+
+| Scenario | GPU 0 | GPU 1 |
+|---|---|---|
+| isolated | tenant A, 28.7 GB | tenant B, 29.3 GB (a 1.5B model sized to the whole card) |
+| shared | tenant A 17.8 GB (limit 20,000 MiB) + tenant B 8.5 GB (limit 9,000 MiB) | empty |
+| shared_cores | same as shared | empty |
+
+vLLM sized its KV cache to the HAMi slice, not the physical card.
+
+### Results: tenant A (the busy model)
+
+From `results/07_gpu_slicing_hami/*_load_sweep_*.json`.
+
+| Users | Isolated tok/s | TTFT p95 | ITL p50 | Shared tok/s | TTFT p95 | ITL p50 | Shared + cores tok/s | TTFT p95 | ITL p50 |
+|---|---|---|---|---|---|---|---|---|---|
+| 32 | 4,199 | 60 ms | 7.4 ms | 2,003 | 108 ms | 15.7 ms | 2,040 | 104 ms | 15.5 ms |
+| 64 | 6,288 | 72 ms | 10.0 ms | 3,245 | 124 ms | 19.4 ms | 3,311 | 116 ms | 19.2 ms |
+| 128 | **7,873** | 112 ms | 16.1 ms | **3,964** | 184 ms | 32.1 ms | **3,807** | 202 ms | 33.4 ms |
+| 192 | 7,791 | 142 ms | 24.5 ms | 3,712 | 257 ms | 52.3 ms | 3,662 | 260 ms | 53.0 ms |
+| 256 | 7,664 | 174 ms | 33.0 ms | 3,634 | 322 ms | 69.0 ms | 3,507 | 331 ms | 71.5 ms |
+
+Zero errors in all three sweeps.
+
+| Scenario | GPUs | Peak tok/s | Per GPU | Cost per 1M output tokens ($0.72 per GPU hour) |
+|---|---|---|---|---|
+| isolated | 2 | 7,873 | 3,936 | $0.0508 |
+| shared | 1 | 3,964 | 3,964 | $0.0504 |
+| shared + cores | 1 | 3,807 | 3,807 | $0.0525 |
+
+### Results: tenant B (the quiet neighbour)
+
+From `results/07_gpu_slicing_hami/*_tenants_*.json`. TTFT p50 / p95, full answer p95.
+
+| Tenant A load | Isolated | Shared | Shared + cores |
+|---|---|---|---|
+| B alone | 10 / 13 ms, 110 ms | 10 / 13 ms, 110 ms | 11 / 13 ms, 110 ms |
+| 32 users | 9 / 12 ms, 109 ms | 21 / 23 ms, 245 ms | 21 / 23 ms, 243 ms |
+| 128 users | 9 / 13 ms, 110 ms | 22 / 24 ms, 259 ms | 22 / 24 ms, 260 ms |
+| 256 users | 9 / 13 ms, 110 ms | 23 / 24 ms, 257 ms | 23 / 24 ms, 258 ms |
+
+Zero tenant B errors in every scenario.
+
+### Results: autoscaling (KEDA, 1 → 2 pods)
+
+From `results/07_gpu_slicing_hami/*_timeline_autoscale.json` and `autoscale/replicas.jsonl`. Load: 64 users for 2 min, 384 for 6 min, 64 for 5 min.
+
+| | |
+|---|---|
+| Load jumps to 384 users | 120 s |
+| KEDA asks for a 2nd pod | 132 s (12 s later) |
+| 2nd pod ready | 271 s (**139 s** cold start, weights already on local disk) |
+| While waiting | TTFT p95 ~4.8 s, ~125 requests waiting, ~450 requests finished per 15 s |
+| With 2 pods | TTFT p95 0.15 s, ~1,000 requests finished per 15 s (2.2×), ~15K tokens/s |
+| Load falls to 64 users | 480 s |
+| Back to 1 pod | 563 s |
+| Errors | **32 of 30,250 (0.1%)**, all at ~593 s: streams cut when the removed pod was killed after the default 30 s grace period (`ChunkedEncodingError`) |
+
+### Incident: HAMi dashboard panels empty
+
+HAMi 2.10 renamed its metrics (`vGPU_device_memory_usage_in_bytes` → `hami_vgpu_memory_used_bytes`, `HostCoreUtilization` → `hami_container_device_utilization_ratio` and others). Prometheus was scraping them all along; the two panels were fixed during the session and Grafana reloaded.
+
+### Phase 7 takeaway
+
+HAMi slices an RTX 5090 between two vLLM servers with no changes, and vLLM respects the memory slice. Sharing halves the busy model's throughput but keeps per GPU throughput the same (3,964 vs 3,936 tok/s) and frees a whole GPU that a small model was wasting. The quiet tenant's TTFT doubles (10 → 22 ms) but stays flat as the neighbour's load grows, with zero errors. Core limits changed nothing measurable here. KEDA scaled out and back in on requests inside vLLM; the cost of scaling out is a 139 s cold start (TTFT p95 ~4.8 s meanwhile), and scaling in drops in-flight streams unless the pod gets a longer grace period.

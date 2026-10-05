@@ -1,0 +1,256 @@
+
+==> Switching off automatic package updates (they can replace the NVIDIA driver mid session)
+
+==> Checking the GPUs
+index, name, uuid, memory.total [MiB], driver_version
+0, NVIDIA GeForce RTX 5090, GPU-dbb9d8a8-4305-2390-645b-442baf5e6ba8, 32607 MiB, 580.95.05
+1, NVIDIA GeForce RTX 5090, GPU-1add1e92-2e18-df04-c21e-49614e7fda48, 32607 MiB, 580.95.05
+
+==> NVIDIA Container Toolkit (k3s needs nvidia-container-runtime before it starts)
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+Selecting previously unselected package libnvidia-container1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130734 files and directories currently installed.)
+Preparing to unpack .../libnvidia-container1_1.20.1-1_amd64.deb ...
+Unpacking libnvidia-container1:amd64 (1.20.1-1) ...
+Selecting previously unselected package libnvidia-container-tools.
+Preparing to unpack .../libnvidia-container-tools_1.20.1-1_amd64.deb ...
+Unpacking libnvidia-container-tools (1.20.1-1) ...
+Selecting previously unselected package nvidia-container-toolkit-base.
+Preparing to unpack .../nvidia-container-toolkit-base_1.20.1-1_amd64.deb ...
+Unpacking nvidia-container-toolkit-base (1.20.1-1) ...
+Selecting previously unselected package nvidia-container-toolkit.
+Preparing to unpack .../nvidia-container-toolkit_1.20.1-1_amd64.deb ...
+Unpacking nvidia-container-toolkit (1.20.1-1) ...
+Setting up nvidia-container-toolkit-base (1.20.1-1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-cdi-refresh.path → /lib/systemd/system/nvidia-cdi-refresh.path.
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-cdi-refresh.service → /lib/systemd/system/nvidia-cdi-refresh.service.
+Setting up libnvidia-container1:amd64 (1.20.1-1) ...
+Setting up libnvidia-container-tools (1.20.1-1) ...
+Setting up nvidia-container-toolkit (1.20.1-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+==> Docker (to build the gateway image and run Locust)
+
+==> k3s v1.34.12+k3s1, with NVIDIA as the default runtime
+[INFO]  Using v1.34.12+k3s1 as release
+[INFO]  Downloading hash https://github.com/k3s-io/k3s/releases/download/v1.34.12%2Bk3s1/sha256sum-amd64.txt
+[INFO]  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.34.12%2Bk3s1/k3s
+[INFO]  Verifying binary download
+[INFO]  Installing k3s to /usr/local/bin/k3s
+[INFO]  Skipping installation of SELinux RPM
+[INFO]  Creating /usr/local/bin/kubectl symlink to k3s
+[INFO]  Creating /usr/local/bin/crictl symlink to k3s
+[INFO]  Skipping /usr/local/bin/ctr symlink to k3s, command exists in PATH at /usr/bin/ctr
+[INFO]  Creating killall script /usr/local/bin/k3s-killall.sh
+[INFO]  Creating uninstall script /usr/local/bin/k3s-uninstall.sh
+[INFO]  env: Creating environment file /etc/systemd/system/k3s.service.env
+[INFO]  systemd: Creating service file /etc/systemd/system/k3s.service
+[INFO]  systemd: Enabling k3s unit
+Created symlink /etc/systemd/system/multi-user.target.wants/k3s.service → /etc/systemd/system/k3s.service.
+[INFO]  systemd: Starting k3s
+NAME     STATUS   ROLES           AGE   VERSION         INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+ubuntu   Ready    control-plane   5s    v1.34.12+k3s1   10.0.2.15     <none>        Ubuntu 22.04.5 LTS   6.8.0-59-generic   containerd://2.2.7-k3s1
+
+==> Helm
+Downloading https://get.helm.sh/helm-v3.22.0-linux-amd64.tar.gz
+Verifying checksum... Done.
+Preparing to install helm into /usr/local/bin
+helm installed into /usr/local/bin/helm
+
+==> HAMi 2.10.0 (GPU sharing)
+node/ubuntu labeled
+Release "hami" does not exist. Installing it now.
+NAME: hami
+LAST DEPLOYED: Mon Oct  5 20:49:35 2026
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+Resource name: nvidia.com/gpu
+
+==> KEDA 2.21.0 (autoscaling)
+Release "keda" does not exist. Installing it now.
+NAME: keda
+LAST DEPLOYED: Mon Oct  5 20:50:20 2026
+NAMESPACE: keda
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+:::^.     .::::^:     :::::::::::::::    .:::::::::.                   .^.                  
+7???~   .^7????~.     7??????????????.   :?????????77!^.              .7?7.                 
+7???~  ^7???7~.       ~!!!!!!!!!!!!!!.   :????!!!!7????7~.           .7???7.                
+7???~^7????~.                            :????:    :~7???7.         :7?????7.               
+7???7????!.           ::::::::::::.      :????:      .7???!        :7??77???7.              
+7????????7:           7???????????~      :????:       :????:      :???7?5????7.             
+7????!~????^          !77777777777^      :????:       :????:     ^???7?#P7????7.            
+7???~  ^????~                            :????:      :7???!     ^???7J#@J7?????7.           
+7???~   :7???!.                          :????:   .:~7???!.    ~???7Y&@#7777????7.          
+7???~    .7???7:      !!!!!!!!!!!!!!!    :????7!!77????7^     ~??775@@@GJJYJ?????7.         
+7???~     .!????^     7?????????????7.   :?????????7!~:      !????G@@@@@@@@5??????7:        
+::::.       :::::     :::::::::::::::    .::::::::..        .::::JGGGB@@@&7:::::::::        
+                                                                      ?@@#~                  
+                                                                      P@B^                   
+                                                                    :&G:                    
+                                                                    !5.                     
+                                                                    .Kubernetes Event-driven Autoscaling (KEDA) - Application autoscaling made simple.
+
+Get started by deploying Scaled Objects to your cluster:
+    - Information about Scaled Objects : https://keda.sh/docs/latest/concepts/
+    - Samples: https://github.com/kedacore/samples
+
+Get information about the deployed ScaledObjects:
+  kubectl get scaledobject [--namespace <namespace>]
+
+Get details about a deployed ScaledObject:
+  kubectl describe scaledobject <scaled-object-name> [--namespace <namespace>]
+
+Get information about the deployed TriggerAuthentications:
+  kubectl get triggerauthentication [--namespace <namespace>]
+
+Get details about a deployed TriggerAuthentication:
+  kubectl describe triggerauthentication <trigger-authentication-name> [--namespace <namespace>]
+
+Get an overview of the Horizontal Pod Autoscalers (HPA) that KEDA is using behind the scenes:
+  kubectl get hpa [--all-namespaces] [--namespace <namespace>]
+
+Learn more about KEDA:
+- Documentation: https://keda.sh/
+- Support: https://keda.sh/support/
+- File an issue: https://github.com/kedacore/keda/issues/new/choose
+
+==> Getting the code
+Cloning into '/root/LLM-Inference-Ops'...
+
+==> Gateway image (built with Docker, imported into k3s)
+
+==> Pulling the vLLM image into k3s (~22 GB)
+
+==> Deploying the base stack
+Waiting for deployment "gateway" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "gateway" rollout to finish: 0 of 1 updated replicas are available...
+deployment "gateway" successfully rolled out
+Waiting for deployment "gpu-exporter" rollout to finish: 0 of 1 updated replicas are available...
+deployment "gpu-exporter" successfully rolled out
+Waiting for deployment "grafana" rollout to finish: 0 of 1 updated replicas are available...
+deployment "grafana" successfully rolled out
+deployment "jaeger" successfully rolled out
+deployment "nginx" successfully rolled out
+deployment "prometheus" successfully rolled out
+
+==> Ready
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS        AGE     IP           NODE     NOMINATED NODE   READINESS GATES
+keda          keda-admission-webhooks-7dbfdf4d44-qkj5h           1/1     Running   0               3m26s   10.42.0.11   ubuntu   <none>           <none>
+keda          keda-operator-7b8cf9b678-6sq5v                     1/1     Running   1 (3m14s ago)   3m26s   10.42.0.9    ubuntu   <none>           <none>
+keda          keda-operator-metrics-apiserver-7b8d7dd476-jlvxp   1/1     Running   0               3m26s   10.42.0.10   ubuntu   <none>           <none>
+kube-system   coredns-5688c889c9-7xmvg                           1/1     Running   0               4m13s   10.42.0.4    ubuntu   <none>           <none>
+kube-system   hami-device-plugin-d2jgh                           2/2     Running   0               4m2s    10.42.0.6    ubuntu   <none>           <none>
+kube-system   hami-scheduler-6bff5966bf-fqmtl                    2/2     Running   0               4m2s    10.42.0.7    ubuntu   <none>           <none>
+kube-system   local-path-provisioner-67d6887d65-6c9wn            1/1     Running   0               4m13s   10.42.0.2    ubuntu   <none>           <none>
+kube-system   metrics-server-74c8c4d68b-sfcl4                    1/1     Running   0               4m13s   10.42.0.3    ubuntu   <none>           <none>
+llmops        gateway-55b4958c4c-bk8rb                           1/1     Running   0               10s     10.42.0.16   ubuntu   <none>           <none>
+llmops        gpu-exporter-765d8d8ccc-g4tm6                      1/1     Running   0               10s     10.42.0.17   ubuntu   <none>           <none>
+llmops        grafana-6dbb45945d-m58zg                           1/1     Running   0               10s     10.42.0.13   ubuntu   <none>           <none>
+llmops        jaeger-7d5ff4bccc-wh455                            1/1     Running   0               10s     10.42.0.14   ubuntu   <none>           <none>
+llmops        nginx-8dcf46d85-9nr2g                              1/1     Running   0               10s     10.42.0.15   ubuntu   <none>           <none>
+llmops        prometheus-fff5876d5-mfrg8                         1/1     Running   0               10s     10.42.0.12   ubuntu   <none>           <none>
+Cluster is up. Tunnels from your laptop: ~/llm-inference-ops/notes/tunnel.sh PORT IP
+  Grafana http://localhost:3000   Prometheus http://localhost:9090   Jaeger http://localhost:16686
+Next: ./scripts/run_phase7.sh
+==> [isolated]
+pod/vllm-large-5ccfb79f7c-tsvgx condition met
+pod/vllm-small-7b4b784cbc-zwhtq condition met
+    32   18.94       4199      45ms      60ms     5.5s    7.4ms       32        0      5%        0  100%       0
+    64   28.48       6288      46ms      72ms     7.7s   10.0ms       64        0      9%        0  100%       0
+   128   33.94       7873      67ms     112ms    12.4s   16.1ms      127        0     18%        0  100%       0
+   192   33.16       7791      98ms     142ms    18.9s   24.5ms      189        0     26%        0  100%       0
+   256   28.30       7664     123ms     174ms    22.9s   33.0ms      254        0     33%        0  100%       0
+
+breaking points: {"requests_queue": null, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": null, "errors_over_1pct": null, "peak_throughput_users": 128, "peak_output_tokens_per_s": 7872.82, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T210513Z_load_sweep_isolated.json
+window             B TTFT p50 B TTFT p95 B e2e p95 B err    A tok/s A TTFT p95 A ITL p50
+B alone                  10ms       13ms     110ms     0          -          -         -
+A at 32 users             9ms       12ms     109ms     0       4199       60ms       7ms
+A at 64 users             9ms       13ms     110ms     0       6288       72ms      10ms
+A at 128 users            9ms       13ms     110ms     0       7873      112ms      16ms
+A at 192 users            9ms       13ms     110ms     0       7791      142ms      25ms
+A at 256 users            9ms       13ms     110ms     0       7664      174ms      33ms
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T210513Z_tenants_isolated.json
+==> [shared]
+pod/vllm-large-749668648-56r4d condition met
+pod/vllm-small-79f7896df4-6442l condition met
+    32    8.58       2003      50ms     108ms    12.1s   15.7ms       32        0     13%        0   99%       0
+    64   14.60       3245      68ms     124ms    15.0s   19.4ms       64        0     22%        0   99%       0
+   128   17.68       3964     110ms     184ms    27.3s   32.1ms      127        0     43%        0   99%       0
+   192   15.86       3712     171ms     257ms    44.8s   52.3ms      190        0     63%        0   99%       0
+   256   10.52       3634     232ms     322ms    23.2s   69.0ms      254        0     84%        0   99%       0
+
+breaking points: {"requests_queue": null, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": null, "errors_over_1pct": null, "peak_throughput_users": 128, "peak_output_tokens_per_s": 3963.84, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T211401Z_load_sweep_shared.json
+window             B TTFT p50 B TTFT p95 B e2e p95 B err    A tok/s A TTFT p95 A ITL p50
+B alone                  10ms       13ms     110ms     0          -          -         -
+A at 32 users            21ms       23ms     245ms     0       2003      108ms      16ms
+A at 64 users            22ms       23ms     257ms     0       3245      124ms      19ms
+A at 128 users           22ms       24ms     259ms     0       3964      184ms      32ms
+A at 192 users           22ms       24ms     254ms     0       3712      257ms      52ms
+A at 256 users           23ms       24ms     257ms     0       3634      322ms      69ms
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T211401Z_tenants_shared.json
+==> [shared_cores]
+pod/vllm-large-6d58b5f7b-4m7tc condition met
+pod/vllm-small-777777dc94-2sn2p condition met
+    32    8.62       2040      50ms     104ms    12.0s   15.5ms       32        0     12%        0   99%       0
+    64   13.44       3311      63ms     116ms    14.9s   19.2ms       63        0     21%        0   99%       0
+   128   16.22       3807     116ms     202ms    25.8s   33.4ms      127        0     46%        0   99%       0
+   192   16.12       3662     175ms     260ms    45.4s   53.0ms      191        0     64%        0   99%       0
+   256   10.74       3507     239ms     331ms    20.8s   71.5ms      254        0     86%        0   99%       0
+
+breaking points: {"requests_queue": null, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": null, "errors_over_1pct": null, "peak_throughput_users": 128, "peak_output_tokens_per_s": 3807.36, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T212249Z_load_sweep_shared_cores.json
+window             B TTFT p50 B TTFT p95 B e2e p95 B err    A tok/s A TTFT p95 A ITL p50
+B alone                  11ms       13ms     110ms     0          -          -         -
+A at 32 users            21ms       23ms     243ms     0       2040      104ms      15ms
+A at 64 users            22ms       23ms     257ms     0       3311      116ms      19ms
+A at 128 users           22ms       24ms     260ms     0       3807      202ms      33ms
+A at 192 users           22ms       24ms     254ms     0       3662      260ms      53ms
+A at 256 users           23ms       24ms     258ms     0       3507      331ms      72ms
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T212249Z_tenants_shared_cores.json
+==> [autoscale] 1 to 2 pods with KEDA
+Warning: PollingInterval is configured but is not relevant for scaling. It only affects scaling when minReplicaCount = 0, idleReplicaCount is set, or useCachedMetrics is enabled, but it still controls how often KEDA refreshes the ScaledObject status conditions and events
+Warning: CooldownPeriod is configured but is not relevant. CooldownPeriod is only relevant when minReplicaCount = 0 or idleReplicaCount is set
+pod/vllm-large-5c9c77ff76-bv8tt condition met
+  750s  ok  404  errors   0  TTFT p95     74 ms    
+  765s  ok  386  errors   0  TTFT p95     85 ms    
+  780s  ok    8  errors   0  TTFT p95     75 ms    
+
+30250 requests, 32 errors
+saved /root/LLM-Inference-Ops/results/07_gpu_slicing_hami/20261005T214022Z_timeline_autoscale.json
+==> Done. Results are in results/07_gpu_slicing_hami/
+20261005T210513Z_load_sweep_isolated.json
+20261005T210513Z_tenants_isolated.json
+20261005T211401Z_load_sweep_shared.json
+20261005T211401Z_tenants_shared.json
+20261005T212249Z_load_sweep_shared_cores.json
+20261005T212249Z_tenants_shared_cores.json
+20261005T214022Z_timeline_autoscale.json
+autoscale
+isolated
+shared
+shared_cores

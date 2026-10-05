@@ -1,0 +1,486 @@
+{
+  "run_id": "20261005T214022Z_timeline_autoscale",
+  "phase": "07_gpu_slicing_hami",
+  "name": "timeline_autoscale",
+  "timestamp": "2026-10-05T21:40:22.102429+00:00",
+  "config": {
+    "label": "autoscale"
+  },
+  "load": {
+    "start": 1791235513.57014,
+    "steps": [
+      64,
+      64,
+      384,
+      384,
+      384,
+      384,
+      384,
+      384,
+      64,
+      64,
+      64,
+      64,
+      64
+    ],
+    "step_seconds": 60,
+    "category_weights": {
+      "short_qa": 0.35,
+      "multi_turn": 0.25,
+      "summarization": 0.25,
+      "long_generation": 0.15
+    }
+  },
+  "metrics": {
+    "timeline": [
+      {
+        "t_s": 0.0,
+        "finished": 393,
+        "ok": 393,
+        "errors": 0,
+        "ttft_p95_s": 0.28903230199966856,
+        "error_samples": []
+      },
+      {
+        "t_s": 15.0,
+        "finished": 426,
+        "ok": 426,
+        "errors": 0,
+        "ttft_p95_s": 0.07386047899990444,
+        "error_samples": []
+      },
+      {
+        "t_s": 30.0,
+        "finished": 414,
+        "ok": 414,
+        "errors": 0,
+        "ttft_p95_s": 0.0725084450000395,
+        "error_samples": []
+      },
+      {
+        "t_s": 45.0,
+        "finished": 397,
+        "ok": 397,
+        "errors": 0,
+        "ttft_p95_s": 0.0750681849999637,
+        "error_samples": []
+      },
+      {
+        "t_s": 60.0,
+        "finished": 367,
+        "ok": 367,
+        "errors": 0,
+        "ttft_p95_s": 0.07343170000012833,
+        "error_samples": []
+      },
+      {
+        "t_s": 75.0,
+        "finished": 391,
+        "ok": 391,
+        "errors": 0,
+        "ttft_p95_s": 0.0749480939998648,
+        "error_samples": []
+      },
+      {
+        "t_s": 90.0,
+        "finished": 406,
+        "ok": 406,
+        "errors": 0,
+        "ttft_p95_s": 0.06987064600025406,
+        "error_samples": []
+      },
+      {
+        "t_s": 105.0,
+        "finished": 379,
+        "ok": 379,
+        "errors": 0,
+        "ttft_p95_s": 0.07017114099971877,
+        "error_samples": []
+      },
+      {
+        "t_s": 120.0,
+        "finished": 454,
+        "ok": 454,
+        "errors": 0,
+        "ttft_p95_s": 4.615316347999851,
+        "error_samples": []
+      },
+      {
+        "t_s": 135.0,
+        "finished": 446,
+        "ok": 446,
+        "errors": 0,
+        "ttft_p95_s": 4.81550454399985,
+        "error_samples": []
+      },
+      {
+        "t_s": 150.0,
+        "finished": 447,
+        "ok": 447,
+        "errors": 0,
+        "ttft_p95_s": 4.786477349000052,
+        "error_samples": []
+      },
+      {
+        "t_s": 165.0,
+        "finished": 431,
+        "ok": 431,
+        "errors": 0,
+        "ttft_p95_s": 4.754426693999903,
+        "error_samples": []
+      },
+      {
+        "t_s": 180.0,
+        "finished": 458,
+        "ok": 458,
+        "errors": 0,
+        "ttft_p95_s": 4.924453626000286,
+        "error_samples": []
+      },
+      {
+        "t_s": 195.0,
+        "finished": 463,
+        "ok": 463,
+        "errors": 0,
+        "ttft_p95_s": 4.686869451000348,
+        "error_samples": []
+      },
+      {
+        "t_s": 210.0,
+        "finished": 458,
+        "ok": 458,
+        "errors": 0,
+        "ttft_p95_s": 4.716783352999755,
+        "error_samples": []
+      },
+      {
+        "t_s": 225.0,
+        "finished": 425,
+        "ok": 425,
+        "errors": 0,
+        "ttft_p95_s": 4.845313600999816,
+        "error_samples": []
+      },
+      {
+        "t_s": 240.0,
+        "finished": 469,
+        "ok": 469,
+        "errors": 0,
+        "ttft_p95_s": 4.8122718390000045,
+        "error_samples": []
+      },
+      {
+        "t_s": 255.0,
+        "finished": 432,
+        "ok": 432,
+        "errors": 0,
+        "ttft_p95_s": 4.82698844000015,
+        "error_samples": []
+      },
+      {
+        "t_s": 270.0,
+        "finished": 850,
+        "ok": 850,
+        "errors": 0,
+        "ttft_p95_s": 4.741580776999854,
+        "error_samples": []
+      },
+      {
+        "t_s": 285.0,
+        "finished": 1066,
+        "ok": 1066,
+        "errors": 0,
+        "ttft_p95_s": 4.0267760860001545,
+        "error_samples": []
+      },
+      {
+        "t_s": 300.0,
+        "finished": 999,
+        "ok": 999,
+        "errors": 0,
+        "ttft_p95_s": 0.15849500100011937,
+        "error_samples": []
+      },
+      {
+        "t_s": 315.0,
+        "finished": 1004,
+        "ok": 1004,
+        "errors": 0,
+        "ttft_p95_s": 0.15246373099989796,
+        "error_samples": []
+      },
+      {
+        "t_s": 330.0,
+        "finished": 995,
+        "ok": 995,
+        "errors": 0,
+        "ttft_p95_s": 0.14717132399982802,
+        "error_samples": []
+      },
+      {
+        "t_s": 345.0,
+        "finished": 979,
+        "ok": 979,
+        "errors": 0,
+        "ttft_p95_s": 0.15360874599991803,
+        "error_samples": []
+      },
+      {
+        "t_s": 360.0,
+        "finished": 1041,
+        "ok": 1041,
+        "errors": 0,
+        "ttft_p95_s": 0.14417895199994746,
+        "error_samples": []
+      },
+      {
+        "t_s": 375.0,
+        "finished": 1016,
+        "ok": 1016,
+        "errors": 0,
+        "ttft_p95_s": 0.15111391200025537,
+        "error_samples": []
+      },
+      {
+        "t_s": 390.0,
+        "finished": 1019,
+        "ok": 1019,
+        "errors": 0,
+        "ttft_p95_s": 0.15779273300040586,
+        "error_samples": []
+      },
+      {
+        "t_s": 405.0,
+        "finished": 982,
+        "ok": 982,
+        "errors": 0,
+        "ttft_p95_s": 0.14683499200009464,
+        "error_samples": []
+      },
+      {
+        "t_s": 420.0,
+        "finished": 1008,
+        "ok": 1008,
+        "errors": 0,
+        "ttft_p95_s": 0.14667625399988538,
+        "error_samples": []
+      },
+      {
+        "t_s": 435.0,
+        "finished": 1008,
+        "ok": 1008,
+        "errors": 0,
+        "ttft_p95_s": 0.15266056200016465,
+        "error_samples": []
+      },
+      {
+        "t_s": 450.0,
+        "finished": 993,
+        "ok": 993,
+        "errors": 0,
+        "ttft_p95_s": 0.14556619299992235,
+        "error_samples": []
+      },
+      {
+        "t_s": 465.0,
+        "finished": 987,
+        "ok": 987,
+        "errors": 0,
+        "ttft_p95_s": 0.15807214200003727,
+        "error_samples": []
+      },
+      {
+        "t_s": 480.0,
+        "finished": 593,
+        "ok": 593,
+        "errors": 0,
+        "ttft_p95_s": 0.12821052600020266,
+        "error_samples": []
+      },
+      {
+        "t_s": 495.0,
+        "finished": 542,
+        "ok": 542,
+        "errors": 0,
+        "ttft_p95_s": 0.06168799899978694,
+        "error_samples": []
+      },
+      {
+        "t_s": 510.0,
+        "finished": 517,
+        "ok": 517,
+        "errors": 0,
+        "ttft_p95_s": 0.06127270700017107,
+        "error_samples": []
+      },
+      {
+        "t_s": 525.0,
+        "finished": 561,
+        "ok": 561,
+        "errors": 0,
+        "ttft_p95_s": 0.06319024799995532,
+        "error_samples": []
+      },
+      {
+        "t_s": 540.0,
+        "finished": 544,
+        "ok": 544,
+        "errors": 0,
+        "ttft_p95_s": 0.06053306099965994,
+        "error_samples": []
+      },
+      {
+        "t_s": 555.0,
+        "finished": 423,
+        "ok": 423,
+        "errors": 0,
+        "ttft_p95_s": 0.06270110300010856,
+        "error_samples": []
+      },
+      {
+        "t_s": 570.0,
+        "finished": 293,
+        "ok": 293,
+        "errors": 0,
+        "ttft_p95_s": 0.06136671300009766,
+        "error_samples": []
+      },
+      {
+        "t_s": 585.0,
+        "finished": 363,
+        "ok": 331,
+        "errors": 32,
+        "ttft_p95_s": 0.1684475899996869,
+        "error_samples": [
+          "ChunkedEncodingError: Response ended prematurely"
+        ]
+      },
+      {
+        "t_s": 600.0,
+        "finished": 399,
+        "ok": 399,
+        "errors": 0,
+        "ttft_p95_s": 0.0776867240001593,
+        "error_samples": []
+      },
+      {
+        "t_s": 615.0,
+        "finished": 417,
+        "ok": 417,
+        "errors": 0,
+        "ttft_p95_s": 0.07496812599993063,
+        "error_samples": []
+      },
+      {
+        "t_s": 630.0,
+        "finished": 418,
+        "ok": 418,
+        "errors": 0,
+        "ttft_p95_s": 0.07301944000028016,
+        "error_samples": []
+      },
+      {
+        "t_s": 645.0,
+        "finished": 409,
+        "ok": 409,
+        "errors": 0,
+        "ttft_p95_s": 0.08535703000006833,
+        "error_samples": []
+      },
+      {
+        "t_s": 660.0,
+        "finished": 397,
+        "ok": 397,
+        "errors": 0,
+        "ttft_p95_s": 0.07704226999976527,
+        "error_samples": []
+      },
+      {
+        "t_s": 675.0,
+        "finished": 403,
+        "ok": 403,
+        "errors": 0,
+        "ttft_p95_s": 0.07847913300020082,
+        "error_samples": []
+      },
+      {
+        "t_s": 690.0,
+        "finished": 403,
+        "ok": 403,
+        "errors": 0,
+        "ttft_p95_s": 0.07803877100013779,
+        "error_samples": []
+      },
+      {
+        "t_s": 705.0,
+        "finished": 373,
+        "ok": 373,
+        "errors": 0,
+        "ttft_p95_s": 0.0756276130000515,
+        "error_samples": []
+      },
+      {
+        "t_s": 720.0,
+        "finished": 398,
+        "ok": 398,
+        "errors": 0,
+        "ttft_p95_s": 0.07315430899961939,
+        "error_samples": []
+      },
+      {
+        "t_s": 735.0,
+        "finished": 396,
+        "ok": 396,
+        "errors": 0,
+        "ttft_p95_s": 0.07523842699993111,
+        "error_samples": []
+      },
+      {
+        "t_s": 750.0,
+        "finished": 404,
+        "ok": 404,
+        "errors": 0,
+        "ttft_p95_s": 0.07441490999963207,
+        "error_samples": []
+      },
+      {
+        "t_s": 765.0,
+        "finished": 386,
+        "ok": 386,
+        "errors": 0,
+        "ttft_p95_s": 0.08537527100043008,
+        "error_samples": []
+      },
+      {
+        "t_s": 780.0,
+        "finished": 8,
+        "ok": 8,
+        "errors": 0,
+        "ttft_p95_s": 0.07454443400001765,
+        "error_samples": []
+      }
+    ],
+    "events": [],
+    "requests": 30250,
+    "errors": 32
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "af72b372c5a92dbcef5b6e2d24ea05da67ba3cf2",
+    "git_dirty": true
+  },
+  "notes": ""
+}

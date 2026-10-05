@@ -1,0 +1,99 @@
+[2026-10-05 21:08:41,837] ubuntu/INFO/locust.main: Starting Locust 2.46.6
+[2026-10-05 21:08:41,850] ubuntu/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-10-05 21:08:41,858] ubuntu/INFO/locust.runners: ubuntu_1ce28a28c9704c6e8f4248796f449c43 (index 0) reported as ready. 1 workers connected.
+[2026-10-05 21:08:41,858] ubuntu/INFO/locust.runners: ubuntu_69e4a026e2b044739ca1d307a4ec7a6e (index 1) reported as ready. 2 workers connected.
+[2026-10-05 21:08:41,858] ubuntu/INFO/locust.runners: ubuntu_d404460a3b8c476dbac78d60d01a83f4 (index 2) reported as ready. 3 workers connected.
+[2026-10-05 21:08:41,859] ubuntu/INFO/locust.runners: ubuntu_2650692ab4d343b6a6709d348e08e4ed (index 3) reported as ready. 4 workers connected.
+[2026-10-05 21:08:41,859] ubuntu/INFO/locust.runners: ubuntu_c0d3811deda541ea9ca810abf37a2efc (index 4) reported as ready. 5 workers connected.
+[2026-10-05 21:08:41,859] ubuntu/INFO/locust.runners: ubuntu_1a7a0e5c61754d1983490463e7617fb1 (index 5) reported as ready. 6 workers connected.
+[2026-10-05 21:08:42,033] ubuntu/INFO/locust.runners: ubuntu_dba673ca085744409884091a0f42bf83 (index 6) reported as ready. 7 workers connected.
+[2026-10-05 21:08:42,033] ubuntu/INFO/locust.runners: ubuntu_3aa00614756f401cb641d06bd472f00c (index 7) reported as ready. 8 workers connected.
+[2026-10-05 21:08:42,859] ubuntu/INFO/locust.runners: Shape test starting.
+[2026-10-05 21:08:42,859] ubuntu/INFO/locust.runners: Shape worker starting
+[2026-10-05 21:08:42,860] ubuntu/INFO/locust.runners: Shape test updating to 32 users at 32.00 spawn rate
+[2026-10-05 21:08:42,860] ubuntu/INFO/locust.runners: Sending spawn jobs of 32 users at 32.00 spawn rate to 8 ready workers
+[2026-10-05 21:08:42,914] ubuntu/INFO/locust.runners: All users spawned: {"ChatUser": 32} (32 total users)
+[2026-10-05 21:09:42,900] ubuntu/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-10-05 21:09:42,900] ubuntu/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-10-05 21:09:42,955] ubuntu/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-10-05 21:10:42,935] ubuntu/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-10-05 21:10:42,935] ubuntu/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-10-05 21:10:42,988] ubuntu/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-10-05 21:11:42,975] ubuntu/INFO/locust.runners: Shape test updating to 192 users at 192.00 spawn rate
+[2026-10-05 21:11:42,975] ubuntu/INFO/locust.runners: Sending spawn jobs of 192 users at 192.00 spawn rate to 8 ready workers
+[2026-10-05 21:11:43,028] ubuntu/INFO/locust.runners: All users spawned: {"ChatUser": 192} (192 total users)
+[2026-10-05 21:12:43,012] ubuntu/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-10-05 21:12:43,012] ubuntu/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-10-05 21:12:43,066] ubuntu/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-10-05 21:13:43,051] ubuntu/INFO/locust.runners: Shape test stopping
+[2026-10-05 21:13:43,072] ubuntu/INFO/locust.runners: ubuntu_1ce28a28c9704c6e8f4248796f449c43 (index 0) reported that it has stopped
+[2026-10-05 21:13:43,073] ubuntu/INFO/locust.runners: ubuntu_1ce28a28c9704c6e8f4248796f449c43 (index 0) reported as ready. 8 workers connected.
+[2026-10-05 21:13:43,073] ubuntu/INFO/locust.runners: ubuntu_3aa00614756f401cb641d06bd472f00c (index 7) reported that it has stopped
+[2026-10-05 21:13:43,073] ubuntu/INFO/locust.runners: ubuntu_3aa00614756f401cb641d06bd472f00c (index 7) reported as ready. 8 workers connected.
+[2026-10-05 21:13:43,074] ubuntu/INFO/locust.runners: ubuntu_d404460a3b8c476dbac78d60d01a83f4 (index 2) reported that it has stopped
+[2026-10-05 21:13:43,074] ubuntu/INFO/locust.runners: ubuntu_d404460a3b8c476dbac78d60d01a83f4 (index 2) reported as ready. 8 workers connected.
+[2026-10-05 21:13:43,075] ubuntu/INFO/locust.runners: ubuntu_2650692ab4d343b6a6709d348e08e4ed (index 3) reported that it has stopped
+[2026-10-05 21:13:43,076] ubuntu/INFO/locust.runners: ubuntu_2650692ab4d343b6a6709d348e08e4ed (index 3) reported as ready. 8 workers connected.
+[2026-10-05 21:13:43,076] ubuntu/INFO/locust.runners: ubuntu_dba673ca085744409884091a0f42bf83 (index 6) reported that it has stopped
+[2026-10-05 21:13:43,076] ubuntu/INFO/locust.runners: ubuntu_c0d3811deda541ea9ca810abf37a2efc (index 4) reported that it has stopped
+[2026-10-05 21:13:43,077] ubuntu/INFO/locust.runners: ubuntu_69e4a026e2b044739ca1d307a4ec7a6e (index 1) reported that it has stopped
+[2026-10-05 21:13:43,077] ubuntu/INFO/locust.runners: ubuntu_1a7a0e5c61754d1983490463e7617fb1 (index 5) reported that it has stopped
+[2026-10-05 21:13:43,077] ubuntu/INFO/locust.runners: ubuntu_dba673ca085744409884091a0f42bf83 (index 6) reported as ready. 5 workers connected.
+[2026-10-05 21:13:43,079] ubuntu/INFO/locust.runners: ubuntu_c0d3811deda541ea9ca810abf37a2efc (index 4) reported as ready. 6 workers connected.
+[2026-10-05 21:13:43,079] ubuntu/INFO/locust.runners: ubuntu_69e4a026e2b044739ca1d307a4ec7a6e (index 1) reported as ready. 7 workers connected.
+[2026-10-05 21:13:43,080] ubuntu/INFO/locust.runners: ubuntu_1a7a0e5c61754d1983490463e7617fb1 (index 5) reported as ready. 8 workers connected.
+[2026-10-05 21:13:44,053] ubuntu/INFO/locust.main: Shape test completed, stopping test
+[2026-10-05 21:13:49,054] ubuntu/INFO/locust.main: --autoquit time reached, shutting down
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,055] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_3aa00614756f401cb641d06bd472f00c' (index 7) quit. 7 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_1ce28a28c9704c6e8f4248796f449c43' (index 0) quit. 6 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_d404460a3b8c476dbac78d60d01a83f4' (index 2) quit. 5 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_dba673ca085744409884091a0f42bf83' (index 6) quit. 4 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_2650692ab4d343b6a6709d348e08e4ed' (index 3) quit. 3 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_69e4a026e2b044739ca1d307a4ec7a6e' (index 1) quit. 2 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_c0d3811deda541ea9ca810abf37a2efc' (index 4) quit. 1 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: Worker 'ubuntu_1a7a0e5c61754d1983490463e7617fb1' (index 5) quit. 0 workers ready.
+[2026-10-05 21:13:49,056] ubuntu/INFO/locust.runners: The last worker quit, stopping test.
+[2026-10-05 21:13:50,085] ubuntu/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                  579     0(0.00%) |  26394    8545   54304  24000 |    1.93        0.00
+TTFT     long_generation                                                                  579     0(0.00%) |    135      35    1073    100 |    1.93        0.00
+TOTAL    multi_turn                                                                      1061     0(0.00%) |   8058    1063   27164   6600 |    3.53        0.00
+TTFT     multi_turn                                                                      1061     0(0.00%) |    160      45    1077    120 |    3.53        0.00
+TOTAL    short_qa                                                                        1577     0(0.00%) |   1505     140    5320   1100 |    5.25        0.00
+TTFT     short_qa                                                                        1577     0(0.00%) |    154      44    1081    120 |    5.25        0.00
+TOTAL    summarization                                                                   1087     0(0.00%) |   9360    2426   27311   8400 |    3.62        0.00
+TTFT     summarization                                                                   1087     0(0.00%) |    180      66    1066    160 |    3.62        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                      8608     0(0.00%) |   4306      35   54304    350 |   28.68        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     24000  33000  38000  40000  46000  49000  53000  54000  54000  54000  54000    579
+TTFT     long_generation                                                                       100    140    160    170    220    320    650    810   1100   1100   1100    579
+TOTAL    multi_turn                                                                           6600   9000  12000  13000  16000  18000  20000  21000  25000  27000  27000   1061
+TTFT     multi_turn                                                                            120    170    190    220    270    350    660    890   1100   1100   1100   1061
+TOTAL    short_qa                                                                             1100   1700   2100   2300   3400   4400   4800   4900   5100   5300   5300   1577
+TTFT     short_qa                                                                              120    170    190    210    260    330    660    810   1100   1100   1100   1577
+TOTAL    summarization                                                                        8400  11000  13000  14000  17000  19000  23000  26000  27000  27000  27000   1087
+TTFT     summarization                                                                         160    190    220    240    270    350    600    790    990   1100   1100   1087
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                            350   2400   4800   7000  14000  20000  35000  42000  53000  54000  54000   8608
+

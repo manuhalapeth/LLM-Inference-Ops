@@ -1666,8 +1666,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "vGPU_device_memory_usage_in_bytes",
-          "legendFormat": "used {{podname}}"
+          "expr": "sum by (pod) (hami_vgpu_memory_used_bytes)",
+          "legendFormat": "used {{pod}}"
         },
         {
           "refId": "B",
@@ -1675,8 +1675,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "vGPU_device_memory_limit_in_bytes",
-          "legendFormat": "limit {{podname}}"
+          "expr": "sum by (pod) (hami_vgpu_memory_limit_bytes)",
+          "legendFormat": "limit {{pod}}"
         }
       ],
       "fieldConfig": {
@@ -1703,8 +1703,8 @@
     },
     {
       "type": "timeseries",
-      "title": "GPU core use per device (HAMi)",
-      "description": "Compute use of each physical GPU as HAMi sees it",
+      "title": "GPU compute use per pod (HAMi)",
+      "description": "How busy the GPU is for each pod, as HAMi measures it (0 to 100)",
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
@@ -1723,8 +1723,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "HostCoreUtilization",
-          "legendFormat": "{{deviceuuid}}"
+          "expr": "max by (pod) (hami_container_device_utilization_ratio)",
+          "legendFormat": "{{pod}}"
         }
       ],
       "fieldConfig": {
