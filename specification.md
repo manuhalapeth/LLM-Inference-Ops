@@ -536,7 +536,9 @@ From `results/05_profiling_and_tuning/*_load_sweep_*.json` and `*_tuning_summary
 | 512 | 12.99 s / 51 ms (256 waiting) | **1.48 s** / 90 ms, KV 99%, preemptions begin |
 | 768 | 24.18 s / 51 ms | 13.80 s / 104 ms, KV 100% |
 
-### Results: capacity and cost per target ($1.211/hr)
+### Results: capacity and cost per target ($1.327/hr)
+
+Costs use $1.327/hr, the price of the Phase 0 to 4 machine, so they compare across phases. This machine actually cost $1.211/hr, which makes every figure 9% lower.
 
 Interactive: TTFT p95 ≤ 0.5 s and ITL p50 ≤ 40 ms. Relaxed: TTFT p95 ≤ 1 s and ITL p50 ≤ 60 ms. Capacity is limited to the steps tested.
 
@@ -597,7 +599,7 @@ FP8 weights passed exactly the cases the baseline passed. The FP8 KV cache answe
 
 **FP8 weights** (`vllm/configs/tune_fp8_weights.yaml`): +50% throughput, same answer quality as BF16. The FP8 KV cache is not usable without calibrated scales.
 
-| Target | Users | Output tokens/s | Cost per 1M output tokens ($1.211/hr) |
+| Target | Users | Output tokens/s | Cost per 1M output tokens ($1.327/hr; 9% less at this machine's $1.211/hr) |
 |---|---|---|---|
 | Interactive: TTFT p95 ≤ 0.5 s, ITL p50 ≤ 40 ms | 128 | 8,264 | $0.045 (baseline $0.066) |
 | Relaxed: TTFT p95 ≤ 1 s, ITL p50 ≤ 60 ms | 256 | 8,363 | $0.044 (baseline $0.064) |
@@ -821,3 +823,61 @@ HAMi 2.10 renamed its metrics (`vGPU_device_memory_usage_in_bytes` → `hami_vgp
 ### Phase 7 takeaway
 
 HAMi slices an RTX 5090 between two vLLM servers with no changes, and vLLM respects the memory slice. Sharing halves the busy model's throughput but keeps per GPU throughput the same (3,964 vs 3,936 tok/s) and frees a whole GPU that a small model was wasting. The quiet tenant's TTFT doubles (10 → 22 ms) but stays flat as the neighbour's load grows, with zero errors. Core limits changed nothing measurable here. KEDA scaled out and back in on requests inside vLLM; the cost of scaling out is a 139 s cold start (TTFT p95 ~4.8 s meanwhile), and scaling in drops in-flight streams unless the pod gets a longer grace period.
+
+---
+
+## Phase 8: Final report
+
+No GPU session. `notebooks/99_final_report.ipynb` recomputes the headline numbers of Phases 1 to 7 from `results/`, and `Readme.md` summarizes them.
+
+### Common basis for comparison
+
+| | |
+|---|---|
+| Traffic | Phase 4's mix (35% short questions, 25% multi turn, 25% summaries, 15% long answers), closed loop |
+| Interactive SLO | TTFT p95 ≤ 0.5 s and ITL p50 ≤ 40 ms |
+| Relaxed SLO | TTFT p95 ≤ 1 s and ITL p50 ≤ 60 ms |
+| Capacity | The highest user step in a sweep that meets the SLO |
+| Reference price | $1.00 per GPU hour, because hosts ranged from $0.60 to $1.33 per GPU hour |
+
+### Results: the journey (interactive SLO)
+
+| Stage | Source | GPUs | Users within SLO | Output tok/s within SLO | ¢ per 1M output tokens at $1/GPU hour | ¢ as paid |
+|---|---|---|---|---|---|---|
+| Baseline, BF16 | Phase 5 | 1 | 128 | 5,546 | 5.0 | 6.1 |
+| FP8 weights | Phase 5 | 1 | 128 | 8,264 | 3.4 | 4.1 |
+| 2 copies behind NGINX | Phase 6 | 2 | 256 | 16,022 | 3.5 | 2.1 |
+| k3s, 7B and 1.5B on a GPU each | Phase 7 | 2 | 256+ | 7,664 | 7.2 | 5.2 |
+| HAMi, 7B and 1.5B on one GPU | Phase 7 | 1 | 128 | 3,964 | 7.0 | 5.0 |
+
+256+ = met the SLO at the highest step tested. Mooncake isn't a stage: it was measured on the conversation workload and made it slower (Phase 6).
+
+### Results: capacity plan
+
+Per RTX 5090 with FP8 weights (from Phase 6's 2 GPU sweep): 128 concurrent streams within the interactive SLO, 192 within the relaxed one, ~8,011 output tokens/s. Plan = streams ÷ 128, rounded up, plus one spare GPU.
+
+| Concurrent streams | GPUs | At $0.72 per GPU hour | At $1.33 per GPU hour |
+|---|---|---|---|
+| 100 | 2 | $1,051/month | $1,937/month |
+| 500 | 5 | $2,628/month | $4,844/month |
+| 1,000 | 9 | $4,730/month | $8,718/month |
+| 5,000 | 41 | $21,550/month | $39,717/month |
+| 10,000 | 80 | $42,048/month | $77,497/month |
+
+### Correction made in this phase
+
+Phase 5's cost tables were labelled $1.211/hr (that machine's price) but computed with $1.327/hr (the Phase 0 to 4 price). The labels now say $1.327/hr, with a note that the real price makes each figure 9% lower. The final report uses each session's actual price.
+
+### Time and money, whole project
+
+| Phase | GPUs | Session | Credit used |
+|---|---|---|---|
+| 0 | 1 | ~24 min | ~$0.40 |
+| 1 | 1 | ~20 min | ~$0.26 |
+| 2 | 1 | ~26 min | ~$0.60 |
+| 3 | 1 | ~40 min | ~$0.85 |
+| 4 | 1 | ~62 min | ~$1.36 |
+| 5 | 1 | 2 h 53 min | $2.86 |
+| 6 | 2 | 1 h 52 min | ~$2.20 |
+| 7 | 2 | ~1 h 35 min | ~$2.30 |
+| **Total** | | **~9 h 10 min** | **~$10.85** |
