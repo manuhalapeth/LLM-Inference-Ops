@@ -1,0 +1,14 @@
+# Phase 5 combined config: the winners from the single-change experiments, combined.
+# RESULT: 11,513 tokens/s (+99%) but answer quality broke (15/22 evals, vs 21/22 for
+# BF16), caused by the FP8 KV cache. Not recommended. The recommended config is
+# tune_fp8_weights.yaml (+50%, same quality as BF16).
+#   FP8 weights   +50% throughput on its own (half the bytes per token)
+#   FP8 KV cache  +22% on its own (half the KV bytes, ~2x capacity)
+#   512 sequences lets more requests run at once, now that FP8 frees the memory for them
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-cache-dtype: fp8
+max-num-seqs: 512

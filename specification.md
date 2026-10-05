@@ -568,6 +568,49 @@ At 1 user, one multi-turn request took 58.9 s under speculation (under 1 s norma
 
 The single largest kernel, a BF16 matrix multiply, was 63.6% of all GPU time.
 
-### Phase 5 findings so far (single changes)
+### Results: the combined config
 
-The GPU is busy 98% of the time and three quarters of that is matrix multiplies on the model weights, so the settings that change *how much work* each step does are the ones that matter. **FP8 weights (+50%) and an FP8 KV cache (+22%)** were the only real wins. Raising the sequence cap barely added throughput but cut time to first token at 384 to 512 users by 5 to 9×, at the cost of slower streaming and, past ~500 running requests, KV cache preemptions. Batched tokens and prefix caching made no difference on this traffic, and n-gram speculative decoding made it worse.
+`vllm/configs/tuned.yaml`: FP8 weights + FP8 KV cache + max-num-seqs 512. KV cache capacity 625,184 tokens, weights 8.17 GiB.
+
+| Users | Output tokens/s | TTFT p95 | ITL p50 | Running | KV max |
+|---|---|---|---|---|---|
+| 64 | 6,602 | 118 ms | 9.4 ms | 63 | 5% |
+| 128 | 9,821 | 421 ms | 11.9 ms | 112 | 9% |
+| 256 | 10,773 | 1,052 ms | 21.7 ms | 226 | 18% |
+| 512 | 11,300 | 2,770 ms | 38.6 ms | 444 | 36% |
+| 768 | **11,513** | 6,902 ms | 44.9 ms | 496 | 40% |
+
+### Results: answer quality
+
+The 22-case eval set (harnesses on), same machine, temperature 0. From `results/05_profiling_and_tuning/*_evals_quality_*.json`.
+
+| Config | Evals passed | Same answer as BF16 | Peak tokens/s |
+|---|---|---|---|
+| baseline (BF16) | 21 / 22 | 22 / 22 | 5,794 |
+| **FP8 weights** | **21 / 22** | 14 / 22 | **8,662** |
+| FP8 KV cache | 17 / 22 | 7 / 22 | 7,064 |
+| tuned (both + 512) | 15 / 22 | 6 / 22 | 11,513 |
+
+FP8 weights passed exactly the cases the baseline passed. The FP8 KV cache answered 17 × 23 = "253", 100 °C = "239 °F", broke JSON output, and the combined config also failed to refuse a phishing request. The one case every config fails is the incident summary (Phase 3).
+
+### Recommended config and SLOs
+
+**FP8 weights** (`vllm/configs/tune_fp8_weights.yaml`): +50% throughput, same answer quality as BF16. The FP8 KV cache is not usable without calibrated scales.
+
+| Target | Users | Output tokens/s | Cost per 1M output tokens ($1.211/hr) |
+|---|---|---|---|
+| Interactive: TTFT p95 ≤ 0.5 s, ITL p50 ≤ 40 ms | 128 | 8,264 | $0.045 (baseline $0.066) |
+| Relaxed: TTFT p95 ≤ 1 s, ITL p50 ≤ 60 ms | 256 | 8,363 | $0.044 (baseline $0.064) |
+
+### Time and money
+
+| | |
+|---|---|
+| GPU price | $1.211/hr |
+| Session | 2 h 53 min (single-change sweeps ~80 min, tuned run ~15 min, quality checks ~6 min, setup and a restart) |
+| Credit used | $2.86 ($21.57 → $18.71) |
+| Credit used, Phases 0 to 5 | $6.29 ($25.00 → $18.71) |
+
+### Phase 5 takeaway
+
+The GPU spends three quarters of its time multiplying by the model weights, so halving the weights' size with FP8 is the one change that matters: +50% throughput and 31% lower cost per token, with answers as good as BF16. The FP8 KV cache and the combined config looked even faster (+22%, +99%) but got arithmetic, unit conversions and JSON wrong; without the eval set, the broken config would have looked like the answer. Raising the sequence cap mostly trades queueing for slower streaming; batched tokens, prefix caching and n-gram speculation didn't help this traffic.

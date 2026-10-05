@@ -1,4 +1,6 @@
-# Phase 5: the baseline plus ONE change. Store the KV cache in FP8 instead of BF16: half the bytes per token.
+# Phase 5: the baseline plus ONE change. RESULT: +22% throughput but wrong answers
+# (17/22 evals vs 21/22): FP8 KV cache without calibrated scales. Not usable as is.
+# Store the KV cache in FP8 instead of BF16: half the bytes per token.
 host: 0.0.0.0
 port: 8000
 gpu-memory-utilization: 0.90

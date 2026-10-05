@@ -138,6 +138,7 @@ def main() -> None:
     parser.add_argument("--vllm-metrics", default="http://localhost:8000/metrics")
     parser.add_argument("--model", default=os.getenv("SERVED_MODEL_NAME", "llm"))
     parser.add_argument("--cases", default=str(ROOT / "evals" / "eval_set.json"))
+    parser.add_argument("--phase", default="03_harnesses_and_traces", help="results/<phase>/ to save into")
     args = parser.parse_args()
 
     cases = json.loads(Path(args.cases).read_text())
@@ -172,7 +173,7 @@ def main() -> None:
         "gpu_s_total": sum(r["gpu_s"] for r in rows),
         "gpu_s_on_harness_cases": sum(r["gpu_s"] for r in rows if r["category"] == "harness"),
     }
-    path = save_run("03_harnesses_and_traces", f"evals_{args.label}",
+    path = save_run(args.phase, f"evals_{args.label}",
                     metrics={"summary": summary, "cases": rows},
                     config={"label": args.label, "model": os.getenv("MODEL_NAME"), "vllm_image": os.getenv("VLLM_IMAGE"),
                             "vllm_config": os.getenv("VLLM_CONFIG", "baseline")},
