@@ -15,7 +15,7 @@
 [![Observability](https://img.shields.io/badge/observability-Prometheus%20·%20Grafana%20·%20Jaeger-E6522C?logo=prometheus&logoColor=white)](observability/)
 [![GPU spend](https://img.shields.io/badge/total%20GPU%20spend-~%2411-2EA44F)](specification.md)
 
-[Results](#the-two-minute-summary) · [Architecture](#architecture) · [Phases](#phases) · [Repository](#repository) · [Run it](#running-it) · [Final report](notebooks/99_final_report.ipynb)
+[Results](#quick-summary) · [Architecture](#architecture) · [Phases](#phases) · [Repository](#repository) · [Run it](#running-it) · [Final report](notebooks/99_final_report.ipynb)
 
 </div>
 
@@ -27,7 +27,7 @@ The application isn't the point. The point is how an LLM system is run: getting 
 
 **Start here: [`notebooks/99_final_report.ipynb`](notebooks/99_final_report.ipynb)**
 
-## The two minute summary
+## Quick summary
 
 Model: Qwen2.5-7B-Instruct on vLLM 0.30.0. Hardware: NVIDIA RTX 5090 (32 GB) on Vast.ai, one GPU for Phases 0 to 5, two for Phases 6 and 7. Total GPU spend for all eight sessions: about **$11**.
 
