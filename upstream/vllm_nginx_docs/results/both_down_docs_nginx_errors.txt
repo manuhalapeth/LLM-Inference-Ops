@@ -1,0 +1,3 @@
+   6 connect() failed (111: Connection refused)
+ 331 no live upstreams
+   2 upstream server temporarily disabled

@@ -1,0 +1,2 @@
+{"mode": "ttfb", "n": 20, "tokens": 64, "first_token_ms_p50": 27, "full_response_ms_p50": 1535}
+{"mode": "ttfb", "n": 10, "tokens": 512, "first_token_ms_p50": 29, "full_response_ms_p50": 12132}

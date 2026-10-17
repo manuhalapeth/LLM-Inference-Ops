@@ -1,0 +1,1 @@
+{"mode": "bursts", "requests": 1664, "statuses": {"200": 1661, "502": 3}}
