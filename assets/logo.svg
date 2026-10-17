@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" fill="none">
+  <!-- chip pins -->
+  <g stroke="#8E95B8" stroke-width="7" stroke-linecap="round">
+    <path d="M84 22v22M120 22v22M156 22v22"/>
+    <path d="M84 196v22M120 196v22M156 196v22"/>
+    <path d="M22 84h22M22 120h22M22 156h22"/>
+    <path d="M196 84h22M196 120h22M196 156h22"/>
+  </g>
+  <!-- chip body -->
+  <rect x="44" y="44" width="152" height="152" rx="22" stroke="#8E95B8" stroke-width="9"/>
+  <!-- requests in, batched through one engine, tokens out -->
+  <g stroke="#E0703A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M66 86h18c14 0 18 34 30 34"/>
+    <path d="M66 120h48"/>
+    <path d="M66 154h18c14 0 18-34 30-34"/>
+    <path d="M134 120h32"/>
+  </g>
+  <circle cx="124" cy="120" r="12" fill="#E0703A"/>
+  <g fill="#E0703A">
+    <circle cx="178" cy="120" r="5"/>
+  </g>
+</svg>

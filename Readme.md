@@ -1,4 +1,25 @@
+<div align="center">
+
+<img src="assets/logo.svg" alt="LLM Inference Ops logo" width="150">
+
 # LLM Inference Ops
+
+**A production style LLM serving stack on rented GPUs, built one phase at a time and measured at every step.**
+
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](gateway/Dockerfile)
+[![vLLM](https://img.shields.io/badge/vLLM-0.30.0-30A2FF)](docker-compose.yml)
+[![Model](https://img.shields.io/badge/model-Qwen2.5--7B--Instruct-6E56CF)](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct)
+[![GPU](https://img.shields.io/badge/GPU-2×%20RTX%205090-76B900?logo=nvidia&logoColor=white)](specification.md)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-k3s%20%2B%20HAMi-326CE5?logo=kubernetes&logoColor=white)](scripts/setup_k3s.sh)
+[![Autoscaling](https://img.shields.io/badge/autoscaling-KEDA-2A4D8F)](notebooks/07_gpu_slicing_hami.ipynb)
+[![Observability](https://img.shields.io/badge/observability-Prometheus%20·%20Grafana%20·%20Jaeger-E6522C?logo=prometheus&logoColor=white)](observability/)
+[![GPU spend](https://img.shields.io/badge/total%20GPU%20spend-~%2411-2EA44F)](specification.md)
+
+[Results](#the-two-minute-summary) · [Architecture](#architecture) · [Phases](#phases) · [Repository](#repository) · [Run it](#running-it) · [Final report](notebooks/99_final_report.ipynb)
+
+</div>
+
+> profile → find the bottleneck → change one thing → benchmark → check quality → repeat
 
 A small-scale version of a production LLM serving stack, built up one phase at a time and measured at every step: a CrewAI agent and load generators, an API gateway with guardrails ("harnesses"), NGINX, and vLLM on rented RTX 5090s, with Prometheus, Grafana and Jaeger on top. It starts with one request on one GPU, breaks a single GPU under load, tunes it, scales out to two GPUs, and ends on Kubernetes with GPU sharing (HAMi) and autoscaling (KEDA).
 
@@ -27,20 +48,37 @@ Model: Qwen2.5-7B-Instruct on vLLM 0.30.0. Hardware: NVIDIA RTX 5090 (32 GB) on 
 
 ## Architecture
 
-```
-CrewAI agent / Locust / clients
-        │
-        ▼
-API gateway (FastAPI)     auth, rate limits, token budgets, prompt injection checks, time limits, traces
-        │
-        ▼
-NGINX                     least connections across vLLM servers, retries, finds new servers by DNS
-        │
-        ▼
-vLLM (one per GPU)        batching, KV cache, streaming; Mooncake as an optional KV tier in CPU memory
-        │
-        ▼
-Prometheus · Grafana · Jaeger     38 panel dashboard, traces from the agent into vLLM's scheduler
+```mermaid
+flowchart LR
+    subgraph clients["Clients"]
+        agent["CrewAI agent<br/>3 chained LLM calls per task"]
+        locust["Locust load tests<br/>up to 384 users"]
+    end
+
+    subgraph box["Rented GPU VM · Vast.ai"]
+        gw["API gateway · FastAPI<br/>auth · rate limits · token budgets<br/>prompt injection checks · time limits"]
+        nginx["NGINX<br/>least connections · retries<br/>finds new servers by DNS"]
+        subgraph gpus["RTX 5090 × 2"]
+            v0["vLLM 0<br/>Qwen2.5 7B Instruct"]
+            v1["vLLM 1<br/>Qwen2.5 7B Instruct"]
+        end
+        mc[("Mooncake<br/>KV tier in CPU memory<br/>optional")]
+    end
+
+    subgraph obs["Observability"]
+        prom["Prometheus + Grafana<br/>38 panel dashboard"]
+        jaeger["Jaeger<br/>traces from the agent<br/>into vLLM's scheduler"]
+    end
+
+    agent -- "x-run-id per task" --> gw
+    locust --> gw
+    gw --> nginx
+    nginx --> v0
+    nginx --> v1
+    v0 -. "evicted KV" .-> mc
+    v1 -.-> mc
+    box -. metrics .-> prom
+    gw -. spans .-> jaeger
 ```
 
 In Phase 7 the same stack runs on k3s, with HAMi slicing GPUs between pods and KEDA scaling vLLM.
