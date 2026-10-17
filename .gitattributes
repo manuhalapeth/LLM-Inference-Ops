@@ -1,0 +1,2 @@
+# Locust's HTML reports are generated output: keep them as evidence, but leave them out of GitHub's language stats
+results/**/*.html linguist-generated
