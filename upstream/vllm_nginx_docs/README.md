@@ -1,6 +1,6 @@
 # vLLM's NGINX guide: three config problems, reproduced
 
-In Phase 6 my NGINX load balancer caused an outage while both vLLM servers were healthy: 1,574 errors at 768 users. When I compared my fixed config with vLLM's own guide for running NGINX in front of vLLM ([`docs/deployment/nginx.md`](https://github.com/vllm-project/vllm/blob/main/docs/deployment/nginx.md)), I found that the guide's config has the same problems and one more. This folder reproduces all three on a laptop, with Docker and no GPU, and is the evidence for a docs fix to vLLM.
+In Phase 6 my NGINX load balancer caused an outage while both vLLM servers were healthy: 1,574 errors at 768 users. When I compared my fixed config with vLLM's own guide for running NGINX in front of vLLM ([`docs/deployment/nginx.md`](https://github.com/vllm-project/vllm/blob/main/docs/deployment/nginx.md)), I found that the guide's config has the same problems and one more. This folder reproduces all three on a laptop, with Docker and no GPU, and is the evidence for my docs fix to vLLM: [vllm-project/vllm#62140](https://github.com/vllm-project/vllm/pull/62140).
 
 ## The three problems
 
