@@ -695,7 +695,7 @@ From `results/06_scaling_out/*_load_sweep_scale_{1x,2x}.json`.
 | 256 | 16,022 | 1,156 | 15.0 ms | 201.2 ms |
 | 512 | 15,208 | 1,235 | 31.6 ms | 215.3 ms |
 
-TP2 split the weights (4.14 GiB per GPU) and had 844,608 tokens of KV capacity, but ran ~13× slower than 2 copies, and slower than one GPU, because all-reduces cross PCIe through host memory (no peer-to-peer). Evals: 21/22, same as one GPU.
+TP2 split the weights (4.14 GiB per GPU) and had 844,608 tokens of KV capacity, but ran ~13× slower than 2 copies, and slower than one GPU, because all-reduces cross PCIe through host memory (no peer-to-peer). It also ran into the gateway's 120 s time limit: 163 long answers timed out, and at 768 and 1,024 users no request finished inside a step. Evals: 21/22, same as one GPU.
 
 ### Results: Mooncake store shared by 2 copies (conversations, round robin)
 
@@ -717,6 +717,8 @@ The first 2-copy run had 1,574 errors (502, "no live upstreams") at 768 users. v
 ### Phase 6 takeaway
 
 Two RTX 5090s serve 16,022 tokens/s as two independent copies (1.84×, 92% efficient). Least connections beats round robin and sticky routing by about 10× on tail latency near capacity. Failover costs only the requests in flight. On these GPUs, tensor parallel is ~13× slower than copies (no peer-to-peer), a Mooncake store over TCP cuts throughput by a third to two thirds under concurrent load, and vLLM 0.30.0's disaggregated serving crashed. The NGINX defaults nearly caused a full outage; health checks need tuning against the backend's keepalive behaviour.
+
+---
 
 ## Phase 7: Kubernetes, GPU sharing (HAMi) and autoscaling (KEDA)
 

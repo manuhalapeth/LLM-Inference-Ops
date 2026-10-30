@@ -1,6 +1,7 @@
 # Client for the NGINX + vLLM reproduction. Talks to NGINX at $LB (default http://nginx).
 #   race SECONDS WORKERS   requests with idle gaps near vLLM's 5 s keep-alive; counts statuses
-#   ttfb N                 streaming requests; time to the first SSE event and to the end
+#   bursts SECONDS SIZE    bursts of concurrent requests spaced ~5 s apart; counts statuses
+#   ttfb N [TOKENS]        streaming requests; time to the first SSE event and to the end
 #   spread SECONDS RPS     steady requests; which server answered, per 5 s bucket
 import asyncio, collections, json, os, random, sys, time
 

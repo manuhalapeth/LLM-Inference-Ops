@@ -9,7 +9,7 @@ the gateway's metrics, so each failure is also visible on the dashboard.
     3. rate limit               one user's burst gets 429 with Retry-After
     4. timeout mid generation   stream cut at the time limit, vLLM stops generating
     5. client disconnect        client hangs up, vLLM stops generating
-    6. vLLM down                fast 502 instead of a hang, then automatic recovery
+    6. vLLM down                fast 502/504 instead of a hang, then automatic recovery
 
 Run on the GPU box from the repo root, with the stack up (drill 6 stops and
 starts the vLLM container):
@@ -161,7 +161,7 @@ class Drills:
         started = subprocess.run(compose + ["start", "vllm"], capture_output=True, text=True)
         if started.returncode != 0:
             # Record it instead of crashing, so the other drills' results are still saved.
-            return {"expected": "fast 502 while vLLM is down; automatic recovery", "passed": False,
+            return {"expected": "fast 5xx while vLLM is down; automatic recovery", "passed": False,
                     "status_while_down": down["status"], "latency_while_down_ms": down["latency_ms"],
                     "trace_id": down["trace_id"], "restart_error": started.stderr.strip()[-500:]}
         recovered = None
@@ -171,7 +171,7 @@ class Drills:
                 recovered = time.perf_counter() - start
                 break
             time.sleep(3)
-        return {"expected": "fast 502 while vLLM is down; traffic recovers on its own once vLLM is back (no NGINX restart)",
+        return {"expected": "fast 5xx while vLLM is down; traffic recovers on its own once vLLM is back (no NGINX restart)",
                 "passed": down["status"] in (502, 503, 504) and down["latency_ms"] < 10_000 and recovered is not None,
                 "status_while_down": down["status"], "latency_while_down_ms": down["latency_ms"],
                 "trace_id": down["trace_id"], "recovered_after_s": recovered}
