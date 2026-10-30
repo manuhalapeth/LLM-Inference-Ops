@@ -117,7 +117,9 @@ if [ "$RUN_TP4" = 1 ] && [ "$GPUS" -ge 4 ] && apply --replicas 1 --tp 4; then
 fi
 
 echo "==> Comparing scaling and tensor parallel"
-python3 loadtest/compare_tuning.py --phase $PHASE --baseline scale_1x --labels scale_1x scale_2x scale_4x tp2 tp4
+# Costs use the whole machine's hourly price (all GPUs), set GPU_HOURLY_PRICE_USD to this session's price.
+python3 loadtest/compare_tuning.py --phase $PHASE --baseline scale_1x --labels scale_1x scale_2x scale_4x tp2 tp4 \
+  --price-per-hour "${GPU_HOURLY_PRICE_USD:-1.190}"
 fi
 
 if [ "$RUN_MOONCAKE" = 1 ]; then

@@ -4,7 +4,7 @@
   "name": "tuning_summary",
   "timestamp": "2026-10-05T16:01:25.874853+00:00",
   "config": {
-    "price_per_hour_usd": 1.327
+    "price_per_hour_usd": 1.19
   },
   "load": {
     "configs": [
@@ -75,12 +75,12 @@
           "interactive": {
             "users": 128,
             "output_tokens_per_s": 8716.942857142858,
-            "usd_per_million_output_tokens": 0.04228674171117951
+            "usd_per_million_output_tokens": 0.037921041926378
           },
           "relaxed": {
             "users": 192,
             "output_tokens_per_s": 8541.942857142858,
-            "usd_per_million_output_tokens": 0.043153076211798216
+            "usd_per_million_output_tokens": 0.038697935713669834
           }
         }
       },
@@ -144,12 +144,12 @@
           "interactive": {
             "users": 256,
             "output_tokens_per_s": 16021.542857142857,
-            "usd_per_million_output_tokens": 0.023007216870301217
+            "usd_per_million_output_tokens": 0.020631942784972455
           },
           "relaxed": {
             "users": 384,
             "output_tokens_per_s": 15739.771428571428,
-            "usd_per_million_output_tokens": 0.02341908920240063
+            "usd_per_million_output_tokens": 0.021001293256109083
           }
         }
       },
