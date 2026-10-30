@@ -1,6 +1,9 @@
 # Phase 5: the baseline plus ONE change. Prefix caching off (baseline: on).
+# The Phase 5 run used `enable-prefix-caching: false`, which vLLM's config loader
+# drops, so that run had prefix caching ON (see its startup log). The negative
+# flag below is the form vLLM's command line takes; not yet rerun on a GPU.
 host: 0.0.0.0
 port: 8000
 gpu-memory-utilization: 0.90
 max-model-len: 8192
-enable-prefix-caching: false
+no-enable-prefix-caching: true

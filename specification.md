@@ -521,12 +521,14 @@ From `results/05_profiling_and_tuning/*_load_sweep_*.json` and `*_tuning_summary
 | Config | Weights | KV cache capacity | Peak tokens/s | vs baseline | TTFT p95 @256 | ITL p50 @256 | KV max | Preemptions |
 |---|---|---|---|---|---|---|---|---|
 | baseline | 14.29 GiB | 209,472 | 5,794 | | 713 ms | 43.0 ms | 57% | 0 |
-| max-num-seqs 512 | 14.29 GiB | 209,472 | 6,013 | +4% | 702 ms | 43.1 ms | 100% | 238 |
-| max-num-seqs 1024 | 14.29 GiB | 209,472 | 5,835 | +1% | 657 ms | 43.9 ms | 100% | 348 |
-| max-num-batched-tokens 8192 | 14.29 GiB | 209,472 | 5,949 | +3% | 743 ms | 41.4 ms | 55% | 0 |
-| prefix caching off | 14.29 GiB | 209,472 | 5,942 | +3% | 709 ms | 42.8 ms | 56% | 0 |
+| max-num-seqs 512 | 14.29 GiB | 205,488 | 6,013 | +4% | 702 ms | 43.1 ms | 100% | 238 |
+| max-num-seqs 1024 | 14.29 GiB | 199,344 | 5,835 | +1% | 657 ms | 43.9 ms | 100% | 348 |
+| max-num-batched-tokens 8192 | 14.29 GiB | 207,936 | 5,949 | +3% | 743 ms | 41.4 ms | 55% | 0 |
+| prefix caching off (not applied, see below) | 14.29 GiB | 209,472 | 5,942 | +3% | 709 ms | 42.8 ms | 56% | 0 |
 | **FP8 KV cache** | 14.29 GiB | **404,480** | **7,064** | **+22%** | 748 ms | 34.9 ms | 30% | 0 |
 | **FP8 weights** | **8.17 GiB** | **323,824** | **8,662** | **+50%** | 745 ms | 29.0 ms | 35% | 0 |
+
+The prefix caching row is a second baseline run, not a test of prefix caching: vLLM dropped `enable-prefix-caching: false` from the config file, and that run's startup log shows `enable_prefix_caching=True`. It landed 3% above the first baseline, which is the run to run noise to keep in mind for the +1% to +4% rows.
 
 ### Results: raising the sequence cap, step by step
 
@@ -615,7 +617,7 @@ FP8 weights passed exactly the cases the baseline passed. The FP8 KV cache answe
 
 ### Phase 5 takeaway
 
-The GPU spends three quarters of its time multiplying by the model weights, so halving the weights' size with FP8 is the one change that matters: +50% throughput and 31% lower cost per token, with answers as good as BF16. The FP8 KV cache and the combined config looked even faster (+22%, +99%) but got arithmetic, unit conversions and JSON wrong; without the eval set, the broken config would have looked like the answer. Raising the sequence cap mostly trades queueing for slower streaming; batched tokens, prefix caching and n-gram speculation didn't help this traffic.
+The GPU spends three quarters of its time multiplying by the model weights, so halving the weights' size with FP8 is the one change that matters: +50% throughput and 31% lower cost per token, with answers as good as BF16. The FP8 KV cache and the combined config looked even faster (+22%, +99%) but got arithmetic, unit conversions and JSON wrong; without the eval set, the broken config would have looked like the answer. Raising the sequence cap mostly trades queueing for slower streaming; batched tokens and n-gram speculation didn't help this traffic, and the prefix caching run turned out not to have switched it off.
 
 ---
 
