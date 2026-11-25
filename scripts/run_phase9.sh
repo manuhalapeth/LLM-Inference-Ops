@@ -47,18 +47,18 @@ measure() {  # label prefix, KV stats on (1) or off (0)
   python3 evals/run_evals.py --phase "$PHASE" --label "quality_$p" | tail -2
   for mode in mix interference; do
     steps=$MIX_STEPS; [ "$mode" = interference ] && steps=$INTERFERENCE_STEPS
-    [ "$kv" = 1 ] && python3 scripts/kv_transfer_stats.py snapshot "$OUT/kv_before.json"
+    [ "$kv" = 1 ] && python3 scripts/kv_transfer_stats.py snapshot /tmp/phase9_kv_before.json
     run_load "${p}_${mode}" "$steps" "$mode"
     if [ "$kv" = 1 ]; then
-      python3 scripts/kv_transfer_stats.py snapshot "$OUT/kv_after.json"
-      python3 scripts/kv_transfer_stats.py diff "$OUT/kv_before.json" "$OUT/kv_after.json" > "$OUT/${p}_${mode}/kv_transfer.json"
+      python3 scripts/kv_transfer_stats.py snapshot /tmp/phase9_kv_after.json
+      python3 scripts/kv_transfer_stats.py diff /tmp/phase9_kv_before.json /tmp/phase9_kv_after.json > "$OUT/${p}_${mode}/kv_transfer.json"
       cat "$OUT/${p}_${mode}/kv_transfer.json"
     fi
     # A crash shows up as errors; keep the logs that explain it.
     C ps --format '{{.Service}} {{.State}}' | grep -E '^vllm-' | grep -qv running && save_logs "${p}_${mode}_crash"
     C logs --no-color --no-log-prefix 2>&1 | grep -qE "AssertionError|EngineDeadError" && save_logs "${p}_${mode}_engine_error"
   done
-  rm -f "$OUT/kv_before.json" "$OUT/kv_after.json"
+  rm -f /tmp/phase9_kv_before.json /tmp/phase9_kv_after.json
 }
 
 for setup in $SETUPS; do
