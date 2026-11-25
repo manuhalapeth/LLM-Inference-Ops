@@ -33,7 +33,10 @@ if [ "$RUN_REPRO" = 1 ]; then
     use_vllm "$tag"
     # No smoke test request here: on v0.30.0 that single request is enough to crash it.
     if SMOKE=0 apply --pd 1,1 --pd-connector mooncake; then
-      python3 scripts/pd_abort_repro.py --phase "$PHASE" --label "abort_$tag" | tail -5
+      # A gentle load: 16 clients with ~3,500 token prompts overflow Mooncake's TCP send queue
+      # on both versions, which fails requests for a different reason (see the notebook).
+      python3 scripts/pd_abort_repro.py --phase "$PHASE" --label "abort_$tag" \
+        --concurrency "${REPRO_CONCURRENCY:-4}" --words "${REPRO_WORDS:-1500}" --requests "${REPRO_REQUESTS:-80}" | tail -5
       C logs --no-color --no-log-prefix vllm-decode-0 > "$OUT/abort_${tag}_decode_full.log" 2>&1 || true
       grep -E -B2 -A28 "Traceback|AssertionError|EngineDeadError" "$OUT/abort_${tag}_decode_full.log" \
         | head -120 > "$OUT/abort_${tag}_decode.log" || true
