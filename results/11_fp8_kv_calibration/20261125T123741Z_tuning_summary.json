@@ -1,0 +1,265 @@
+{
+  "run_id": "20261125T123741Z_tuning_summary",
+  "phase": "11_fp8_kv_calibration",
+  "name": "tuning_summary",
+  "timestamp": "2026-11-25T12:37:41.444394+00:00",
+  "config": {
+    "price_per_hour_usd": 0.752
+  },
+  "load": {
+    "configs": [
+      "fp8w_kv_bf16",
+      "fp8w_kv_fp8_scale1",
+      "fp8w_kv_fp8_skip3"
+    ]
+  },
+  "metrics": {
+    "configs": [
+      {
+        "label": "fp8w_kv_bf16",
+        "peak_output_tokens_per_s": 8185.285714285715,
+        "peak_at_users": 192,
+        "max_running": 256.0,
+        "max_kv_cache_usage": 0.3662736290473517,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 384,
+          "kv_cache_95pct": null,
+          "preemptions": null,
+          "ttft_p95_over_slo": 384,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 192,
+          "peak_output_tokens_per_s": 8185.285714285715,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "64": {
+            "output_tokens_per_s": 6427.028571428571,
+            "ttft_p95_s": 0.07235942199986312,
+            "itl_p50_s": 0.00988561532080558,
+            "waiting_max": 0.0
+          },
+          "128": {
+            "output_tokens_per_s": 7927.142857142857,
+            "ttft_p95_s": 0.1383029099997657,
+            "itl_p50_s": 0.015937032555556802,
+            "waiting_max": 0.0
+          },
+          "192": {
+            "output_tokens_per_s": 8185.285714285715,
+            "ttft_p95_s": 0.23440512599972863,
+            "itl_p50_s": 0.023187538861799167,
+            "waiting_max": 0.0
+          },
+          "256": {
+            "output_tokens_per_s": 8103.4,
+            "ttft_p95_s": 0.2619527070000913,
+            "itl_p50_s": 0.031199274848182336,
+            "waiting_max": 0.0
+          },
+          "384": {
+            "output_tokens_per_s": 6945.742857142857,
+            "ttft_p95_s": 4.506973980999646,
+            "itl_p50_s": 0.036661009947333935,
+            "waiting_max": 128.0
+          },
+          "512": {
+            "output_tokens_per_s": 7349.057142857143,
+            "ttft_p95_s": 8.908024954999746,
+            "itl_p50_s": 0.03507979711110469,
+            "waiting_max": 256.0
+          },
+          "768": {
+            "output_tokens_per_s": 6961.857142857143,
+            "ttft_p95_s": 17.381572323999535,
+            "itl_p50_s": 0.03754263729122677,
+            "waiting_max": 512.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 256,
+            "output_tokens_per_s": 8103.4,
+            "usd_per_million_output_tokens": 0.02577793134843262
+          },
+          "relaxed": {
+            "users": 256,
+            "output_tokens_per_s": 8103.4,
+            "usd_per_million_output_tokens": 0.02577793134843262
+          }
+        }
+      },
+      {
+        "label": "fp8w_kv_fp8_scale1",
+        "peak_output_tokens_per_s": 11322.314285714287,
+        "peak_at_users": 256,
+        "max_running": 256.0,
+        "max_kv_cache_usage": 0.2026060546683649,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 384,
+          "kv_cache_95pct": null,
+          "preemptions": null,
+          "ttft_p95_over_slo": 384,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 256,
+          "peak_output_tokens_per_s": 11322.314285714287,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "64": {
+            "output_tokens_per_s": 7501.628571428571,
+            "ttft_p95_s": 0.06870297400018899,
+            "itl_p50_s": 0.008416972107143227,
+            "waiting_max": 0.0
+          },
+          "128": {
+            "output_tokens_per_s": 10470.085714285715,
+            "ttft_p95_s": 0.15396414499991806,
+            "itl_p50_s": 0.011955521134290206,
+            "waiting_max": 0.0
+          },
+          "192": {
+            "output_tokens_per_s": 11095.171428571428,
+            "ttft_p95_s": 0.22803443199973117,
+            "itl_p50_s": 0.016907465793043704,
+            "waiting_max": 0.0
+          },
+          "256": {
+            "output_tokens_per_s": 11322.314285714287,
+            "ttft_p95_s": 0.2818950059991039,
+            "itl_p50_s": 0.022041219169491453,
+            "waiting_max": 0.0
+          },
+          "384": {
+            "output_tokens_per_s": 10871.914285714285,
+            "ttft_p95_s": 2.9998955890005163,
+            "itl_p50_s": 0.02367942408616314,
+            "waiting_max": 128.0
+          },
+          "512": {
+            "output_tokens_per_s": 11020.685714285713,
+            "ttft_p95_s": 6.1115668899983575,
+            "itl_p50_s": 0.023184132426335508,
+            "waiting_max": 256.0
+          },
+          "768": {
+            "output_tokens_per_s": 10941.485714285714,
+            "ttft_p95_s": 12.63315336300002,
+            "itl_p50_s": 0.023345334240207728,
+            "waiting_max": 512.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 256,
+            "output_tokens_per_s": 11322.314285714287,
+            "usd_per_million_output_tokens": 0.01844931023973168
+          },
+          "relaxed": {
+            "users": 256,
+            "output_tokens_per_s": 11322.314285714287,
+            "usd_per_million_output_tokens": 0.01844931023973168
+          }
+        }
+      },
+      {
+        "label": "fp8w_kv_fp8_skip3",
+        "peak_output_tokens_per_s": 10893.171428571428,
+        "peak_at_users": 192,
+        "max_running": 256.0,
+        "max_kv_cache_usage": 0.20868149755832877,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 256,
+          "kv_cache_95pct": null,
+          "preemptions": null,
+          "ttft_p95_over_slo": 384,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 192,
+          "peak_output_tokens_per_s": 10893.171428571428,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "64": {
+            "output_tokens_per_s": 7354.714285714285,
+            "ttft_p95_s": 0.06661508099932689,
+            "itl_p50_s": 0.008549644253245977,
+            "waiting_max": 0.0
+          },
+          "128": {
+            "output_tokens_per_s": 10212.285714285714,
+            "ttft_p95_s": 0.14142640200043388,
+            "itl_p50_s": 0.01231831705172226,
+            "waiting_max": 0.0
+          },
+          "192": {
+            "output_tokens_per_s": 10893.171428571428,
+            "ttft_p95_s": 0.24498524600130622,
+            "itl_p50_s": 0.017212593873566596,
+            "waiting_max": 0.0
+          },
+          "256": {
+            "output_tokens_per_s": 10744.057142857142,
+            "ttft_p95_s": 0.30488948699894536,
+            "itl_p50_s": 0.023160544000004227,
+            "waiting_max": 2.0
+          },
+          "384": {
+            "output_tokens_per_s": 10291.314285714287,
+            "ttft_p95_s": 3.295435080999596,
+            "itl_p50_s": 0.02458277252549391,
+            "waiting_max": 127.0
+          },
+          "512": {
+            "output_tokens_per_s": 10164.0,
+            "ttft_p95_s": 5.829381675999684,
+            "itl_p50_s": 0.024816858349018443,
+            "waiting_max": 256.0
+          },
+          "768": {
+            "output_tokens_per_s": 9902.6,
+            "ttft_p95_s": 11.80928192600004,
+            "itl_p50_s": 0.02575597051291104,
+            "waiting_max": 511.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 256,
+            "output_tokens_per_s": 10744.057142857142,
+            "usd_per_million_output_tokens": 0.01944227270121718
+          },
+          "relaxed": {
+            "users": 256,
+            "output_tokens_per_s": 10744.057142857142,
+            "usd_per_million_output_tokens": 0.01944227270121718
+          }
+        }
+      }
+    ],
+    "targets": [
+      [
+        "interactive",
+        0.5,
+        0.04
+      ],
+      [
+        "relaxed",
+        1.0,
+        0.06
+      ]
+    ]
+  },
+  "environment": {
+    "hostname": "Manus-MacBook-Air-538.local",
+    "python": "3.14.2",
+    "gpus": [],
+    "git_commit": "92f4a14f874063410ef585cd830e349e852b3c70",
+    "git_dirty": true
+  },
+  "notes": ""
+}
