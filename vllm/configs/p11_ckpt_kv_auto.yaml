@@ -1,8 +1,10 @@
 # Phase 11: a checkpoint made by scripts/calibrate_kv_fp8.py (FP8_DYNAMIC weights)
-# with the KV cache left in BF16: the control for its calibrated FP8 KV cache.
+# with the KV cache in BF16: the control for its calibrated FP8 KV cache.
 # Quantization comes from the checkpoint, so no quantization key here.
+# "auto" is NOT enough: with a kv_cache_scheme in the checkpoint, auto still
+# stores FP8 (the first Phase 11 pass ran FP8 twice). Ask for bfloat16 outright.
 host: 0.0.0.0
 port: 8000
 gpu-memory-utilization: 0.90
 max-model-len: 8192
-kv-cache-dtype: auto
+kv-cache-dtype: bfloat16
