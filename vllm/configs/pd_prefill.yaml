@@ -1,4 +1,4 @@
-# Phase 6 disaggregated serving: the PREFILL server. Computes the prompt and hands
+# Phase 6 and 9 disaggregated serving: the PREFILL server. Computes the prompt and hands
 # its KV to a decode server through Mooncake (over TCP; no RDMA on rented boxes).
 host: 0.0.0.0
 port: 8000

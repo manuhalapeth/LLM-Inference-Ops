@@ -6,6 +6,7 @@ how NGINX balances between them, and which servers Prometheus scrapes.
     python3 scripts/topology.py --replicas 4 --lb user_hash  # sticky routing per user
     python3 scripts/topology.py --replicas 4 --mooncake-store
     python3 scripts/topology.py --pd 1,1                     # 1 prefill + 1 decode server
+    python3 scripts/topology.py --pd 1,1 --pd-connector nixl # the same, KV moved by NIXL
 
 Writes generated/compose.json, generated/upstream.conf, generated/prom_targets/vllm.json
 and generated/env. Then:
@@ -24,8 +25,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "generated"
+# Phases 6 to 8 ran v0.30.0. Phase 9 on sets VLLM_TAG=v0.34.0 (and VLLM_IMAGE to match).
 VLLM_IMAGE = "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}"
-MOONCAKE_IMAGE = "llm-inference-ops/vllm-mooncake:v0.30.0"
+MOONCAKE_IMAGE = "llm-inference-ops/vllm-mooncake:${VLLM_TAG:-v0.30.0}"
 MOONCAKE_BUILD = {"context": "./vllm/mooncake", "args": {"VLLM_IMAGE": VLLM_IMAGE}}
 
 LB_METHODS = {
@@ -81,7 +83,8 @@ def build(args) -> tuple[dict, str, list, dict]:
     if args.pd:
         n_prefill, n_decode = (int(x) for x in args.pd.split(","))
         names = [f"vllm-prefill-{i}" for i in range(n_prefill)] + [f"vllm-decode-{i}" for i in range(n_decode)]
-        configs = [args.prefill_config] * n_prefill + [args.decode_config] * n_decode
+        suffix = "_nixl" if args.pd_connector == "nixl" else ""
+        configs = [args.prefill_config + suffix] * n_prefill + [args.decode_config + suffix] * n_decode
     else:
         names = [f"vllm-{i}" for i in range(args.replicas)]
         configs = [args.config] * args.replicas
@@ -92,7 +95,13 @@ def build(args) -> tuple[dict, str, list, dict]:
     extra_env = {"MOONCAKE_CONFIG_PATH": "/mooncake/mooncake_config_shared.json"} if args.mooncake_store else {}
     for i, (name, config) in enumerate(zip(names, configs)):
         gpus = list(range(i * args.tp, (i + 1) * args.tp))
-        services[name] = vllm_service(name, gpus, config, args.tp, 8000 + i, image, extra_env, args.fake_dir)
+        env = dict(extra_env)
+        if args.pd and args.pd_connector == "nixl":
+            # The prefill server tells the decode server where to fetch the KV from:
+            # its own name on the compose network, not the default "localhost".
+            env.update({"VLLM_NIXL_SIDE_CHANNEL_HOST": name, "VLLM_NIXL_SIDE_CHANNEL_PORT": "5600",
+                        "UCX_NET_DEVICES": "all", "UCX_LOG_LEVEL": "info"})
+        services[name] = vllm_service(name, gpus, config, args.tp, 8000 + i, image, env, args.fake_dir)
         if args.mooncake_store and not args.fake_dir:
             services[name]["depends_on"] = ["mooncake-master"]
 
@@ -101,7 +110,13 @@ def build(args) -> tuple[dict, str, list, dict]:
                                        "entrypoint": ["mooncake_master"], "command": ["--port", "50051"],
                                        "restart": "unless-stopped"}
 
-    if args.pd:
+    if args.pd and args.pd_connector == "nixl":
+        # vLLM's NIXL proxy: the prefill server returns where its KV lives, the
+        # decode server pulls it with NIXL and streams the answer.
+        cmd = ["python3", "/mooncake/nixl_proxy.py", "--host", "0.0.0.0", "--port", "8000",
+               "--prefiller-hosts", *names[:n_prefill], "--prefiller-ports", *["8000"] * n_prefill,
+               "--decoder-hosts", *names[n_prefill:], "--decoder-ports", *["8000"] * n_decode]
+    elif args.pd:
         # vLLM's example proxy: sends each request to a prefill server (1 token,
         # KV written via Mooncake), then streams the answer from a decode server.
         bootstrap = "8000" if args.fake_dir else "8998"
@@ -110,6 +125,7 @@ def build(args) -> tuple[dict, str, list, dict]:
             cmd += ["--prefill", f"http://{n}:8000", bootstrap]
         for n in names[n_prefill:]:
             cmd += ["--decode", f"http://{n}:8000"]
+    if args.pd:
         if args.fake_dir:
             proxy = {"image": "python:3.12-slim", "volumes": ["./vllm/mooncake:/mooncake:ro"],
                      "entrypoint": ["sh", "-c", "pip install -q fastapi==0.142.2 uvicorn==0.54.0 httpx==0.28.1 && exec " + " ".join(cmd)]}
@@ -155,7 +171,7 @@ def build(args) -> tuple[dict, str, list, dict]:
 def describe(args) -> str:
     if args.pd:
         p, d = args.pd.split(",")
-        return f"pd {p}P+{d}D tp{args.tp} lb={args.lb}"
+        return f"pd {p}P+{d}D {args.pd_connector} tp{args.tp} lb={args.lb}"
     return f"{args.replicas}x tp{args.tp} {args.config} lb={args.lb}" + (" mooncake_store" if args.mooncake_store else "")
 
 
@@ -168,6 +184,8 @@ def main() -> None:
     parser.add_argument("--lb", choices=list(LB_METHODS), default="round_robin")
     parser.add_argument("--mooncake-store", action="store_true", help="share KV cache between servers through Mooncake")
     parser.add_argument("--pd", help="prefill,decode server counts, e.g. 1,1 (disaggregated serving)")
+    parser.add_argument("--pd-connector", choices=["mooncake", "nixl"], default="mooncake",
+                        help="what moves the KV from prefill to decode")
     parser.add_argument("--prefill-config", default="pd_prefill")
     parser.add_argument("--decode-config", default="pd_decode")
     parser.add_argument("--gateway-workers", type=int, default=4)

@@ -1,4 +1,4 @@
-# Phase 6 disaggregated serving: the DECODE server. Receives the KV from a prefill
+# Phase 6 and 9 disaggregated serving: the DECODE server. Receives the KV from a prefill
 # server through Mooncake and generates the answer.
 host: 0.0.0.0
 port: 8000

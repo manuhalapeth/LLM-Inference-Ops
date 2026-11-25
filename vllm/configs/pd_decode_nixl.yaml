@@ -1,0 +1,11 @@
+# Phase 9 disaggregated serving with NIXL instead of Mooncake: the DECODE server.
+# NIXL moves the KV over UCX, which picks the fastest path it finds between the
+# two GPUs (on these machines there is no GPU peer to peer, so through host memory).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-transfer-config:
+  kv_connector: NixlConnector
+  kv_role: kv_consumer
