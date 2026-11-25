@@ -1,0 +1,20 @@
+# Phase 9 disaggregated serving, Mooncake (TCP) with the settings that kept it
+# serving under load: the PREFILL server. With the defaults, 16 concurrent
+# 3,500 token prompts overflowed the TCP transport's queue, the decode server
+# failed those requests, and the prefill server kept their KV blocks until the
+# 480 s abort timeout, so it filled up and stopped admitting new prompts.
+# topology.py also sets MC_TCP_MAX_QUEUED_TRANSFERS_PER_PEER and
+# VLLM_MOONCAKE_ABORT_REQUEST_TIMEOUT for this variant.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-transfer-config:
+  kv_connector: MooncakeConnector
+  kv_role: kv_producer
+  # A failed transfer recomputes the prompt on the decode server instead of
+  # failing the request.
+  kv_load_failure_policy: recompute
+  kv_connector_extra_config:
+    mooncake_protocol: tcp

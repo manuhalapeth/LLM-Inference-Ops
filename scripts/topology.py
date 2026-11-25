@@ -87,7 +87,7 @@ def build(args) -> tuple[dict, str, list, dict]:
     if args.pd:
         n_prefill, n_decode = (int(x) for x in args.pd.split(","))
         names = [f"vllm-prefill-{i}" for i in range(n_prefill)] + [f"vllm-decode-{i}" for i in range(n_decode)]
-        suffix = "_nixl" if args.pd_connector == "nixl" else ""
+        suffix = {"nixl": "_nixl", "mooncake_tuned": "_mooncake_tuned"}.get(args.pd_connector, "")
         configs = [args.prefill_config + suffix] * n_prefill + [args.decode_config + suffix] * n_decode
     else:
         names = [f"vllm-{i}" for i in range(args.replicas)]
@@ -107,6 +107,11 @@ def build(args) -> tuple[dict, str, list, dict]:
             # its own name on the compose network, not the default "localhost".
             env.update({"VLLM_NIXL_SIDE_CHANNEL_HOST": name, "VLLM_NIXL_SIDE_CHANNEL_PORT": "5600",
                         "UCX_NET_DEVICES": "all", "UCX_LOG_LEVEL": "info"})
+        if args.pd and args.pd_connector == "mooncake_tuned":
+            # A deeper TCP send queue (default overflowed at 16 concurrent long prompts), and
+            # give back a prefill server's KV blocks 60 s after a transfer stalls, not 480 s.
+            env.update({"MC_TCP_MAX_QUEUED_TRANSFERS_PER_PEER": "65536", "MC_TCP_LANES_PER_PEER": "8",
+                        "VLLM_MOONCAKE_ABORT_REQUEST_TIMEOUT": "60"})
         services[name] = vllm_service(name, gpus, config, args.tp, 8000 + i, image, env, args.fake_dir)
         if args.mooncake_store and not args.fake_dir:
             services[name]["depends_on"] = ["mooncake-master"]
@@ -219,7 +224,7 @@ def main() -> None:
                         help="cache_aware: requests of imbalance before it balances load instead")
     parser.add_argument("--mooncake-store", action="store_true", help="share KV cache between servers through Mooncake")
     parser.add_argument("--pd", help="prefill,decode server counts, e.g. 1,1 (disaggregated serving)")
-    parser.add_argument("--pd-connector", choices=["mooncake", "nixl"], default="mooncake",
+    parser.add_argument("--pd-connector", choices=["mooncake", "mooncake_tuned", "nixl"], default="mooncake",
                         help="what moves the KV from prefill to decode")
     parser.add_argument("--prefill-config", default="pd_prefill")
     parser.add_argument("--decode-config", default="pd_decode")
