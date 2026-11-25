@@ -66,7 +66,8 @@ fi
 start_vllm() {  # label config model; non-zero if vLLM doesn't come up
   export VLLM_CONFIG=$2 MODEL_NAME=${3:+/root/.cache/huggingface/$3}
   MODEL_NAME=${MODEL_NAME:-$BASE_MODEL}
-  docker compose up -d gateway vllm >/dev/null 2>&1
+  # Prometheus, Grafana and the GPU exporter too: the calibration step stops everything.
+  docker compose up -d gateway vllm prometheus grafana gpu-exporter >/dev/null 2>&1
   if ! python3 scripts/smoke_test.py --wait 1200 > /dev/null 2>&1; then
     echo "!! $1: vLLM did not start, see $OUT/failed_$1.log"
     docker compose logs --no-color --no-log-prefix --tail 150 vllm > "$OUT/failed_$1.log" 2>&1
