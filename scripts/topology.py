@@ -87,7 +87,7 @@ def build(args) -> tuple[dict, str, list, dict]:
     if args.pd:
         n_prefill, n_decode = (int(x) for x in args.pd.split(","))
         names = [f"vllm-prefill-{i}" for i in range(n_prefill)] + [f"vllm-decode-{i}" for i in range(n_decode)]
-        suffix = {"nixl": "_nixl", "mooncake_tuned": "_mooncake_tuned"}.get(args.pd_connector, "")
+        suffix = {"nixl": "_nixl", "nixl_hostpid": "_nixl", "mooncake_tuned": "_mooncake_tuned"}.get(args.pd_connector, "")
         configs = [args.prefill_config + suffix] * n_prefill + [args.decode_config + suffix] * n_decode
     else:
         names = [f"vllm-{i}" for i in range(args.replicas)]
@@ -102,7 +102,7 @@ def build(args) -> tuple[dict, str, list, dict]:
         env = dict(extra_env)
         if config.endswith("_kv_events"):  # full 32 byte block hashes, as vLLM's router expects
             env["VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES"] = "0"
-        if args.pd and args.pd_connector == "nixl":
+        if args.pd and args.pd_connector in ("nixl", "nixl_hostpid"):
             # The prefill server tells the decode server where to fetch the KV from:
             # its own name on the compose network, not the default "localhost".
             env.update({"VLLM_NIXL_SIDE_CHANNEL_HOST": name, "VLLM_NIXL_SIDE_CHANNEL_PORT": "5600",
@@ -113,6 +113,10 @@ def build(args) -> tuple[dict, str, list, dict]:
             env.update({"MC_TCP_MAX_QUEUED_TRANSFERS_PER_PEER": "65536", "MC_TCP_LANES_PER_PEER": "8",
                         "VLLM_MOONCAKE_ABORT_REQUEST_TIMEOUT": "60"})
         services[name] = vllm_service(name, gpus, config, args.tp, 8000 + i, image, env, args.fake_dir)
+        if args.pd and args.pd_connector == "nixl_hostpid":
+            # UCX's shared memory transports (cma, posix) need to see the other process,
+            # which separate PID namespaces hide; with them hidden, NIXL fell back to TCP.
+            services[name]["pid"] = "host"
         if args.mooncake_store and not args.fake_dir:
             services[name]["depends_on"] = ["mooncake-master"]
 
@@ -121,7 +125,7 @@ def build(args) -> tuple[dict, str, list, dict]:
                                        "entrypoint": ["mooncake_master"], "command": ["--port", "50051"],
                                        "restart": "unless-stopped"}
 
-    if args.pd and args.pd_connector == "nixl":
+    if args.pd and args.pd_connector in ("nixl", "nixl_hostpid"):
         # vLLM's NIXL proxy: the prefill server returns where its KV lives, the
         # decode server pulls it with NIXL and streams the answer.
         cmd = ["python3", "/mooncake/nixl_proxy.py", "--host", "0.0.0.0", "--port", "8000",
@@ -225,7 +229,7 @@ def main() -> None:
                         help="cache_aware: requests of imbalance before it balances load instead")
     parser.add_argument("--mooncake-store", action="store_true", help="share KV cache between servers through Mooncake")
     parser.add_argument("--pd", help="prefill,decode server counts, e.g. 1,1 (disaggregated serving)")
-    parser.add_argument("--pd-connector", choices=["mooncake", "mooncake_tuned", "nixl"], default="mooncake",
+    parser.add_argument("--pd-connector", choices=["mooncake", "mooncake_tuned", "nixl", "nixl_hostpid"], default="mooncake",
                         help="what moves the KV from prefill to decode")
     parser.add_argument("--prefill-config", default="pd_prefill")
     parser.add_argument("--decode-config", default="pd_decode")
