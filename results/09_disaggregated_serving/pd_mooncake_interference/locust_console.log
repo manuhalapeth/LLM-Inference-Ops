@@ -1,0 +1,19 @@
+time="2026-11-25T11:03:38Z" level=warning msg="Found orphan containers ([llm-inference-ops-pd-proxy-1 llm-inference-ops-vllm-decode-0-1 llm-inference-ops-vllm-prefill-0-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-11-25 11:03:39,688] 75e60d97bb42/INFO/locust.main: Starting Locust 2.46.6
+[2026-11-25 11:03:39,712] 75e60d97bb42/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-11-25 11:03:39,729] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_8e7b6030ec5e47b0be839f7695217ab2 (index 0) reported as ready. 1 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_c3b48973191a4e169c10d984191754b8 (index 1) reported as ready. 2 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_27da52a8db0b42c29c78a5f102bf3419 (index 2) reported as ready. 3 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_5e2387cd122e4d4f91b491f2ebcc14ee (index 3) reported as ready. 4 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_50f091e9a72b49578a4c30ae626a1a57 (index 4) reported as ready. 5 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_6248bd4645a0457896cc88cacfc38cfe (index 5) reported as ready. 6 workers connected.
+[2026-11-25 11:03:39,730] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_d97ea1994918410fbc10c4fd822ec54f (index 6) reported as ready. 7 workers connected.
+[2026-11-25 11:03:39,731] 75e60d97bb42/INFO/locust.runners: 75e60d97bb42_fd14ec8b8e97488a81163ab84f55b374 (index 7) reported as ready. 8 workers connected.
+[2026-11-25 11:03:40,731] 75e60d97bb42/INFO/locust.runners: Shape test starting.
+[2026-11-25 11:03:40,731] 75e60d97bb42/INFO/locust.runners: Shape worker starting
+[2026-11-25 11:03:40,731] 75e60d97bb42/INFO/locust.runners: Shape test updating to 16 users at 16.00 spawn rate
+[2026-11-25 11:03:40,732] 75e60d97bb42/INFO/locust.runners: Sending spawn jobs of 16 users at 16.00 spawn rate to 8 ready workers
+[2026-11-25 11:03:40,840] 75e60d97bb42/INFO/locust.runners: All users spawned: {"ChatUser": 16} (16 total users)

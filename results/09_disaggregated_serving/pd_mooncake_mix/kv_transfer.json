@@ -1,0 +1,13 @@
+{
+  "prefill": {
+    "connector": "mooncake",
+    "transfers": 833.0,
+    "gib": 11.78173828125,
+    "mib_per_transfer": 14.483193277310924,
+    "xfer_ms_mean": 348.88964022568695,
+    "xfer_ms_p95": 688.1835937499998,
+    "gib_per_s": 0.04053930470886082,
+    "failed_transfers": 1094.0,
+    "expired_requests": 0.0
+  }
+}

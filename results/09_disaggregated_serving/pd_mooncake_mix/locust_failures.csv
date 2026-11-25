@@ -1,0 +1,11 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+TOTAL,multi_turn,"Exception(""{'type': 'timeout', 'message': 'request exceeded its 120s time limit'}"")",121,2026-11-25T11:02:17Z,2026-11-25T11:03:14Z
+TOTAL,short_qa,"Exception(""{'type': 'timeout', 'message': 'request exceeded its 120s time limit'}"")",173,2026-11-25T11:02:17Z,2026-11-25T11:03:14Z
+TOTAL,long_generation,"Exception(""{'type': 'timeout', 'message': 'request exceeded its 120s time limit'}"")",76,2026-11-25T11:02:18Z,2026-11-25T11:03:14Z
+TOTAL,summarization,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",1014,2026-11-25T10:59:31Z,2026-11-25T11:03:28Z
+TOTAL,multi_turn,Exception('ChunkedEncodingError: Response ended prematurely'),1,2026-11-25T11:00:05Z,2026-11-25T11:00:05Z
+TOTAL,short_qa,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",1382,2026-11-25T10:59:31Z,2026-11-25T11:03:28Z
+TOTAL,long_generation,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",562,2026-11-25T10:59:31Z,2026-11-25T11:03:28Z
+TOTAL,multi_turn,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",967,2026-11-25T10:59:31Z,2026-11-25T11:03:28Z
+TOTAL,summarization,"Exception(""{'type': 'timeout', 'message': 'request exceeded its 120s time limit'}"")",142,2026-11-25T11:02:17Z,2026-11-25T11:03:14Z
+TOTAL,short_qa,Exception('ChunkedEncodingError: Response ended prematurely'),1,2026-11-25T11:00:12Z,2026-11-25T11:00:12Z
