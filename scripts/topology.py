@@ -7,6 +7,7 @@ how NGINX balances between them, and which servers Prometheus scrapes.
     python3 scripts/topology.py --replicas 4 --mooncake-store
     python3 scripts/topology.py --pd 1,1                     # 1 prefill + 1 decode server
     python3 scripts/topology.py --pd 1,1 --pd-connector nixl # the same, KV moved by NIXL
+    python3 scripts/topology.py --replicas 4 --router cache_aware  # vLLM's router picks the server
 
 Writes generated/compose.json, generated/upstream.conf, generated/prom_targets/vllm.json
 and generated/env. Then:
@@ -29,6 +30,9 @@ OUT = ROOT / "generated"
 VLLM_IMAGE = "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}"
 MOONCAKE_IMAGE = "llm-inference-ops/vllm-mooncake:${VLLM_TAG:-v0.30.0}"
 MOONCAKE_BUILD = {"context": "./vllm/mooncake", "args": {"VLLM_IMAGE": VLLM_IMAGE}}
+
+ROUTER_IMAGE = "llm-inference-ops/vllm-router:0.1.17"
+ROUTER_POLICIES = ["round_robin", "power_of_two", "consistent_hash", "cache_aware", "kv_aware"]
 
 LB_METHODS = {
     "round_robin": "",                                   # NGINX's default: each server in turn
@@ -96,6 +100,8 @@ def build(args) -> tuple[dict, str, list, dict]:
     for i, (name, config) in enumerate(zip(names, configs)):
         gpus = list(range(i * args.tp, (i + 1) * args.tp))
         env = dict(extra_env)
+        if config.endswith("_kv_events"):  # full 32 byte block hashes, as vLLM's router expects
+            env["VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES"] = "0"
         if args.pd and args.pd_connector == "nixl":
             # The prefill server tells the decode server where to fetch the KV from:
             # its own name on the compose network, not the default "localhost".
@@ -134,6 +140,28 @@ def build(args) -> tuple[dict, str, list, dict]:
                      "entrypoint": cmd}
         services["pd-proxy"] = {**proxy, "depends_on": names, "restart": "unless-stopped"}
         backends = ["pd-proxy"]
+    elif args.router:
+        # vLLM's router does the balancing; NGINX keeps one upstream (the router), so
+        # the gateway, NGINX and the traces stay as they were.
+        cmd = ["--host", "0.0.0.0", "--port", "8000", "--policy", args.router,
+               "--worker-urls", *[f"http://{n}:8000" for n in names],
+               "--prometheus-host", "0.0.0.0", "--prometheus-port", "29000",
+               "--request-timeout-secs", "600", "--log-level", "warning",
+               # NGINX doesn't retry a streaming request either; a failure should count.
+               "--disable-retries"]
+        if args.router == "kv_aware":
+            # Tell it where each server publishes its KV cache events (set in
+            # tune_fp8_weights_kv_events.yaml) rather than relying on discovery.
+            for n in names:
+                cmd += ["--kv-event-source", f"http://{n}:8000=tcp://{n}:5557",
+                        "--kv-event-replay-source", f"http://{n}:8000=tcp://{n}:5558"]
+            cmd += ["--kv-event-block-size", "16"]  # vLLM's default block size
+        if args.router == "cache_aware":
+            cmd += ["--cache-threshold", str(args.cache_threshold),
+                    "--balance-abs-threshold", str(args.balance_abs_threshold)]
+        services["vllm-router"] = {"image": ROUTER_IMAGE, "build": {"context": "./router"}, "command": cmd,
+                                   "depends_on": names, "restart": "unless-stopped"}
+        backends = ["vllm-router"]
     else:
         backends = names
 
@@ -159,6 +187,8 @@ def build(args) -> tuple[dict, str, list, dict]:
         "",
     ])
     targets = [{"targets": [f"{n}:8000"], "labels": {"replica": n}} for n in names]
+    if args.router:
+        targets.append({"targets": ["vllm-router:29000"], "labels": {"replica": "router"}})
     env = {
         "NGINX_UPSTREAM": "./generated/upstream.conf",
         "PROM_TARGETS_DIR": "./generated/prom_targets",
@@ -172,7 +202,8 @@ def describe(args) -> str:
     if args.pd:
         p, d = args.pd.split(",")
         return f"pd {p}P+{d}D {args.pd_connector} tp{args.tp} lb={args.lb}"
-    return f"{args.replicas}x tp{args.tp} {args.config} lb={args.lb}" + (" mooncake_store" if args.mooncake_store else "")
+    lb = f"router={args.router}" if args.router else f"lb={args.lb}"
+    return f"{args.replicas}x tp{args.tp} {args.config} {lb}" + (" mooncake_store" if args.mooncake_store else "")
 
 
 def main() -> None:
@@ -182,6 +213,10 @@ def main() -> None:
     parser.add_argument("--gpus", type=int, default=4, help="GPUs on the machine")
     parser.add_argument("--config", default="tune_fp8_weights", help="vllm/configs/<name>.yaml for every server")
     parser.add_argument("--lb", choices=list(LB_METHODS), default="round_robin")
+    parser.add_argument("--router", choices=ROUTER_POLICIES, help="put vLLM's router behind NGINX with this policy")
+    parser.add_argument("--cache-threshold", type=float, default=0.3, help="cache_aware: prefix match needed to follow the cache")
+    parser.add_argument("--balance-abs-threshold", type=int, default=64,
+                        help="cache_aware: requests of imbalance before it balances load instead")
     parser.add_argument("--mooncake-store", action="store_true", help="share KV cache between servers through Mooncake")
     parser.add_argument("--pd", help="prefill,decode server counts, e.g. 1,1 (disaggregated serving)")
     parser.add_argument("--pd-connector", choices=["mooncake", "nixl"], default="mooncake",

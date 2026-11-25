@@ -1,0 +1,15 @@
+# Phase 10: the Phase 5 recommended config (FP8 weights) plus KV cache events,
+# so vLLM's router (kv_aware policy) can see which blocks each server holds.
+# Every Phase 10 setup runs this, NGINX ones included, so they all pay the same.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+# The router computes the same block hashes as vLLM, so both must use sha256_cbor
+# (and VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES=0, set by topology.py).
+prefix-caching-hash-algo: sha256_cbor
+kv-events-config:
+  enable_kv_cache_events: true
+  endpoint: "tcp://*:5557"
+  replay_endpoint: "tcp://*:5558"
