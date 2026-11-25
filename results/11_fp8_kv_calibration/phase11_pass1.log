@@ -1,0 +1,85 @@
+==> [0] Calibrating tensor -> llmops/qwen2.5-7b-fp8dyn-kv-tensor
+2026-11-25T10:31:33.6703 | resave_config | INFO - Resaved original config with patched fields to /hf/llmops/qwen2.5-7b-fp8dyn-kv-tensor/config.json
+Dispatching model:   0%|          | 0/399 [00:00<?, ?it/s]Dispatching model: 100%|██████████| 399/399 [00:00<00:00, 67579.04it/s]
+saved /hf/llmops/qwen2.5-7b-fp8dyn-kv-tensor in 110 s
+   25       15.6      18.59
+   26       15.6      21.22
+   27      418.2      69.56
+{
+  "layers": 28,
+  "k_absmax_max": 418.25,
+  "k_absmax_min": 11.7578125,
+  "v_absmax_max": 69.5625,
+  "v_absmax_min": 1.955078125,
+  "layers_k_clipped_at_scale_1": 0,
+  "layers_v_clipped_at_scale_1": 0,
+  "layers_k_below_1": 0,
+  "layers_v_below_1": 0
+}
+==> [0] Calibrating attn_head -> llmops/qwen2.5-7b-fp8dyn-kv-head
+2026-11-25T10:33:05.7371 | resave_config | INFO - Resaved original config with patched fields to /hf/llmops/qwen2.5-7b-fp8dyn-kv-head/config.json
+Dispatching model:   0%|          | 0/399 [00:00<?, ?it/s]Dispatching model: 100%|██████████| 399/399 [00:00<00:00, 67077.93it/s]
+saved /hf/llmops/qwen2.5-7b-fp8dyn-kv-head in 72 s
+   25       15.6      18.59
+   26       15.6      20.23
+   27      418.2      70.00
+{
+  "layers": 28,
+  "k_absmax_max": 418.25,
+  "k_absmax_min": 10.6640625,
+  "v_absmax_max": 70.0,
+  "v_absmax_min": 1.955078125,
+  "layers_k_clipped_at_scale_1": 0,
+  "layers_v_clipped_at_scale_1": 0,
+  "layers_k_below_1": 0,
+  "layers_v_below_1": 0
+}
+==> [1] baseline_bf16
+21/22 passed  correctness 7/7  instructions 5/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T103521Z_evals_quality_baseline_bf16.json
+baseline_bf16: 461/500 correct (92.2% +- 2.4%), 0 errors, 46 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T103606Z_gsm8k_baseline_bf16.json
+==> [1] bf16w_kv_fp8_scale1
+17/22 passed  correctness 4/7  instructions 4/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T103727Z_evals_quality_bf16w_kv_fp8_scale1.json
+bf16w_kv_fp8_scale1: 29/500 correct (5.8% +- 2.0%), 0 errors, 65 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T103832Z_gsm8k_bf16w_kv_fp8_scale1.json
+==> [1] fp8w_kv_bf16
+21/22 passed  correctness 7/7  instructions 5/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104043Z_evals_quality_fp8w_kv_bf16.json
+fp8w_kv_bf16: 464/500 correct (92.8% +- 2.3%), 0 errors, 28 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104112Z_gsm8k_fp8w_kv_bf16.json
+==> [1] fp8w_kv_fp8_scale1
+16/22 passed  correctness 4/7  instructions 3/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104226Z_evals_quality_fp8w_kv_fp8_scale1.json
+fp8w_kv_fp8_scale1: 31/500 correct (6.2% +- 2.1%), 0 errors, 37 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104303Z_gsm8k_fp8w_kv_fp8_scale1.json
+==> [1] fp8w_kv_fp8_per_token_head
+11/22 passed  correctness 1/7  instructions 4/5  summarization 0/1  safety 0/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104417Z_evals_quality_fp8w_kv_fp8_per_token_head.json
+fp8w_kv_fp8_per_token_head: 5/500 correct (1.0% +- 0.9%), 0 errors, 50 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104507Z_gsm8k_fp8w_kv_fp8_per_token_head.json
+==> [1] ckpt_kv_bf16
+14/22 passed  correctness 3/7  instructions 2/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104618Z_evals_quality_ckpt_kv_bf16.json
+ckpt_kv_bf16: 7/500 correct (1.4% +- 1.0%), 0 errors, 49 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104707Z_gsm8k_ckpt_kv_bf16.json
+==> [1] ckpt_kv_fp8_tensor
+14/22 passed  correctness 3/7  instructions 2/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104818Z_evals_quality_ckpt_kv_fp8_tensor.json
+ckpt_kv_fp8_tensor: 7/500 correct (1.4% +- 1.0%), 0 errors, 49 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T104907Z_gsm8k_ckpt_kv_fp8_tensor.json
+==> [1] ckpt_kv_fp8_head
+!! ckpt_kv_fp8_head: vLLM did not start, see results/11_fp8_kv_calibration/failed_ckpt_kv_fp8_head.log
+==> [2] fp8w_kv_bf16
+    64   27.77          -      41ms      76ms     7.5s    9.8ms        -        -       -        -     -       0
+   128   35.03          -      75ms     132ms    12.6s   16.2ms        -        -       -        -     -       0
+   192   35.94          -     106ms     168ms    17.9s   22.9ms        -        -       -        -     -       0
+   256   35.80          -     147ms     298ms    24.0s   31.2ms        -        -       -        -     -       0
+   384   30.17          -    4310ms    4818ms    31.3s   35.9ms        -        -       -        -     -       0
+   512   30.20          -    8498ms    9240ms    35.4s   35.5ms        -        -       -        -     -       0
+   768   10.23          -   16647ms   17188ms    27.2s   35.3ms        -        -       -        -     -       0
+
+breaking points: {"requests_queue": null, "kv_cache_95pct": null, "preemptions": null, "ttft_p95_over_slo": 384, "errors_over_1pct": null, "peak_throughput_users": 192, "peak_output_tokens_per_s": null, "ttft_slo_s": 1.0}
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T111656Z_load_sweep_fp8w_kv_bf16.json
+==> [2] fp8w_kv_fp8_scale1
