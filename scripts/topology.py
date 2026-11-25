@@ -160,7 +160,8 @@ def build(args) -> tuple[dict, str, list, dict]:
             for n in names:
                 cmd += ["--kv-event-source", f"http://{n}:8000=tcp://{n}:5557",
                         "--kv-event-replay-source", f"http://{n}:8000=tcp://{n}:5558"]
-            cmd += ["--kv-event-block-size", "16"]  # vLLM's default block size
+            # Static sources also need the served model's name ("model identity").
+            cmd += ["--kv-event-block-size", "16", "--kv-event-model", "${SERVED_MODEL_NAME:-llm}"]
         if args.router == "cache_aware":
             cmd += ["--cache-threshold", str(args.cache_threshold),
                     "--balance-abs-threshold", str(args.balance_abs_threshold)]
