@@ -1,0 +1,2 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+TOTAL,summarization,Exception('ChunkedEncodingError: Response ended prematurely'),1,2026-11-25T12:01:09Z,2026-11-25T12:01:09Z

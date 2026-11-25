@@ -1,0 +1,116 @@
+time="2026-11-25T12:12:21Z" level=warning msg="Found orphan containers ([llm-inference-ops-pd-proxy-1 llm-inference-ops-vllm-prefill-0-1 llm-inference-ops-vllm-decode-0-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-11-25 12:12:22,740] 58e3fd2d1339/INFO/locust.main: Starting Locust 2.46.6
+[2026-11-25 12:12:22,764] 58e3fd2d1339/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-11-25 12:12:22,780] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0f76e19f8e2a423fb02d4405bc42adb8 (index 0) reported as ready. 1 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_29dc8258936e446981e38bc7e8c147b5 (index 1) reported as ready. 2 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_136888e45c2746ba8a55ac3a57099f36 (index 2) reported as ready. 3 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_6013bd027c2b4bdb97ee7afd00a96fc2 (index 3) reported as ready. 4 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_30eee46050e5460faba708c04a48fe6a (index 4) reported as ready. 5 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_e00676f26542442cb3580bf1c4c3660e (index 5) reported as ready. 6 workers connected.
+[2026-11-25 12:12:22,781] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_8a85349bc87647c7a3363cc94087fcb5 (index 6) reported as ready. 7 workers connected.
+[2026-11-25 12:12:22,945] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0835ffed7c0044e09c4baf438b9a60df (index 7) reported as ready. 8 workers connected.
+[2026-11-25 12:12:23,781] 58e3fd2d1339/INFO/locust.runners: Shape test starting.
+[2026-11-25 12:12:23,781] 58e3fd2d1339/INFO/locust.runners: Shape worker starting
+[2026-11-25 12:12:23,781] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-11-25 12:12:23,782] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-11-25 12:12:23,879] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-11-25 12:13:08,809] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-11-25 12:13:08,809] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-11-25 12:13:08,905] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-11-25 12:13:53,839] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 384 users at 384.00 spawn rate
+[2026-11-25 12:13:53,839] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 384 users at 384.00 spawn rate to 8 ready workers
+[2026-11-25 12:13:53,946] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 384} (384 total users)
+[2026-11-25 12:14:38,865] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-11-25 12:14:38,865] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 8 ready workers
+[2026-11-25 12:14:38,961] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-11-25 12:15:23,900] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 768 users at 768.00 spawn rate
+[2026-11-25 12:15:23,900] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 768 users at 768.00 spawn rate to 8 ready workers
+[2026-11-25 12:15:24,016] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 768} (768 total users)
+[2026-11-25 12:16:08,934] 58e3fd2d1339/INFO/locust.runners: Shape test updating to 1024 users at 1024.00 spawn rate
+[2026-11-25 12:16:08,935] 58e3fd2d1339/INFO/locust.runners: Sending spawn jobs of 1024 users at 1024.00 spawn rate to 8 ready workers
+[2026-11-25 12:16:08,935] 58e3fd2d1339/WARNING/locust.runners: Your selected spawn rate is very high (>100/worker), and this is known to sometimes cause issues. Do you really need to ramp up that fast?
+[2026-11-25 12:16:09,039] 58e3fd2d1339/INFO/locust.runners: All users spawned: {"ChatUser": 1024} (1024 total users)
+[2026-11-25 12:16:53,974] 58e3fd2d1339/INFO/locust.runners: Shape test stopping
+[2026-11-25 12:16:54,040] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_136888e45c2746ba8a55ac3a57099f36 (index 2) reported that it has stopped
+[2026-11-25 12:16:54,040] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_136888e45c2746ba8a55ac3a57099f36 (index 2) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,056] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_6013bd027c2b4bdb97ee7afd00a96fc2 (index 3) reported that it has stopped
+[2026-11-25 12:16:54,057] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_6013bd027c2b4bdb97ee7afd00a96fc2 (index 3) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,058] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_e00676f26542442cb3580bf1c4c3660e (index 5) reported that it has stopped
+[2026-11-25 12:16:54,058] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_e00676f26542442cb3580bf1c4c3660e (index 5) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,058] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0f76e19f8e2a423fb02d4405bc42adb8 (index 0) reported that it has stopped
+[2026-11-25 12:16:54,059] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0f76e19f8e2a423fb02d4405bc42adb8 (index 0) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,060] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_29dc8258936e446981e38bc7e8c147b5 (index 1) reported that it has stopped
+[2026-11-25 12:16:54,060] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_29dc8258936e446981e38bc7e8c147b5 (index 1) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,061] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_8a85349bc87647c7a3363cc94087fcb5 (index 6) reported that it has stopped
+[2026-11-25 12:16:54,061] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0835ffed7c0044e09c4baf438b9a60df (index 7) reported that it has stopped
+[2026-11-25 12:16:54,061] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_8a85349bc87647c7a3363cc94087fcb5 (index 6) reported as ready. 7 workers connected.
+[2026-11-25 12:16:54,061] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_0835ffed7c0044e09c4baf438b9a60df (index 7) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,063] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_30eee46050e5460faba708c04a48fe6a (index 4) reported that it has stopped
+[2026-11-25 12:16:54,064] 58e3fd2d1339/INFO/locust.runners: 58e3fd2d1339_30eee46050e5460faba708c04a48fe6a (index 4) reported as ready. 8 workers connected.
+[2026-11-25 12:16:54,975] 58e3fd2d1339/INFO/locust.main: Shape test completed, stopping test
+[2026-11-25 12:16:59,977] 58e3fd2d1339/INFO/locust.main: --autoquit time reached, shutting down
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,978] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,979] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,979] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,979] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_136888e45c2746ba8a55ac3a57099f36' (index 2) quit. 7 workers ready.
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,979] 58e3fd2d1339/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,980] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_29dc8258936e446981e38bc7e8c147b5' (index 1) quit. 6 workers ready.
+[2026-11-25 12:16:59,981] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_0835ffed7c0044e09c4baf438b9a60df' (index 7) quit. 5 workers ready.
+[2026-11-25 12:16:59,981] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 12:16:59,981] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_8a85349bc87647c7a3363cc94087fcb5' (index 6) quit. 4 workers ready.
+[2026-11-25 12:16:59,981] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_30eee46050e5460faba708c04a48fe6a' (index 4) quit. 3 workers ready.
+[2026-11-25 12:16:59,981] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_6013bd027c2b4bdb97ee7afd00a96fc2' (index 3) quit. 2 workers ready.
+[2026-11-25 12:16:59,982] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_0f76e19f8e2a423fb02d4405bc42adb8' (index 0) quit. 1 workers ready.
+[2026-11-25 12:16:59,982] 58e3fd2d1339/INFO/locust.runners: Worker '58e3fd2d1339_e00676f26542442cb3580bf1c4c3660e' (index 5) quit. 0 workers ready.
+[2026-11-25 12:16:59,982] 58e3fd2d1339/INFO/locust.runners: The last worker quit, stopping test.
+[2026-11-25 12:17:01,045] 58e3fd2d1339/INFO/locust.main: Shutting down (exit code 1)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                  796     1(0.13%) |  21939      50   57705  16000 |    2.95        0.00
+TTFT     long_generation                                                                  795     0(0.00%) |  14709     699   48423   9900 |    2.95        0.00
+TOTAL    multi_turn                                                                      1335     1(0.07%) |  18814     824   57393  13000 |    4.95        0.00
+TTFT     multi_turn                                                                      1334     0(0.00%) |  15956     261   49188  10000 |    4.94        0.00
+TOTAL    short_qa                                                                        1885     1(0.05%) |  16478     502   54259  11000 |    6.99        0.00
+TTFT     short_qa                                                                        1884     0(0.00%) |  15829     103   51783  10000 |    6.98        0.00
+TOTAL    summarization                                                                   1316     0(0.00%) |  18995    1649   57266  13000 |    4.88        0.00
+TTFT     summarization                                                                   1316     0(0.00%) |  15689     616   48431  10000 |    4.88        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     10661     3(0.03%) |  17080      50   57705  12000 |   39.51        0.01
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                     16000  22000  32000  34000  48000  49000  55000  56000  58000  58000  58000    796
+TTFT     long_generation                                                                      9900  15000  22000  25000  35000  40000  42000  44000  48000  48000  48000    795
+TOTAL    multi_turn                                                                          13000  22000  29000  32000  42000  46000  49000  53000  56000  57000  57000   1335
+TTFT     multi_turn                                                                          10000  18000  25000  28000  36000  41000  43000  46000  49000  49000  49000   1334
+TOTAL    short_qa                                                                            11000  19000  25000  29000  37000  43000  46000  48000  53000  54000  54000   1885
+TTFT     short_qa                                                                            10000  18000  24000  28000  36000  41000  44000  47000  51000  52000  52000   1884
+TOTAL    summarization                                                                       13000  19000  29000  32000  43000  47000  50000  52000  56000  57000  57000   1316
+TTFT     summarization                                                                       10000  16000  24000  27000  36000  41000  43000  44000  48000  48000  48000   1316
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                          12000  19000  25000  30000  38000  44000  48000  50000  56000  58000  58000  10661
+
+Error report
+# occurrences      Error                                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+1                  TOTAL short_qa: Exception('Internal Server Error')                                                  
+1                  TOTAL long_generation: Exception('<html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.27.5</center>\r\n</body>\r\n</html>\r\n')
+1                  TOTAL multi_turn: Exception('ChunkedEncodingError: Response ended prematurely')                     
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+
+
