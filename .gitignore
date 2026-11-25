@@ -17,3 +17,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Downloaded eval data (GSM8K)
+evals/.cache/
