@@ -8,11 +8,16 @@ ARG MOONCAKE_VERSION=0.3.13.post1
 
 # The default Mooncake wheel links CUDA 12; images built on CUDA 13 need the
 # cuda13 variant (both install the same `mooncake` package).
-RUN CUDA_MAJOR=$(python3 -c "import torch; print(torch.version.cuda.split('.')[0])") && \
-    if [ "$CUDA_MAJOR" = "13" ]; then PKG=mooncake-transfer-engine-cuda13; else PKG=mooncake-transfer-engine; fi && \
-    echo "CUDA $CUDA_MAJOR -> installing $PKG==$MOONCAKE_VERSION" && \
-    (uv pip install --system --no-cache "$PKG==$MOONCAKE_VERSION" \
-      || python3 -m pip install --no-cache-dir "$PKG==$MOONCAKE_VERSION") && \
+# Images from v0.34.0 on already ship Mooncake (and NIXL), so keep theirs.
+RUN if python3 -c "import mooncake.engine" 2>/dev/null; then \
+      echo "Mooncake already in the image, keeping it"; \
+    else \
+      CUDA_MAJOR=$(python3 -c "import torch; print(torch.version.cuda.split('.')[0])") && \
+      if [ "$CUDA_MAJOR" = "13" ]; then PKG=mooncake-transfer-engine-cuda13; else PKG=mooncake-transfer-engine; fi && \
+      echo "CUDA $CUDA_MAJOR -> installing $PKG==$MOONCAKE_VERSION" && \
+      (uv pip install --system --no-cache "$PKG==$MOONCAKE_VERSION" \
+        || python3 -m pip install --no-cache-dir "$PKG==$MOONCAKE_VERSION"); \
+    fi && \
     (python3 -c "from mooncake.store import MooncakeDistributedStore; print('mooncake store OK')" \
       || echo "mooncake import check skipped: it may need the GPU driver, which only exists at run time") && \
     which mooncake_master
