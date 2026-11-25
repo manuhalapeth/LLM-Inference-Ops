@@ -1,0 +1,10 @@
+# Phase 11: FP8 weights plus an FP8 KV cache with a scale computed for every
+# token and KV head as it's written (new in vLLM 0.33). No calibration needed;
+# only the Triton attention backend supports it.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-cache-dtype: fp8_per_token_head
+attention-backend: TRITON_ATTN

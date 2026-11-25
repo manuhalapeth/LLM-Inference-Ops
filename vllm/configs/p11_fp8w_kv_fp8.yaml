@@ -1,0 +1,8 @@
+# Phase 11: FP8 weights plus an FP8 KV cache with vLLM's default scales (1.0),
+# the Phase 5 change that broke answers, rerun on vLLM v0.34.0.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-cache-dtype: fp8
