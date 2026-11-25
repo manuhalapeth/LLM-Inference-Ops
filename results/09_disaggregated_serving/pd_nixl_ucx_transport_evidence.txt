@@ -1,0 +1,37 @@
+Wed Nov 25 11:18:34 UTC 2026
+decode server (172.18.0.5) TCP connections to the prefill server (172.18.0.6), excluding the HTTP port 8000:
+State Recv-Q Send-Q Local Address:Port  Peer Address:Port Process                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+ESTAB 9      0         172.18.0.5:55127   172.18.0.6:36199
+	 cubic wscale:7,7 rto:201 rtt:0.033/0.018 ato:40 mss:1448 pmtu:1500 rcvmss:536 advmss:1448 cwnd:10 bytes_sent:42 bytes_acked:43 bytes_received:9 segs_out:42 segs_in:41 data_segs_out:1 data_segs_in:1 send 3510303030bps lastsnd:393284 lastrcv:393283 lastack:4399 pacing_rate 6864592592bps delivery_rate 1053090904bps delivered:2 app_limited rcv_space:14480 rcv_ssthresh:64088 minrtt:0.011                                                                                
+ESTAB 0      0         172.18.0.5:33993   172.18.0.6:36199
+	 cubic wscale:7,7 rto:206 rtt:5.302/10.451 ato:40 mss:1448 pmtu:1500 rcvmss:1448 advmss:1448 cwnd:14 ssthresh:54 bytes_sent:27704320 bytes_acked:27704321 bytes_received:88827099675 segs_out:10850117 segs_in:65520028 data_segs_out:636485 data_segs_in:65518893 send 30587703bps lastsnd:287 lastrcv:290 lastack:246 pacing_rate 61165304bps delivery_rate 4719407400bps delivered:636486 app_limited busy:21628ms rcv_rtt:1 rcv_space:920003 rcv_ssthresh:3086821 minrtt:0.008
+ESTAB 9      0         172.18.0.5:39415   172.18.0.6:36199
+	 cubic wscale:7,7 rto:201 rtt:0.023/0.012 ato:40 mss:1448 pmtu:1500 rcvmss:536 advmss:1448 cwnd:10 bytes_sent:42 bytes_acked:43 bytes_received:9 segs_out:42 segs_in:41 data_segs_out:1 data_segs_in:1 send 5036521739bps lastsnd:393304 lastrcv:393304 lastack:4402 pacing_rate 9964731176bps delivery_rate 1053090904bps delivered:2 app_limited rcv_space:14480 rcv_ssthresh:64088 minrtt:0.011                                                                                
+ESTAB 9      0         172.18.0.5:55477   172.18.0.6:36199
+	 cubic wscale:7,7 rto:201 rtt:0.024/0.013 ato:40 mss:1448 pmtu:1500 rcvmss:536 advmss:1448 cwnd:10 bytes_sent:42 bytes_acked:43 bytes_received:9 segs_out:42 segs_in:41 data_segs_out:1 data_segs_in:1 send 4826666667bps lastsnd:393343 lastrcv:393342 lastack:4405 pacing_rate 9603316056bps delivery_rate 1053090904bps delivered:2 app_limited rcv_space:14480 rcv_ssthresh:64088 minrtt:0.011                                                                                
+ESTAB 9      0         172.18.0.5:42571   172.18.0.6:36199
+	 cubic wscale:7,7 rto:201 rtt:0.023/0.012 ato:40 mss:1448 pmtu:1500 rcvmss:536 advmss:1448 cwnd:10 bytes_sent:42 bytes_acked:43 bytes_received:9 segs_out:42 segs_in:41 data_segs_out:1 data_segs_in:1 send 5036521739bps lastsnd:393335 lastrcv:393335 lastack:4415 pacing_rate 9911443848bps delivery_rate 965333328bps delivered:2 app_limited rcv_space:14480 rcv_ssthresh:64088 minrtt:0.012                                                                                 
+
+UCX transport libraries shipped with NIXL in the image:
+libucm_cuda.la
+libucm_cuda.so.0.0.0
+libuct_cma.la
+libuct_cma.so.0.0.0
+libuct_cuda.la
+libuct_cuda.so.0.0.0
+libuct_ib.la
+libuct_ib.so.0.0.0
+libuct_ib_efa.la
+libuct_ib_efa.so.0.0.0
+libuct_ib_mlx5.la
+libuct_ib_mlx5.so.0.0.0
+libuct_ib_mlx5_ext.la
+libuct_ib_mlx5_ext.so.0.0.0
+libuct_ib_mlx5_gda.la
+libuct_ib_mlx5_gda.so.0.0.0
+libuct_ib_mlx5_gdp.la
+libuct_ib_mlx5_gdp.so.0.0.0
+libucx_perftest_cuda.la
+libucx_perftest_cuda.so.0.0.0
+libucx_perftest_mad.la
+libucx_perftest_mad.so.0.0.0

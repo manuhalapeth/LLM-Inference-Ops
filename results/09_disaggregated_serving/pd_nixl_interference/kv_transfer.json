@@ -1,0 +1,13 @@
+{
+  "decode": {
+    "connector": "nixl",
+    "transfers": 3275.0,
+    "gib": 56.17431640625,
+    "mib_per_transfer": 17.56412213740458,
+    "xfer_ms_mean": 2715.3097328245385,
+    "xfer_ms_p95": 5000.0,
+    "gib_per_s": 0.006316945288951145,
+    "failed_transfers": 0.0,
+    "expired_requests": 0.0
+  }
+}

@@ -17,3 +17,79 @@ time="2026-11-25T11:17:18Z" level=warning msg="Found orphan containers ([llm-inf
 [2026-11-25 11:17:20,681] 44d4699934cc/INFO/locust.runners: Shape test updating to 16 users at 16.00 spawn rate
 [2026-11-25 11:17:20,681] 44d4699934cc/INFO/locust.runners: Sending spawn jobs of 16 users at 16.00 spawn rate to 8 ready workers
 [2026-11-25 11:17:20,777] 44d4699934cc/INFO/locust.runners: All users spawned: {"ChatUser": 16} (16 total users)
+[2026-11-25 11:18:05,710] 44d4699934cc/INFO/locust.runners: Shape test updating to 32 users at 32.00 spawn rate
+[2026-11-25 11:18:05,711] 44d4699934cc/INFO/locust.runners: Sending spawn jobs of 32 users at 32.00 spawn rate to 8 ready workers
+[2026-11-25 11:18:05,807] 44d4699934cc/INFO/locust.runners: All users spawned: {"ChatUser": 32} (32 total users)
+[2026-11-25 11:18:50,738] 44d4699934cc/INFO/locust.runners: Shape test updating to 64 users at 64.00 spawn rate
+[2026-11-25 11:18:50,738] 44d4699934cc/INFO/locust.runners: Sending spawn jobs of 64 users at 64.00 spawn rate to 8 ready workers
+[2026-11-25 11:18:50,857] 44d4699934cc/INFO/locust.runners: All users spawned: {"ChatUser": 64} (64 total users)
+[2026-11-25 11:19:35,760] 44d4699934cc/INFO/locust.runners: Shape test updating to 128 users at 128.00 spawn rate
+[2026-11-25 11:19:35,761] 44d4699934cc/INFO/locust.runners: Sending spawn jobs of 128 users at 128.00 spawn rate to 8 ready workers
+[2026-11-25 11:19:35,849] 44d4699934cc/INFO/locust.runners: All users spawned: {"ChatUser": 128} (128 total users)
+[2026-11-25 11:20:20,784] 44d4699934cc/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-11-25 11:20:20,784] 44d4699934cc/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 8 ready workers
+[2026-11-25 11:20:20,870] 44d4699934cc/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-11-25 11:21:05,808] 44d4699934cc/INFO/locust.runners: Shape test stopping
+[2026-11-25 11:21:05,854] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0d6784bd84b647d19369aa729f688976 (index 1) reported that it has stopped
+[2026-11-25 11:21:05,854] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0d6784bd84b647d19369aa729f688976 (index 1) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,856] 44d4699934cc/INFO/locust.runners: 44d4699934cc_678da6a1ff7f41739860da5aa6caa407 (index 2) reported that it has stopped
+[2026-11-25 11:21:05,856] 44d4699934cc/INFO/locust.runners: 44d4699934cc_678da6a1ff7f41739860da5aa6caa407 (index 2) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,857] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0b8e58ab455f41c381e9da0bf3686a81 (index 0) reported that it has stopped
+[2026-11-25 11:21:05,857] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0b8e58ab455f41c381e9da0bf3686a81 (index 0) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,859] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0b15d42bbfea44abbacea2bafe7c8358 (index 6) reported that it has stopped
+[2026-11-25 11:21:05,859] 44d4699934cc/INFO/locust.runners: 44d4699934cc_0b15d42bbfea44abbacea2bafe7c8358 (index 6) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,876] 44d4699934cc/INFO/locust.runners: 44d4699934cc_933de6588bd74ca38aff582adca33ea8 (index 7) reported that it has stopped
+[2026-11-25 11:21:05,876] 44d4699934cc/INFO/locust.runners: 44d4699934cc_933de6588bd74ca38aff582adca33ea8 (index 7) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,877] 44d4699934cc/INFO/locust.runners: 44d4699934cc_36fba01ebb5b4ee289c65b3c039e0c97 (index 5) reported that it has stopped
+[2026-11-25 11:21:05,878] 44d4699934cc/INFO/locust.runners: 44d4699934cc_36fba01ebb5b4ee289c65b3c039e0c97 (index 5) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,878] 44d4699934cc/INFO/locust.runners: 44d4699934cc_63d9e4691861408b8e8b81468c36e16e (index 4) reported that it has stopped
+[2026-11-25 11:21:05,878] 44d4699934cc/INFO/locust.runners: 44d4699934cc_63d9e4691861408b8e8b81468c36e16e (index 4) reported as ready. 8 workers connected.
+[2026-11-25 11:21:05,881] 44d4699934cc/INFO/locust.runners: 44d4699934cc_ec18411131644c0f9236130e88dede7b (index 3) reported that it has stopped
+[2026-11-25 11:21:05,881] 44d4699934cc/INFO/locust.runners: 44d4699934cc_ec18411131644c0f9236130e88dede7b (index 3) reported as ready. 8 workers connected.
+[2026-11-25 11:21:06,810] 44d4699934cc/INFO/locust.main: Shape test completed, stopping test
+[2026-11-25 11:21:11,812] 44d4699934cc/INFO/locust.main: --autoquit time reached, shutting down
+[2026-11-25 11:21:11,813] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,814] 44d4699934cc/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 11:21:11,815] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,815] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,815] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_678da6a1ff7f41739860da5aa6caa407' (index 2) quit. 7 workers ready.
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_0d6784bd84b647d19369aa729f688976' (index 1) quit. 6 workers ready.
+[2026-11-25 11:21:11,816] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_0b8e58ab455f41c381e9da0bf3686a81' (index 0) quit. 5 workers ready.
+[2026-11-25 11:21:11,817] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_0b15d42bbfea44abbacea2bafe7c8358' (index 6) quit. 4 workers ready.
+[2026-11-25 11:21:11,818] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_63d9e4691861408b8e8b81468c36e16e' (index 4) quit. 3 workers ready.
+[2026-11-25 11:21:11,818] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_ec18411131644c0f9236130e88dede7b' (index 3) quit. 2 workers ready.
+[2026-11-25 11:21:11,818] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_36fba01ebb5b4ee289c65b3c039e0c97' (index 5) quit. 1 workers ready.
+[2026-11-25 11:21:11,818] 44d4699934cc/INFO/locust.runners: Worker '44d4699934cc_933de6588bd74ca38aff582adca33ea8' (index 7) quit. 0 workers ready.
+[2026-11-25 11:21:11,819] 44d4699934cc/INFO/locust.runners: The last worker quit, stopping test.
+[2026-11-25 11:21:12,902] 44d4699934cc/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    long_generation                                                                 1528     0(0.00%) |   8411    3439   26258   7100 |    6.79        0.00
+TTFT     long_generation                                                                 1528     0(0.00%) |   2502      68   15590   1100 |    6.79        0.00
+TOTAL    summarization                                                                   1491     0(0.00%) |   4501    1131   19076   3200 |    6.62        0.00
+TTFT     summarization                                                                   1491     0(0.00%) |   2471     124   15577   1000 |    6.62        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                      6038     0(0.00%) |   4483      68   26258   3300 |   26.83        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    long_generation                                                                      7100   8700   9600  10000  14000  20000  23000  25000  26000  26000  26000   1528
+TTFT     long_generation                                                                      1100   2500   3400   4000   6500  11000  14000  15000  16000  16000  16000   1528
+TOTAL    summarization                                                                        3200   4500   5400   6100   9000  14000  16000  18000  19000  19000  19000   1491
+TTFT     summarization                                                                        1000   2400   3200   3900   6100  11000  13000  15000  16000  16000  16000   1491
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           3300   5000   6200   7400  10000  13000  18000  21000  26000  26000  26000   6038
+
