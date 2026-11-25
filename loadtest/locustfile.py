@@ -33,6 +33,8 @@ STEP_SECONDS = int(os.getenv("STEP_SECONDS", "60"))
 # "mix": independent requests (Phases 4 and 5). "sessions": every user holds a
 # conversation about a long document, so each request repeats that user's
 # growing prefix (what sticky routing and a shared KV store are for).
+# "interference": half long answers streaming, half long documents arriving,
+# the case disaggregated prefill and decode is meant for (Phase 9).
 LOAD_MODE = os.getenv("LOAD_MODE", "mix")
 SESSION_TURNS = int(os.getenv("SESSION_TURNS", "6"))
 FOLLOW_UPS = [
@@ -46,6 +48,8 @@ FOLLOW_UPS = [
 
 # A chat product's mix: mostly short exchanges, some long documents, some long answers.
 CATEGORY_WEIGHTS = {"short_qa": 0.35, "multi_turn": 0.25, "summarization": 0.25, "long_generation": 0.15}
+if LOAD_MODE == "interference":
+    CATEGORY_WEIGHTS = {"summarization": 0.5, "long_generation": 0.5}
 
 PROMPTS = json.loads((Path(__file__).parent / "prompts.json").read_text())
 BY_CATEGORY = {c: [p for p in PROMPTS if p["category"] == c] for c in CATEGORY_WEIGHTS}
@@ -112,6 +116,7 @@ class ChatUser(User):
         answer = []
         start = time.perf_counter()
         first_token, usage, error, status = None, {}, None, None
+        last_chunk, max_gap = None, 0.0  # the longest pause between two chunks of the answer
         try:
             with self.session.post(f"{HOST}/v1/chat/completions", json=body, stream=True, timeout=600,
                                    headers={"x-user-id": self.user_id}) as resp:
@@ -130,8 +135,12 @@ class ChatUser(User):
                         for c in event.get("choices", []):
                             if c.get("delta", {}).get("content"):
                                 answer.append(c["delta"]["content"])
+                                now = time.perf_counter()
                                 if first_token is None:
-                                    first_token = time.perf_counter()
+                                    first_token = now
+                                else:
+                                    max_gap = max(max_gap, now - last_chunk)
+                                last_chunk = now
         except requests.RequestException as exc:
             error = f"{type(exc).__name__}: {exc}"[:200]
         end = time.perf_counter()
@@ -143,6 +152,7 @@ class ChatUser(User):
             "e2e_s": end - start,
             "prompt_tokens": usage.get("prompt_tokens"), "output_tokens": out,
             "itl_s": (end - first_token) / (out - 1) if first_token and out > 1 else None,
+            "max_gap_s": max_gap if first_token and out > 1 else None,
         })
         _record(row)
         if LOAD_MODE == "sessions":

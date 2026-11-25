@@ -82,8 +82,13 @@ def analyze_step(rows: list[dict], prom: Prometheus | None, start: float, end: f
         "ttft_s": pct([r["ttft_s"] for r in ok]),
         "e2e_s": pct([r["e2e_s"] for r in ok]),
         "itl_s": pct([r["itl_s"] for r in ok]),
+        # The longest pause inside each answer (a stall while another request's
+        # prompt is computed). Missing in runs before Phase 9.
+        "max_gap_s": pct([r["max_gap_s"] for r in ok if r.get("max_gap_s") is not None]),
         "by_category": {c: {"requests": len(rs), "ttft_p95_s": pct([r["ttft_s"] for r in rs])["p95"],
-                            "e2e_p95_s": pct([r["e2e_s"] for r in rs])["p95"]}
+                            "e2e_p95_s": pct([r["e2e_s"] for r in rs])["p95"],
+                            "itl_p50_s": pct([r["itl_s"] for r in rs])["p50"],
+                            "max_gap_p95_s": pct([r.get("max_gap_s") for r in rs])["p95"]}
                         for c in sorted({r["category"] for r in ok}) for rs in [[r for r in ok if r["category"] == c]]},
     }
     if prom:
