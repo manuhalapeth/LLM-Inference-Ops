@@ -1,0 +1,91 @@
+3317535 Phase 9: NIXL disaggregated serving on the mix, no errors but 62% below 2 copies (KV transfers queue)
+30
+==> [1] ckpt_kv_bf16
+20/22 passed  correctness 7/7  instructions 5/5  summarization 0/1  safety 2/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112026Z_evals_quality_ckpt_kv_bf16.json
+ckpt_kv_bf16: 465/500 correct (93.0% +- 2.2%), 0 errors, 28 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112054Z_gsm8k_ckpt_kv_bf16.json
+==> [1] bf16w_kv_fp8_triton
+17/22 passed  correctness 4/7  instructions 4/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112209Z_evals_quality_bf16w_kv_fp8_triton.json
+bf16w_kv_fp8_triton: 28/500 correct (5.6% +- 2.0%), 0 errors, 66 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112315Z_gsm8k_bf16w_kv_fp8_triton.json
+==> [1] fp8w_kv_bf16_triton
+21/22 passed  correctness 7/7  instructions 5/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112426Z_evals_quality_fp8w_kv_bf16_triton.json
+fp8w_kv_bf16_triton: 462/500 correct (92.4% +- 2.3%), 0 errors, 27 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112453Z_gsm8k_fp8w_kv_bf16_triton.json
+==> [1] fp8w_kv_fp8_triton
+15/22 passed  correctness 4/7  instructions 3/5  summarization 0/1  safety 2/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112601Z_evals_quality_fp8w_kv_fp8_triton.json
+fp8w_kv_fp8_triton: 27/500 correct (5.4% +- 2.0%), 0 errors, 38 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112639Z_gsm8k_fp8w_kv_fp8_triton.json
+==> [1] ckpt_kv_fp8_tensor_triton
+13/22 passed  correctness 3/7  instructions 1/5  summarization 0/1  safety 3/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112747Z_evals_quality_ckpt_kv_fp8_tensor_triton.json
+ckpt_kv_fp8_tensor_triton: 7/500 correct (1.4% +- 1.0%), 0 errors, 48 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112836Z_gsm8k_ckpt_kv_fp8_tensor_triton.json
+==> [1] fp8w_kv_fp8_flashinfer_native
+15/22 passed  correctness 4/7  instructions 3/5  summarization 0/1  safety 2/3  harness 6/6  | secrets leaked: 0
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T112948Z_evals_quality_fp8w_kv_fp8_flashinfer_native.json
+fp8w_kv_fp8_flashinfer_native: 33/500 correct (6.6% +- 2.2%), 0 errors, 38 s
+saved /root/LLM-Inference-Ops/results/11_fp8_kv_calibration/20261125T113027Z_gsm8k_fp8w_kv_fp8_flashinfer_native.json
+==> Comparing
+Traceback (most recent call last):
+  File "/root/LLM-Inference-Ops/loadtest/compare_tuning.py", line 113, in <module>
+    main()
+  File "/root/LLM-Inference-Ops/loadtest/compare_tuning.py", line 86, in main
+    for run in load_runs(args.phase):  # oldest first, so the latest run of each config wins
+  File "/root/LLM-Inference-Ops/loadtest/results_logger.py", line 113, in load_runs
+    return sorted(runs, key=lambda r: r["timestamp"])
+  File "/root/LLM-Inference-Ops/loadtest/results_logger.py", line 113, in <lambda>
+    return sorted(runs, key=lambda r: r["timestamp"])
+KeyError: 'timestamp'
+==> Done. Results are in results/11_fp8_kv_calibration/
+20261125T103521Z_evals_quality_baseline_bf16.json
+20261125T103606Z_gsm8k_baseline_bf16.json
+20261125T103727Z_evals_quality_bf16w_kv_fp8_scale1.json
+20261125T103832Z_gsm8k_bf16w_kv_fp8_scale1.json
+20261125T104043Z_evals_quality_fp8w_kv_bf16.json
+20261125T104112Z_gsm8k_fp8w_kv_bf16.json
+20261125T104226Z_evals_quality_fp8w_kv_fp8_scale1.json
+20261125T104303Z_gsm8k_fp8w_kv_fp8_scale1.json
+20261125T104417Z_evals_quality_fp8w_kv_fp8_per_token_head.json
+20261125T104507Z_gsm8k_fp8w_kv_fp8_per_token_head.json
+20261125T104618Z_evals_quality_ckpt_kv_bf16.json
+20261125T104707Z_gsm8k_ckpt_kv_bf16.json
+20261125T104818Z_evals_quality_ckpt_kv_fp8_tensor.json
+20261125T104907Z_gsm8k_ckpt_kv_fp8_tensor.json
+20261125T111656Z_load_sweep_fp8w_kv_bf16.json
+20261125T112026Z_evals_quality_ckpt_kv_bf16.json
+20261125T112054Z_gsm8k_ckpt_kv_bf16.json
+20261125T112209Z_evals_quality_bf16w_kv_fp8_triton.json
+20261125T112315Z_gsm8k_bf16w_kv_fp8_triton.json
+20261125T112426Z_evals_quality_fp8w_kv_bf16_triton.json
+20261125T112453Z_gsm8k_fp8w_kv_bf16_triton.json
+20261125T112601Z_evals_quality_fp8w_kv_fp8_triton.json
+20261125T112639Z_gsm8k_fp8w_kv_fp8_triton.json
+20261125T112747Z_evals_quality_ckpt_kv_fp8_tensor_triton.json
+20261125T112836Z_gsm8k_ckpt_kv_fp8_tensor_triton.json
+20261125T112948Z_evals_quality_fp8w_kv_fp8_flashinfer_native.json
+20261125T113027Z_gsm8k_fp8w_kv_fp8_flashinfer_native.json
+calibrate_attn_head.log
+calibrate_tensor.log
+failed_ckpt_kv_fp8_head.log
+fp8w_kv_bf16
+kv_fp8_error.json
+kv_scales_attn_head.json
+kv_scales_tensor.json
+phase11_pass1.log
+vllm_startup_baseline_bf16.log
+vllm_startup_bf16w_kv_fp8_scale1.log
+vllm_startup_bf16w_kv_fp8_triton.log
+vllm_startup_ckpt_kv_bf16.log
+vllm_startup_ckpt_kv_fp8_tensor.log
+vllm_startup_ckpt_kv_fp8_tensor_triton.log
+vllm_startup_fp8w_kv_bf16.log
+vllm_startup_fp8w_kv_bf16_triton.log
+vllm_startup_fp8w_kv_fp8_flashinfer_native.log
+vllm_startup_fp8w_kv_fp8_per_token_head.log
+vllm_startup_fp8w_kv_fp8_scale1.log
+vllm_startup_fp8w_kv_fp8_triton.log
