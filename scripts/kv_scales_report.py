@@ -78,6 +78,7 @@ def main() -> None:
                 row[f"{kind}_scale_max"] = max(vals)
                 row[f"{kind}_absmax"] = max(vals) * FP8_MAX   # the largest key / value seen
                 row[f"{kind}_heads"] = len(vals)
+                row[f"{kind}_absmax_per_head"] = [x * FP8_MAX for x in vals]
         rows.append(row)
 
     k = [r["k_absmax"] for r in rows if "k_absmax" in r]
