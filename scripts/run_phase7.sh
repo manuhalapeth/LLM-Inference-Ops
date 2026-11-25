@@ -7,7 +7,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 export KUBECONFIG=${KUBECONFIG:-/etc/rancher/k3s/k3s.yaml}
 
-PHASE=07_gpu_slicing_hami
+PHASE=${PHASE7_DIR:-07_gpu_slicing_hami}   # 07_gpu_slicing_hami_grace for the scale down rerun
 OUT=results/$PHASE
 mkdir -p "$OUT" generated
 STEPS="${STEPS:-32,64,128,192,256}"
@@ -32,7 +32,8 @@ deploy() {  # scenario name
   "${K[@]}" delete deploy vllm-large vllm-small --ignore-not-found --wait >/dev/null 2>&1
   "${K[@]}" delete scaledobject vllm-large-scaler --ignore-not-found >/dev/null 2>&1
   "${K[@]}" wait --for=delete pod -l component=vllm --timeout 300s >/dev/null 2>&1
-  python3 scripts/k8s_manifests.py "$1" --gpu-uuids "$UUIDS" "${FAKE_ARGS[@]}" > "generated/k8s_$1.json"
+  python3 scripts/k8s_manifests.py "$1" --gpu-uuids "$UUIDS" "${FAKE_ARGS[@]}" \
+    --grace-period "${GRACE_PERIOD:-180}" --prestop "${PRESTOP:-15}" > "generated/k8s_$1.json"
   "${K[@]}" apply -f "generated/k8s_$1.json" >/dev/null
   if ! "${K[@]}" wait --for=condition=Ready pod -l component=vllm --timeout 1800s; then
     echo "!! $1: vLLM pods did not become ready"

@@ -218,7 +218,8 @@ def base(args) -> list:
 
 # ---------------------------------------------------------------- vLLM pods
 
-def vllm(name, tenant, gpu_limits=None, annotations=None, replicas=1, fake=False, util=0.90) -> list:
+def vllm(name, tenant, gpu_limits=None, annotations=None, replicas=1, fake=False, util=0.90,
+         grace_s=180, prestop_s=15) -> list:
     m = MODELS[tenant]
     labels = {"component": "vllm", "tenant": m["served"]}
     if fake:
@@ -245,7 +246,19 @@ def vllm(name, tenant, gpu_limits=None, annotations=None, replicas=1, fake=False
                                    "periodSeconds": 5, "failureThreshold": 3}
     container["startupProbe"] = {"httpGet": {"path": "/health", "port": 8000},
                                  "periodSeconds": 5, "failureThreshold": 360}  # up to 30 min to load
-    items = [deployment(name, [container], labels=labels, volumes=volumes, replicas=replicas, pod_annotations=annotations),
+    # Scaling down (Phase 7 addendum). Kubernetes removes a terminating pod from the
+    # Service and sends SIGTERM at the same moment, and NGINX only notices the pod is
+    # gone at its next DNS lookup. So: wait prestop_s before SIGTERM (no new requests
+    # arrive after that), then give streams up to grace_s to finish. The gateway caps
+    # an answer at 120 s, so 180 s covers the longest one. Phase 7 ran with the
+    # Kubernetes default (no wait, 30 s), which cut 32 streams.
+    extra_spec = {}
+    if prestop_s:
+        container["lifecycle"] = {"preStop": {"exec": {"command": ["sleep", str(prestop_s)]}}}
+    if grace_s:
+        extra_spec["terminationGracePeriodSeconds"] = grace_s
+    items = [deployment(name, [container], labels=labels, volumes=volumes, replicas=replicas, pod_annotations=annotations,
+                        extra_spec=extra_spec),
              service(name, 8000, headless=True)]
     if tenant == "small":  # tenant B is reached directly, for the latency probe
         items.append({"apiVersion": "v1", "kind": "Service", "metadata": meta(f"{name}-np"),
@@ -274,7 +287,8 @@ def scenario(args) -> list:
         items += vllm("vllm-large", "large", large, on_gpu(0), fake=args.fake)
         items += vllm("vllm-small", "small", small, on_gpu(0), fake=args.fake)
     elif args.scenario == "autoscale":
-        items += vllm("vllm-large", "large", whole, None, fake=args.fake)
+        items += vllm("vllm-large", "large", whole, None, fake=args.fake,
+                      grace_s=args.grace_period, prestop_s=args.prestop)
         items.append({
             "apiVersion": "keda.sh/v1alpha1", "kind": "ScaledObject", "metadata": meta("vllm-large-scaler"),
             "spec": {
@@ -302,6 +316,10 @@ def main() -> None:
     parser.add_argument("--grafana-password", default="admin")
     parser.add_argument("--max-replicas", type=int, default=2)
     parser.add_argument("--scale-threshold", type=int, default=180)
+    parser.add_argument("--grace-period", type=int, default=180,
+                        help="autoscale: seconds a stopping vLLM pod gets to finish its streams (0 = Kubernetes default, 30)")
+    parser.add_argument("--prestop", type=int, default=15,
+                        help="autoscale: seconds to wait before SIGTERM, so NGINX stops sending first (0 = none)")
     parser.add_argument("--fake", action="store_true")
     parser.add_argument("--fake-dir", default="")
     args = parser.parse_args()
