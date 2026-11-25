@@ -110,6 +110,11 @@ def analyze_step(rows: list[dict], prom: Prometheus | None, start: float, end: f
                                               prom.increase("vllm:prefix_cache_queries_total", start, end)),
             # How evenly the load was spread: average requests running on each vLLM server.
             "running_per_replica": prom.per_series("avg_over_time(vllm:num_requests_running[1m])", end, "replica"),
+            # Where the prefix cache hit, per server, over the measured part of the step (Phase 10).
+            "prefix_hit_rate_per_replica": prom.per_series(
+                f"sum by (replica) (increase(vllm:prefix_cache_hits_total[{max(int(duration), 10)}s]))"
+                f" / sum by (replica) (increase(vllm:prefix_cache_queries_total[{max(int(duration), 10)}s]))",
+                end, "replica"),
         }
     return step
 
