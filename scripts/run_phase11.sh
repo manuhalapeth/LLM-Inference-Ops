@@ -45,7 +45,8 @@ if [ "$RUN_CALIBRATION" = 1 ]; then
     if [ -f "$HF_DIR/$ckpt/config.json" ]; then echo "==> [0] $ckpt already calibrated"; continue; fi
     echo "==> [0] Calibrating $strategy -> $ckpt"
     docker run --rm --gpus all --ipc host -v "$HF_DIR:/hf" -v "$PWD/scripts:/scripts:ro" -e HF_HOME=/hf \
-      -e HF_TOKEN="${HF_TOKEN:-}" pytorch/pytorch:2.11.0-cuda12.8-cudnn9-runtime \
+      -e HF_TOKEN="${HF_TOKEN:-}" -e PIP_BREAK_SYSTEM_PACKAGES=1 -e PIP_ROOT_USER_ACTION=ignore \
+      pytorch/pytorch:2.11.0-cuda12.8-cudnn9-runtime \
       bash -c "pip install -q llmcompressor==0.15.0 && python3 /scripts/calibrate_kv_fp8.py --model $BASE_MODEL --strategy $strategy --out /hf/$ckpt" \
       > "$OUT/calibrate_${strategy}.log" 2>&1 || echo "!! calibration $strategy failed, see $OUT/calibrate_${strategy}.log"
     tail -3 "$OUT/calibrate_${strategy}.log"
