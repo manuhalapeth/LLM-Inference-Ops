@@ -8,13 +8,18 @@ the scheduler no longer has, and the assertion fires. v0.34.0 keeps such
 requests in `_aborted_kv_loads` until the transfer settles.
 
 This script tests that reading. It sends long, unique prompts through the
-gateway (so they go prefill -> KV transfer -> decode) and:
+gateway (so they go prefill -> KV transfer -> decode), in parts:
 
-    control  every client waits for its answer        (should never crash)
+    control  every client waits for a 64 token answer   (should never crash)
+    short    every client asks for ONE token: the prefill server already made
+             it, so the decode side can finish the request while its KV is
+             still arriving (the same free-before-transfer-settles path)
     abort    every client hangs up after a short, random delay, so many
              cancellations land while the KV is in flight
 
-After each part it checks the decode server's /health directly.
+After each part it checks the decode server's /health directly and stops at
+the first part that kills it. (In Phase 9 the v0.30.0 decode server already
+died on the readiness probe, a single max_tokens=1 request, before this ran.)
 
     python3 scripts/pd_abort_repro.py --phase 09_disaggregated_serving --label abort_v0.30.0
 
@@ -47,8 +52,8 @@ def prompt(words: int) -> list[dict]:
     return [{"role": "user", "content": text + "\nSummarize the review above in three sentences."}]
 
 
-def one(url: str, model: str, words: int, hang_up_after_s: float | None) -> str:
-    body = json.dumps({"model": model, "messages": prompt(words), "max_tokens": 64,
+def one(url: str, model: str, words: int, hang_up_after_s: float | None, max_tokens: int = 64) -> str:
+    body = json.dumps({"model": model, "messages": prompt(words), "max_tokens": max_tokens,
                        "temperature": 0, "stream": True}).encode()
     req = urllib.request.Request(f"{url}/v1/chat/completions", data=body,
                                  headers={"Content-Type": "application/json", "x-user-id": "pd-abort-repro"})
@@ -74,13 +79,15 @@ def healthy(decode_url: str) -> bool:
         return False
 
 
-def run(args, abort: bool) -> dict:
+def run(args, part: str) -> dict:
     outcomes, lock = [], threading.Lock()
+    abort = part == "abort"
+    max_tokens = 1 if part == "short" else 64
 
     def worker(n: int):
         for _ in range(n):
             delay = random.uniform(args.min_hang_up_s, args.max_hang_up_s) if abort else None
-            result = one(args.url, args.model, args.words, delay)
+            result = one(args.url, args.model, args.words, delay, max_tokens)
             with lock:
                 outcomes.append(result)
 
@@ -93,7 +100,8 @@ def run(args, abort: bool) -> dict:
         t.join()
     time.sleep(args.settle_s)  # let in-flight transfers finish (or crash the server)
     counts = {k: outcomes.count(k) for k in sorted(set(outcomes))}
-    return {"abort": abort, "seconds": round(time.time() - start, 1), "outcomes": counts,
+    return {"part": part, "max_tokens": max_tokens, "hang_up": abort,
+            "seconds": round(time.time() - start, 1), "outcomes": counts,
             "decode_healthy_after": healthy(args.decode_url)}
 
 
@@ -110,18 +118,22 @@ def main() -> None:
     parser.add_argument("--min-hang-up-s", type=float, default=0.05)
     parser.add_argument("--max-hang-up-s", type=float, default=0.6)
     parser.add_argument("--settle-s", type=float, default=10)
+    parser.add_argument("--parts", default="control,short,abort", help="which parts, in order")
     args = parser.parse_args()
 
     if not healthy(args.decode_url):
         raise SystemExit(f"decode server at {args.decode_url} is not healthy before the test")
-    parts = {"control": run(args, abort=False)}
-    print("control:", json.dumps(parts["control"]))
-    if parts["control"]["decode_healthy_after"]:
-        parts["abort"] = run(args, abort=True)
-        print("abort:  ", json.dumps(parts["abort"]))
-    crashed = not parts.get("abort", parts["control"])["decode_healthy_after"]
-    print("==> decode server", "CRASHED" if crashed else "survived")
-    path = save_run(args.phase, f"pd_abort_{args.label}", {"parts": parts, "decode_crashed": crashed},
+    parts, crashed_in = {}, None
+    for part in args.parts.split(","):
+        parts[part] = run(args, part)
+        print(f"{part}:", json.dumps(parts[part]))
+        if not parts[part]["decode_healthy_after"]:
+            crashed_in = part
+            break
+    crashed = crashed_in is not None
+    print("==> decode server", f"CRASHED in part '{crashed_in}'" if crashed else "survived")
+    path = save_run(args.phase, f"pd_abort_{args.label}",
+                    {"parts": parts, "decode_crashed": crashed, "crashed_in": crashed_in},
                     config={"topology": os.getenv("TOPOLOGY", ""), "vllm_image": os.getenv("VLLM_IMAGE", "")},
                     load=vars(args))
     print(f"saved {path}")

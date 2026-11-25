@@ -31,9 +31,11 @@ if [ "$RUN_REPRO" = 1 ]; then
   for tag in v0.30.0 v0.34.0; do
     echo "==> [0] Client hang ups during the KV handover, vLLM $tag"
     use_vllm "$tag"
-    if apply --pd 1,1 --pd-connector mooncake; then
-      python3 scripts/pd_abort_repro.py --phase "$PHASE" --label "abort_$tag" | tail -4
-      C logs --no-color --no-log-prefix vllm-decode-0 2>&1 | grep -E -B2 -A28 "Traceback|AssertionError|EngineDeadError" \
+    # No smoke test request here: on v0.30.0 that single request is enough to crash it.
+    if SMOKE=0 apply --pd 1,1 --pd-connector mooncake; then
+      python3 scripts/pd_abort_repro.py --phase "$PHASE" --label "abort_$tag" | tail -5
+      C logs --no-color --no-log-prefix vllm-decode-0 > "$OUT/abort_${tag}_decode_full.log" 2>&1 || true
+      grep -E -B2 -A28 "Traceback|AssertionError|EngineDeadError" "$OUT/abort_${tag}_decode_full.log" \
         | head -120 > "$OUT/abort_${tag}_decode.log" || true
     fi
   done
