@@ -39,6 +39,7 @@ bf16w_kv_fp8_triton|p11_bf16w_kv_fp8_triton|
 fp8w_kv_bf16_triton|p11_fp8w_kv_bf16_triton|
 fp8w_kv_fp8_triton|p11_fp8w_kv_fp8_triton|
 ckpt_kv_fp8_tensor_triton|p11_ckpt_kv_fp8_triton|$CKPT_TENSOR
+fp8w_kv_fp8_flashinfer_native|p11_fp8w_kv_fp8_flashinfer_native|
 "
 # ONLY="label ..." runs just those configs (for a second pass).
 ONLY="${ONLY:-}"
@@ -70,7 +71,7 @@ start_vllm() {  # label config model; non-zero if vLLM doesn't come up
     return 1
   fi
   docker compose logs --no-color --no-log-prefix vllm 2>/dev/null \
-    | grep -E "non-default args|Available KV cache memory|GPU KV cache size|Model loading took|[Qq]uantiz|kv_cache_dtype|k_scale|v_scale|scaling factor|[Aa]ttention backend|Using .* backend|Application startup complete" \
+    | grep -E "query dtypes|decode_backend|non-default args|Available KV cache memory|GPU KV cache size|Model loading took|[Qq]uantiz|kv_cache_dtype|k_scale|v_scale|scaling factor|[Aa]ttention backend|Using .* backend|Application startup complete" \
     | head -30 > "$OUT/vllm_startup_$1.log" || true
 }
 
