@@ -69,7 +69,10 @@ if ! timeout 120 $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L >/dev/nu
     | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' \
     | $SUDO tee /etc/apt/sources.list.d/nvidia-container-toolkit.list >/dev/null
   $SUDO apt-get update -qq
-  $SUDO apt-get install -y -qq nvidia-container-toolkit
+  # Vast's VM image holds every NVIDIA package (so the driver can't change), the
+  # container toolkit included even though it isn't installed. Unhold just these.
+  $SUDO apt-get install -y -qq --allow-change-held-packages nvidia-container-toolkit \
+    nvidia-container-toolkit-base libnvidia-container-tools libnvidia-container1
   $SUDO nvidia-ctk runtime configure --runtime=docker
   $SUDO systemctl restart docker
   timeout 120 $DOCKER run --rm --gpus all ubuntu:22.04 nvidia-smi -L || die "containers still cannot see the GPU"
