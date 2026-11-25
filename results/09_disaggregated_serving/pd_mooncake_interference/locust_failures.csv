@@ -1,3 +1,3 @@
 Method,Name,Error,Occurrences,First Seen,Last Seen
-TOTAL,summarization,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",760,2026-11-25T11:03:40Z,2026-11-25T11:03:54Z
-TOTAL,long_generation,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",729,2026-11-25T11:03:40Z,2026-11-25T11:03:54Z
+TOTAL,summarization,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",6138,2026-11-25T11:03:40Z,2026-11-25T11:07:25Z
+TOTAL,long_generation,"Exception(""{'message': 'Internal server error', 'type': 'InternalServerError', 'param': None, 'code': 500}"")",6006,2026-11-25T11:03:40Z,2026-11-25T11:07:25Z
