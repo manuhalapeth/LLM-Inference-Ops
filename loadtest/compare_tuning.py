@@ -84,7 +84,7 @@ def main() -> None:
 
     runs = {}
     for run in load_runs(args.phase):  # oldest first, so the latest run of each config wins
-        label = run["config"]["label"]
+        label = run["config"].get("label", "")  # other kinds of runs (crash tests, evals) may have none
         if run["name"].startswith("load_sweep_") and not label.startswith("latency_") and (not args.labels or label in args.labels):
             runs[label] = run
     rows = [summarize_sweep(r, args.price_per_hour) for r in runs.values()]
