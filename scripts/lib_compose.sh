@@ -35,7 +35,8 @@ apply() {  # topology.py arguments; starts that setup and waits until it answers
     if [ "$(date +%s)" -gt "$deadline" ]; then break; fi
     sleep 5
   done
-  if ! python3 scripts/smoke_test.py --wait 300 > /dev/null 2>&1; then
+  # SMOKE=0 skips the test request (Phase 9: it alone crashes vLLM v0.30.0's decode server).
+  if [ "${SMOKE:-1}" = 1 ] && ! python3 scripts/smoke_test.py --wait 300 > /dev/null 2>&1; then
     echo "!! $TOPOLOGY did not come up"
     C logs --no-color --tail 200 > "$OUT/failed_$(slug "$TOPOLOGY")_${VLLM_TAG:-v0.30.0}.log" 2>&1
     return 1
