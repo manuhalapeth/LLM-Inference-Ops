@@ -1,0 +1,11 @@
+# Phase 11: FP8 weights and an FP8 KV cache, except layers 0 1 3 27, which keep BF16 keys
+# and values. In those layers some key channels carry a large constant offset (up
+# to 344 times their spread across tokens), so FP8 rounding error drowns the part
+# of the key that varies; scales can't fix an offset (scripts/kv_fp8_attention_sim.py).
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-cache-dtype: fp8
+kv-cache-dtype-skip-layers: ["0", "1", "3", "27"]

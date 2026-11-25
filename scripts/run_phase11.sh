@@ -40,10 +40,12 @@ fp8w_kv_bf16_triton|p11_fp8w_kv_bf16_triton|
 fp8w_kv_fp8_triton|p11_fp8w_kv_fp8_triton|
 ckpt_kv_fp8_tensor_triton|p11_ckpt_kv_fp8_triton|$CKPT_TENSOR
 fp8w_kv_fp8_flashinfer_native|p11_fp8w_kv_fp8_flashinfer_native|
+fp8w_kv_fp8_skip3|p11_fp8w_kv_fp8_skip3|
+fp8w_kv_fp8_skip4|p11_fp8w_kv_fp8_skip4|
 "
 # ONLY="label ..." runs just those configs (for a second pass).
 ONLY="${ONLY:-}"
-SWEEP_LABELS="${SWEEP_LABELS:-fp8w_kv_bf16 fp8w_kv_fp8_scale1 fp8w_kv_fp8_per_token_head ckpt_kv_bf16 ckpt_kv_fp8_tensor ckpt_kv_fp8_head fp8w_kv_bf16_triton fp8w_kv_fp8_triton}"
+SWEEP_LABELS="${SWEEP_LABELS:-fp8w_kv_bf16 fp8w_kv_fp8_scale1 ckpt_kv_bf16 fp8w_kv_fp8_skip4}"
 
 if [ "$RUN_CALIBRATION" = 1 ]; then
   docker compose down >/dev/null 2>&1   # calibration needs the whole GPU
