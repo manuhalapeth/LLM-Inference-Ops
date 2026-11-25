@@ -1,0 +1,31 @@
+DEBUG: Server startup function called
+DEBUG: Initializing logging
+DEBUG: Logging initialized
+DEBUG: Initializing Prometheus metrics
+DEBUG: Prometheus metrics initialized
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1025:[0m Starting router on 0.0.0.0:8000 | mode: Regular { worker_urls: ["http://vllm-0:8000", "http://vllm-1:8000", "http://vllm-2:8000", "http://vllm-3:8000"] } | policy: KvAware { router_temperature: 0.0, kv_penalty_host: 0.8, kv_penalty_external: 0.6, kv_penalty_disk: 0.3, static_kv_event_sources: {"http://vllm-0:8000": StaticKvEventSources { endpoints: ["tcp://vllm-0:5557"], replay_endpoints: Some(["tcp://vllm-0:5558"]), topic: "", block_size: 16, model: "llm" }, "http://vllm-1:8000": StaticKvEventSources { endpoints: ["tcp://vllm-1:5557"], replay_endpoints: Some(["tcp://vllm-1:5558"]), topic: "", block_size: 16, model: "llm" }, "http://vllm-2:8000": StaticKvEventSources { endpoints: ["tcp://vllm-2:5557"], replay_endpoints: Some(["tcp://vllm-2:5558"]), topic: "", block_size: 16, model: "llm" }, "http://vllm-3:8000": StaticKvEventSources { endpoints: ["tcp://vllm-3:5557"], replay_endpoints: Some(["tcp://vllm-3:5558"]), topic: "", block_size: 16, model: "llm" }} } | kv_connector: Nixl | max_payload: 512MB
+DEBUG: Creating HTTP client
+DEBUG: HTTP client created
+DEBUG: Creating AppContext
+DEBUG: AppContext created
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1129:[0m Single router mode (enable_igw=false)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::routers::http::router[0m[2m:[0m [2msrc/routers/http/router.rs[0m[2m:[0m[2m1021:[0m Waiting for 4 unique hosts (representing 4 workers) to become healthy (timeout: 600s)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::routers::http::router[0m[2m:[0m [2msrc/routers/http/router.rs[0m[2m:[0m[2m1100:[0m 4 out of 4 unique hosts are healthy (representing 4 workers)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m242:[0m using configured static KV event sources [3mworker_url[0m[2m=[0m"http://vllm-0:8000" [3mmodel[0m[2m=[0mllm [3mblock_size[0m[2m=[0m16 [3mranks[0m[2m=[0m1
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m515:[0m kv_index http://vllm-0:8000: spawned subscriber rank0 (instance http://vllm-0:8000)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m242:[0m using configured static KV event sources [3mworker_url[0m[2m=[0m"http://vllm-1:8000" [3mmodel[0m[2m=[0mllm [3mblock_size[0m[2m=[0m16 [3mranks[0m[2m=[0m1
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m515:[0m kv_index http://vllm-1:8000: spawned subscriber rank0 (instance http://vllm-1:8000)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m242:[0m using configured static KV event sources [3mworker_url[0m[2m=[0m"http://vllm-2:8000" [3mmodel[0m[2m=[0mllm [3mblock_size[0m[2m=[0m16 [3mranks[0m[2m=[0m1
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m515:[0m kv_index http://vllm-2:8000: spawned subscriber rank0 (instance http://vllm-2:8000)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m242:[0m using configured static KV event sources [3mworker_url[0m[2m=[0m"http://vllm-3:8000" [3mmodel[0m[2m=[0mllm [3mblock_size[0m[2m=[0m16 [3mranks[0m[2m=[0m1
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::discovery[0m[2m:[0m [2msrc/kv_index/discovery.rs[0m[2m:[0m[2m515:[0m kv_index http://vllm-3:8000: spawned subscriber rank0 (instance http://vllm-3:8000)
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::policies::registry[0m[2m:[0m [2msrc/policies/registry.rs[0m[2m:[0m[2m100:[0m Assigning policy kv_aware to new model unknown
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1141:[0m Started health checker for workers with 60s interval
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1156:[0m Started request queue with size: 100, timeout: 60s
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1192:[0m Router ready | workers: ["http://vllm-3:8000", "http://vllm-0:8000", "http://vllm-1:8000", "http://vllm-2:8000"]
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::middleware[0m[2m:[0m [2msrc/middleware.rs[0m[2m:[0m[2m421:[0m Starting concurrency queue processor
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1270:[0m Starting server on 0.0.0.0:8000
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::subscriber[0m[2m:[0m [2msrc/kv_index/subscriber.rs[0m[2m:[0m[2m158:[0m kv_index subscriber for http://vllm-1:8000 rank0 on tcp://vllm-1:5557
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::subscriber[0m[2m:[0m [2msrc/kv_index/subscriber.rs[0m[2m:[0m[2m158:[0m kv_index subscriber for http://vllm-0:8000 rank0 on tcp://vllm-0:5557
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::subscriber[0m[2m:[0m [2msrc/kv_index/subscriber.rs[0m[2m:[0m[2m158:[0m kv_index subscriber for http://vllm-2:8000 rank0 on tcp://vllm-2:5557
+[2m2026-11-25 10:55:30[0m [32m INFO[0m [2mvllm_router_rs::kv_index::subscriber[0m[2m:[0m [2msrc/kv_index/subscriber.rs[0m[2m:[0m[2m158:[0m kv_index subscriber for http://vllm-3:8000 rank0 on tcp://vllm-3:5557

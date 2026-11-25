@@ -1,0 +1,302 @@
+{
+  "services": {
+    "vllm-0": {
+      "image": "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}",
+      "entrypoint": [
+        "vllm",
+        "serve"
+      ],
+      "command": [
+        "${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}",
+        "--served-model-name",
+        "${SERVED_MODEL_NAME:-llm}",
+        "--config",
+        "/configs/tune_fp8_weights_kv_events.yaml"
+      ],
+      "environment": {
+        "HF_TOKEN": "${HF_TOKEN:-}",
+        "OTEL_SERVICE_NAME": "vllm-0",
+        "VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES": "0"
+      },
+      "volumes": [
+        "./vllm/configs:/configs:ro",
+        "./vllm/mooncake:/mooncake:ro",
+        "${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface"
+      ],
+      "ipc": "host",
+      "ports": [
+        "127.0.0.1:8000:8000"
+      ],
+      "deploy": {
+        "resources": {
+          "reservations": {
+            "devices": [
+              {
+                "driver": "nvidia",
+                "device_ids": [
+                  "0"
+                ],
+                "capabilities": [
+                  "gpu"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "start_period": "15m"
+      },
+      "restart": "unless-stopped"
+    },
+    "vllm-1": {
+      "image": "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}",
+      "entrypoint": [
+        "vllm",
+        "serve"
+      ],
+      "command": [
+        "${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}",
+        "--served-model-name",
+        "${SERVED_MODEL_NAME:-llm}",
+        "--config",
+        "/configs/tune_fp8_weights_kv_events.yaml"
+      ],
+      "environment": {
+        "HF_TOKEN": "${HF_TOKEN:-}",
+        "OTEL_SERVICE_NAME": "vllm-1",
+        "VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES": "0"
+      },
+      "volumes": [
+        "./vllm/configs:/configs:ro",
+        "./vllm/mooncake:/mooncake:ro",
+        "${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface"
+      ],
+      "ipc": "host",
+      "ports": [
+        "127.0.0.1:8001:8000"
+      ],
+      "deploy": {
+        "resources": {
+          "reservations": {
+            "devices": [
+              {
+                "driver": "nvidia",
+                "device_ids": [
+                  "1"
+                ],
+                "capabilities": [
+                  "gpu"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "start_period": "15m"
+      },
+      "restart": "unless-stopped"
+    },
+    "vllm-2": {
+      "image": "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}",
+      "entrypoint": [
+        "vllm",
+        "serve"
+      ],
+      "command": [
+        "${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}",
+        "--served-model-name",
+        "${SERVED_MODEL_NAME:-llm}",
+        "--config",
+        "/configs/tune_fp8_weights_kv_events.yaml"
+      ],
+      "environment": {
+        "HF_TOKEN": "${HF_TOKEN:-}",
+        "OTEL_SERVICE_NAME": "vllm-2",
+        "VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES": "0"
+      },
+      "volumes": [
+        "./vllm/configs:/configs:ro",
+        "./vllm/mooncake:/mooncake:ro",
+        "${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface"
+      ],
+      "ipc": "host",
+      "ports": [
+        "127.0.0.1:8002:8000"
+      ],
+      "deploy": {
+        "resources": {
+          "reservations": {
+            "devices": [
+              {
+                "driver": "nvidia",
+                "device_ids": [
+                  "2"
+                ],
+                "capabilities": [
+                  "gpu"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "start_period": "15m"
+      },
+      "restart": "unless-stopped"
+    },
+    "vllm-3": {
+      "image": "${VLLM_IMAGE:-vllm/vllm-openai:v0.30.0}",
+      "entrypoint": [
+        "vllm",
+        "serve"
+      ],
+      "command": [
+        "${MODEL_NAME:-Qwen/Qwen2.5-7B-Instruct}",
+        "--served-model-name",
+        "${SERVED_MODEL_NAME:-llm}",
+        "--config",
+        "/configs/tune_fp8_weights_kv_events.yaml"
+      ],
+      "environment": {
+        "HF_TOKEN": "${HF_TOKEN:-}",
+        "OTEL_SERVICE_NAME": "vllm-3",
+        "VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES": "0"
+      },
+      "volumes": [
+        "./vllm/configs:/configs:ro",
+        "./vllm/mooncake:/mooncake:ro",
+        "${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/root/.cache/huggingface"
+      ],
+      "ipc": "host",
+      "ports": [
+        "127.0.0.1:8003:8000"
+      ],
+      "deploy": {
+        "resources": {
+          "reservations": {
+            "devices": [
+              {
+                "driver": "nvidia",
+                "device_ids": [
+                  "3"
+                ],
+                "capabilities": [
+                  "gpu"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "start_period": "15m"
+      },
+      "restart": "unless-stopped"
+    },
+    "vllm-router": {
+      "image": "llm-inference-ops/vllm-router:0.1.17",
+      "build": {
+        "context": "./router"
+      },
+      "command": [
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--policy",
+        "kv_aware",
+        "--worker-urls",
+        "http://vllm-0:8000",
+        "http://vllm-1:8000",
+        "http://vllm-2:8000",
+        "http://vllm-3:8000",
+        "--prometheus-host",
+        "0.0.0.0",
+        "--prometheus-port",
+        "29000",
+        "--request-timeout-secs",
+        "600",
+        "--log-level",
+        "warning",
+        "--disable-retries",
+        "--kv-event-source",
+        "http://vllm-0:8000=tcp://vllm-0:5557",
+        "--kv-event-replay-source",
+        "http://vllm-0:8000=tcp://vllm-0:5558",
+        "--kv-event-source",
+        "http://vllm-1:8000=tcp://vllm-1:5557",
+        "--kv-event-replay-source",
+        "http://vllm-1:8000=tcp://vllm-1:5558",
+        "--kv-event-source",
+        "http://vllm-2:8000=tcp://vllm-2:5557",
+        "--kv-event-replay-source",
+        "http://vllm-2:8000=tcp://vllm-2:5558",
+        "--kv-event-source",
+        "http://vllm-3:8000=tcp://vllm-3:5557",
+        "--kv-event-replay-source",
+        "http://vllm-3:8000=tcp://vllm-3:5558",
+        "--kv-event-block-size",
+        "16",
+        "--kv-event-model",
+        "${SERVED_MODEL_NAME:-llm}"
+      ],
+      "depends_on": [
+        "vllm-0",
+        "vllm-1",
+        "vllm-2",
+        "vllm-3"
+      ],
+      "restart": "unless-stopped"
+    },
+    "vllm": {
+      "profiles": [
+        "single"
+      ]
+    },
+    "nginx": {
+      "depends_on": [
+        "jaeger",
+        "vllm-router"
+      ]
+    }
+  }
+}

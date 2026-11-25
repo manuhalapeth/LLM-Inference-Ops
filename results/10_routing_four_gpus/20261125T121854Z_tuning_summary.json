@@ -1,0 +1,268 @@
+{
+  "run_id": "20261125T121854Z_tuning_summary",
+  "phase": "10_routing_four_gpus",
+  "name": "tuning_summary",
+  "timestamp": "2026-11-25T12:18:54.869205+00:00",
+  "config": {
+    "price_per_hour_usd": 3.952
+  },
+  "load": {
+    "configs": [
+      "scale_1x",
+      "scale_2x",
+      "scale_4x"
+    ]
+  },
+  "metrics": {
+    "configs": [
+      {
+        "label": "scale_1x",
+        "peak_output_tokens_per_s": 7949.4857142857145,
+        "peak_at_users": 128,
+        "max_running": 256.0,
+        "max_kv_cache_usage": 0.35523114355231145,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 384,
+          "kv_cache_95pct": null,
+          "preemptions": null,
+          "ttft_p95_over_slo": 384,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 128,
+          "peak_output_tokens_per_s": 7949.4857142857145,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "64": {
+            "output_tokens_per_s": 6460.171428571429,
+            "ttft_p95_s": 0.0909743049996905,
+            "itl_p50_s": 0.009609576555559461,
+            "waiting_max": 0.0
+          },
+          "128": {
+            "output_tokens_per_s": 7949.4857142857145,
+            "ttft_p95_s": 0.1617758889997276,
+            "itl_p50_s": 0.015868433235293338,
+            "waiting_max": 0.0
+          },
+          "192": {
+            "output_tokens_per_s": 7832.371428571429,
+            "ttft_p95_s": 0.26116237600035674,
+            "itl_p50_s": 0.02414723740547585,
+            "waiting_max": 0.0
+          },
+          "256": {
+            "output_tokens_per_s": 7421.657142857143,
+            "ttft_p95_s": 0.24511711400009517,
+            "itl_p50_s": 0.034196372323050124,
+            "waiting_max": 0.0
+          },
+          "384": {
+            "output_tokens_per_s": 7056.6,
+            "ttft_p95_s": 4.702926210999976,
+            "itl_p50_s": 0.03597085105850946,
+            "waiting_max": 128.0
+          },
+          "512": {
+            "output_tokens_per_s": 6909.5142857142855,
+            "ttft_p95_s": 8.86317969799984,
+            "itl_p50_s": 0.03614692097818161,
+            "waiting_max": 256.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 256,
+            "output_tokens_per_s": 7421.657142857143,
+            "usd_per_million_output_tokens": 0.1479154529301204
+          },
+          "relaxed": {
+            "users": 256,
+            "output_tokens_per_s": 7421.657142857143,
+            "usd_per_million_output_tokens": 0.1479154529301204
+          }
+        }
+      },
+      {
+        "label": "scale_2x",
+        "peak_output_tokens_per_s": 16056.628571428571,
+        "peak_at_users": 384,
+        "max_running": 511.0,
+        "max_kv_cache_usage": 0.7136440202133633,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 384,
+          "kv_cache_95pct": null,
+          "preemptions": null,
+          "ttft_p95_over_slo": 768,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 384,
+          "peak_output_tokens_per_s": 16056.628571428571,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "128": {
+            "output_tokens_per_s": 12644.0,
+            "ttft_p95_s": 0.09507754400056001,
+            "itl_p50_s": 0.009864684602408273,
+            "waiting_max": 0.0
+          },
+          "256": {
+            "output_tokens_per_s": 15524.371428571429,
+            "ttft_p95_s": 0.17536081500020373,
+            "itl_p50_s": 0.01619433366319356,
+            "waiting_max": 0.0
+          },
+          "384": {
+            "output_tokens_per_s": 16056.628571428571,
+            "ttft_p95_s": 0.2777366009995603,
+            "itl_p50_s": 0.02355029010704896,
+            "waiting_max": 1.0
+          },
+          "512": {
+            "output_tokens_per_s": 15089.971428571429,
+            "ttft_p95_s": 0.27537647200006177,
+            "itl_p50_s": 0.03370067559694655,
+            "waiting_max": 0.0
+          },
+          "768": {
+            "output_tokens_per_s": 13601.514285714286,
+            "ttft_p95_s": 4.9562235880002845,
+            "itl_p50_s": 0.03702828046774206,
+            "waiting_max": 255.0
+          },
+          "1024": {
+            "output_tokens_per_s": 13712.314285714287,
+            "ttft_p95_s": 9.078574241999377,
+            "itl_p50_s": 0.0374863725155253,
+            "waiting_max": 510.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 512,
+            "output_tokens_per_s": 15089.971428571429,
+            "usd_per_million_output_tokens": 0.07274883076976804
+          },
+          "relaxed": {
+            "users": 512,
+            "output_tokens_per_s": 15089.971428571429,
+            "usd_per_million_output_tokens": 0.07274883076976804
+          }
+        }
+      },
+      {
+        "label": "scale_4x",
+        "peak_output_tokens_per_s": 31724.257142857143,
+        "peak_at_users": 768,
+        "max_running": 1022.0,
+        "max_kv_cache_usage": 1.4038929440389294,
+        "preemptions": 0,
+        "errors": 0,
+        "breaking_points": {
+          "requests_queue": 768,
+          "kv_cache_95pct": 768,
+          "preemptions": null,
+          "ttft_p95_over_slo": 1536,
+          "errors_over_1pct": null,
+          "peak_throughput_users": 768,
+          "peak_output_tokens_per_s": 31724.257142857143,
+          "ttft_slo_s": 1.0
+        },
+        "at_users": {
+          "256": {
+            "output_tokens_per_s": 25289.428571428572,
+            "ttft_p95_s": 0.09871550299976661,
+            "itl_p50_s": 0.009839684566801364,
+            "waiting_max": 0.0
+          },
+          "512": {
+            "output_tokens_per_s": 31466.885714285716,
+            "ttft_p95_s": 0.17132982299972355,
+            "itl_p50_s": 0.01598820900000072,
+            "waiting_max": 0.0
+          },
+          "768": {
+            "output_tokens_per_s": 31724.257142857143,
+            "ttft_p95_s": 0.27985806400010915,
+            "itl_p50_s": 0.023865430348124973,
+            "waiting_max": 3.0
+          },
+          "1024": {
+            "output_tokens_per_s": 30002.457142857143,
+            "ttft_p95_s": 0.3319692180002676,
+            "itl_p50_s": 0.03387592503225819,
+            "waiting_max": 8.0
+          },
+          "1536": {
+            "output_tokens_per_s": 27729.17142857143,
+            "ttft_p95_s": 4.6865313069993135,
+            "itl_p50_s": 0.037103167954316126,
+            "waiting_max": 508.0
+          },
+          "2048": {
+            "output_tokens_per_s": 27903.942857142858,
+            "ttft_p95_s": 8.706927811999776,
+            "itl_p50_s": 0.03684861162352771,
+            "waiting_max": 1020.0
+          }
+        },
+        "capacity": {
+          "interactive": {
+            "users": 1024,
+            "output_tokens_per_s": 30002.457142857143,
+            "usd_per_million_output_tokens": 0.0365895957304661
+          },
+          "relaxed": {
+            "users": 1024,
+            "output_tokens_per_s": 30002.457142857143,
+            "usd_per_million_output_tokens": 0.0365895957304661
+          }
+        }
+      }
+    ],
+    "targets": [
+      [
+        "interactive",
+        0.5,
+        0.04
+      ],
+      [
+        "relaxed",
+        1.0,
+        0.06
+      ]
+    ]
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "488a019222862bd641c6899223b985f0abc13f56",
+    "git_dirty": true
+  },
+  "notes": ""
+}

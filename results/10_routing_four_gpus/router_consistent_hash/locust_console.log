@@ -1,0 +1,140 @@
+time="2026-11-25T13:51:56Z" level=warning msg="Found orphan containers ([llm-inference-ops-vllm-router-1 llm-inference-ops-vllm-3-1 llm-inference-ops-vllm-2-1 llm-inference-ops-vllm-1-1 llm-inference-ops-vllm-0-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container llm-inference-ops-jaeger-1  Running
+ Container llm-inference-ops-nginx-1  Running
+ Container llm-inference-ops-gateway-1  Running
+[2026-11-25 13:51:57,168] 495c6013d8e9/INFO/locust.main: Starting Locust 2.46.6
+[2026-11-25 13:51:57,200] 495c6013d8e9/INFO/locust.main: Starting web interface at http://0.0.0.0:8089, press enter to open your default browser.
+[2026-11-25 13:51:57,217] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_0f8c854f47694fdea31682722667987d (index 0) reported as ready. 1 workers connected.
+[2026-11-25 13:51:57,217] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_18c4c26eb91747d08971903fca5ef981 (index 1) reported as ready. 2 workers connected.
+[2026-11-25 13:51:57,217] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_251b27c14e144b2eb16c94b97497db9f (index 2) reported as ready. 3 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_c0e218bd6c1b4d938f603fb8a0fa64fe (index 3) reported as ready. 4 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_8e2f8d785b4f4843a544ae073ec5c5ef (index 4) reported as ready. 5 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_979c3c23af6449469c2b60a3bf407d15 (index 5) reported as ready. 6 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_b2acc78e79304f1c995ac6da27fdea06 (index 6) reported as ready. 7 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_7007fcc43afe4298baa8fe7dcfed1b93 (index 7) reported as ready. 8 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_4e82ae66288a44c5b1bbafc567bddb6c (index 8) reported as ready. 9 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_29db5eeba1754ca684a797175bbf1c07 (index 9) reported as ready. 10 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_063420510a9e458b8eac3edec8ac7aba (index 10) reported as ready. 11 workers connected.
+[2026-11-25 13:51:57,218] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_af848e5a71414404ab697f4e2eeee020 (index 11) reported as ready. 12 workers connected.
+[2026-11-25 13:51:57,380] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_9ddeb4b5b11f4cb6a5faf195aa7f3a34 (index 12) reported as ready. 13 workers connected.
+[2026-11-25 13:51:57,381] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_544fe2d50e0c483bb2330c430f6c365c (index 13) reported as ready. 14 workers connected.
+[2026-11-25 13:51:57,382] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_78b425bc4d7d4bd599e2c27fb3976a89 (index 14) reported as ready. 15 workers connected.
+[2026-11-25 13:51:57,383] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_437776ebe2a44e60b65c5344ddac788c (index 15) reported as ready. 16 workers connected.
+[2026-11-25 13:51:58,218] 495c6013d8e9/INFO/locust.runners: Shape test starting.
+[2026-11-25 13:51:58,218] 495c6013d8e9/INFO/locust.runners: Shape worker starting
+[2026-11-25 13:51:58,218] 495c6013d8e9/INFO/locust.runners: Shape test updating to 256 users at 256.00 spawn rate
+[2026-11-25 13:51:58,219] 495c6013d8e9/INFO/locust.runners: Sending spawn jobs of 256 users at 256.00 spawn rate to 16 ready workers
+[2026-11-25 13:51:58,319] 495c6013d8e9/INFO/locust.runners: All users spawned: {"ChatUser": 256} (256 total users)
+[2026-11-25 13:52:43,247] 495c6013d8e9/INFO/locust.runners: Shape test updating to 512 users at 512.00 spawn rate
+[2026-11-25 13:52:43,247] 495c6013d8e9/INFO/locust.runners: Sending spawn jobs of 512 users at 512.00 spawn rate to 16 ready workers
+[2026-11-25 13:52:43,336] 495c6013d8e9/INFO/locust.runners: All users spawned: {"ChatUser": 512} (512 total users)
+[2026-11-25 13:53:28,276] 495c6013d8e9/INFO/locust.runners: Shape test updating to 768 users at 768.00 spawn rate
+[2026-11-25 13:53:28,277] 495c6013d8e9/INFO/locust.runners: Sending spawn jobs of 768 users at 768.00 spawn rate to 16 ready workers
+[2026-11-25 13:53:28,375] 495c6013d8e9/INFO/locust.runners: All users spawned: {"ChatUser": 768} (768 total users)
+[2026-11-25 13:54:13,307] 495c6013d8e9/INFO/locust.runners: Shape test updating to 1024 users at 1024.00 spawn rate
+[2026-11-25 13:54:13,307] 495c6013d8e9/INFO/locust.runners: Sending spawn jobs of 1024 users at 1024.00 spawn rate to 16 ready workers
+[2026-11-25 13:54:13,404] 495c6013d8e9/INFO/locust.runners: All users spawned: {"ChatUser": 1024} (1024 total users)
+[2026-11-25 13:54:58,338] 495c6013d8e9/INFO/locust.runners: Shape test stopping
+[2026-11-25 13:54:58,385] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_251b27c14e144b2eb16c94b97497db9f (index 2) reported that it has stopped
+[2026-11-25 13:54:58,385] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_251b27c14e144b2eb16c94b97497db9f (index 2) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,405] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_b2acc78e79304f1c995ac6da27fdea06 (index 6) reported that it has stopped
+[2026-11-25 13:54:58,406] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_b2acc78e79304f1c995ac6da27fdea06 (index 6) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,406] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_af848e5a71414404ab697f4e2eeee020 (index 11) reported that it has stopped
+[2026-11-25 13:54:58,406] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_af848e5a71414404ab697f4e2eeee020 (index 11) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,406] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_c0e218bd6c1b4d938f603fb8a0fa64fe (index 3) reported that it has stopped
+[2026-11-25 13:54:58,406] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_544fe2d50e0c483bb2330c430f6c365c (index 13) reported that it has stopped
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_c0e218bd6c1b4d938f603fb8a0fa64fe (index 3) reported as ready. 15 workers connected.
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_544fe2d50e0c483bb2330c430f6c365c (index 13) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_979c3c23af6449469c2b60a3bf407d15 (index 5) reported that it has stopped
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_4e82ae66288a44c5b1bbafc567bddb6c (index 8) reported that it has stopped
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_979c3c23af6449469c2b60a3bf407d15 (index 5) reported as ready. 15 workers connected.
+[2026-11-25 13:54:58,407] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_4e82ae66288a44c5b1bbafc567bddb6c (index 8) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_7007fcc43afe4298baa8fe7dcfed1b93 (index 7) reported that it has stopped
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_7007fcc43afe4298baa8fe7dcfed1b93 (index 7) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_78b425bc4d7d4bd599e2c27fb3976a89 (index 14) reported that it has stopped
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_78b425bc4d7d4bd599e2c27fb3976a89 (index 14) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_063420510a9e458b8eac3edec8ac7aba (index 10) reported that it has stopped
+[2026-11-25 13:54:58,408] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_063420510a9e458b8eac3edec8ac7aba (index 10) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,409] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_9ddeb4b5b11f4cb6a5faf195aa7f3a34 (index 12) reported that it has stopped
+[2026-11-25 13:54:58,409] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_9ddeb4b5b11f4cb6a5faf195aa7f3a34 (index 12) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,410] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_8e2f8d785b4f4843a544ae073ec5c5ef (index 4) reported that it has stopped
+[2026-11-25 13:54:58,410] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_8e2f8d785b4f4843a544ae073ec5c5ef (index 4) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,411] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_0f8c854f47694fdea31682722667987d (index 0) reported that it has stopped
+[2026-11-25 13:54:58,411] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_29db5eeba1754ca684a797175bbf1c07 (index 9) reported that it has stopped
+[2026-11-25 13:54:58,411] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_0f8c854f47694fdea31682722667987d (index 0) reported as ready. 15 workers connected.
+[2026-11-25 13:54:58,411] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_29db5eeba1754ca684a797175bbf1c07 (index 9) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,411] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_18c4c26eb91747d08971903fca5ef981 (index 1) reported that it has stopped
+[2026-11-25 13:54:58,412] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_18c4c26eb91747d08971903fca5ef981 (index 1) reported as ready. 16 workers connected.
+[2026-11-25 13:54:58,413] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_437776ebe2a44e60b65c5344ddac788c (index 15) reported that it has stopped
+[2026-11-25 13:54:58,413] 495c6013d8e9/INFO/locust.runners: 495c6013d8e9_437776ebe2a44e60b65c5344ddac788c (index 15) reported as ready. 16 workers connected.
+[2026-11-25 13:54:59,340] 495c6013d8e9/INFO/locust.main: Shape test completed, stopping test
+[2026-11-25 13:55:04,342] 495c6013d8e9/INFO/locust.main: --autoquit time reached, shutting down
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,343] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,344] 495c6013d8e9/INFO/locust.runners: Got quit message from master, shutting down...
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,345] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_b2acc78e79304f1c995ac6da27fdea06' (index 6) quit. 15 workers ready.
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_251b27c14e144b2eb16c94b97497db9f' (index 2) quit. 14 workers ready.
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_af848e5a71414404ab697f4e2eeee020' (index 11) quit. 13 workers ready.
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_4e82ae66288a44c5b1bbafc567bddb6c' (index 8) quit. 12 workers ready.
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_544fe2d50e0c483bb2330c430f6c365c' (index 13) quit. 11 workers ready.
+[2026-11-25 13:55:04,346] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_c0e218bd6c1b4d938f603fb8a0fa64fe' (index 3) quit. 10 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_063420510a9e458b8eac3edec8ac7aba' (index 10) quit. 9 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_9ddeb4b5b11f4cb6a5faf195aa7f3a34' (index 12) quit. 8 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_8e2f8d785b4f4843a544ae073ec5c5ef' (index 4) quit. 7 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_78b425bc4d7d4bd599e2c27fb3976a89' (index 14) quit. 6 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_7007fcc43afe4298baa8fe7dcfed1b93' (index 7) quit. 5 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_0f8c854f47694fdea31682722667987d' (index 0) quit. 4 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_979c3c23af6449469c2b60a3bf407d15' (index 5) quit. 3 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_29db5eeba1754ca684a797175bbf1c07' (index 9) quit. 2 workers ready.
+[2026-11-25 13:55:04,347] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_18c4c26eb91747d08971903fca5ef981' (index 1) quit. 1 workers ready.
+[2026-11-25 13:55:04,348] 495c6013d8e9/INFO/locust.runners: Worker '495c6013d8e9_437776ebe2a44e60b65c5344ddac788c' (index 15) quit. 0 workers ready.
+[2026-11-25 13:55:04,348] 495c6013d8e9/INFO/locust.runners: The last worker quit, stopping test.
+[2026-11-25 13:55:05,428] 495c6013d8e9/INFO/locust.main: Shutting down (exit code 0)
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+TOTAL    session_follow_up                                                              13403     0(0.00%) |   4804     161   40585   1200 |   74.39        0.00
+TTFT     session_follow_up                                                              13403     0(0.00%) |   2685      51   29308    130 |   74.39        0.00
+TOTAL    session_open                                                                    3172     0(0.00%) |   9594    1250   51573   4500 |   17.60        0.00
+TTFT     session_open                                                                    3172     0(0.00%) |   2270      49   26600    180 |   17.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                     33150     0(0.00%) |   4163      49   51573    700 |  183.98        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+TOTAL    session_follow_up                                                                    1200   1900   2700   3900  18000  28000  32000  35000  39000  40000  41000  13403
+TTFT     session_follow_up                                                                     130    180    240    340  13000  24000  25000  26000  28000  29000  29000  13403
+TOTAL    session_open                                                                         4500   6400   8100  11000  32000  41000  46000  50000  51000  52000  52000   3172
+TTFT     session_open                                                                          180    510    890   1100  11000  15000  24000  25000  26000  27000  27000   3172
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                            700   1500   2700   4200  16000  25000  32000  36000  49000  51000  52000  33150
+

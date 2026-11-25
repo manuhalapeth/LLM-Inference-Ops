@@ -1,0 +1,62 @@
+# TYPE vllm_router_requests_total counter
+vllm_router_requests_total{route="/v1/chat/completions"} 17597
+
+# TYPE vllm_router_processed_requests_total counter
+vllm_router_processed_requests_total{worker="http://vllm-2:8000"} 4384
+vllm_router_processed_requests_total{worker="http://vllm-3:8000"} 3815
+vllm_router_processed_requests_total{worker="http://vllm-1:8000"} 5024
+vllm_router_processed_requests_total{worker="http://vllm-0:8000"} 4374
+
+# TYPE vllm_router_cb_outcomes_total counter
+vllm_router_cb_outcomes_total{worker="http://vllm-0:8000",outcome="success"} 4374
+vllm_router_cb_outcomes_total{worker="http://vllm-2:8000",outcome="success"} 4384
+vllm_router_cb_outcomes_total{worker="http://vllm-1:8000",outcome="success"} 5024
+vllm_router_cb_outcomes_total{worker="http://vllm-3:8000",outcome="success"} 3815
+
+# TYPE vllm_router_policy_decisions_total counter
+vllm_router_policy_decisions_total{policy="consistent_hash",worker="http://vllm-2:8000"} 4384
+vllm_router_policy_decisions_total{policy="consistent_hash",worker="http://vllm-3:8000"} 3815
+vllm_router_policy_decisions_total{policy="consistent_hash",worker="http://vllm-1:8000"} 5024
+vllm_router_policy_decisions_total{policy="consistent_hash",worker="http://vllm-0:8000"} 4374
+
+# TYPE vllm_router_worker_health gauge
+vllm_router_worker_health{worker="http://vllm-2:8000"} 1
+vllm_router_worker_health{worker="http://vllm-3:8000"} 1
+vllm_router_worker_health{worker="http://vllm-0:8000"} 1
+vllm_router_worker_health{worker="http://vllm-1:8000"} 1
+
+# TYPE vllm_router_cb_state gauge
+vllm_router_cb_state{worker="http://vllm-0:8000"} 0
+vllm_router_cb_state{worker="http://vllm-3:8000"} 0
+vllm_router_cb_state{worker="http://vllm-2:8000"} 0
+vllm_router_cb_state{worker="http://vllm-1:8000"} 0
+
+# TYPE vllm_router_active_workers gauge
+vllm_router_active_workers 4
+
+# TYPE vllm_router_generate_duration_seconds histogram
+vllm_router_generate_duration_seconds_bucket{le="0.001"} 0
+vllm_router_generate_duration_seconds_bucket{le="0.005"} 251
+vllm_router_generate_duration_seconds_bucket{le="0.01"} 7054
+vllm_router_generate_duration_seconds_bucket{le="0.025"} 14851
+vllm_router_generate_duration_seconds_bucket{le="0.05"} 16986
+vllm_router_generate_duration_seconds_bucket{le="0.1"} 17541
+vllm_router_generate_duration_seconds_bucket{le="0.25"} 17597
+vllm_router_generate_duration_seconds_bucket{le="0.5"} 17597
+vllm_router_generate_duration_seconds_bucket{le="1"} 17597
+vllm_router_generate_duration_seconds_bucket{le="2.5"} 17597
+vllm_router_generate_duration_seconds_bucket{le="5"} 17597
+vllm_router_generate_duration_seconds_bucket{le="10"} 17597
+vllm_router_generate_duration_seconds_bucket{le="15"} 17597
+vllm_router_generate_duration_seconds_bucket{le="30"} 17597
+vllm_router_generate_duration_seconds_bucket{le="45"} 17597
+vllm_router_generate_duration_seconds_bucket{le="60"} 17597
+vllm_router_generate_duration_seconds_bucket{le="90"} 17597
+vllm_router_generate_duration_seconds_bucket{le="120"} 17597
+vllm_router_generate_duration_seconds_bucket{le="180"} 17597
+vllm_router_generate_duration_seconds_bucket{le="240"} 17597
+vllm_router_generate_duration_seconds_bucket{le="+Inf"} 17597
+vllm_router_generate_duration_seconds_sum 289.69898265199987
+vllm_router_generate_duration_seconds_count 17597
+
+

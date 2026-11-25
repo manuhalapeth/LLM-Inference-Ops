@@ -1,0 +1,56 @@
+# TYPE vllm_router_prefix_routing_decisions_total counter
+vllm_router_prefix_routing_decisions_total{policy="kv_aware",stage="regular",outcome="missing_tokens"} 5
+
+# TYPE vllm_router_cb_outcomes_total counter
+vllm_router_cb_outcomes_total{worker="http://vllm-3:8000",outcome="success"} 5
+
+# TYPE vllm_router_kv_routing_inputs_total counter
+vllm_router_kv_routing_inputs_total{transport="http",result="preparation_rejected"} 20
+
+# TYPE vllm_router_kv_placement_lookups_total counter
+vllm_router_kv_placement_lookups_total{result="missing_tokens"} 5
+
+# TYPE vllm_router_requests_total counter
+vllm_router_requests_total{route="/v1/chat/completions"} 5
+
+# TYPE vllm_router_worker_health gauge
+vllm_router_worker_health{worker="http://vllm-0:8000"} 1
+vllm_router_worker_health{worker="http://vllm-2:8000"} 1
+vllm_router_worker_health{worker="http://vllm-1:8000"} 1
+vllm_router_worker_health{worker="http://vllm-3:8000"} 1
+
+# TYPE vllm_router_active_workers gauge
+vllm_router_active_workers 4
+
+# TYPE vllm_router_running_requests gauge
+vllm_router_running_requests{worker="http://vllm-3:8000"} 0
+
+# TYPE vllm_router_cb_state gauge
+vllm_router_cb_state{worker="http://vllm-3:8000"} 0
+
+# TYPE vllm_router_generate_duration_seconds histogram
+vllm_router_generate_duration_seconds_bucket{le="0.001"} 0
+vllm_router_generate_duration_seconds_bucket{le="0.005"} 0
+vllm_router_generate_duration_seconds_bucket{le="0.01"} 0
+vllm_router_generate_duration_seconds_bucket{le="0.025"} 1
+vllm_router_generate_duration_seconds_bucket{le="0.05"} 1
+vllm_router_generate_duration_seconds_bucket{le="0.1"} 4
+vllm_router_generate_duration_seconds_bucket{le="0.25"} 5
+vllm_router_generate_duration_seconds_bucket{le="0.5"} 5
+vllm_router_generate_duration_seconds_bucket{le="1"} 5
+vllm_router_generate_duration_seconds_bucket{le="2.5"} 5
+vllm_router_generate_duration_seconds_bucket{le="5"} 5
+vllm_router_generate_duration_seconds_bucket{le="10"} 5
+vllm_router_generate_duration_seconds_bucket{le="15"} 5
+vllm_router_generate_duration_seconds_bucket{le="30"} 5
+vllm_router_generate_duration_seconds_bucket{le="45"} 5
+vllm_router_generate_duration_seconds_bucket{le="60"} 5
+vllm_router_generate_duration_seconds_bucket{le="90"} 5
+vllm_router_generate_duration_seconds_bucket{le="120"} 5
+vllm_router_generate_duration_seconds_bucket{le="180"} 5
+vllm_router_generate_duration_seconds_bucket{le="240"} 5
+vllm_router_generate_duration_seconds_bucket{le="+Inf"} 5
+vllm_router_generate_duration_seconds_sum 0.39667999899999995
+vllm_router_generate_duration_seconds_count 5
+
+

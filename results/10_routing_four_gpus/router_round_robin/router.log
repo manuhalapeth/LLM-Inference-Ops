@@ -1,0 +1,19 @@
+DEBUG: Server startup function called
+DEBUG: Initializing logging
+DEBUG: Logging initialized
+DEBUG: Initializing Prometheus metrics
+DEBUG: Prometheus metrics initialized
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1025:[0m Starting router on 0.0.0.0:8000 | mode: Regular { worker_urls: ["http://vllm-0:8000", "http://vllm-1:8000", "http://vllm-2:8000", "http://vllm-3:8000"] } | policy: RoundRobin | kv_connector: Nixl | max_payload: 512MB
+DEBUG: Creating HTTP client
+DEBUG: HTTP client created
+DEBUG: Creating AppContext
+DEBUG: AppContext created
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1129:[0m Single router mode (enable_igw=false)
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::routers::http::router[0m[2m:[0m [2msrc/routers/http/router.rs[0m[2m:[0m[2m1021:[0m Waiting for 4 unique hosts (representing 4 workers) to become healthy (timeout: 600s)
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::routers::http::router[0m[2m:[0m [2msrc/routers/http/router.rs[0m[2m:[0m[2m1100:[0m 4 out of 4 unique hosts are healthy (representing 4 workers)
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::policies::registry[0m[2m:[0m [2msrc/policies/registry.rs[0m[2m:[0m[2m100:[0m Assigning policy round_robin to new model unknown
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1141:[0m Started health checker for workers with 60s interval
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1156:[0m Started request queue with size: 100, timeout: 60s
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1192:[0m Router ready | workers: ["http://vllm-3:8000", "http://vllm-0:8000", "http://vllm-2:8000", "http://vllm-1:8000"]
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::middleware[0m[2m:[0m [2msrc/middleware.rs[0m[2m:[0m[2m421:[0m Starting concurrency queue processor
+[2m2026-11-25 12:29:24[0m [32m INFO[0m [2mvllm_router_rs::server[0m[2m:[0m [2msrc/server.rs[0m[2m:[0m[2m1270:[0m Starting server on 0.0.0.0:8000
