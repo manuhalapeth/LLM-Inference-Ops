@@ -110,4 +110,6 @@ def load_runs(phase: str | None = None, results_dir: Path = RESULTS_DIR) -> list
     """All saved runs (optionally for one phase), oldest first."""
     pattern = f"{phase}/*.json" if phase else "*/*.json"
     runs = [json.loads(p.read_text()) for p in Path(results_dir).glob(pattern)]
+    # Other JSON files can sit next to the runs (KV scale reports, KV transfer stats): skip them.
+    runs = [r for r in runs if isinstance(r, dict) and "timestamp" in r]
     return sorted(runs, key=lambda r: r["timestamp"])
