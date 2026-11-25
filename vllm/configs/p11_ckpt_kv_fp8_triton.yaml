@@ -1,0 +1,7 @@
+# Phase 11: the calibrated checkpoint's FP8 KV cache on the Triton attention backend.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+kv-cache-dtype: fp8
+attention-backend: TRITON_ATTN

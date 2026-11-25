@@ -1,0 +1,8 @@
+# Phase 11: FP8 weights, BF16 KV cache, Triton attention: the backend's own cost,
+# to compare with p11_fp8w_kv_fp8_triton.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+attention-backend: TRITON_ATTN

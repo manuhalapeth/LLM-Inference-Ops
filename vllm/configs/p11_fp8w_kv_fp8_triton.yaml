@@ -1,0 +1,9 @@
+# Phase 11: FP8 weights, FP8 KV cache at scale 1.0, on the Triton attention backend
+# (vLLM picks FlashInfer by default). See p11_bf16w_kv_fp8_triton.yaml.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+quantization: fp8
+kv-cache-dtype: fp8
+attention-backend: TRITON_ATTN

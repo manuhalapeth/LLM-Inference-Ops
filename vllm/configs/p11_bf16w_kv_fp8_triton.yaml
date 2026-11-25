@@ -1,0 +1,10 @@
+# Phase 11: BF16 weights, FP8 KV cache at scale 1.0, on the Triton attention backend.
+# The same KV cache as tune_kv_cache_fp8, which vLLM runs on FlashInfer (XQA decode
+# kernel) on this GPU: if this one keeps quality, the kernel path is the problem,
+# not FP8 itself.
+host: 0.0.0.0
+port: 8000
+gpu-memory-utilization: 0.90
+max-model-len: 8192
+kv-cache-dtype: fp8
+attention-backend: TRITON_ATTN
