@@ -9,6 +9,11 @@ quantization: fp8
 # The router computes the same block hashes as vLLM, so both must use sha256_cbor
 # (and VLLM_KV_EVENTS_USE_INT_BLOCK_HASHES=0, set by topology.py).
 prefix-caching-hash-algo: sha256_cbor
+# The router turns each prompt into tokens with vLLM's /v1/chat/completions/render
+# endpoint before scoring cache matches. vLLM 0.34 answers 403 on it unless
+# scale out endpoints are on; without them cache_aware and kv_aware silently
+# fall back to load only (every decision "missing_tokens").
+enable-scale-out: true
 kv-events-config:
   enable_kv_cache_events: true
   endpoint: "tcp://*:5557"
