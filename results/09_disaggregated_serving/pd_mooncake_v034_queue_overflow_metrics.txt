@@ -1,0 +1,12 @@
+vllm:mooncake_num_failed_transfers_total{engine="0",model_name="llm"} 97.0
+vllm:mooncake_num_failed_recvs_total{engine="0",model_name="llm"} 0.0
+vllm:mooncake_num_kv_expired_reqs_total{engine="0",model_name="llm"} 0.0
+vllm:num_requests_running{engine="0",model_name="llm"} 0.0
+vllm:num_requests_waiting{engine="0",model_name="llm"} 198.0
+vllm:kv_cache_usage_perc{engine="0",model_name="llm"} 0.9985027138311809
+vllm:mooncake_num_failed_transfers_total{engine="0",model_name="llm"} 0.0
+vllm:mooncake_num_failed_recvs_total{engine="0",model_name="llm"} 97.0
+vllm:mooncake_num_kv_expired_reqs_total{engine="0",model_name="llm"} 0.0
+vllm:num_requests_running{engine="0",model_name="llm"} 0.0
+vllm:num_requests_waiting{engine="0",model_name="llm"} 0.0
+vllm:kv_cache_usage_perc{engine="0",model_name="llm"} 0.9985027138311809

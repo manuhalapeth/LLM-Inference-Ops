@@ -1,0 +1,63 @@
+{
+  "run_id": "20261125T104051Z_pd_abort_abort_v0-34-0",
+  "phase": "09_disaggregated_serving",
+  "name": "pd_abort_abort_v0.34.0",
+  "timestamp": "2026-11-25T10:40:51.917768+00:00",
+  "config": {
+    "topology": "pd 1P+1D mooncake tp1 lb=round_robin",
+    "vllm_image": "vllm/vllm-openai:v0.34.0"
+  },
+  "load": {
+    "phase": "09_disaggregated_serving",
+    "label": "abort_v0.34.0",
+    "url": "http://localhost:8080",
+    "decode_url": "http://localhost:8001",
+    "model": "llm",
+    "words": 3000,
+    "requests": 200,
+    "concurrency": 16,
+    "min_hang_up_s": 0.05,
+    "max_hang_up_s": 0.6,
+    "settle_s": 10
+  },
+  "metrics": {
+    "parts": {
+      "control": {
+        "abort": false,
+        "seconds": 313.2,
+        "outcomes": {
+          "ok": 192
+        },
+        "decode_healthy_after": true
+      },
+      "abort": {
+        "abort": true,
+        "seconds": 15.4,
+        "outcomes": {
+          "hung_up": 192
+        },
+        "decode_healthy_after": true
+      }
+    },
+    "decode_crashed": false
+  },
+  "environment": {
+    "hostname": "ubuntu",
+    "python": "3.10.12",
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      },
+      {
+        "name": "NVIDIA GeForce RTX 5090",
+        "memory_mib": 32607,
+        "driver": "580.95.05"
+      }
+    ],
+    "git_commit": "8a86f4947a8dd30738fea3b857f91c530f0846ab",
+    "git_dirty": true
+  },
+  "notes": ""
+}
