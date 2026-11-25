@@ -66,13 +66,16 @@ for setup in $SETUPS; do
     copies)      echo "==> [1] 2 copies, least connections"; apply --replicas 2 --lb least_conn && measure copies 0 ;;
     pd_mooncake) echo "==> [2] 1 prefill + 1 decode, Mooncake"; apply --pd 1,1 --pd-connector mooncake && measure pd_mooncake 1 ;;
     pd_nixl)     echo "==> [3] 1 prefill + 1 decode, NIXL"; apply --pd 1,1 --pd-connector nixl && measure pd_nixl 1 ;;
+    pd_mooncake_tuned)
+      echo "==> [4] 1 prefill + 1 decode, Mooncake with a deeper TCP queue, 60 s abort timeout, recompute on failure"
+      apply --pd 1,1 --pd-connector mooncake_tuned && measure pd_mooncake_tuned 1 ;;
   esac
 done
 
 echo "==> Comparing"
 for mode in mix interference; do
   python3 loadtest/compare_tuning.py --phase "$PHASE" --baseline "copies_$mode" \
-    --labels "copies_$mode" "pd_mooncake_$mode" "pd_nixl_$mode" --price-per-hour "${GPU_HOURLY_PRICE_USD:-1.0}" | tail -12
+    --labels "copies_$mode" "pd_mooncake_$mode" "pd_nixl_$mode" "pd_mooncake_tuned_$mode" --price-per-hour "${GPU_HOURLY_PRICE_USD:-1.0}" | tail -12
 done
 
 kill $SAMPLER 2>/dev/null || true
