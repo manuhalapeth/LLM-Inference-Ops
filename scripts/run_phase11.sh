@@ -35,8 +35,14 @@ fp8w_kv_fp8_per_token_head|p11_fp8w_kv_fp8_per_token_head|
 ckpt_kv_bf16|p11_ckpt_kv_auto|$CKPT_TENSOR
 ckpt_kv_fp8_tensor|p11_ckpt_kv_fp8|$CKPT_TENSOR
 ckpt_kv_fp8_head|p11_ckpt_kv_fp8|$CKPT_HEAD
+bf16w_kv_fp8_triton|p11_bf16w_kv_fp8_triton|
+fp8w_kv_bf16_triton|p11_fp8w_kv_bf16_triton|
+fp8w_kv_fp8_triton|p11_fp8w_kv_fp8_triton|
+ckpt_kv_fp8_tensor_triton|p11_ckpt_kv_fp8_triton|$CKPT_TENSOR
 "
-SWEEP_LABELS="${SWEEP_LABELS:-fp8w_kv_bf16 fp8w_kv_fp8_scale1 fp8w_kv_fp8_per_token_head ckpt_kv_bf16 ckpt_kv_fp8_tensor ckpt_kv_fp8_head}"
+# ONLY="label ..." runs just those configs (for a second pass).
+ONLY="${ONLY:-}"
+SWEEP_LABELS="${SWEEP_LABELS:-fp8w_kv_bf16 fp8w_kv_fp8_scale1 fp8w_kv_fp8_per_token_head ckpt_kv_bf16 ckpt_kv_fp8_tensor ckpt_kv_fp8_head fp8w_kv_bf16_triton fp8w_kv_fp8_triton}"
 
 if [ "$RUN_CALIBRATION" = 1 ]; then
   docker compose down >/dev/null 2>&1   # calibration needs the whole GPU
@@ -74,7 +80,9 @@ each_config() {  # callback: runs it for every config line
   mapfile -t lines <<< "$CONFIGS"
   for line in "${lines[@]}"; do
     IFS='|' read -r label cfg model <<< "$line"
-    [ -n "$label" ] && "$1" "$label" "$cfg" "$model" </dev/null
+    [ -n "$label" ] || continue
+    if [ -n "$ONLY" ]; then case " $ONLY " in *" $label "*) ;; *) continue ;; esac; fi
+    "$1" "$label" "$cfg" "$model" </dev/null
   done
 }
 
