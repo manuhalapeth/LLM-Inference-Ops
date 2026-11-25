@@ -1,0 +1,436 @@
+{
+  "checkpoint": "/root/.cache/huggingface/llmops/qwen2.5-7b-fp8dyn-kv-tensor",
+  "summary": {
+    "layers": 28,
+    "k_absmax_max": 418.25,
+    "k_absmax_min": 11.7578125,
+    "v_absmax_max": 69.5625,
+    "v_absmax_min": 1.955078125,
+    "layers_k_clipped_at_scale_1": 0,
+    "layers_v_clipped_at_scale_1": 0,
+    "layers_k_below_1": 0,
+    "layers_v_below_1": 0
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "k_scale_max": 0.384765625,
+      "k_absmax": 172.375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        172.375
+      ],
+      "v_scale_max": 0.006439208984375,
+      "v_absmax": 2.884765625,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        2.884765625
+      ]
+    },
+    {
+      "layer": 1,
+      "k_scale_max": 0.1416015625,
+      "k_absmax": 63.4375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        63.4375
+      ],
+      "v_scale_max": 0.004364013671875,
+      "v_absmax": 1.955078125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        1.955078125
+      ]
+    },
+    {
+      "layer": 2,
+      "k_scale_max": 0.06982421875,
+      "k_absmax": 31.28125,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        31.28125
+      ],
+      "v_scale_max": 0.00933837890625,
+      "v_absmax": 4.18359375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.18359375
+      ]
+    },
+    {
+      "layer": 3,
+      "k_scale_max": 0.1650390625,
+      "k_absmax": 73.9375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        73.9375
+      ],
+      "v_scale_max": 0.005767822265625,
+      "v_absmax": 2.583984375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        2.583984375
+      ]
+    },
+    {
+      "layer": 4,
+      "k_scale_max": 0.0262451171875,
+      "k_absmax": 11.7578125,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        11.7578125
+      ],
+      "v_scale_max": 0.01043701171875,
+      "v_absmax": 4.67578125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.67578125
+      ]
+    },
+    {
+      "layer": 5,
+      "k_scale_max": 0.036376953125,
+      "k_absmax": 16.296875,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        16.296875
+      ],
+      "v_scale_max": 0.0155029296875,
+      "v_absmax": 6.9453125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        6.9453125
+      ]
+    },
+    {
+      "layer": 6,
+      "k_scale_max": 0.040771484375,
+      "k_absmax": 18.265625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        18.265625
+      ],
+      "v_scale_max": 0.01043701171875,
+      "v_absmax": 4.67578125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.67578125
+      ]
+    },
+    {
+      "layer": 7,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.0087890625,
+      "v_absmax": 3.9375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        3.9375
+      ]
+    },
+    {
+      "layer": 8,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.0111083984375,
+      "v_absmax": 4.9765625,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.9765625
+      ]
+    },
+    {
+      "layer": 9,
+      "k_scale_max": 0.04150390625,
+      "k_absmax": 18.59375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        18.59375
+      ],
+      "v_scale_max": 0.0103759765625,
+      "v_absmax": 4.6484375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.6484375
+      ]
+    },
+    {
+      "layer": 10,
+      "k_scale_max": 0.033935546875,
+      "k_absmax": 15.203125,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.203125
+      ],
+      "v_scale_max": 0.0103759765625,
+      "v_absmax": 4.6484375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.6484375
+      ]
+    },
+    {
+      "layer": 11,
+      "k_scale_max": 0.033447265625,
+      "k_absmax": 14.984375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        14.984375
+      ],
+      "v_scale_max": 0.0103759765625,
+      "v_absmax": 4.6484375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.6484375
+      ]
+    },
+    {
+      "layer": 12,
+      "k_scale_max": 0.047119140625,
+      "k_absmax": 21.109375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        21.109375
+      ],
+      "v_scale_max": 0.01043701171875,
+      "v_absmax": 4.67578125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.67578125
+      ]
+    },
+    {
+      "layer": 13,
+      "k_scale_max": 0.10009765625,
+      "k_absmax": 44.84375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        44.84375
+      ],
+      "v_scale_max": 0.00872802734375,
+      "v_absmax": 3.91015625,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        3.91015625
+      ]
+    },
+    {
+      "layer": 14,
+      "k_scale_max": 0.045166015625,
+      "k_absmax": 20.234375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        20.234375
+      ],
+      "v_scale_max": 0.0120849609375,
+      "v_absmax": 5.4140625,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        5.4140625
+      ]
+    },
+    {
+      "layer": 15,
+      "k_scale_max": 0.06396484375,
+      "k_absmax": 28.65625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        28.65625
+      ],
+      "v_scale_max": 0.01080322265625,
+      "v_absmax": 4.83984375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.83984375
+      ]
+    },
+    {
+      "layer": 16,
+      "k_scale_max": 0.048828125,
+      "k_absmax": 21.875,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        21.875
+      ],
+      "v_scale_max": 0.01043701171875,
+      "v_absmax": 4.67578125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.67578125
+      ]
+    },
+    {
+      "layer": 17,
+      "k_scale_max": 0.038330078125,
+      "k_absmax": 17.171875,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        17.171875
+      ],
+      "v_scale_max": 0.01043701171875,
+      "v_absmax": 4.67578125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        4.67578125
+      ]
+    },
+    {
+      "layer": 18,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.0177001953125,
+      "v_absmax": 7.9296875,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        7.9296875
+      ]
+    },
+    {
+      "layer": 19,
+      "k_scale_max": 0.1083984375,
+      "k_absmax": 48.5625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        48.5625
+      ],
+      "v_scale_max": 0.0123291015625,
+      "v_absmax": 5.5234375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        5.5234375
+      ]
+    },
+    {
+      "layer": 20,
+      "k_scale_max": 0.03271484375,
+      "k_absmax": 14.65625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        14.65625
+      ],
+      "v_scale_max": 0.01171875,
+      "v_absmax": 5.25,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        5.25
+      ]
+    },
+    {
+      "layer": 21,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.01611328125,
+      "v_absmax": 7.21875,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        7.21875
+      ]
+    },
+    {
+      "layer": 22,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.0174560546875,
+      "v_absmax": 7.8203125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        7.8203125
+      ]
+    },
+    {
+      "layer": 23,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.0242919921875,
+      "v_absmax": 10.8828125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        10.8828125
+      ]
+    },
+    {
+      "layer": 24,
+      "k_scale_max": 0.039306640625,
+      "k_absmax": 17.609375,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        17.609375
+      ],
+      "v_scale_max": 0.0252685546875,
+      "v_absmax": 11.3203125,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        11.3203125
+      ]
+    },
+    {
+      "layer": 25,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.04150390625,
+      "v_absmax": 18.59375,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        18.59375
+      ]
+    },
+    {
+      "layer": 26,
+      "k_scale_max": 0.034912109375,
+      "k_absmax": 15.640625,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        15.640625
+      ],
+      "v_scale_max": 0.04736328125,
+      "v_absmax": 21.21875,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        21.21875
+      ]
+    },
+    {
+      "layer": 27,
+      "k_scale_max": 0.93359375,
+      "k_absmax": 418.25,
+      "k_heads": 1,
+      "k_absmax_per_head": [
+        418.25
+      ],
+      "v_scale_max": 0.1552734375,
+      "v_absmax": 69.5625,
+      "v_heads": 1,
+      "v_absmax_per_head": [
+        69.5625
+      ]
+    }
+  ]
+}
